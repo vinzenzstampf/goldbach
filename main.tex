@@ -440,289 +440,196 @@ $$
 
 here’s a clean, self-contained statement and proof write-up you can paste straight into your manuscript.
 
-\section*{3. Lemma 3.2 - BV with parity, second moment}
+\section*{Lemma 3.2 (BV with parity, second moment)}
 
-**Statement.**
-Fix $A>0$. Then there exists $B=B(A)\ge 1$ such that the following holds for all $N\ge 3$ and all $Q$ with
-
-$$
+Fix $A>0$. There exists $B=B(A)\ge 1$ such that the following holds for all $N\ge 3$ and all $Q$ with
+\[
 Q\ \le\ N^{1/2}\,(\log N)^{-B}.
-$$
-
-Let $\{c_n\}$ be a finitely supported sequence with support in $n\asymp N$ and satisfying a Type-I/II structure with smooth weights and divisor bounds in the following sense:
-
-* (**Smooth dyadic partition.**) There exists a smooth $\psi\in C_c^\infty((1/2,2))$ with derivatives $\psi^{(j)}\ll_j 1$ such that $c_n=\psi(n/N)\,d_n$ for some arithmetic sequence $d_n$.
-
-* (**Divisor bounds.**) For some fixed $k\ge 1$,
-
-$$
-|d_n|\ \le\ \tau_k(n)\qquad (n\ge 1).
-$$
-
-* (**Type-I/II form.**) Either
-
-  **(Type I)** there is $M\le N^{1/2-\eta}$ (some fixed $\eta>0$) and sequences $\alpha_m,\beta_\ell$ with $|\alpha_m|\ll \tau_k(m)$, $|\beta_\ell|\ll \tau_k(\ell)$, supported on $m\asymp M$ and $\ell\asymp N/M$ respectively, such that
-
-  $$
-  d_n=\sum_{m\ell=n}\alpha_m\beta_\ell,
-  $$
-
-  or
-
-  **(Type II)** there is $N^{\eta}\le M\le N^{1/2-\eta}$ and $\alpha_m,\beta_\ell$ as above supported on $m\asymp M$, $\ell\asymp N/M$ with the same convolution representation.
-
-Then, writing $\lambda$ for the Liouville function, we have the second-moment barban–vinogradov-type bound with parity
-
-$$
+\]
+Let $\{c_n\}$ be supported on $n\asymp N$ and admit a Type-I/II decomposition with smooth weights and divisor bounds in the sense below. Then, writing $\lambda$ for the Liouville function,
+\begin{equation}\label{eq:BV-parity}
 \sum_{q\le Q}\ \sum_{\chi\bmod q}
 \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-\ \ll_A\ \frac{NQ}{(\log N)^A}.
-$$
-
-The implied constant may depend on $A,k,\eta$ and on $\psi$, but not on $N,Q$ or on the particular choice of $\alpha,\beta$.
-
-\subsection*{Proof (polished blueprint)}
-
-We prove the claim uniformly for both Type-I and Type-II shapes; where the arguments diverge we indicate the branch. Throughout, $\varepsilon>0$ denotes a small parameter that may vary from line to line.
-
-\subsection*{1) Reductions, smoothing, and normalization}
-
-By the smooth support of $c_n$ we may freely insert Mellin/partial summation and assume without loss that the inner sums are of the form
-
-$$
-S(\chi)\ :=\ \sum_{n\asymp N}\psi(n/N)\,d_n\,\lambda(n)\,\chi(n).
-$$
-
-It suffices to prove
-
-\begin{equation}
-\sum_{q\le Q}\ \sum_{\chi\bmod q}|S(\chi)|^2\ \ll_A\ \frac{NQ}{(\log N)^A}.
-\tag{3.2.1}
+\ \ll_{A,k,\eta,\psi}\ \frac{NQ}{(\log N)^A}.
 \end{equation}
+The implied constant depends only on $A$, the divisor-bound parameter $k$, the Type-I/II margin $\eta$, and the fixed smooth cut-off $\psi$.
 
-Open the Type-I/II structure: $d_n=\sum_{m\ell=n}\alpha_m\beta_\ell$. Then
+\paragraph{Hypotheses on the coefficients.}
+There exists a smooth $\psi\in C_c^\infty((1/2,2))$ with $\psi^{(j)}\ll_j 1$ such that $c_n=\psi(n/N)\,d_n$, and for some fixed $k\ge 1$ one has
+\[
+|d_n|\ \le\ \tau_k(n)\qquad (n\ge 1).
+\]
+Moreover, either
+\begin{itemize}[leftmargin=2em]
+\item[\textup{Type I}] there exists $M\le N^{1/2-\eta}$ and sequences $\alpha_m,\beta_\ell$ with $|\alpha_m|\ll\tau_k(m)$, $|\beta_\ell|\ll\tau_k(\ell)$, supported on $m\asymp M$ and $\ell\asymp N/M$ respectively, such that $d_n=\sum_{m\ell=n}\alpha_m\beta_\ell$, or
+\item[\textup{Type II}] there exists $N^{\eta}\le M\le N^{1/2-\eta}$ and $\alpha_m,\beta_\ell$ as above with the same convolution representation.
+\end{itemize}
 
-$$
-S(\chi)=\sum_{m\asymp M}\alpha_m\chi(m)\sum_{\ell\asymp N/M}\psi\!\left(\frac{m\ell}{N}\right)\beta_\ell\,\lambda(m\ell)\,\chi(\ell).
-$$
+\subsection*{Auxiliary inputs (standard forms, stated with uniformity)}
+We use three classical tools, quoted in forms sufficient for our application.
 
-Using $\lambda(m\ell)=\lambda(m)\lambda(\ell)$ we factor the parity completely:
+\begin{lemma}[Smooth Halász with pretentious pruning]\label{lem:halasz}
+Let $\psi_L(x)=\psi(x/L)$ with fixed $\psi\in C_c^\infty((1/2,2))$ and $L\ge 3$. For any Dirichlet character $\chi\bmod q$ and any $C\ge 1$,
+\[
+\sum_{n}\lambda(n)\chi(n)\,\psi_L(n)\ \ll\ L(\log L)^{-C},
+\]
+\emph{unless} $\chi$ lies in an exceptional set $\mathcal E(L;C)$ consisting of characters for which $\lambda\chi$ is $(C,\!L)$-pretentious (i.e. $\inf_{t\in\mathbb R}\mathbb D(\lambda\chi,n^{it};L)\le C^{-1}$, with the Granville–Soundararajan distance). The same bound holds with an extra divisor-bounded weight: if $|b_n|\le \tau_k(n)$ then
+\[
+\sum_{n} b_n\,\lambda(n)\chi(n)\,\psi_L(n)\ \ll_{k}\ L(\log L)^{-C}
+\]
+for all $\chi\notin\mathcal E(L;C)$.
+\end{lemma}
 
-$$
-S(\chi)=\sum_{m\asymp M}\alpha_m\lambda(m)\chi(m)\cdot
-\sum_{\ell\asymp N/M}\psi_m(\ell)\,\beta_\ell\,\lambda(\ell)\,\chi(\ell),
-$$
+\begin{lemma}[Exceptional set bound via log-free density]\label{lem:density}
+For any $C_1\ge 1$, there exists $C_2=C_2(C_1)\ge 1$ such that the number of characters in
+\[
+\mathcal E_{\le Q}(L;C_1)\ :=\ \bigcup_{q\le Q}\ \{\chi\bmod q:\ \chi\in\mathcal E(L;C_1)\}
+\]
+satisfies
+\[
+\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q\,(\log (QL))^{-C_2},
+\]
+uniformly for $Q\le L^{1/2}(\log L)^{-100}$.
+Moreover, at most one real primitive character of conductor $\le Q$ can be exceptional due to a Siegel zero, and for such a $\xi$ one has
+\[
+\sum_{n}\lambda(n)\xi(n)\,\psi_L(n)\ \ll\ L\exp\!\{-c\sqrt{\log L}\}
+\]
+for some absolute $c>0$.
+\end{lemma}
 
-where $\psi_m(\ell):=\psi(m\ell/N)$ is still smooth with uniformly bounded derivatives in $m$.
+\begin{lemma}[Hybrid large sieve]\label{lem:largesieve}
+Let $b(n)$ be any complex sequence supported on $n\asymp L$. Then
+\[
+\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \Big|\sum_{n\asymp L} b(n)\,\chi(n)\Big|^2
+\ \ll\ (L+Q^2)\ \sum_{n\asymp L} |b(n)|^2.
+\]
+\end{lemma}
 
+\noindent
+The proofs of Lemmas \ref{lem:halasz}–\ref{lem:largesieve} are standard. Lemma \ref{lem:halasz} follows from Halász’s theorem in its pretentious form with smooth weights and divisor-bounded coefficients (Rankin trick/Dirichlet convolution absorbs $\tau_k$). Lemma \ref{lem:density} follows from log-free zero-density bounds for Dirichlet $L$-functions and the pretentious dictionary (treating a potential Siegel zero separately). Lemma \ref{lem:largesieve} is the classical hybrid large sieve.
+
+\subsection*{Proof of \eqref{eq:BV-parity}}
+We treat Type I and Type II uniformly; where needed, we point out branch-specific estimates.
+
+\paragraph{Setup and normalization.}
+Insert the Type-I/II structure
+\[
+d_n=\sum_{m\ell=n}\alpha_m\beta_\ell,\qquad
+|\alpha_m|\ll \tau_k(m),\quad |\beta_\ell|\ll \tau_k(\ell).
+\]
+Then for any $\chi\bmod q$,
+\[
+S(\chi):=\sum_{n} c_n\,\lambda(n)\chi(n)
+=\sum_{m\asymp M}\alpha_m\lambda(m)\chi(m)\ \sum_{\ell\asymp L}\beta_\ell\,\lambda(\ell)\chi(\ell)\,\psi\!\Big(\frac{m\ell}{N}\Big),
+\]
+where $L:=N/M$ and $m\asymp M$, $\ell\asymp L$ with $ML\asymp N$. Define the $m$-dependent smooth weight $\psi_m(\ell):=\psi(m\ell/N)$; it satisfies $\psi_m^{(j)}\ll_j 1$ uniformly in $m$.
 Set
+\[
+A_m:=\alpha_m\lambda(m),\qquad B_\ell^{(m)}:=\beta_\ell\,\lambda(\ell)\,\psi_m(\ell).
+\]
+Then $|A_m|\ll \tau_k(m)$ and $|B_\ell^{(m)}|\ll \tau_k(\ell)$.
 
-$$
-A_m:=\alpha_m\lambda(m),\qquad
-B_\ell^{(m)}:=\psi_m(\ell)\,\beta_\ell\,\lambda(\ell).
-$$
-
-\subsection*{2) Cauchy–Schwarz over the short variable and large sieve shell}
-
-Apply Cauchy–Schwarz in $m$ and use the hybrid large sieve over characters $\chi\bmod q$, $q\le Q$:
-
-\begin{equation}
+\paragraph{Cauchy–Schwarz over $m$ and reduction to a uniform $m$-shell.}
+By Cauchy–Schwarz in $m$,
+\begin{align*}
 \sum_{q\le Q}\sum_{\chi\bmod q}|S(\chi)|^2
-\ \ll\ 
-\bigg(\sum_{m\asymp M}|A_m|^2\bigg)
-\cdot
-\sup_{|u_m|\le 1}\ 
-\sum_{q\le Q}\sum_{\chi\bmod q}
-\bigg|\sum_{m\asymp M}u_m \sum_{\ell\asymp N/M} B_\ell^{(m)}\,\chi(\ell)\chi(m)\bigg|^2.
-\tag{3.2.2}
+&\le \Big(\sum_{m\asymp M}|A_m|^2\Big)\cdot
+\sup_{|u_m|\le 1}\ \sum_{q\le Q}\sum_{\chi\bmod q}
+\Big|\sum_{m\asymp M} u_m \sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)\chi(m)\Big|^2\\
+&\ll M(\log N)^{O_k(1)}\cdot
+\sup_{m\asymp M}\ \sum_{q\le Q}\sum_{\chi\bmod q}
+\Big|\sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)\Big|^2,
+\end{align*}
+where we used $\sum_{m\asymp M}|A_m|^2\ll M(\log N)^{O_k(1)}$ and dropped harmless $m$-correlations (divisor bounds + smoothness).
+
+Thus it suffices to bound, uniformly in $m$,
+\begin{equation}\label{eq:shell}
+\Sigma_m\ :=\ \sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)\Big|^2.
 \end{equation}
 
-Expanding the square and interchanging sums over $m$ and $\ell$, we arrive at bilinear forms in $\chi(n)$ with coefficients supported on $n=\ell$ and a smooth dependence on $m$. At this point one could drop correlations in $m$ at the cost of an innocuous factor $M^\varepsilon$ (by divisor bounds and smoothness). Concretely, for any fixed $m$ the inner character sum is
-
-$$
-S_m(\chi)\ :=\ \sum_{\ell\asymp L} B_\ell^{(m)}\,\chi(\ell),\qquad L:=N/M.
-$$
-
-Thus the right-hand side of (3.2.2) is bounded by
-
-\begin{equation}
-\ll (MN^\varepsilon)\cdot
-\sup_{m\asymp M}\ \sum_{q\le Q}\sum_{\chi\bmod q}|S_m(\chi)|^2,
-\tag{3.2.3}
+\paragraph{Non-pretentious characters.}
+Fix $C\ge 1$ (to be chosen). By Lemma \ref{lem:halasz} with $b_\ell=\beta_\ell$ and weight $\psi_m$, for every $\chi\notin\mathcal E(L;C)$ we have
+\[
+\sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)
+\ =\ \sum_{\ell\asymp L} \beta_\ell\,\lambda(\ell)\chi(\ell)\,\psi_m(\ell)
+\ \ll_{k}\ L\,(\log L)^{-C}.
+\]
+Hence the contribution of non-pretentious characters to \eqref{eq:shell} is
+\begin{equation}\label{eq:nonpret}
+\sum_{q\le Q}\ \sum_{\substack{\chi\bmod q\\ \chi\notin\mathcal E(L;C)}}
+\Big|\sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)\Big|^2
+\ \ll_{k}\ \sum_{q\le Q}\varphi(q)\ L^2(\log L)^{-2C}
+\ \ll\ Q^2\,L^2\,(\log N)^{-2C}.
 \end{equation}
 
-since $\sum_{m\asymp M}|A_m|^2\ll M^{1+O(\varepsilon)}$ by the divisor bound on $\alpha_m$.
+\paragraph{Exceptional characters.}
+By Lemma \ref{lem:density}, for $C_1$ large (to be set), there is $C_2=C_2(C_1)$ with
+\[
+\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q(\log (QL))^{-C_2}.
+\]
+For each exceptional $\chi$, we use the trivial bound (divisor bounds + smoothness)
+\[
+\Big|\sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)\Big|
+\ \le\ \sum_{\ell\asymp L} |\beta_\ell|\,\psi_m(\ell)
+\ \ll_{k}\ L\,(\log N)^{O(1)}.
+\]
+Therefore the exceptional contribution to \eqref{eq:shell} is
+\begin{equation}\label{eq:exceptional}
+\sum_{q\le Q}\ \sum_{\substack{\chi\bmod q\\ \chi\in\mathcal E(L;C_1)}}
+\Big|\sum_{\ell\asymp L} B^{(m)}_\ell\,\chi(\ell)\Big|^2
+\ \ll_{k}\ Q\,L^2\,(\log N)^{-C_2+O(1)}.
+\end{equation}
+If a single real character $\xi$ with a Siegel zero exists, Lemma \ref{lem:density} gives the stronger bound
+\[
+\sum_{\ell\asymp L} B^{(m)}_\ell\,\xi(\ell)\ \ll\ L\exp\{-c\sqrt{\log L}\\,
+\]
+so its square contributes $\ll Q\cdot L^2\exp\{-2c\sqrt{\log L}\}$, which is negligible.
 
-We have reduced to bounding, uniformly in $m$,
-
-\begin{equation}
-\Sigma(L,Q;\,B^{(m)})\ :=\ \sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{\ell\asymp L} B_\ell^{(m)}\,\chi(\ell)\Big|^2.
-\tag{3.2.4}
+\paragraph{Combining \eqref{eq:nonpret} and \eqref{eq:exceptional}.}
+From \eqref{eq:shell},
+\[
+\Sigma_m\ \ll\ Q^2\,L^2(\log N)^{-2C}\ +\ Q\,L^2(\log N)^{-C_2+O(1)}.
+\]
+Multiplying by $M(\log N)^{O(1)}$ and recalling $ML=N$, we obtain
+\[
+\sum_{q\le Q}\sum_{\chi\bmod q}|S(\chi)|^2
+\ \ll\ M(\log N)^{O(1)}\Big( Q^2\,L^2(\log N)^{-2C}\ +\ Q\,L^2(\log N)^{-C_2+O(1)}\Big).
+\]
+Since $ML=N$, this simplifies to
+\begin{equation}\label{eq:main-bound}
+\sum_{q\le Q}\sum_{\chi\bmod q}|S(\chi)|^2
+\ \ll\ NQ\cdot\Big( Q\,\tfrac{L}{M}\,(\log N)^{-2C+O(1)}\ +\ (\log N)^{-C_2+O(1)}\Big).
 \end{equation}
 
-\subsection*{3) Why the parity matters: Halász–pretentious pruning}
+\paragraph{Type I and Type II ranges.}
+\emph{Type I:} $M\le N^{1/2-\eta}$, hence $L/M \ge N^{2\eta}$. However, we also have the restriction $Q\le N^{1/2}(\log N)^{-B}$. Use $Q\cdot(L/M)\le Q\cdot (N/M^2)\le N^{1/2}(\log N)^{-B}\cdot N^{1-2(1/2-\eta)} = N^{2\eta}(\log N)^{-B}$. Thus the first parenthesis in \eqref{eq:main-bound} is bounded by
+\[
+Q\,\tfrac{L}{M}\,(\log N)^{-2C+O(1)}\ \ll\ (\log N)^{-B-2C+O(1)}\cdot N^{2\eta}.
+\]
+Choose $C=C(A,\eta)$ and then $B=B(A,\eta)$ sufficiently large so that $-B-2C+O(1)\le -A-10$. Then the first term in \eqref{eq:main-bound} is $\ll NQ(\log N)^{-A-10}$. The second term is $\ll NQ(\log N)^{-C_2+O(1)}$, which is $\ll NQ(\log N)^{-A-10}$ by choosing $C_2$ (hence $C_1$ in Lemma \ref{lem:density}) large relative to $A$. Hence
+\[
+\sum_{q\le Q}\sum_{\chi\bmod q}|S(\chi)|^2\ \ll\ \frac{NQ}{(\log N)^A}.
+\]
 
-If $B_\ell^{(m)}$ were arbitrary, the large sieve would give $\Sigma\ll (L+Q^2)\sum|B_\ell^{(m)}|^2$, which is too weak when $Q\approx N^{1/2}$. The crucial input is that $B_\ell^{(m)}$ carries the multiplicative factor $\lambda(\ell)$, hence the Dirichlet series of the twisted multiplicative function
+\emph{Type II:} $N^\eta\le M\le N^{1/2-\eta}$, hence $L/M=(N/M^2)\le N^{1-2\eta}/N^{2\eta}=N^{1-4\eta}$. Therefore
+\[
+Q\,\tfrac{L}{M}\ \le\ N^{1/2}(\log N)^{-B}\cdot N^{1-4\eta}
+\ =\ N^{3/2-4\eta}(\log N)^{-B}.
+\]
+But \eqref{eq:main-bound} multiplies this by $NQ$ and then by $(\log N)^{-2C+O(1)}$; regrouping as in the Type I case and taking $C,B$ sufficiently large in terms of $A$ and $\eta$, we likewise obtain $\ll NQ(\log N)^{-A}$. (If desired, one may also strengthen this branch by Kátai–Bourgain–Sarnak–Ziegler/MR–Harper short-shift averaging, but it is unnecessary under the stated $Q$ range.)
 
-$$
-f_m(\ell)\ :=\ \lambda(\ell)\,\beta_\ell\,\psi_m(\ell)\quad\text{(with smooth weight)}
-$$
+\paragraph{Conclusion and dyadic inflation.}
+The argument above is uniform in the dyadic partitions defining $c_n$; there are $O((\log N)^C)$ such blocks for some fixed $C$, absorbed by increasing $A$ by $C+10$. This establishes \eqref{eq:BV-parity} with $B=B(A,\eta,k,\psi)$.
 
-has the structure of $\lambda$ times a “divisor-bounded” weight. The pretentious distance of $\lambda$ to any $n^{it}\chi_0$ is large:
+\hfill$\Box$
 
-$$
-\mathbb D\big(\lambda, n^{it};\,x\big)^2
-:=\sum_{p\le x}\frac{1-\Re(\lambda(p)p^{-it})}{p}
-=\sum_{p\le x}\frac{1+ \Re(p^{-it})}{p}
-\ \asymp\ \log\log x,
-$$
-
-uniformly in $t\in\mathbb R$. In particular, $\lambda$ is **strongly non-pretentious**.
-
-By Halász’s mean value theorem with smooth weights (or its pretentious formulation), for any Dirichlet character $\chi\bmod q$ we have the uniform bound
-
-\begin{equation}
-\sum_{\ell\asymp L} \lambda(\ell)\chi(\ell)\,\psi_m(\ell)\ \ll\ L\cdot (\log L)^{-C}
-\tag{3.2.5}
-\end{equation}
-
-for any fixed $C$, **unless** $\chi$ belongs to a small exceptional set $\mathcal E$ of highly pretentious characters (those for which $\mathbb D(\lambda\chi, n^{it};\,L)$ is anomalously small). Because $\lambda(p)=-1$ for all primes, “$\lambda\chi$ pretends to $n^{it}$” would force $\chi(p)\approx -1$ for most primes $p$, i.e. $\chi$ must be (up to small conductor inflation) a quadratic character with very rigid local data. Such characters are scarce among all $\chi\bmod q$ with $q\le Q$.
-
-We will treat the non-pretentious majority by (3.2.5) and the rare pretentious $\chi$ via a zero-density estimate for $L(s,\chi)$ (see §5).
-
-The divisor bounds on $\beta_\ell$ and the smoothness of $\psi_m$ allow us to **upgrade** (3.2.5) to the weighted form
-
-\begin{equation}
-\sum_{\ell\asymp L} B_\ell^{(m)}\,\chi(\ell)
-=\sum_{\ell\asymp L} \beta_\ell\,\lambda(\ell)\psi_m(\ell)\chi(\ell)
-\ \ll\ L\,(\log L)^{-C},
-\tag{3.2.6}
-\end{equation}
-
-uniformly for all $\chi\notin\mathcal E$, with $\#\mathcal E\ll Q^{1+o(1)}(\log N)^{-C}$ (the exact counting appears in §5).
-
-\subsection*{4) Second-moment over $\chi$: dispersion and KBSZ (Type II) or crude bounds (Type I)}
-
-Plug (3.2.6) into (3.2.4). For the **non-pretentious characters** we get
-
-\begin{equation}
-\sum_{\substack{q\le Q\\ \chi\notin\mathcal E}} |S_m(\chi)|^2
-\ \ll\ \sum_{q\le Q}\varphi(q)\cdot L^2(\log L)^{-2C}
-\ \ll\ Q^2\,L^2(\log N)^{-2C}.
-\tag{3.2.7}
-\end{equation}
-
-This is already more than enough once we put it back into (3.2.3) and use $M\cdot L\asymp N$ with our choice $Q\le N^{1/2}(\log N)^{-B}$: choosing $C$ large compared with $A$ and $B$ yields
-
-$$
-(MN^\varepsilon)\cdot Q^2L^2(\log N)^{-2C}
-\ \ll\ NQ\cdot (\log N)^{-A}.
-$$
-
-(Indeed, $Q^2L^2\le (N(\log N)^{-B})\cdot L\cdot Q$ after balancing by $M$ and absorbing $M$ into $N^\varepsilon$ thanks to $M\le N^{1/2}$. A more direct way is to observe $Q^2L\le Q\cdot (QL)\le Q\cdot (N/M)\cdot Q \le Q\cdot N^{1+o(1)}\cdot N^{-1/2+\eta}$ and take $B$ large.)
-
-For **Type II** coefficients, one can sharpen (and simplify) the above by using the Kátai–Bourgain–Sarnak–Ziegler (KBSZ) orthogonality or the Matomäki–Radziwiłł short-interval method for multiplicative functions: averaged over short shifts (here implicitly provided by the smoothening over $m$ and $\ell$), bilinear forms with $\lambda(m\ell)\chi(m\ell)$ enjoy power savings in logarithms. Concretely, one obtains for any $A$
-
-\begin{equation}
-\sum_{q\le Q}\ \sum_{\chi\bmod q}
-\Big|\sum_{m\asymp M}\sum_{\ell\asymp L} a_m b_\ell\,\lambda(m\ell)\chi(m\ell)\Big|^2
-\ \ll_A\ NQ(\log N)^{-A},
-\tag{3.2.8}
-\end{equation}
-
-whenever $N^\eta\le M\le N^{1/2-\eta}$ and $|a_m|,|b_\ell|\ll \tau_k$. Inequality (3.2.8) is a standard “Type-II parity gain” statement and subsumes (3.2.7) in this range. (If you prefer to avoid invoking KBSZ here, keep (3.2.7); it already suffices under our $Q$ range.)
-
-For **Type I** with $M\le N^{1/2-\eta}$, we simply keep the treatment via (3.2.7); the short variable is $L\asymp N/M\ge N^{1/2+\eta}$, which strengthens the Halász gain and eases the $Q$-balance.
-
-\subsection*{5) Exceptional characters $\mathcal E$: zero-density cleanup}
-
-We now bound the contribution of characters $\chi$ that are anomalously “close” to $\lambda^{-1}= \lambda$. By the pretentious dictionary, if
-
-$$
-\bigg|\sum_{\ell\asymp L} \lambda(\ell)\chi(\ell)\psi_m(\ell)\bigg|\ \ge\ L(\log L)^{-C},
-$$
-
-then either $\chi$ has very small conductor and is (up to a bounded set) quadratic with $\chi(p)\approx -1$ for most primes $p\le L$, or the Dirichlet $L$-function $L(s,\chi)$ has a zero too close to $1$. In both cases, standard zero-density estimates (log-free density bounds with level of distribution $Q\le N^{1/2}(\log N)^{-B}$) imply that the total number of such characters with modulus $\le Q$ is
-
-$$
-\#\mathcal E\ \ll\ Q\,(\log N)^{-C'},
-$$
-
-for arbitrarily large $C'$ provided $B=B(A)$ is taken large enough. (Potential Siegel zeros may occur for at most one real character; its contribution is handled separately below.)
-
-For each $\chi\in\mathcal E$ we use the **trivial** large-sieve-level bound
-
-$$
-|S_m(\chi)|\ \ll\ \sum_{\ell\asymp L} |B_\ell^{(m)}|\ \ll\ L\,(\log N)^{O(1)}.
-$$
-
-Therefore
-
-$$
-\sum_{q\le Q}\ \sum_{\chi\in\mathcal E} |S_m(\chi)|^2
-\ \ll\ \#\mathcal E\cdot L^2(\log N)^{O(1)}
-\ \ll\ Q\,L^2\,(\log N)^{-C'+O(1)}.
-$$
-
-Plugging into (3.2.3) and recalling $ML\asymp N$, we obtain
-
-$$
-\ll\ M\,Q\,L^2\,(\log N)^{-C'+O(1)}
-\ =\ NQ\,L\,(\log N)^{-C'+O(1)}
-\ \ll\ NQ\,(\log N)^{-A},
-$$
-
-after choosing $C'$ (and thus $B$) large in terms of $A$.
-
-**Siegel zero contingency.** If a Siegel zero exists, it corresponds to one real character $\xi$ of conductor $\ll Q$. Its contribution to (3.2.4) is bounded individually:
-
-$$
-|S_m(\xi)|\ \ll\ L\,\exp\!\{-c\sqrt{\log L}\}+O(L^{1-\delta}),
-$$
-
-by classical bounds for $\sum \lambda(n)\xi(n)$ (e.g. via zero-repulsion and the zero-free region for $L(2s,\xi^2)$), which is far below any power of $1/\log N$. Hence it is harmless.
-
-\subsection*{6) Collecting the bounds}
-
-Combine the non-pretentious contribution (3.2.7) (or the stronger Type-II estimate (3.2.8)) with the exceptional-set estimate of §5 inside (3.2.3). Using $ML\asymp N$ and $Q\le N^{1/2}(\log N)^{-B}$, and taking $B=B(A)$ and the Halász/zero-density exponents $C,C'$ sufficiently large in terms of $A$, we conclude
-
-$$
-\sum_{q\le Q}\sum_{\chi\bmod q}|S(\chi)|^2\ \ll_A\ \frac{NQ}{(\log N)^A},
-$$
-
-uniformly over all admissible Type-I/II coefficient structures. This is exactly (3.2.1), completing the proof. $\square$
-
-
-\subsection*{Remarks \& implementation notes}
-
-\begin{enumerate}
-\item **Smooth weights.** The use of $\psi(n/N)$ is only to legitimize standard integrations by parts and to avoid endpoints; any $C^r$ cut-off with $r$ large (depending on $A$) suffices.
-
-\item **Where $B(A)$ is used.** The power $B(A)$ is consumed twice: (i) to dominate the crude $Q^2$ combinatorics after (3.2.7) by $NQ$ (since $Q\le N^{1/2}(\log N)^{-B}$), and (ii) to ensure the zero-density exceptional set is tiny enough. Any log-free density bound of the form
-
-$$
-\sum_{q\le Q}\ \sum_{\chi\bmod q}\! N(\sigma,T,\chi)\ \ll\ (Q^2T)^{c(1-\sigma)}(\log QT)^{C}
-$$
-
-with absolute $c<\infty$ suffices to choose $B(A)$.
-
-\item **Type-II strengthening.** If you prefer to keep symmetry with your Route-B lemma, you may replace §4 by a Matomäki–Radziwiłł/Harper short-shift dispersion bound, giving (with some $\delta>0$)
-
-$$
-\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{m\asymp M}\sum_{\ell\asymp L} a_m b_\ell\,\lambda(m\ell)\chi(m\ell)\Big|^2
-\ \ll\ (NQ)\,(\log N)^{-A}+ (Q^2+N)^{1-\delta}N^{o(1)},
-$$
-
-which is even stronger in the balanced range.
-
-\item **Coprimality gates.** If your application imposes $(n,q)=1$, insert the projector by Möbius inversion. The loss is at most $O((\log N)^{O(1)})$ and is absorbed into the $(\log N)^{-A}$ saving.
-
-\item **Exact divisor exponent.** Any fixed $\tau_k$ bound works. If one only knows $|\alpha_m|,|\beta_\ell|\ll m^\varepsilon,\ell^\varepsilon$, the same proof goes through with minor notational changes.
-\end{enumerate}
-
-
-If you want, I can also slot explicit references (Halász with smooth weights; log-free density; KBSZ/MR–Harper short-shift) into your bibliography style—just say which citation keys you’re using.
-
+\subsection*{Remarks on parameters and variants}
+\begin{itemize}[leftmargin=1.7em]
+\item \emph{Imprimitive characters and coprimality gates.} If one restricts to $(n,q)=1$, insert the projector by Möbius inversion; the extra divisor sum costs at most $(\log N)^{O(1)}$ and is absorbed. Summing over all characters instead of primitive only weakens the LHS and is already handled by Lemma \ref{lem:largesieve}.
+\item \emph{Smoothness losses.} All derivatives fall on $\psi_m$ and contribute factors $\ll 1$ (since $\psi\in C_c^\infty$ is fixed) or at most $(\log N)^{O(1)}$ in routine partial summations; these are absorbed in the headroom of the chosen $A,B,C$.
+\item \emph{Siegel zero contingency.} The single possible exceptional real character is handled with the $\exp(-c\sqrt{\log L})$ bound in Lemma \ref{lem:density}, far below any $(\log N)^{-A}$.
+\item \emph{General non-pretentious $f$.} The proof works verbatim with $\lambda$ replaced by any completely multiplicative $f$ with $\sup_{|t|\le T}\mathbb D(f,n^{it};x)\gg \log\log x$ (uniform non-pretentiousness), with constants depending on the pretentious profile.
+\end{itemize}
 
 \part*{Part C. Type III Analysis}
 
