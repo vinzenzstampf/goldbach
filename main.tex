@@ -54,8 +54,10 @@
  \usepackage{fancyhdr}
 \fancypagestyle{plain}{%  the preset of fancyhdr 
     \fancyhf{} % clear all header and footer fields
-    \fancyfoot[R]{\includegraphics[width=2cm]{KULEUVEN_GENT_RGB_LOGO.png}}
-    \fancyfoot[L]{\thedate}
+  % Show logo if present (prevents a hard error when the file is missing)
+  \fancyfoot[R]{\IfFileExists{KULEUVEN_GENT_RGB_LOGO.png}{\includegraphics[width=2cm]{KULEUVEN_GENT_RGB_LOGO.png}}{}}
+  % Left footer shows the document date
+  \fancyfoot[L]{\thedate}
     \fancyhead[L]{Description of Assignment}
     \fancyhead[R]{\theauthor}
 }
@@ -72,6 +74,10 @@
   \end{center}%
   \par
   \vskip 1em}
+% Provide public macros used elsewhere in the document
+% (LaTeX stores these internally as \@date and \@author)
+\providecommand{\thedate}{\@date}
+\providecommand{\theauthor}{\@author}
 \makeatother
 
 \usepackage{lipsum}  
