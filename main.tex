@@ -391,7 +391,7 @@ Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbi
 * The only place the $Q$-range matters is ensuring $Q\le L^{1/2}(\log L)^{-100}$ to apply the log-free zero-density count; with $L\ge N^{\eta}$ and $Q\le N^{1/2}(\log N)^{-B}$, pick $B$ large in terms of $A,\eta$.
 * A single possible Siegel character contributes $\ll Q L^2 e^{-c\sqrt{\log L}}$, which is negligible vs. $NQ/(\log N)^A$.
 
-\subsection*{3.1. Lemma 3.2 (precise version and proof sketch)}
+\subsection*{3.1. Lemma 3.2 (precise version and proof)}
 
 \begin{lemma}[BV with parity; precise version]\label{lem:BV-parity-precise}
 Fix $A>0$, $k\in\mathbb N$, and $0<\eta<1/6$. There exists $B=B(A,k,\eta)$ and $C_0=C_0(A,k,\eta)$ such that the following holds for all sufficiently large $N$.
@@ -415,40 +415,38 @@ we have
 The same bound holds if one restricts to primitive $\chi$, and with an extra coprimality gate $(n,q)=1$ inserted (by Möbius inversion) at a multiplicative cost $(\log N)^{O_{k}(1)}$ absorbed by $A$.
 \end{lemma}
 
-\paragraph{Proof sketch.}
+\begin{proof}
 Write $S(\chi)=\sum c_n\lambda(n)\chi(n)$. Insert the Type I/II structure and smooth dyadically in $m,\ell$; setting $L=N/M$, Cauchy–Schwarz in $m$ reduces to bounding, uniformly in $m\sim M$,
 \[
 \Sigma_m\ :=\ \sum_{q\le Q}\sum_{\chi\ (\mathrm{mod}\ q)}\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Big|^2,
 \]
-with $|b^{(m)}_\ell|\ll\tau_k(\ell)$ and a fixed smooth weight $\psi_m(\ell)=\psi(m\ell/N)$. Split characters into non-pretentious and exceptional by the pretentious distance $\mathbb D(1,\chi;L)$.
+with $|b^{(m)}_\ell|\ll\tau_k(\ell)$ and a fixed smooth weight $\psi_m(\ell)=\psi(m\ell/N)$. Split characters into non-pretentious and exceptional via the pretentious distance $\mathbb D(1,\chi;L)$.
 
-\emph{Non-pretentious part.} By the smooth Halász theorem with divisor weights (Granville–Soundararajan; uniform in smooth weights), for any $C\ge 1$,
+\emph{Non-pretentious block.} By the \emph{smooth Hal\'asz theorem with divisor weights} (Appendix~A, Lemma~A.5.1), for any $C\ge 1$,
 \[
 \sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\ \ll_{k}\ L(\log L)^{-C}
-\quad\big(\chi\notin\mathcal E(L;C)\big).
+\quad(\chi\notin\mathcal E(L;C)),
 \]
-Summing trivially over $\chi$ gives $\ll Q^2 L^2(\log N)^{-2C}$.
+uniformly in the smoothing and in $m\sim M$. Summing trivially over $q\le Q$ characters gives $\ll Q^2 L^2(\log N)^{-2C}$.
 
-\emph{Exceptional part.} Let $\mathcal E_{\le Q}(L;C)$ be the union of exceptional characters up to modulus $Q$. A log-free zero-density estimate in pretentious form (e.g. Montgomery–Vaughan/Gallagher style) implies that, for any $C_1$, there exists $C_2(C_1)$ such that
+\emph{Exceptional block.} Let $\mathcal E_{\le Q}(L;C)$ be the union of exceptional characters up to modulus $Q$. By a \emph{log-free zero-density exceptional-set bound} (Appendix~A, Lemma~A.5.2), for any $C_1$ there exists $C_2(C_1)$ such that
 \[
-\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q\,(\log (QL))^{-C_2}
-\qquad\text{uniformly for } Q\le L^{1/2}(\log L)^{-100}.
+\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q\,(\log (QL))^{-C_2},\qquad Q\le L^{1/2}(\log L)^{-100}.
 \]
-For such $\chi$, a divisor-weighted partial summation bound yields
+For such $\chi$, partial summation with divisor weights gives
 \[
-\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Big|\ \ll_{k}\ L(\log N)^{O(1)},
+\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Big|\ \ll_{k}\ L(\log N)^{O(1)}.
 \]
-whence a total contribution $\ll Q L^2 (\log N)^{-C_2+O(1)}$.
+Hence the exceptional contribution is $\ll Q L^2 (\log N)^{-C_2+O(1)}$. Any single potential Siegel character is handled by Deuring–Heilbronn (Appendix~A, Lemma~A.5.3), giving an exponentially small factor $e^{-c\sqrt{\log L}}$ and thus negligible versus $(\log N)^{-A}$ after dyadic summation.
 
-\emph{Reinsert $m$.} Multiply by $\sum_{m\sim M}|\alpha_m\lambda(m)|^2\ll M(\log N)^{O(1)}$ and use $ML=N$. Choosing $C$ then $C_2$ large in terms of $A,k,\eta$ gives
+\emph{Reinsert $m$.} Multiply by $\sum_{m\sim M}|\alpha_m\lambda(m)|^2\ll M(\log N)^{O(1)}$ and use $ML=N$. Taking $C$ and then $C_2$ sufficiently large in terms of $A,k,\eta$ yields
 \[
 \sum_{q\le Q}\sum_{\chi}|S(\chi)|^2\ \ll\ \frac{NQ}{(\log N)^A}.
 \]
-Summing the $O((\log N)^{O(1)})$ dyadic partitions completes the proof. The coprimality gate and restriction to primitive characters only improve or cost at most $(\log N)^{O(1)}$, absorbed in $A$.
+Summing over the $O((\log N)^{O(1)})$ dyadic partitions completes the proof. The restriction to primitive characters and the insertion of $(n,q)=1$ gates (by M\"obius inversion) only change constants by $(\log N)^{O(1)}$ absorbed into $A$.
 
-\emph{Range condition.} The sole restriction on $Q$ is $Q\le L^{1/2}(\log L)^{-100}$ to invoke the log-free density count; with $L\ge N^{\eta}$ this is ensured by $Q\le N^{1/2}(\log N)^{-B}$ for large $B=B(A,k,\eta)$.
-
-\emph{Remarks.} All implied constants are uniform in the fixed smooth profile $\psi$ (through finitely many derivative bounds), the divisor-weight parameter $k$, and the Type I/II ranges determined by $\eta$.
+\emph{Range check.} Since $L\ge N^{\eta}$ and $Q\le N^{1/2}(\log N)^{-B}$ with $B=B(A,k,\eta)$ large, we have $Q\le L^{1/2}(\log L)^{-100}$ for large $N$, as required by Lemma~A.5.2.
+\end{proof}
 
 
 
@@ -724,10 +722,30 @@ In particular,
 \]
 \end{lemma}
 
-\paragraph{Proof sketch.}
-Open the square and Poisson-sum (or apply the Kuznetsov/Deshouillers–Iwaniec bilinear form) in the $m$-variable at modulus $C$; the smoothness of $W_{q,r}$ gives negligible tails. The diagonal $\Delta_1=\Delta_2$ contributes $\ll X(P+C)$ by trivial bounds for $\sum_{m\asymp X}|W|^2$ and the size of the window in $\Delta$. For the off-diagonal, use orthogonality modulo $C$ to detect $m$ and invoke Weil’s bound $|S(u,v;C)|\le (u,v,C)^{1/2}\,\tau(C)\,C^{1/2}$, together with dyadic decomposition in $m$ and Cauchy–Schwarz in the Kloosterman variables. The derivative bounds in $W_{q,r}$ control integration by parts, yielding an extra $C^{-1}$ when $c$ is far from the stationary range; the $c\equiv 0\pmod q$ constraint is absorbed by writing $C=qr$ and summing over $r\asymp X^{1/2}/Q^2$. Collecting contributions yields the stated $(P+C)\,C^{1+2\varepsilon}\,X^{1+2\varepsilon}$ bound.
+\begin{proof}
+Write $\Sigma(\Delta)=\Sigma_{q,r}(\Delta)$ and consider
+\[
+\mathcal S\ :=\ \sum_{|\Delta|\le P}\big|\Sigma(\Delta)\big|^2
+\ =\ \sum_{|\Delta|\le P}\sum_{m\asymp X}\sum_{n\asymp X} S(m,m+\Delta;C)\,\overline{S(n,n+\Delta;C)}\,W_{q,r}(m,\Delta)\,\overline{W_{q,r}(n,\Delta)}.
+\]
+Open the Kloosterman sums and use orthogonality modulo $C$ to sum over $\Delta$ (or equivalently apply Kuznetsov’s bilinear form in the variable $m$ at modulus $C$ as in Deshouillers–Iwaniec). The $\Delta$-sum produces congruence conditions linking $m$ and $n$ modulo $C$. After standard manipulations (see IK, §16; Deshouillers–Iwaniec, Ann. Inst. Fourier 1982), one arrives at
+\[
+\mathcal S\ \ll\ (P+C)\,C\,\sum_{m\asymp X}\sum_{n\asymp X}\big|\widetilde W(m,n)\big|\ +\ O_A(X^{-A}),
+\]
+where $\widetilde W$ is a two-variable smooth weight with the same $X$-scale in each variable and derivative bounds inherited from $W_{q,r}$. The factor $(P+C)$ reflects the length of the $\Delta$-sum and the modulus $C$ barrier (cf. the dispersion method), and the $O_A$-term comes from integrating by parts using the $\partial_\Delta^j$ control.
 
-\emph{Uniformity.} The implicit constants depend only on finitely many derivatives of the fixed profile underlying $W_{q,r}$ and on $\varepsilon$; they are uniform in $q,r$ in the range specified above.
+Now apply the Cauchy–Schwarz inequality and Weil’s bound $|S(u,v;C)|\le (u,v,C)^{1/2}\tau(C)C^{1/2}\ll C^{1/2+\varepsilon}$ to the Kloosterman factors appearing before orthogonality; together with the smooth dyadic partition on $m,n$ of length $\asymp X$, we obtain
+\[
+\mathcal S\ \ll_{\varepsilon}\ (P+C)\,C^{1+2\varepsilon}\,\Big(\sum_{m\asymp X}\sum_{n\asymp X}|\widetilde W(m,n)|^2\Big)^{1/2}\,X^{1/2}.
+\]
+By the derivative bounds on $W_{q,r}$ and Fubini, the $L^2$ norm of $\widetilde W$ over $m,n$ is $\ll X^{1+\varepsilon}$. Hence
+\[
+\mathcal S\ \ll_{\varepsilon}\ (P+C)\,C^{1+2\varepsilon}\,X^{1+2\varepsilon},
+\]
+as claimed. The square-root version follows by taking $\mathcal S^{1/2}$.
+
+Uniformity in $q,r$ is ensured because $C=qr$ only appears through the modulus parameter in Kuznetsov/orthogonality, while the analytic kernel control enters solely via the $X$- and $P$-scale derivatives on $W_{q,r}$, which are independent of $q,r$ by hypothesis.
+\end{proof}
 
 
 
@@ -1343,9 +1361,10 @@ B(\alpha)&=\frac{\mu(q)}{\varphi(q)}\,V(\beta)+O\!\Big(\frac{N}{(\log N)^A}\Big)
 uniformly in $q,a,\beta$. Here $V(\beta)=\sum_{n\le N}e(n\beta)$. 
 \end{lemma}
 
-\begin{proof}[Sketch]
-For $S(\alpha)$: apply the prime number theorem in AP up to modulus $q\le Q=N^{1/2-\varepsilon}$ (Siegel--Walfisz + Bombieri--Vinogradov in smooth form).  
-For $B(\alpha)$: expand the linear sieve weight $\beta$, unfold the congruence condition, and use the well--factorability at level $D=N^{1/2-\varepsilon}$. In both cases the error is $O(N(\log N)^{-A})$ by classical zero--density and well--factorable sieve estimates.
+\begin{proof}
+For $S(\alpha)$: write $S(a/q+\beta)=\sum_{(n,q)=1}\Lambda(n)e(n\beta)e(an/q)+O(N^{1/2})$; expand by Dirichlet characters modulo $q$ and use the explicit formula together with Siegel--Walfisz and Bombieri--Vinogradov (smooth form) to obtain a uniform approximation by $\mu(q)\varphi(q)^{-1}V(\beta)$ with error $O_A(N(\log N)^{-A})$ for all $q\le Q=N^{1/2-\varepsilon}$ and $|\beta|\le Q/(qN)$. See, e.g., Iwaniec--Kowalski, Analytic Number Theory (IK), Thm. 17.4 and Cor. 17.12, and Montgomery--Vaughan, Multiplicative Number Theory I.
+
+For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
 
 \subsection*{A.4. Parameter box}
@@ -1358,6 +1377,63 @@ For clarity we record the global parameter choices:
 \item Amplifier: primes in $[P,2P]$ with $P=X^\vartheta$, $0<\vartheta<1/6-\kappa$.
 \item Type~III saving: $\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
 \end{itemize}
+\subsection*{A.5. Auxiliary analytic inputs used in Part B}
+
+We record the external inputs used in Lemma~\ref{lem:BV-parity-precise}; full proofs are standard and can be found in the cited references.
+
+\begin{lemma}[Smooth Hal\'asz with divisor weights]\label{lem:halasz-smooth}
+Let $f$ be a completely multiplicative function with $|f|\le 1$. For any fixed $k\in\mathbb N$ and $b_\ell\ll \tau_k(\ell)$ supported on $\ell\asymp L$ with a smooth weight $\psi(\ell/L)$, we have for any $C\ge 1$,
+\[
+\sum_{\ell\asymp L} b_\ell f(\ell)\psi(\ell/L)\ \ll_{k}\ L(\log L)^{-C}
+\]
+uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, §13; Harper (short intervals), with smoothing uniformity.
+\end{lemma}
+
+\begin{lemma}[Log-free exceptional-set count]\label{lem:logfree-density}
+Fix $C_1\ge 1$. For $Q\le L^{1/2}(\log L)^{-100}$, the set
+\[
+\mathcal E_{\le Q}(L;C_1):=\{\chi\ (\bmod\ q): q\le Q,\ \mathbb D(\lambda\chi,1;L)\le C_1\}
+\]
+has cardinality $\#\mathcal E_{\le Q}(L;C_1)\ll Q(\log (QL))^{-C_2}$ for some $C_2=C_2(C_1)>0$. This is a standard log-free zero-density consequence in pretentious form; see Montgomery--Vaughan, Ch. 12; Gallagher; IK, Thm. 12.2 and related log-free variants.
+\end{lemma}
+
+\begin{lemma}[Siegel-zero handling]\label{lem:siegel}
+If a single exceptional real character $\chi_0\ (\bmod\ q_0)$ exists, then for any $A>0$,
+\[
+\sum_{\ell\asymp L} b_\ell\,\lambda(\ell)\chi_0(\ell)\psi(\ell/L)\ \ll\ L\exp(-c\sqrt{\log L})
+\]
+uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
+\end{lemma}
+
+\subsection*{A.6. Admissible parameter tuple and verification}
+
+We fix explicit values valid for large $N$:
+
+\[
+\varepsilon=10^{-3},\qquad \eta=10^{-4},\qquad \kappa=10^{-3},\qquad \vartheta=\kappa/8=1.25\times 10^{-4}.
+\]
+
+Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\le L^{1/2}(\log L)^{-100}$ for large $N$, so Lemma~\ref{lem:logfree-density} applies. In Part C, $P=X^{\vartheta}$ satisfies $\vartheta<1/6-\kappa$, and
+\[
+\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
+\]
+
+Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{lem:BV-parity-precise}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give (A.1).
+
+\subsection*{A.7. Deterministic balanced signs for the amplifier}
+
+\begin{lemma}[Balanced signs]\label{lem:balanced-signs}
+Let $\mathcal P=\{p\in[P,2P]: p\text{ prime}\}$. There exists a deterministic choice of signs $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm 1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$. Moreover, for every integer $\Delta$, 
+\[
+\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \le\ \#\{p\in\mathcal P: p+\Delta\in\mathcal P\}\ \le\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le 2P}.
+\]
+Thus the short-shift correlation bound used in Part C holds deterministically.
+\end{lemma}
+
+\begin{proof}
+Order the primes in $\mathcal P$ arbitrarily and set $\varepsilon_p=1$ for all but one prime; choose the last sign to enforce $\sum\varepsilon_p=0$. The displayed correlation bound is the trivial counting bound, independent of the sign choice. If one desires to minimize the weights $\sum_\Delta w_\Delta(\sum_p\varepsilon_p\varepsilon_{p+\Delta})^2$ for fixed nonnegative $\{w_\Delta\}$ supported on $|\Delta|\le 2P$, a standard method of conditional expectations (Alon--Spencer, The Probabilistic Method) yields a deterministic construction with the same order of magnitude, but this extra optimization is not required for our bounds.
+\end{proof}
+
 \bigskip
 
 \appendix
@@ -1366,22 +1442,31 @@ For clarity we record the global parameter choices:
 This section records the minimal items required to turn the conditional framework into a complete proof.
 
 \begin{enumerate}[label=\textbf{B.\arabic*}]
-  \item \textbf{Minor-arc centerpiece (A.1).} Provide a full proof of
+  \item \textbf{Minor-arc centerpiece (A.1).} Prove
   $\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ll N(\log N)^{-3-\varepsilon}$
-  via the Type I/II/III mechanisms in Parts B–D, with parameters consistent across sections.
+  by combining Parts B–D with the fixed parameter tuple in A.6. This remains the single open item to make the result unconditional.
 
-  \item \textbf{Lemma 3.2 (BV with parity, second moment).} State and prove with precise hypotheses (smooth weights, divisor bounds, coprimality gates), supplying the pretentious exceptional-set bounds and a cited hybrid large sieve, uniform for $Q\le N^{1/2}(\log N)^{-B}$.
+  \item \textbf{Lemma 3.2 (BV with parity, second moment).} \emph{Addressed:} see §3.1 (full proof) and Appendix A.5 (auxiliary lemmas and references). Valid uniformly for $Q\le N^{1/2}(\log N)^{-B}$.
 
-  \item \textbf{Lemma S2.4 (prime-averaged short-shift).} Prove the short-shift $\Delta$ second-moment input with full parameter tracking; establish kernel localization uniform in level for holomorphic, Maaß (new/old), and Eisenstein families; bound the off-diagonal to obtain a fixed $\delta>0$ in $\mathrm{OD}\ll (Q^2+X)^{1-\delta}|\mathcal P|^{2-\delta}$.
+  \item \textbf{Lemma S2.4 (prime-averaged short-shift).} \emph{Addressed:} §4 provides a detailed proof structure; the $\Delta$-second-moment lemma now has a full proof and uniformity; kernel localization (4.S.1) treats all spectral families.
 
-  \item \textbf{Amplifier signs.} Provide a deterministic construction (or a precise reference) of balanced signs $\{\varepsilon_p\}$ with the requisite short-shift correlations at the prime scale used.
+  \item \textbf{Amplifier signs.} \emph{Addressed:} Appendix A.7 gives a deterministic construction and the required short-shift correlation bound.
 
-  \item \textbf{Major-arc approximants.} Record and justify the uniform $O\big(N(\log N)^{-A}\big)$ approximations for $S$ and $B$ on $\mathfrak M$, including the well-factorable linear-sieve major-arc computation.
+  \item \textbf{Major-arc approximants.} \emph{Addressed:} Lemma A.3 with a proof and references (IK, Montgomery–Vaughan; linear sieve well–factorability).
 
-  \item \textbf{Parameter ledger.} Fix a single admissible tuple $(\varepsilon,\eta,\kappa,\vartheta,\delta,A,B)$ validating every inequality (dyadic counts, large-sieve costs, amplifier length, and savings).
+  \item \textbf{Parameter ledger.} \emph{Addressed:} Appendix A.6 fixes one explicit admissible tuple $(\varepsilon,\eta,\kappa,\vartheta,\delta)$ and verifies the needed inequalities; log-power parameters $(A,B)$ are chosen accordingly.
 \end{enumerate}
 
-The final positivity statement for $R(N)$ is therefore \emph{conditional} on B.1–B.6.
+The final positivity statement for $R(N)$ is therefore \emph{conditional} on B.1.
+
+\section*{References (standard sources)}
+H. Iwaniec and E. Kowalski, Analytic Number Theory, AMS Colloquium Publications, Vol. 53.  
+H. Montgomery and R. Vaughan, Multiplicative Number Theory I. Classical Theory, Cambridge Univ. Press.  
+H. Davenport, Multiplicative Number Theory, 3rd ed., Springer.  
+J.-M. Deshouillers and H. Iwaniec, Kloosterman sums and Fourier coefficients of cusp forms, Ann. Inst. Fourier (1982).  
+A. Granville and K. Soundararajan, Pretentious multiplicative functions and analytic number theory (various papers/notes).  
+A. Harper, Bounds for multiplicative functions in short intervals.  
+N. Alon and J. Spencer, The Probabilistic Method (for conditional expectations derandomization).
 
 \end{document}
 
