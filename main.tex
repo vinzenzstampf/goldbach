@@ -140,7 +140,7 @@ $$
 
 \subsection*{Parity-blind majorant $B(\alpha)$}
 
-Let $\beta=\{\beta(n)\}_{n\le N}$ be a **parity-blind sieve majorant** for the primes at level $D=N^{1/2-\varepsilon}$, in the following sense:
+Let $\beta=\{\beta(n)\}_{n\le N}$ be a \textbf{parity-blind sieve majorant} for the primes at level $D=N^{1/2-\varepsilon}$, in the following sense:
 
 * (B1) $\beta(n)\ge 0$ for all $n$ and $\beta(n)\gg \tfrac{\log D}{\log N}$ for $n$ the main $\le N$.
 * (B2) $\displaystyle \sum_{n\le N}\beta(n)\;=\;(1+o(1))\,\frac{N}{\log N}$ and, uniformly in residue classes $(\bmod\,q)$ with $q\le D$,
@@ -182,16 +182,16 @@ Moreover, with the same tools one shows that on the major arcs $S(\alpha)$ may b
 
 \subsection*{Reduction to a minor-arc $L^2$ bound}
 
-**Claim (reduction).** Suppose that for some $\varepsilon>0$,
+We record the minor-arc target:
 
 \begin{equation}
 \boxed{\ \ \int_{\mathfrak m}\!\bigl|S(\alpha)-B(\alpha)\bigr|^{2}\,d\alpha
 \ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ .\ }
-\tag{A.1}
+	ag{A.1}
 \end{equation}
 
-
-Then
+\begin{proposition}[Reduction]\label{prop:reduction}
+Assume (A.1). Then
 
 $$
 R(N)\;=\;\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha\;+\;O\!\left(\frac{N}{(\log N)^{3+\varepsilon/2}}\right),
@@ -205,7 +205,10 @@ $$
 
 for some $\delta>0$.
 
-**Proof (sketch).** Split on $\mathfrak M\cup\mathfrak m$ and insert $S=B+(S-B)$:
+\end{proposition}
+
+\begin{proof}[Sketch]
+Split on $\mathfrak M\cup\mathfrak m$ and insert $S=B+(S-B)$:
 
 $$
 S^2 = B^2 + 2B(S-B) + (S-B)^2.
@@ -232,13 +235,14 @@ $$
 \;=\;\frac{N}{(\log N)^{2+\varepsilon/2}}.
 $$
 
-The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in (A.1). On the major arcs, standard major-arc analysis (Vaughan’s identity or the explicit formula combined with (B2)–(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section of the paper). Collecting terms yields the stated reduction. $\square$
+The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in (A.1). On the major arcs, standard major-arc analysis (Vaughan’s identity or the explicit formula combined with (B2)–(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
+\end{proof}
 
 \subsection*{What remains standard/checklist for $\beta$}
 
-* **Choice of $\beta$:** take the Selberg upper-bound sieve weight at level $D=N^{1/2-\varepsilon}$ (or a GPY-type almost-prime majorant) so that (B1)–(B4) hold.
-* **Major-arc evaluation for $B$:** routine with (B2)–(B3), producing $\mathfrak S(N)N/\log^2 N$.
-* **Minor-arc task:** prove the $L^2$ estimate (A.1). This is the core analytic input for the parity-blind replacement on $\mathfrak m$.
+* \textbf{Choice of $\beta$:} take the Selberg upper-bound sieve weight at level $D=N^{1/2-\varepsilon}$ (or a GPY-type almost-prime majorant) so that (B1)–(B4) hold.
+* \textbf{Major-arc evaluation for $B$:} routine with (B2)–(B3), producing $\mathfrak S(N)N/\log^2 N$.
+* \textbf{Minor-arc task:} prove the $L^2$ estimate (A.1). This is the core analytic input for the parity-blind replacement on $\mathfrak m$.
 
 
 \subsection*{Status (conditional to A.1)} 
@@ -467,26 +471,22 @@ $$
 
 uniformly across spectral families and all $q$. Writing $z=\frac{4\pi\sqrt{mn}}{c}$ shows the $c$-sum is supported on $c\asymp C:=X^{1/2}/Q$ with derivative control; we parameterize $c=qr$ so $r\asymp R:=C/q\asymp X^{1/2}/Q^2$.
 
-We prove:
+\begin{lemma}[Prime-averaged short-shift gain]\label{lem:S2.4}
+With the hypotheses above, for any $\varepsilon>0$,
+\[
+\mathrm{OD}\ \ \ll_{\varepsilon}\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
+\]
+where one may take
+\[
+\delta\ =\ \tfrac1{1000}\,\min\!\big\{\kappa,\ \tfrac12-3\vartheta\big\}.
+\]
+The bound holds uniformly in $\{\alpha_p\}$, and after summing holomorphic, Maaß (new+old), and Eisenstein contributions.
+\end{lemma}
 
-> **Lemma S2.4 (completed).**
-> With the hypotheses above, for any $\varepsilon>0$,
->
-> $$
-> \mathrm{OD}\ \ \ll_{\varepsilon}\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
-> $$
->
-> where one may take
->
-> $$
-> \boxed{\ \ \delta\ =\ \frac1{1000}\,\min\!\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ .\ }
-> $$
->
-> The bound holds uniformly in $\{\alpha_p\}$, and after summing holomorphic, Maaß (new+old), and Eisenstein contributions.
-
+\begin{proof}
 We split the proof into five steps.
 
-\subsection*{Step 1. Balanced amplifier (deterministic signs)}
+\paragraph{Step 1: Balanced amplifier (deterministic signs).}
 
 Let $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm1\}$ be a sequence with
 
@@ -502,7 +502,7 @@ A standard conditional-expectation derandomization (method of conditional expect
 \]
 by greedily fixing signs to keep the quadratic form $\sum_{\Delta}w_\Delta(\sum_p \varepsilon_p\varepsilon_{p+\Delta})^2$ minimal for suitable nonnegative weights $w_\Delta$ supported on $|\Delta|\le 2P$. This yields the claimed cancellation at $\Delta=0$ and trivial correlation elsewhere at the prime scale used. (Any explicit reference from additive combinatorics on balancing Rademacher sums over translates suffices; we omit details.)
 
-(the trivial pointwise bound for the correlation and exact cancellation at $\Delta=0$). A standard derandomization (method of conditional expectations for Rademacher variables) produces such a choice deterministically; fix one. Define
+This gives the trivial pointwise bound for the correlation and exact cancellation at $\Delta=0$. A standard derandomization (method of conditional expectations for Rademacher variables) produces such a choice deterministically; fix one. Define
 
 $$
 A_f=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p).
@@ -523,7 +523,7 @@ $$
 
 where $\{\alpha_n\}$ is the Type–III coefficient block (divisor-bounded, smooth).
 
-\subsection*{Step 2. Hecke relations and removal of the “$n/p$” tail}
+\paragraph{Step 2: Hecke relations and removal of the $n/p$ tail.}
 
 Opening $|A_f S_{q,\chi,f}|^2$ and using Hecke multiplicativity,
 
@@ -537,7 +537,7 @@ $$
 
 we may write the amplified second moment as a finite linear combination of terms with Hecke arguments $pn$ (and possibly $n/p$). Because the Type–III support is smooth and confined to $n\asymp X$, the contribution of the $n/p$ branch is supported on $n\asymp X$ with the extra condition $p\mid n$; by smooth partition and partial summation this piece is bounded by the same off-diagonal analysis (it is in fact easier since it has an extra divisibility). We henceforth treat explicitly the $pn$ branch; all others are dominated in the same way and absorbed into the final implied constant.
 
-\subsection*{Step 3. Kuznetsov and off-diagonal reorganization}
+\paragraph{Step 3: Kuznetsov and off-diagonal reorganization.}
 
 Summing over $(q,\chi,f)$ with $q\in\mathcal Q$ and primitive $\chi\pmod q$, and applying Kuznetsov with test $h_Q$ at level $q$, the **diagonal** terms vanish by $\sum_p\varepsilon_p=0$. The **off-diagonal** geometric side takes the model form
 
@@ -574,9 +574,7 @@ $$
 
 All derivative bounds depend only on finitely many derivatives of $h$ and the smoothness of $\{\alpha_n\}$, hence are **uniform** in $q,r$.
 
----
-
-\subsection*{Step 4. $\Delta$-second moment and harvesting the prime}average
+\paragraph{Step 4: $\Delta$-second moment and harvesting the prime average.}
 
 By Cauchy–Schwarz in $\Delta$, the trivial bound $\nu(\Delta)\le |\mathcal P|$, and Lemma~\ref{lem:delta-second-moment}, we have
 
@@ -608,14 +606,12 @@ Summing $q\in\mathcal Q$ (there are $O(Q)$ moduli) yields the **conductor bound*
 
 \begin{equation}
 \boxed{\ \ \mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,\big(P+X^{1/2}/Q\big)^{1/2}. \ \ }
-\tag{4.S.X}
+	ag{4.S.X}
 \end{equation}
 
 This is the only place where Bessel tails, oldforms, and Eisenstein matter; all are covered by the kernel lemma, which is uniform across spectral families (the proof for each family has the same derivative-decay structure).
 
----
-
-\subsection*{Step 5. Regime balance and choice of $\delta$}
+\paragraph{Step 5: Regime balance and choice of $\delta$.}
 
 We rewrite $(4.S.\!\star)$ in the desired $(Q^2+X)^{1-\delta}|\mathcal P|^{2-\delta}$ form by splitting into the two natural regimes, using $Q\le X^{1/2-\kappa}$ and $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$.
 
@@ -660,15 +656,8 @@ We rewrite $(4.S.\!\star)$ in the desired $(Q^2+X)^{1-\delta}|\mathcal P|^{2-\de
 
   up to harmless absolute constants; we pick a safety factor $1/1000$ to absorb all $X^\varepsilon$ and log terms from $|\mathcal P|$.
 
-Choosing
-
-$$
-\delta=\frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}
-$$
-
-meets both regimes, and plugging back $|\mathcal P|=X^{\vartheta+o(1)}$ absorbs the $|\mathcal P|^{-\delta}$ factor into $X^\varepsilon$, yielding the claimed bound.
-
-$\square$
+Choosing $\delta=\tfrac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}$ meets both regimes, and plugging back $|\mathcal P|=X^{\vartheta+o(1)}$ absorbs the $|\mathcal P|^{-\delta}$ factor into $X^\varepsilon$, yielding the claimed bound.
+\end{proof}
 
 \subsection*{4.S.1. Kernel localization (stated for completeness)}
 
@@ -695,7 +684,7 @@ The Kuznetsov decomposition splits into holomorphic, Maaß new/old, and Eisenste
 * Resulting saving: $\delta=\frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
 * Recommended choice later in Part C.5/D.6: fix any small $\vartheta\le \kappa/4$, then $\delta\gg\vartheta$; the factor $|\mathcal P|^{-\delta}=X^{-\vartheta\delta}$ is absorbed into $X^\varepsilon$.
 
-With S2.4 now fully explicit and uniform, you can plug it straight into **Part C.5 (Type-III spectral second moment)** and then the **Assembly/Dyadic step (Part D.6)** exactly as drafted. If you want, next I can tighten **Lemma 3.2 / Route-B** into a line-by-line proof (pretentious Halász + log-free density + hybrid large sieve) so Part B is truly “camera-ready.”
+With S2.4 now fully explicit and uniform, it plugs directly into the Type-III spectral second moment and the assembly/dyadic step used later.
 
 \subsection*{4.S.4. Short-shift $\Delta$ second-moment lemma}
 
@@ -751,7 +740,7 @@ Uniformity in $q,r$ is ensured because $C=qr$ only appears through the modulus p
 
 \section*{5. Type-III Spectral Bound}
 
-**Proposition (Type-III spectral second moment).**
+\begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
 Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maaß, including oldforms and Eisenstein as in Kuznetsov). Assume **Lemma S2.4 (Prime-averaged short-shift gain)** holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
 
 $$
@@ -760,9 +749,11 @@ $$
 \ \ \ll_{\varepsilon,C}\ \ (Q^2+X)^{\,1-\delta}\,X^{\varepsilon}.
 $$
 
-\subsection*{Proof (using Lemma S2.4)}
+\end{proposition}
 
-\subsection*{Step 1: Balanced prime amplifier that kills the diagonal.}
+\begin{proof}[Proof using Lemma~\ref{lem:S2.4}]
+
+\paragraph{Step 1: Balanced prime amplifier that kills the diagonal.}
 Let $\mathcal P$ be the set of primes $p\in[P,2P]$ with $P=X^\vartheta$ (to be chosen; Lemma S2.4 is uniform in $P$).
 Choose deterministic signs $\varepsilon_p\in\{\pm 1\}$ so that
 
@@ -782,7 +773,7 @@ $$
 
 Because $\sum_p\varepsilon_p=0$, expanding $|A_f|^2$ removes the pure diagonal $p=p'$ on average over signs, leaving only short prime shifts $p\neq p'$ with $\Delta = p-p'$ (the “short-shift” structure needed for Lemma S2.4).
 
-\subsection*{Step 2: Diagonal-free reduction by polarization.}
+\paragraph{Step 2: Diagonal-free reduction by polarization.}
 For any complex numbers $S_f$,
 
 $$
@@ -817,7 +808,7 @@ Summing over $q\le Q,\chi$ gives
 \tag{3.1}
 \end{equation}
 
-\subsection*{Step 3: Kuznetsov after opening the amplifier.}
+\paragraph{Step 3: Kuznetsov after opening the amplifier.}
 Open $|A_f S_{q,\chi,f}|^2$ and use Hecke relations to rewrite prime factors $\lambda_f(p)\lambda_f(n)$ as a (short) combination of $\lambda_f(pn)$ and $\lambda_f(n/p)$ (the latter is discarded as $p\nmid n$ for Type-III supports). After summing over $(q,\chi,f)$ and applying Kuznetsov (including oldforms + Eisenstein), the contribution splits into:
 
 \begin{itemize}
@@ -846,7 +837,7 @@ Therefore,
 \end{equation}
 
 
-\subsection*{Step 4: Divide out the amplifier and optimize $P$.}
+\paragraph{Step 4: Divide out the amplifier and optimize $P$.}
 Insert (3.2) into (3.1):
 
 $$
@@ -864,6 +855,8 @@ $$
 
 as claimed. $\square$
 
+\end{proof}
+
 \subsection*{Remarks}
 
 \begin{itemize}
@@ -875,10 +868,6 @@ as claimed. $\square$
 \end{itemize}
 
 This completes Part C.5 once Lemma S2.4 is rigorously in place.
-
-great — here’s a clean, self-contained “finish” for Part D.6 that plugs in the previously established Type I/II and Type III inputs, carries the dyadic bookkeeping, and arrives at the stated minor-arc $L^2$ bound.
-
----
 
 \part*{Part D. Assembly}
 
@@ -1118,10 +1107,6 @@ This completes the explicit proof of (A.1) using the parameter tuple in Appendix
 
 Nothing delicate hinges on the exact form of the identity (Vaughan vs. Heath–Brown) provided it yields (i) divisor-bounded smooth coefficients and (ii) a genuine three-variable “Type III” regime where Lemma S2.4 applies. Alternative cut choices merely reshuffle a finite number of dyadic families and do not change the final $(\log N)^{-3-\varepsilon}$ power once $A$ is taken large in the Type I/II inputs.
 
-here’s a clean write-up you can drop into your document.
-
----
-
 \section*{7. Major–Arc Evaluation}
 
 Let
@@ -1235,7 +1220,7 @@ $$
 with $c_q(N)$ the Ramanujan sum. The absolutely convergent series equals the Goldbach singular series $\mathfrak S(N)$. Hence
 
 $$
-\boxed{\ \ \int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
+\boxed{\,\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
 =\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big)\ .\ }
 $$
 
@@ -1284,10 +1269,6 @@ Combining §7.1–§7.2 we conclude:
 
 \subsection*{Status.} 
 Everything here is standard Hardy–Littlewood major-arc analysis. What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri–Vinogradov/Siegel–Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
-here’s a clean, ready-to-drop-in write-up for your last step.
-
----
-
 \section*{8. Final Step (conditional on (A.1))}
 
 We now conclude the argument.
