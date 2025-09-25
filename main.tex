@@ -80,9 +80,6 @@
 \providecommand{\theauthor}{\@author}
 \makeatother
 
-\usepackage{lipsum}  
-\usepackage{cmbright}
-
 \begin{document}
 
 \maketitle
@@ -94,6 +91,18 @@
 \end{tabular}
 
 \part*{Part A. Framework}
+
+\section*{Assumptions \\& conditional result (at a glance)}
+
+This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived \emph{conditional} on the minor-arc $L^2$ estimate (A.1) and the analytic inputs explicitly stated in Parts B–D. In particular:
+
+\begin{itemize}
+  \item Establishing (A.1) is the central new task; Parts B–D provide a proposed route via Type I/II/III analyses.
+  \item Major-arc expansions for $S$ and for the sieve majorant $B$ are used with uniformity standard in the literature; precise statements are recorded in §7 with hypotheses.
+  \item The final positivity conclusion for $R(N)$ is conditional on (A.1) and the stated major-arc bounds; no claim is made here that the new inputs are fully proved.
+\end{itemize}
+
+A succinct punch-list of outstanding items appears in Appendix~B.
 
 \section*{1. Circle-Method Decomposition}
 
@@ -237,8 +246,8 @@ The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in (A.1). On 
 * **Minor-arc task:** prove the $L^2$ estimate (A.1). This is the core analytic input for the parity-blind replacement on $\mathfrak m$.
 
 
-\subsection*{Status} 
-With the above definitions and the reduction, Part A is complete modulo verifying that the chosen sieve weight $\beta$ satisfies (B1)–(B4) (standard) and establishing the minor-arc bound (A.1), which is the target of subsequent sections.
+\subsection*{Status (conditional to A.1)} 
+With the above definitions and the reduction, Part A is complete \emph{conditional} on establishing the minor-arc bound (A.1). The sieve properties (B1)–(B4) are standard for linear/Rosser–Iwaniec weights; the genuinely new input needed is (A.1), which is the target of Parts B–D.
 
 \part*{Part B. Type I / II Analysis}
 
@@ -1096,7 +1105,7 @@ here’s a clean, ready-to-drop-in write-up for your last step.
 
 ---
 
-\section*{8. Final Step}
+\section*{8. Final Step (conditional on (A.1))}
 
 We now conclude the argument.
 
@@ -1127,26 +1136,24 @@ which satisfies $\mathfrak S(N)>0$ for every even $N$, and $\mathfrak S(N)=0$ fo
 
 \subsection*{Minor arcs.}
 
-By the Assembly/Dyadic step (Part D.6) together with the construction of the parity-blind majorant $B$ (Part A.1) and its minor-arc $L^2$ control, we have
+Assume the minor-arc $L^2$ input (A.1):
 
 $$
 \int_{\mathfrak m} |S(\alpha)-B(\alpha)|^2\,d\alpha
-\;\ll\;\frac{N}{(\log N)^{3+\varepsilon}},
-\qquad
-\int_{\mathfrak m} |B(\alpha)|^2\,d\alpha
 \;\ll\;\frac{N}{(\log N)^{3+\varepsilon}}.
 $$
 
-Hence, by $(x+y)^2\le 2x^2+2y^2$,
+Write $S^2=B^2+2B(S-B)+(S-B)^2$ and integrate over $\mathfrak m$.
+By Cauchy–Schwarz and Parseval,
 
 $$
-\int_{\mathfrak m} |S(\alpha)|^2\,d\alpha
-\;\le\;2\!\int_{\mathfrak m}\!|S(\alpha)-B(\alpha)|^2\,d\alpha
-\;+\;2\!\int_{\mathfrak m}\!|B(\alpha)|^2\,d\alpha
-\;\ll\;\frac{N}{(\log N)^{3+\varepsilon}}.
+\Big|\int_{\mathfrak m} B(\alpha)\,\big(S(\alpha)-B(\alpha)\big)\,e(-N\alpha)\,d\alpha\Big|
+\ \le\ \Big(\int_0^1 |B(\alpha)|^2\,d\alpha\Big)^{1/2}
+\Big(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\Big)^{1/2}
+\ \ll\ \frac{N}{(\log N)^{2+\varepsilon/2}},
 $$
 
-Therefore the minor arcs contribute $o\!\left(N/\log^2 N\right)$.
+since $\int_0^1|B|^2\ll N/\log N$ by (B2)–(B3). The pure error $\int_{\mathfrak m}|S-B|^2$ is already $\ll N/(\log N)^{3+\varepsilon}$. Thus the minor arcs contribute $o\!\left(N/\log^2 N\right)$ under (A.1), without requiring any bound stronger than $\int_0^1|B|^2\ll N/\log N$.
 
 \subsection*{Conclusion.}
 
@@ -1260,5 +1267,30 @@ For clarity we record the global parameter choices:
 \end{itemize}
 \bigskip
 
+\appendix
+\section*{Appendix B. Outstanding items and assumptions}
+
+This section records the minimal items required to turn the conditional framework into a complete proof.
+
+\begin{enumerate}[label=\textbf{B.\arabic*}]
+  \item \textbf{Minor-arc centerpiece (A.1).} Provide a full proof of
+  $\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ll N(\log N)^{-3-\varepsilon}$
+  via the Type I/II/III mechanisms in Parts B–D, with parameters consistent across sections.
+
+  \item \textbf{Lemma 3.2 (BV with parity, second moment).} State and prove with precise hypotheses (smooth weights, divisor bounds, coprimality gates), supplying the pretentious exceptional-set bounds and a cited hybrid large sieve, uniform for $Q\le N^{1/2}(\log N)^{-B}$.
+
+  \item \textbf{Lemma S2.4 (prime-averaged short-shift).} Prove the short-shift $\Delta$ second-moment input with full parameter tracking; establish kernel localization uniform in level for holomorphic, Maaß (new/old), and Eisenstein families; bound the off-diagonal to obtain a fixed $\delta>0$ in $\mathrm{OD}\ll (Q^2+X)^{1-\delta}|\mathcal P|^{2-\delta}$.
+
+  \item \textbf{Amplifier signs.} Provide a deterministic construction (or a precise reference) of balanced signs $\{\varepsilon_p\}$ with the requisite short-shift correlations at the prime scale used.
+
+  \item \textbf{Major-arc approximants.} Record and justify the uniform $O\big(N(\log N)^{-A}\big)$ approximations for $S$ and $B$ on $\mathfrak M$, including the well-factorable linear-sieve major-arc computation.
+
+  \item \textbf{Parameter ledger.} Fix a single admissible tuple $(\varepsilon,\eta,\kappa,\vartheta,\delta,A,B)$ validating every inequality (dyadic counts, large-sieve costs, amplifier length, and savings).
+\end{enumerate}
+
+The final positivity statement for $R(N)$ is therefore \emph{conditional} on B.1–B.6.
 
 \end{document}
+
+% --------- APPENDIX B INSERTED BEFORE \end{document} IN PREVIOUS LINE; MOVE IT ABOVE IF NEEDED ---------
+

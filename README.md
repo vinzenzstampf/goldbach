@@ -1,5 +1,15 @@
 # goldbach
 
+## Status
+
+This document outlines a conditional circle-method framework toward the binary Goldbach conjecture. The final asymptotic is derived conditional on:
+
+- A minor-arc L2 estimate (A.1): ∫_m |S(α)−B(α)|^2 ≪ N / (log N)^{3+ε}.
+- Type I/II and Type III inputs as stated in Parts B–D (Lemma 3.2, Lemma S2.4), with uniform parameter control.
+- Standard major-arc approximants for S and for a well-factorable sieve majorant B.
+
+See “Assumptions & conditional result” in Part A and Appendix B (Outstanding items) in `main.tex` for a punch-list of what remains to be proved.
+
 ## Build (macOS)
 
 You can build the LaTeX document `main.tex` in two ways:
