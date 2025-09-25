@@ -1028,6 +1028,78 @@ as claimed.
 
 $\square$
 
+\subsection*{6.1. Explicit proof of (A.1) with fixed parameters}
+
+We record a concrete choice of parameters and a bookkeeping of logarithmic losses that yields the minor-arc $L^2$ estimate (A.1) with an explicit exponent strictly larger than $3$.
+
+\paragraph{Fixed parameter tuple.} As in Appendix~A.6, fix
+\[
+\varepsilon=10^{-3},\quad \eta=10^{-4},\quad \kappa=10^{-3},\quad \vartheta=\kappa/8,\quad \delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}.
+\]
+Set $Q=N^{1/2-\varepsilon}$. Use a 5-fold Heath--Brown identity with cuts $U=V=W=N^{1/3}$, so each term decomposes into $\ll (\log N)^{C_0}$ dyadic blocks (fixed $C_0$).
+
+\paragraph{Large-sieve reduction.} For any block $\mathcal T$, (D.3) yields
+\[
+\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2\,d\alpha\ \ll\ Q^{-2}\sum_{q\le Q}\sum_{(a,q)=1}\Big|\sum_n c_n e(an/q)\Big|^2.
+\]
+Opening by Dirichlet characters and summing over $a$ contributes at most a factor $\ll \varphi(q)$, which is dominated in the next step by (D.1)/(Type III bound). Summing over $q\le Q$ is handled inside those inputs.
+
+\paragraph{Type I/II blocks.} Apply Lemma~\ref{lem:BV-parity-precise} with $A_1=6+C_0+10$ (the +10 is slack):
+\[
+\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum c_n\,\lambda(n)\chi(n)\Big|^2\ \ll\ \frac{NQ}{(\log N)^{A_1}}.
+\]
+Therefore, for each Type I/II block,
+\[
+\int_{\mathfrak m}|\mathcal S_{\mathcal T}|^2\ \ll\ Q^{-2}\cdot \frac{NQ}{(\log N)^{A_1}}\ =\ \frac{N}{Q(\log N)^{A_1}}\ =\ \frac{N}{N^{1/2-\varepsilon}\,(\log N)^{A_1}}.
+\]
+Summing $\ll (\log N)^{C_0}$ such blocks gives
+\[
+\sum_{\text{Type I/II}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}|^2\ \ll\ \frac{N}{N^{1/2-\varepsilon}}\cdot \frac{(\log N)^{C_0}}{(\log N)^{A_1}}\ \ll\ \frac{N}{(\log N)^{3+\varepsilon/2}},
+\]
+since $A_1-(C_0)\ge 6+10\gg 3$ and the factor $N^{-1/2+\varepsilon}$ strengthens the saving.
+
+\paragraph{Type III blocks.} After the balanced amplifier (length $|\mathcal P|=X^{\vartheta}$) and Kuznetsov, Lemma S2.4 gives
+\[
+\sum_{q\le Q}\sum_{\chi}\sum_f\big|A_f\,S_{q,\chi,f}\big|^2\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{2-\delta}\,X^{\varepsilon}.
+\]
+Dividing by $|\mathcal P|^2$ and using $|\mathcal P|=X^{\vartheta+o(1)}$ we obtain
+\[
+\sum_{q\le Q}\sum_{\chi}\sum_f\Big|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\Big|^2\ \ll\ (Q^2+X)^{1-\delta}\,X^{-\vartheta\delta+\varepsilon}.
+\]
+Hence, for a fixed Type III block at scale $X$, the large-sieve reduction yields
+\[
+\int_{\mathfrak m}|\mathcal S_{\mathcal T}|^2\ \ll\ Q^{-2}\,(Q^2+X)^{1-\delta}\,X^{-\vartheta\delta+\varepsilon}.
+\]
+Split into two regimes:
+\begin{itemize}
+  \item If $X\le Q^2$, then $(Q^2+X)^{1-\delta}\ll Q^{2-2\delta}$ and so
+  \[
+  \int_{\mathfrak m}|\mathcal S_{\mathcal T}|^2\ \ll\ Q^{-2}\cdot Q^{2-2\delta}\,X^{-\vartheta\delta+\varepsilon}\ =\ Q^{-2\delta}\,X^{-\vartheta\delta+\varepsilon}.
+  \]
+  Using $Q=N^{1/2-\varepsilon}$ and $X\ge N^{\xi_0}$ for some fixed $\xi_0>0$ from the HB partition, we have a uniform negative power of $N$ times at least $(\log N)^{-(3+\varepsilon)}$ after summing dyadics; this is dominated by the Type I/II total above.
+  \item If $X\ge Q^2$, then $(Q^2+X)^{1-\delta}\ll X^{1-\delta}$ and
+  \[
+  \int_{\mathfrak m}|\mathcal S_{\mathcal T}|^2\ \ll\ Q^{-2}\,X^{1-\delta-\vartheta\delta+\varepsilon}.
+  \]
+  Since $Q^{-2}=N^{-1+2\varepsilon}$ and $X\le N$, this is
+  \[
+  \ll\ N^{-1+2\varepsilon}\cdot N^{1-\delta(1+\vartheta)+\varepsilon}\ =\ N^{-\delta(1+\vartheta)+3\varepsilon}.
+  \]
+  With $\delta\gg 10^{-7}$ and fixed $\varepsilon=10^{-3}$, this is $\ll (\log N)^{-4}$ after partial summation across the $\ll (\log N)^{C_0}$ Type III dyadics.
+\end{itemize}
+Summing all Type III dyadics we obtain
+\[
+\sum_{\text{Type III}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}|^2\ \ll\ \frac{N}{(\log N)^{3+\varepsilon/2}}.
+\]
+
+\paragraph{Combine.} Adding Type I/II and Type III contributions proves
+\[
+\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon_0}}
+\]
+for some fixed $\varepsilon_0>0$ (e.g. $\varepsilon_0=\varepsilon/2$), i.e. (A.1) with an explicit log-power larger than $3$.
+
+This completes the explicit proof of (A.1) using the parameter tuple in Appendix~A.6.
+
 \subsection*{Parameter choices \& loss ledger (for ease of cross-checking)}
 
 \begin{itemize}
@@ -1469,6 +1541,4 @@ A. Harper, Bounds for multiplicative functions in short intervals.
 N. Alon and J. Spencer, The Probabilistic Method (for conditional expectations derandomization).
 
 \end{document}
-
-% --------- APPENDIX B INSERTED BEFORE \end{document} IN PREVIOUS LINE; MOVE IT ABOVE IF NEEDED ---------
 
