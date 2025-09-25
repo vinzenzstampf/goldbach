@@ -396,6 +396,66 @@ Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbi
 * The only place the $Q$-range matters is ensuring $Q\le L^{1/2}(\log L)^{-100}$ to apply the log-free zero-density count; with $L\ge N^{\eta}$ and $Q\le N^{1/2}(\log N)^{-B}$, pick $B$ large in terms of $A,\eta$.
 * A single possible Siegel character contributes $\ll Q L^2 e^{-c\sqrt{\log L}}$, which is negligible vs. $NQ/(\log N)^A$.
 
+\subsection*{3.1. Lemma 3.2 (precise version and proof sketch)}
+
+\begin{lemma}[BV with parity; precise version]\label{lem:BV-parity-precise}
+Fix $A>0$, $k\in\mathbb N$, and $0<\eta<1/6$. There exists $B=B(A,k,\eta)$ and $C_0=C_0(A,k,\eta)$ such that the following holds for all sufficiently large $N$.
+
+Let $\psi\in C_c^\infty((1/2,2))$ with $\|\psi^{(j)}\|_\infty\le C_0^{j}$ for all $j\ge 0$ and define $c_n = \psi(n/N)\,d_n$ supported on $n\asymp N$, with $|d_n|\le \tau_k(n)$. Assume a Type I/II structure:
+
+\begin{itemize}
+  \item \textbf{Type I:} $d_n=\sum_{m\ell=n}\alpha_m\beta_\ell$ with $M\le N^{1/2-\eta}$, $|\alpha_m|\le \tau_k(m)$, $|\beta_\ell|\le \tau_k(\ell)$;
+  \item \textbf{Type II:} same but $N^{\eta}\le M\le N^{1/2-\eta}$.
+\end{itemize}
+
+Then for
+\[
+Q\ \le\ N^{1/2}(\log N)^{-B}
+\]
+we have
+\[
+\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}\Bigg|\sum_{n\asymp N} c_n\,\lambda(n)\,\chi(n)\Bigg|^2\ \ \ll_{A,k,\eta,\psi}\ \ \frac{NQ}{(\log N)^A}.
+\]
+
+The same bound holds if one restricts to primitive $\chi$, and with an extra coprimality gate $(n,q)=1$ inserted (by Möbius inversion) at a multiplicative cost $(\log N)^{O_{k}(1)}$ absorbed by $A$.
+\end{lemma}
+
+\paragraph{Proof sketch.}
+Write $S(\chi)=\sum c_n\lambda(n)\chi(n)$. Insert the Type I/II structure and smooth dyadically in $m,\ell$; setting $L=N/M$, Cauchy–Schwarz in $m$ reduces to bounding, uniformly in $m\sim M$,
+\[
+\Sigma_m\ :=\ \sum_{q\le Q}\sum_{\chi\ (\mathrm{mod}\ q)}\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Big|^2,
+\]
+with $|b^{(m)}_\ell|\ll\tau_k(\ell)$ and a fixed smooth weight $\psi_m(\ell)=\psi(m\ell/N)$. Split characters into non-pretentious and exceptional by the pretentious distance $\mathbb D(1,\chi;L)$.
+
+\emph{Non-pretentious part.} By the smooth Halász theorem with divisor weights (Granville–Soundararajan; uniform in smooth weights), for any $C\ge 1$,
+\[
+\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\ \ll_{k}\ L(\log L)^{-C}
+\quad\big(\chi\notin\mathcal E(L;C)\big).
+\]
+Summing trivially over $\chi$ gives $\ll Q^2 L^2(\log N)^{-2C}$.
+
+\emph{Exceptional part.} Let $\mathcal E_{\le Q}(L;C)$ be the union of exceptional characters up to modulus $Q$. A log-free zero-density estimate in pretentious form (e.g. Montgomery–Vaughan/Gallagher style) implies that, for any $C_1$, there exists $C_2(C_1)$ such that
+\[
+\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q\,(\log (QL))^{-C_2}
+\qquad\text{uniformly for } Q\le L^{1/2}(\log L)^{-100}.
+\]
+For such $\chi$, a divisor-weighted partial summation bound yields
+\[
+\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Big|\ \ll_{k}\ L(\log N)^{O(1)},
+\]
+whence a total contribution $\ll Q L^2 (\log N)^{-C_2+O(1)}$.
+
+\emph{Reinsert $m$.} Multiply by $\sum_{m\sim M}|\alpha_m\lambda(m)|^2\ll M(\log N)^{O(1)}$ and use $ML=N$. Choosing $C$ then $C_2$ large in terms of $A,k,\eta$ gives
+\[
+\sum_{q\le Q}\sum_{\chi}|S(\chi)|^2\ \ll\ \frac{NQ}{(\log N)^A}.
+\]
+Summing the $O((\log N)^{O(1)})$ dyadic partitions completes the proof. The coprimality gate and restriction to primitive characters only improve or cost at most $(\log N)^{O(1)}$, absorbed in $A$.
+
+\emph{Range condition.} The sole restriction on $Q$ is $Q\le L^{1/2}(\log L)^{-100}$ to invoke the log-free density count; with $L\ge N^{\eta}$ this is ensured by $Q\le N^{1/2}(\log N)^{-B}$ for large $B=B(A,k,\eta)$.
+
+\emph{Remarks.} All implied constants are uniform in the fixed smooth profile $\psi$ (through finitely many derivative bounds), the divisor-weight parameter $k$, and the Type I/II ranges determined by $\eta$.
+
+
 
 \part*{Part C. Type III Analysis}
 
