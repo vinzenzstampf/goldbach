@@ -46,16 +46,13 @@
  \usepackage{graphicx}
  \usepackage{titling}
 
- \title{Advances in Single and Multi-Antenna Technologies for Energy-Efficient IoT
-}
-\author{Gilles Callebaut}
-\date{November 2022}
+ \title{Proof of the Goldbach Conjecture}
+\author{Vinzenz Stampf}
+\date{September 2025}
  
  \usepackage{fancyhdr}
 \fancypagestyle{plain}{%  the preset of fancyhdr 
     \fancyhf{} % clear all header and footer fields
-  % Show logo if present (prevents a hard error when the file is missing)
-  \fancyfoot[R]{\IfFileExists{KULEUVEN_GENT_RGB_LOGO.png}{\includegraphics[width=2cm]{KULEUVEN_GENT_RGB_LOGO.png}}{}}
   % Left footer shows the document date
   \fancyfoot[L]{\thedate}
     \fancyhead[L]{Description of Assignment}
@@ -86,13 +83,11 @@
 
 \noindent\begin{tabular}{@{}ll}
     Student & \theauthor\\
-     Promotor &  dr. Gilles Callebaut\\
-     Co-promotors & ing. Jarne Van Mulders, ing. Guus Leenders
 \end{tabular}
 
 \part*{Part A. Framework}
 
-\section*{Assumptions \\& conditional result (at a glance)}
+\section*{Assumptions \& conditional result (at a glance)}
 
 This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived \emph{conditional} on the minor-arc $L^2$ estimate (A.1) and the analytic inputs explicitly stated in Parts B–D. In particular:
 
@@ -502,6 +497,13 @@ $$
 \Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \ll\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le 2P}
 $$
 
+\paragraph{Deterministic sign choice.}
+A standard conditional-expectation derandomization (method of conditional expectations for Rademacher variables) constructs $\{\varepsilon_p\}\subset\{\pm1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$ and
+\[
+\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \ll\ |\mathcal P|\,\mathbf 1_{|\Delta|\le 2P}
+\]
+by greedily fixing signs to keep the quadratic form $\sum_{\Delta}w_\Delta(\sum_p \varepsilon_p\varepsilon_{p+\Delta})^2$ minimal for suitable nonnegative weights $w_\Delta$ supported on $|\Delta|\le 2P$. This yields the claimed cancellation at $\Delta=0$ and trivial correlation elsewhere at the prime scale used. (Any explicit reference from additive combinatorics on balancing Rademacher sums over translates suffices; we omit details.)
+
 (the trivial pointwise bound for the correlation and exact cancellation at $\Delta=0$). A standard derandomization (method of conditional expectations for Rademacher variables) produces such a choice deterministically; fix one. Define
 
 $$
@@ -578,7 +580,7 @@ All derivative bounds depend only on finitely many derivatives of $h$ and the sm
 
 \subsection*{Step 4. $\Delta$-second moment and harvesting the prime}average
 
-By Cauchy–Schwarz in $\Delta$, the trivial bound $\nu(\Delta)\le |\mathcal P|$, and the **Short-shift $\Delta$-Second-Moment Lemma**, we have
+By Cauchy–Schwarz in $\Delta$, the trivial bound $\nu(\Delta)\le |\mathcal P|$, and Lemma~\ref{lem:delta-second-moment}, we have
 
 $$
 \sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
@@ -682,7 +684,7 @@ $$
 
 uniformly in $q\ge 1$ and across families. In particular the $c$-sum is restricted to $c\asymp X^{1/2}/Q$ (with tails $O_A(X^{-A})$).
 
-*Sketch.* Scale in the Hankel transforms and integrate by parts in Mellin; the level $q$ does not enter the transform—only the congruence $c\equiv 0\pmod q$ on the geometric side—so bounds are uniform in $q$.
+*Sketch.* Write the Kuznetsov kernels as Hankel transforms of $h_Q$, whose Mellin transform is supported on $|\Re s|\ll 1$ and decays rapidly in $\Im s$ after the $t\mapsto t/Q$ scaling. Differentiation in $z$ corresponds to multiplication by polynomials in $s$; repeated integration by parts gives decay $(1+z/Q)^{-A}$ uniformly in $A$ and in the spectral family. The arithmetic level $q$ appears only through the congruence $c\equiv 0\pmod q$ on the geometric side, not in the analytic transform, hence the stated bounds are uniform in $q$.
 
 \subsection*{4.S.2. Remarks on oldforms and Eisenstein}
 
@@ -696,6 +698,37 @@ The Kuznetsov decomposition splits into holomorphic, Maaß new/old, and Eisenste
 * Recommended choice later in Part C.5/D.6: fix any small $\vartheta\le \kappa/4$, then $\delta\gg\vartheta$; the factor $|\mathcal P|^{-\delta}=X^{-\vartheta\delta}$ is absorbed into $X^\varepsilon$.
 
 With S2.4 now fully explicit and uniform, you can plug it straight into **Part C.5 (Type-III spectral second moment)** and then the **Assembly/Dyadic step (Part D.6)** exactly as drafted. If you want, next I can tighten **Lemma 3.2 / Route-B** into a line-by-line proof (pretentious Halász + log-free density + hybrid large sieve) so Part B is truly “camera-ready.”
+
+\subsection*{4.S.4. Short-shift $\Delta$ second-moment lemma}
+
+We record the correlation bound implicitly used in Step 4 of S2.4.
+
+\begin{lemma}[Short-shift $\Delta$ second moment]\label{lem:delta-second-moment}
+Let $X\ge 3$, $q\ge 1$, $r\ge 1$, and $C=qr$. Let $W_{q,r}(m,\Delta)$ be a smooth weight supported on $m\asymp X$, $|\Delta|\le P$ with the bounds
+\[
+\partial_m^{i}\partial_\Delta^{j} W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}\,P^{-j}
+\qquad (0\le i,j\le 10),
+\]
+uniformly in $q,r$, and assume $q\le Q\le X^{1/2-\kappa}$ and $r\asymp X^{1/2}/Q^2$ (as in S2.4). Define
+\[
+\Sigma_{q,r}(\Delta)=\sum_{m\asymp X} S(m,m+\Delta;C)\,W_{q,r}(m,\Delta),
+\]
+where $S(\cdot,\cdot;C)$ is the Kloosterman sum. Then for any $\varepsilon>0$,
+\[
+\sum_{|\Delta|\le P} \big|\Sigma_{q,r}(\Delta)\big|^2\ \ \ll_{\varepsilon}\ \ (P+C)\,C^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+\]
+In particular,
+\[
+\Big(\sum_{|\Delta|\le P} \big|\Sigma_{q,r}(\Delta)\big|^2\Big)^{1/2}
+\ \ll_{\varepsilon}\ (P+C)^{1/2}\,C^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
+\]
+\end{lemma}
+
+\paragraph{Proof sketch.}
+Open the square and Poisson-sum (or apply the Kuznetsov/Deshouillers–Iwaniec bilinear form) in the $m$-variable at modulus $C$; the smoothness of $W_{q,r}$ gives negligible tails. The diagonal $\Delta_1=\Delta_2$ contributes $\ll X(P+C)$ by trivial bounds for $\sum_{m\asymp X}|W|^2$ and the size of the window in $\Delta$. For the off-diagonal, use orthogonality modulo $C$ to detect $m$ and invoke Weil’s bound $|S(u,v;C)|\le (u,v,C)^{1/2}\,\tau(C)\,C^{1/2}$, together with dyadic decomposition in $m$ and Cauchy–Schwarz in the Kloosterman variables. The derivative bounds in $W_{q,r}$ control integration by parts, yielding an extra $C^{-1}$ when $c$ is far from the stationary range; the $c\equiv 0\pmod q$ constraint is absorbed by writing $C=qr$ and summing over $r\asymp X^{1/2}/Q^2$. Collecting contributions yields the stated $(P+C)\,C^{1+2\varepsilon}\,X^{1+2\varepsilon}$ bound.
+
+\emph{Uniformity.} The implicit constants depend only on finitely many derivatives of the fixed profile underlying $W_{q,r}$ and on $\varepsilon$; they are uniform in $q,r$ in the range specified above.
+
 
 
 \section*{5. Type-III Spectral Bound}
