@@ -662,7 +662,10 @@ After opening $|A_f S_{q,\chi,f}|^2$, linearizing Hecke, and applying Kuznetsov 
 	\sum_{m\asymp X}\alpha_m\overline{\alpha_{m}}\,
 	S(p_1m,p_2m;qr)\,\mathcal W_{q}\!\Big(\tfrac{4\pi\sqrt{p_1m\cdot p_2m}}{qr}\Big)\,+\,\mathcal E,
 \]
-where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuz-uniform}, and $\mathcal E$ collects tails $O_A(X^{-A})$ and the (treated) $p\mid n$ Hecke tails (see the separate patch below).
+where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuz-uniform},
+and $\mathcal E$ collects $O_A(X^{-A})$ kernel tails and the $p\mid n$ Hecke tails
+(bounded by Lemma~\ref{lem:hecke-tails}).
+
 
 Set $\Delta=p_1-p_2$, and absorb $\mathcal W_q$ into a smooth weight $W_{q,r}(m,\Delta)$ with the derivative bounds of Lemma~\ref{lem:delta-second-moment}. Grouping by $\Delta$ and letting $\nu(\Delta)$ be the number of prime pairs with difference $\Delta$,
 \[
