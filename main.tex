@@ -338,7 +338,7 @@ With the above definitions and the reduction, Part A is complete \emph{condition
 \end{itemize}
 
 
-\section{BVP2M Lemma (BV with parity, second moment)}
+\section{BVP2M (BV with parity, second moment)}
 Fix $A>0$. Then there is $B=B(A)$ such that for all large $N$ and
 
 $$
@@ -429,7 +429,7 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 	Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbing this by increasing $A$ gives the stated bound.
 \end{proof}
 
-\subsection{BVP2M Lemma (precise version and proof)}
+\subsection{BVP2M (precise version and proof)}
 
 \begin{lemma}[BV with parity, second moment — airtight]\label{lem:BV-parity-airtight}
 	Fix $A>0$, $k\in\mathbb N$, and $0<\eta<\tfrac16$. There exists $B=B(A,k,\eta)$ and $C_0=C_0(A,k,\eta)$ such that for all sufficiently large $N$ the following holds.
@@ -519,7 +519,7 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 
 \part{Type III Analysis}
 
-\section{PASSG Lemma (Prime-averaged short-shift gain — full proof)}
+\section{PASSG (Prime-averaged short-shift gain — full proof)}
 
 We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
 
@@ -601,7 +601,7 @@ We aim to show
 	\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,X^{\varepsilon}
 \end{equation}
 with some fixed $\delta>0$. This is the Type-III spectral bound used in Part D,
-and it follows by dividing by the amplifier after the off-diagonal bound (PASSG Lemma).
+and it follows by dividing by the amplifier after the off-diagonal bound (PASSG).
 
 \paragraph{Step 1: Balanced amplifier domination.}
 Let $\varepsilon_p\in\{\pm 1\}$ be signs with $\sum_{p\in\mathcal P}\varepsilon_p=0$ (Appendix A.7).
@@ -915,10 +915,10 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 \section{Type-III Spectral Bound}
 
-\noindent Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{PASSG Lemma (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
+\noindent Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{PASSG (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
 
 \begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{PASSG Lemma (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
+	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{PASSG (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
 
 	$$
 		\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}\ \sum_{f}
@@ -931,7 +931,7 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 \begin{proof}[Proof using Lemma~\ref{lem:S2.4}]
 
 	\noindent\textbf{Step 1: Balanced prime amplifier that kills the diagonal.}
-	Let $\mathcal P$ be the set of primes $p\in[P,2P]$ with $P=X^\vartheta$ (to be chosen; PASSG Lemma is uniform in $P$).
+	Let $\mathcal P$ be the set of primes $p\in[P,2P]$ with $P=X^\vartheta$ (to be chosen; PASSG is uniform in $P$).
 	Choose deterministic signs $\varepsilon_p\in\{\pm 1\}$ so that
 
 	$$
@@ -948,7 +948,7 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 		A_f \ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p).
 	$$
 
-	Because $\sum_p\varepsilon_p=0$, expanding $|A_f|^2$ removes the pure diagonal $p=p'$ on average over signs, leaving only short prime shifts $p\neq p'$ with $\Delta = p-p'$ (the “short-shift” structure needed for PASSG Lemma).
+	Because $\sum_p\varepsilon_p=0$, expanding $|A_f|^2$ removes the pure diagonal $p=p'$ on average over signs, leaving only short prime shifts $p\neq p'$ with $\Delta = p-p'$ (the “short-shift” structure needed for PASSG).
 
 	\noindent\textbf{Step 2: Diagonal-free reduction by polarization.}
 	For any complex numbers $S_f$,
@@ -994,9 +994,9 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 		\item \textbf{(Spectral) diagonal/main terms:} the parts that would arise from $p=p'$ or $\Delta=0$, but these are annihilated by $\sum_p\varepsilon_p=0$ and by our balanced-sign choice, leaving at most lower-order boundary terms absorbed in $X^{\varepsilon}$.
 	\end{itemize}
 
-	Precisely this OD piece is what \textbf{PASSG Lemma} estimates \emph{after} the amplifier and Kuznetsov:
+	Precisely this OD piece is what \textbf{PASSG} estimates \emph{after} the amplifier and Kuznetsov:
 
-	\noindent\textbf{PASSG Lemma (assumed).} Uniformly in $P=X^\vartheta$,
+	\noindent\textbf{PASSG (assumed).} Uniformly in $P=X^\vartheta$,
 
 	$$
 		\mathrm{OD}\ \ \ll\ \ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}.
@@ -1035,14 +1035,14 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 \subsection{Remarks}
 
 \begin{itemize}
-	\item \textbf{Uniformity \& hypotheses.} The argument only used (i) Type-III structure (smooth $\alpha_n$, divisor bounds), (ii) balanced prime amplifier with $\sum \varepsilon_p=0$, (iii) Kuznetsov with full continuous and oldform ranges, and (iv) PASSG Lemma’s OD estimate. No further spectral gap input is needed beyond what S2.4 encapsulates.
+	\item \textbf{Uniformity \& hypotheses.} The argument only used (i) Type-III structure (smooth $\alpha_n$, divisor bounds), (ii) balanced prime amplifier with $\sum \varepsilon_p=0$, (iii) Kuznetsov with full continuous and oldform ranges, and (iv) PASSG’s OD estimate. No further spectral gap input is needed beyond what S2.4 encapsulates.
 
 	\item \textbf{Why the diagonal doesn’t spoil the saving.} The balanced amplifier removes the dangerous $p=p'$ contribution \emph{before} applying Kuznetsov. What remains are genuinely shifted correlations $(\Delta\neq 0)$, to which S2.4 applies and gives the $(Q^2+X)^{1-\delta}$ saving.
 
 	\item \textbf{Choice of $\vartheta$.} Any fixed $\vartheta\in(0,1/2)$ permitted by S2.4 works; the $|\mathcal P|^{-\delta}$ factor improves the exponent, and we simply absorb it into $X^{\varepsilon}$.
 \end{itemize}
 
-This completes Part C.5 once PASSG Lemma is rigorously in place.
+This completes Part C.5 once PASSG is rigorously in place.
 
 \part{Assembly}
 \section{Dyadic Decomposition (final)}
@@ -1058,13 +1058,13 @@ Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,w(n)\,e(\alpha n)$ with a fixed smooth w
 		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|^2
 		      \ \ll\ \frac{NQ}{(\log N)^A}
 	      \end{equation}
-	      holds for each fixed $A>0$. (This is BVP2M Lemma and the “Route B Lemma” for the balanced ranges.)
+	      holds for each fixed $A>0$. (This is BVP2M and the “Route B Lemma” for the balanced ranges.)
 
 	\item \textbf{(III)}: For every dyadic Type-III block $\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)$ produced after amplification and Kuznetsov, the prime-averaged off-diagonal is bounded by
 
 	      \begin{equation}\label{eq:D2}\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\end{equation}
 
-	      for some fixed $\delta>0$, uniformly for amplifier length $|\mathcal P|=X^\vartheta$ with $\vartheta=\vartheta(\delta)>0$, and with uniform control of oldforms/Eisenstein and Bessel kernels. (This is PASSG Lemma and its Type-III spectral corollary.)
+	      for some fixed $\delta>0$, uniformly for amplifier length $|\mathcal P|=X^\vartheta$ with $\vartheta=\vartheta(\delta)>0$, and with uniform control of oldforms/Eisenstein and Bessel kernels. (This is PASSG and its Type-III spectral corollary.)
 \end{itemize}
 
 Then, for any $\varepsilon>0$,
@@ -1155,7 +1155,7 @@ The diagonal is controlled either by the amplifier normalization or by subtracti
 
 \begin{equation}\label{eq:D7}\sum_{\text{Type III dyadics}}\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.\end{equation}
 
-\emph{Bookkeeping note.} The $X^{-\eta}$ saving is uniform in the dyadic location because $\delta>0$ is fixed and $\vartheta$ is chosen as a fixed fraction of $\delta$; any residual factors from Bessel kernels, oldforms, and Eisenstein are already absorbed in \eqref{eq:D2} by the uniform spectral analysis ensured in PASSG Lemma. The $q$-sum restriction $q\le Q$ matches the circle-method minor-arc decomposition, so no leakage arises.
+\emph{Bookkeeping note.} The $X^{-\eta}$ saving is uniform in the dyadic location because $\delta>0$ is fixed and $\vartheta$ is chosen as a fixed fraction of $\delta$; any residual factors from Bessel kernels, oldforms, and Eisenstein are already absorbed in \eqref{eq:D2} by the uniform spectral analysis ensured in PASSG. The $q$-sum restriction $q\le Q$ matches the circle-method minor-arc decomposition, so no leakage arises.
 
 ---
 
@@ -1168,19 +1168,19 @@ $$
 $$
 
 as claimed.
-\subsection{Derivation of \eqref{eq:A1} from the BVP2M and PASSG Lemmas}
+\subsection{Derivation of \eqref{eq:A1} from BVP2M and PASSGs}
 
 \noindent\textbf{Scope.} In this subsection we \emph{derive} the minor-arc $L^2$ estimate
 \[\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\]
 \begin{enumerate}[label=(\roman*)]
-	\item \textbf{Type I/II second moment with parity} (BVP2M Lemma): for $Q\le N^{1/2}(\log N)^{-B}$,
+	\item \textbf{Type I/II second moment with parity} (BVP2M): for $Q\le N^{1/2}(\log N)^{-B}$,
 	      \[
 		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum c_n\,\lambda(n)\chi(n)\Big|^2
 		      \ \ll\ \frac{NQ}{(\log N)^A},
 	      \]
 	      uniformly for the Type I/II coefficient structures produced by the identity (divisor bounds, smooth weights).
 
-	\item \textbf{Type III off-diagonal saving} (PASSG Lemma): after prime-length amplification and Kuznetsov,
+	\item \textbf{Type III off-diagonal saving} (PASSG): after prime-length amplification and Kuznetsov,
 	      \[
 		      \mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}
 	      \]
@@ -1197,7 +1197,7 @@ as claimed.
 Expanding in Dirichlet characters reduces this to the second moments controlled by (i) and (ii).
 
 \medskip
-\noindent\textbf{Type I/II dyadics.} the BVP2M Lemma with $A$ large (absorbing the $O((\log N)^C)$ dyadic inflation) gives a total
+\noindent\textbf{Type I/II dyadics.} BVP2M with $A$ large (absorbing the $O((\log N)^C)$ dyadic inflation) gives a total
 \[
 	\sum_{\text{Type I/II dyadics}}
 	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
@@ -1205,7 +1205,7 @@ Expanding in Dirichlet characters reduces this to the second moments controlled 
 \]
 
 \medskip
-\noindent\textbf{Type III dyadics.} After applying the prime amplifier of fixed length $|\mathcal P|=X^\vartheta$ and Kuznetsov, the PASSG Lemma furnishes a uniform saving $\delta>0$ on the off-diagonal. Dividing by the amplifier normalization (as in Prop.~\ref{prop:typeIII}), one gets for each Type III block (with outer scale $X$)
+\noindent\textbf{Type III dyadics.} After applying the prime amplifier of fixed length $|\mathcal P|=X^\vartheta$ and Kuznetsov, PASSG furnishes a uniform saving $\delta>0$ on the off-diagonal. Dividing by the amplifier normalization (as in Prop.~\ref{prop:typeIII}), one gets for each Type III block (with outer scale $X$)
 \[
 	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
 	\ \ll\ Q^{-2}\,(Q^2+X)^{1-\delta}\,X^{-\vartheta\delta+\varepsilon}.
@@ -1213,7 +1213,7 @@ Expanding in Dirichlet characters reduces this to the second moments controlled 
 Summing over Type III dyadics and splitting $X\le Q^2$ and $X\ge Q^2$ yields a net contribution $\ll N(\log N)^{-3-\varepsilon}$ for fixed $\vartheta=\vartheta(\delta)>0$.
 
 \medskip
-\noindent\textbf{Conclusion.} Summing all dyadics gives \eqref{eq:A1}. \emph{Thus, \eqref{eq:A1} holds provided the BVP2M Lemma and the PASSG Lemma hold in the stated uniform forms.} This is the only place where \eqref{eq:A1} depends on Part~B and Part~C.
+\noindent\textbf{Conclusion.} Summing all dyadics gives \eqref{eq:A1}. \emph{Thus, \eqref{eq:A1} holds provided BVP2M and PASSG hold in the stated uniform forms.} This is the only place where \eqref{eq:A1} depends on Part~B and Part~C.
 
 \subsection{Parameter choices \& loss ledger (for ease of cross-checking)}
 
@@ -1227,12 +1227,12 @@ Summing over Type III dyadics and splitting $X\le Q^2$ and $X\ge Q^2$ yields a n
 		      \item Type I/II: pick $A$ so that $(\log N)^C$ dyadic inflation is dominated; we target $3+\varepsilon$ net powers of $\log$.
 		      \item Type III: the $\delta$-saving from \eqref{eq:D2} after amplifier normalization yields uniform $X^{-\eta}$ decay, summable across dyadics.
 	      \end{itemize}
-	\item \textbf{Exceptional characters / oldforms / Eisenstein}: already handled in the hypotheses of BVP2M Lemma and PASSG Lemma; their contributions obey the same $(\log N)^{-A}$ savings and therefore do not affect the sum.
+	\item \textbf{Exceptional characters / oldforms / Eisenstein}: already handled in the hypotheses of BVP2M and PASSG; their contributions obey the same $(\log N)^{-A}$ savings and therefore do not affect the sum.
 \end{itemize}
 
 \subsection{Remark}
 
-Nothing delicate hinges on the exact form of the identity (Vaughan vs. Heath-Brown) provided it yields (i) divisor-bounded smooth coefficients and (ii) a genuine three-variable “Type III” regime where PASSG Lemma applies. Alternative cut choices merely reshuffle a finite number of dyadic families and do not change the final $(\log N)^{-3-\varepsilon}$ power once $A$ is taken large in the Type I/II inputs.
+Nothing delicate hinges on the exact form of the identity (Vaughan vs. Heath-Brown) provided it yields (i) divisor-bounded smooth coefficients and (ii) a genuine three-variable “Type III” regime where PASSG applies. Alternative cut choices merely reshuffle a finite number of dyadic families and do not change the final $(\log N)^{-3-\varepsilon}$ power once $A$ is taken large in the Type I/II inputs.
 
 \section{Major-Arc Evaluation}
 
@@ -1614,7 +1614,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 			      \sum_{n\le N}\beta(n)\lambda(n)W(n/N)
 			      \ \ll\ \frac{N}{(\log N)^A}
 		      \]
-		      for all $A>0$, uniformly in $N$. This follows by expanding $\beta$, applying Cauchy over $d\le D$, and invoking the BVP2M Lemma / Route~B on each inner sum.
+		      for all $A>0$, uniformly in $N$. This follows by expanding $\beta$, applying Cauchy over $d\le D$, and invoking BVP2M / Route~B on each inner sum.
 	\end{enumerate}
 \end{lemma}
 
