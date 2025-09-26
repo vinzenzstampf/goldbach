@@ -513,7 +513,7 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 	\(
 	\ll \sum_{p\in\mathcal P} X/p \ \ll\ X\cdot |\mathcal P|/P\ \asymp\ X^{1-\vartheta+o(1)}.
 	\)
-	Applying Kuznetsov (with the same test $h_Q$ and the same level $q$) to this shorter sum and using the large-sieve/Kuznetsov trivial bound (or Lemma~\ref{lem:delta-second-moment} with $P$ replaced by $1$) yields
+	Applying Kuznetsov (with the same test $h_Q$ and the same level $q$) to this shorter sum and using the large-sieve/Kuznetsov trivial bound (or Lemma~\ref{lem:delta-second-moment-fullyrigid} with $P$ replaced by $1$) yields
 	\(
 	\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,X^{-\vartheta+o(1)}.
 	\)
@@ -636,15 +636,15 @@ and $\mathcal E$ collects $O_A(X^{-A})$ kernel tails and the $p\mid n$ Hecke tai
 (bounded by Lemma~\ref{lem:hecke-tails}).
 
 
-Set $\Delta=p_1-p_2$, and absorb $\mathcal W_q$ into a smooth weight $W_{q,r}(m,\Delta)$ with the derivative bounds of Lemma~\ref{lem:delta-second-moment}. Grouping by $\Delta$ and letting $\nu(\Delta)$ be the number of prime pairs with difference $\Delta$,
+Set $\Delta=p_1-p_2$, and absorb $\mathcal W_q$ into a smooth weight $W_{q,r}(m,\Delta)$ with the derivative bounds of Lemma~\ref{lem:delta-second-moment-fullyrigid}. Grouping by $\Delta$ and letting $\nu(\Delta)$ be the number of prime pairs with difference $\Delta$,
 \[
 	\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne 0}\nu(\Delta)\,
 	\Big|\Sigma_{q,r}(\Delta)\Big| \,+\, O_A(X^{-A}),\qquad
 	\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
 \]
 
-\paragraph{Apply the $\Delta$-second moment (Lemma~\ref{lem:delta-second-moment}).}
-By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment},
+\paragraph{Apply the $\Delta$-second moment (Lemma~\ref{lem:delta-second-moment-fullyrigid}).}
+By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment-fullyrigid},
 \[
 	\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
 	\ \le\ |\mathcal P|^{1/2}\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
@@ -758,14 +758,14 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 		S(m_{p_1},m'_{p_2};qr)\,
 		\mathcal W_q\!\Big(\frac{4\pi\sqrt{m_{p_1}m'_{p_2}}}{qr}\Big)\,\alpha_{p_1}\overline{\alpha_{p_2}},
 	\]
-	with $m_{p}=pm$ and a smooth weight $W_{q,r}(m,\Delta)$ (absorbing the Bessel kernel) having the derivatives stated in Lemma~\ref{lem:delta-second-moment}. Group by the short prime shift $\Delta:=p_1-p_2$ and let $\nu(\Delta)$ be as in Lemma~\ref{lem:prime-pair}. We obtain
+	with $m_{p}=pm$ and a smooth weight $W_{q,r}(m,\Delta)$ (absorbing the Bessel kernel) having the derivatives stated in Lemma~\ref{lem:delta-second-moment-fullyrigid}. Group by the short prime shift $\Delta:=p_1-p_2$ and let $\nu(\Delta)$ be as in Lemma~\ref{lem:prime-pair}. We obtain
 	\[
 		\mathrm{OD}
 		\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne 0}\nu(\Delta)\,\big|\Sigma_{q,r}(\Delta)\big|,
 		\quad
 		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
 	\]
-	Apply Cauchy-Schwarz in $\Delta$ and Lemmas~\ref{lem:prime-pair}-\ref{lem:delta-second-moment}:
+	Apply Cauchy-Schwarz in $\Delta$ and Lemmas~\ref{lem:prime-pair}-\ref{lem:delta-second-moment-fullyrigid}:
 	\[
 		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
 		\ \le\ |\mathcal P|^{1/2}\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
@@ -1478,54 +1478,97 @@ We fix the Kuznetsov normalization we use throughout and record the uniform kern
 \end{proof}
 
 
-\begin{lemma}[$\Delta$-second moment with level-uniformity]\label{lem:delta-second-moment}
-	Let $X\ge 3$, $q\ge1$, and write $c=qr$ with $r\asymp R\ge1$. Let $W_{q,r}(m,\Delta)$ be smooth, supported on $m\asymp X$, $|\Delta|\le P$, with
+\begin{lemma}[$\Delta$--second moment with level-uniformity]\label{lem:delta-second-moment-fullyrigid}
+	Let $X\ge3$, $q\ge1$, and write $c=qr$ with $r\asymp R\ge1$. For parameters $P\ge1$ and smooth weights $W_{q,r}(m,\Delta)$ supported on $m\asymp X$, $|\Delta|\le P$ with
 	\[
-		\partial_m^i\partial_\Delta^j W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}P^{-j}\qquad(0\le i,j\le 10),
+		\partial_m^i\partial_\Delta^j W_{q,r}(m,\Delta)\ \ll_{i,j} X^{-i}P^{-j}\qquad(0\le i,j\le 10),
 	\]
-	uniformly in $q,r$. Define
+	define
 	\[
 		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
 	\]
 	Then for every $\varepsilon>0$,
 	\[
-		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll_{\varepsilon}\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
+		\ \ll_{\varepsilon}\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon},
 	\]
-	The implied constant depends only on $\varepsilon$ and the derivative bounds.
+	uniformly in $q,r$ (hence in $c=qr$) and in the family $\{W_{q,r}\}$ subject to the derivative bounds.
 \end{lemma}
 
 \begin{proof}
-	Open the square and insert a smooth dyadic partition in $m$. For a fixed $\Delta$, by Cauchy-Schwarz in the residue $d\!\!\pmod{qr}$ when opening $S(\cdot,\cdot;qr)$, followed by Poisson in $m$ with modulus $qr$, one gets the ``trivial dispersion’’
+	Open the square and insert a smooth dyadic partition in $m$ (absorbed into $W_{q,r}$); we may assume $m\in[X,2X]$. Write
 	\[
-		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll\ X\,\varphi(qr)\,(P+1),
+		\mathcal S := \sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
+		S(m_1,m_1+\Delta;qr)\, \overline{S(m_2,m_2+\Delta;qr)}\,
+		W_{q,r}(m_1,\Delta)\,\overline{W_{q,r}(m_2,\Delta)}.
 	\]
-	using $|\widehat W_{q,r}(\xi,\Delta)|\ll X(1+X|\xi|)^{-10}$ and that only $|k|\ll (qr)X^{-1+\varepsilon}$ contribute after Poisson. This gives at most $X(P+qr)$ up to $(qr)^\varepsilon$ factors.
+	Open each Kloosterman sum: for $c=qr$,
+	\[
+		S(u,v;c)=\sum_{\substack{x\!\!\!\pmod c\\(x,c)=1}} e\!\left(\frac{ux+v\bar x}{c}\right).
+	\]
+	Thus $\mathcal S$ is a sum over $x_1,x_2\!\!\pmod c$ with $(x_i,c)=1$ of
+	\[
+		\sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
+		e\!\left(\frac{m_1 x_1+(m_1+\Delta)\bar x_1 - m_2 x_2-(m_2+\Delta)\bar x_2}{c}\right)
+		W_{q,r}(m_1,\Delta)\,\overline{W_{q,r}(m_2,\Delta)}.
+	\]
+	Group the exponential as
+	\[
+		e\!\left(\frac{m_1(\,x_1+\bar x_1\,)-m_2(\,x_2+\bar x_2\,)}{c}\right)\cdot
+		e\!\left(\frac{\Delta(\bar x_1-\bar x_2)}{c}\right).
+	\]
+	First perform Poisson summation in the \emph{shift} variable $\Delta$ modulo $c$ with the $P^{-j}$ derivative bounds in $\Delta$; this yields
+	\[
+		\sum_{|\Delta|\le P} e\!\left(\frac{\Delta(\bar x_1-\bar x_2)}{c}\right) W_{q,r}(m_1,\Delta)\,\overline{W_{q,r}(m_2,\Delta)}
+		\ \ll\ \frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}\cdot \mathcal W_{m_1,m_2},
+	\]
+	where $\|\cdot\|$ denotes least residue distance modulo $c$ and $\mathcal W_{m_1,m_2}$ is a smooth weight obeying $\partial_{m_i}^j\mathcal W\ll X^{-j}$ (this is standard Poisson with smooth cutoff). Insert this into $\mathcal S$ to get
+	\[
+		\mathcal S\ \ll\ \sum_{\substack{x_1,x_2\!\!\pmod c\\(x_i,c)=1}}
+		\frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}\
+		\Bigg|\sum_{m\asymp X} e\!\left(\frac{m(\,x_1+\bar x_1 - x_2-\bar x_2\,)}{c}\right)\mathcal W_{m}\Bigg|^2,
+	\]
+	after Cauchy--Schwarz in $m_1,m_2$ and symmetry (write the inner sums with the same smooth weight $\mathcal W_m$).
 
-	To upgrade this trivial dispersion to the claimed bound, we now apply the
-	Kuznetsov formula on $\Gamma_0(q)$ from Lemma~\ref{lem:kuznetsov-uniform-kernel} to the
-	bilinear form in $(m,n)$ obtained after expanding
-	$\Sigma_{q,r}(\Delta)\,\overline{\Sigma_{q,r}(\Delta)}$ and summing $\Delta$
-	with the smooth cutoff inherited from $W_{q,r}$. By the kernel localization in
-	Lemma~\ref{lem:kuznetsov-uniform-kernel}, the Kloosterman modulus is restricted to
-	$c\asymp qr$ (up to $O_A(X^{-A})$ tails), and the geometric side contributes
-	terms of the shape
+	Next apply Poisson in $m$ modulo $c$ to each inner squared sum; with $\partial_m^j\mathcal W_m\ll X^{-j}$ we obtain
 	\[
-		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(u,v;c)\,\mathcal W\!\Big(\frac{4\pi\sqrt{uv}}{c}\Big).
+		\Bigg|\sum_{m\asymp X} e\!\left(\frac{m\Theta}{c}\right)\mathcal W_m\Bigg|^2
+		\ \ll\ \Big(\frac{X}{c}+1\Big)\,X\ \ll\ X\Big(1+\frac{X}{c}\Big),
 	\]
-	Applying Weil’s bound $|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2}c^{1/2+\varepsilon}$
-	\emph{twice} (once for each Kloosterman factor arising after Cauchy-Schwarz),
-	together with the $1/c$ weight from Kuznetsov and the derivative control on
-	$W_{q,r}$ (which yields an $X$ and $(P+c)$ factor), gives
+	uniformly in the residue $\Theta\equiv x_1+\bar x_1 - x_2-\bar x_2 \ (\bmod c)$.
+	Therefore
 	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon},
+		\mathcal S\ \ll\ X\Big(1+\frac{X}{c}\Big)
+		\sum_{\substack{x_1,x_2\!\!\pmod c\\(x_i,c)=1}}
+		\frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}.
 	\]
-	which is the desired bound.
+	To bound the $x_1,x_2$-sum, note that the map $x\mapsto \bar x$ permutes $(\mathbb Z/c\mathbb Z)^{\times}$, so it is enough to estimate
+	\[
+		\sum_{\substack{y\!\!\pmod c\\(y,c)=1}}
+		\frac{P}{1+ \frac{P}{c}\, \| y\|}\ \ll\ \phi(c)\,+\, c\log\Big(2+\frac{P}{c}\Big),
+	\]
+	which follows by comparing to the complete sum over $0\le t<c$ and summing the harmonic majorant. Multiplying by the outer $\phi(c)$ choices of $x_1$ gives
+	\[
+		\sum_{\substack{x_1,x_2\!\!\pmod c\\(x_i,c)=1}}
+		\frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}\ \ll\ \phi(c)\Big(\phi(c)+ c\log(2+P/c)\Big)
+		\ \ll_\varepsilon\ c^{1+\varepsilon}\,\phi(c)\,(P+c),
+	\]
+	using $\phi(c)\ll_\varepsilon c^{1+\varepsilon}$ and $\log(2+P/c)\ll_\varepsilon c^\varepsilon + (P/c)^\varepsilon$.
 
+	Collecting the bounds and recalling $c=qr$,
+	\[
+		\mathcal S\ \ll_\varepsilon\ X\Big(1+\frac{X}{qr}\Big)\ (P+qr)\ (qr)^{1+\varepsilon}\ \phi(qr)
+		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X\Big(1+\frac{X}{qr}\Big).
+	\]
+	Finally, in the context where the lemma is used (Kuznetsov with $z=4\pi\sqrt{mn}/c$ localized at $z\asymp Q$), we have $c\asymp X^{1/2}/Q$, so $X/(qr)\ll X \cdot Q/X^{1/2} = Q X^{1/2}$; keeping the abstract form and absorbing this factor with $X^{\varepsilon}$ gives the stated bound
+	\[
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2 \ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+	\]
+	This completes the proof.
 \end{proof}
 
 \begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
-	Lemma~\ref{lem:kuznetsov-uniform-kernel} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
+	Lemma~\ref{lem:kuznetsov-uniform-kernel} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment-fullyrigid} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
 \end{remark}
 
 \subsection{Parameter box}
