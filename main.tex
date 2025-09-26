@@ -861,6 +861,28 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 	uniformly across all spectral pieces, completing the proof.
 \end{proof}
 
+\begin{remark}[Parameters \& ranges for Lemma~\ref{lem:S2.4-final}]
+	Fix any $0<\kappa<\tfrac14$ and choose $\vartheta$ with
+	\[
+		0<\vartheta<\tfrac16-\kappa .
+	\]
+	Take $Q\le X^{1/2-\kappa}$ and $P=X^\vartheta$ (so $|\mathcal P|\asymp P/\log P$).
+	Then Lemma~\ref{lem:S2.4} holds with
+	\[
+		\delta=\frac{1}{1000}\min\!\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ >\ 0 .
+	\]
+	In particular, the choice
+	\[
+		\kappa=10^{-3},\qquad \vartheta=\frac{\kappa}{8}
+	\]
+	gives $\delta\ge 5\times 10^{-7}$, which is uniform across all dyadic $X$ and all spectral pieces (holomorphic, Maa\ss, and Eisenstein, including oldforms). The constants in the bound
+	\[
+		\sum_{q\in\mathcal Q}\sum_{\chi}\sum_f \Big|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Big|^2
+		\ \ll\ (Q^2+X)^{1-\delta}\,X^\varepsilon
+	\]
+	depend at most on $\varepsilon$, on finitely many derivatives of the fixed test $h$, and on the exponent $C$ in the divisor-type bound $|\alpha_n|\ll_\varepsilon \tau(n)^C$.
+\end{remark}
+
 
 \section{Type-III Spectral Bound}
 
