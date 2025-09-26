@@ -637,19 +637,20 @@ Because $\sum_{p}\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to bo
 
 \paragraph{Step 3: Kuznetsov with test $h_Q$ and kernel localization.}
 Sum over $f$ and (orthogonally) over $\chi$ modulo $q$.
-Applying Kuznetsov (Lemma~\ref{lem:kuz-uniform}) with test $h_Q(t)=h(t/Q)$, and using Lemma~\ref{lem:kernel-localization},
+Applying Kuznetsov (Lemma~\ref{lem:kuz-uniform}) with test $h_Q(t)=h(t/Q)$ and using Lemma~\ref{lem:kernel-localization},
 the off-diagonal (OD) contribution can be written in the geometric form
 \[
 	\mathrm{OD}
 	=\sum_{q\in\mathcal Q}\ \sum_{\substack{c\equiv 0\ (q)}} \frac{1}{c}
 	\sum_{\substack{p_1,p_2\in\mathcal P\\ p_1\ne p_2}}\varepsilon_{p_1}\varepsilon_{p_2}
 	\sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}\,
-	S(p_1 m, p_2 n;c)\ \mathcal W_q\!\left(\frac{4\pi\sqrt{p_1 m\cdot p_2 n}}{c}\right),
+	S(p_1 m, p_2 n;c)\ \mathcal W_q\!\left(\frac{4\pi\sqrt{p_1 m\cdot p_2 n}}{c}\right).
 \]
-where $\mathcal W_q$ denotes any of the Bessel kernels (holomorphic, Maaß, Eisenstein),
-all obeying $z^j\partial_z^j\mathcal W_q(z)\ll_A(1+z/Q)^{-A}$ uniformly in $q$.
-Thus $c$ is restricted to $c\asymp C:=X^{1/2}/Q$ up to $O_A(X^{-A})$ tails.
-Write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
+Here $\mathcal W_q$ denotes any of the Bessel kernels (holomorphic, Maa\ss, Eisenstein).
+By Lemma~\ref{lem:kernel-localization}, the kernel decay localizes the Kloosterman modulus to
+$c\asymp C:=X^{1/2}/Q$ up to $O_A(X^{-A})$ tails; write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
+Moreover, by Cauchy--Schwarz in $n$ together with the smooth dyadic partition (absorbing divisor-bounded coefficients into the weight), it suffices to treat the balanced same-variable case; we may reduce to sums with $n=m$ at the cost of a factor $X^{\varepsilon}$. This yields the $m$-only model used below.
+
 \subsubsection*{Insertion for Lemma~\ref{lem:S2.4}: using the $\Delta$-second moment and optimizing exponents}
 
 \paragraph{From amplifier+Kuznetsov to a $\Delta$-family.}
