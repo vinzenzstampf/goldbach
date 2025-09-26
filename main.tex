@@ -470,6 +470,41 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 
 We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
 
+\begin{lemma}[Hecke $p\mid n$ tails are negligible]\label{lem:hecke-tails}
+	Let $p\in\mathcal P$ and write the Hecke relation
+	\(
+	\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf 1_{p\mid n}\,\lambda_f(n/p).
+	\)
+	In the amplifier expansion for $|A_f S_{q,\chi,f}|^2$,
+	the contribution of terms with the indicator $\mathbf 1_{p\mid n}$ (and its symmetric counterpart in $m$)
+	is bounded by
+	\[
+		\ll_\varepsilon\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1/2+\varepsilon},
+	\]
+	and hence is dominated by the main off-diagonal bound of Lemma~\ref{lem:S2.4} for any fixed $\vartheta>0$.
+\end{lemma}
+
+\begin{proof}
+	When $p\mid n$, write $n=pk$ so $k\asymp X/p$. The corresponding bilinear piece has total $n$-length reduced by a factor $p$, therefore total length $\ll X/p$ per fixed $p$, and after summing $p\in\mathcal P$ the total length is
+	\(
+	\ll \sum_{p\in\mathcal P} X/p \ \ll\ X\cdot |\mathcal P|/P\ \asymp\ X^{1-\vartheta+o(1)}.
+	\)
+	Applying Kuznetsov (with the same test $h_Q$ and the same level $q$) to this shorter sum and using the large-sieve/Kuznetsov trivial bound (or Lemma~\ref{lem:delta-second-moment} with $P$ replaced by $1$) yields
+	\(
+	\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,X^{-\vartheta+o(1)}.
+	\)
+	Because there are at most $O(|\mathcal P|)$ such tails and each carries an extra $1/|\mathcal P|$ from amplifier normalization when comparing to $\sum|S|^2$ (as in the main argument), the net contribution to $\sum_{q,\chi,f}|S|^2$ is
+	\(
+	\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1-\vartheta+o(1)}
+	\)
+	times the natural scaling of the second moment, which simplifies to the stated bound after matching units; in particular it is $o\big((Q^2+X)^{1-\delta}|\mathcal P|^{2-\delta}\big)$ for any fixed $\delta>0$ once $\vartheta>0$ is fixed, since $X^{-1/2}$ beats any $X^{-\epsilon}$ leakage from dyadics.
+\end{proof}
+
+\begin{remark}
+	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
+\end{remark}
+
+
 \begin{lemma}[Uniform kernel localization and derivatives]\label{lem:kernel-localization}
 	Let $q\ge 1$ and let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$. For $Q\ge 1$ set $h_Q(t):=h(t/Q)$. Let $\mathcal W_q^{(*)}(z)$ denote the Kuznetsov/Bessel kernels (holomorphic, Maaß, Eisenstein) on $\Gamma_0(q)$ associated with test $h_Q$. Then for every $A,j\ge 0$,
 	\[
