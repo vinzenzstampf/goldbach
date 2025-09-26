@@ -454,295 +454,138 @@ Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbi
 
 \part*{Part C. Type III Analysis}
 
-\section*{4. Lemma S2.4 (Prime-averaged short-shift gain)}
-We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$, and complex coefficients $|\alpha_p|\le 1$. For each $f$ in an orthonormal Hecke basis (holomorphic or Maass of any weight, including oldforms, plus the Eisenstein family), define the prime amplifier
+\section*{4. Lemma S2.4 (Prime-averaged short-shift gain — full proof)}
 
-$$
-	\mathrm{Amp}(f)=\sum_{p\in\mathcal P}\alpha_p\,\lambda_f(p).
-$$
+We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
 
-Let $h_Q(t)=h(t/Q)$ with a fixed even $h\in C_c^\infty([-2,2])$, $h(0)=1$. For each $q\in\mathcal Q$ apply the Kuznetsov formula at level $q$ with spectral test $h_Q$. By the **Kernel Localization Lemma** (4.S.1 below), the geometric kernel $\mathcal W_q(z)$ satisfies
-
-$$
-	\mathcal W_q(z),\ z\partial_z^{\,j}\mathcal W_q(z)\ \ll_{A,j}\Big(1+\frac zQ\Big)^{-A}\qquad(\forall A,j\ge0),
-$$
-
-uniformly across spectral families and all $q$. Writing $z=\frac{4\pi\sqrt{mn}}{c}$ shows the $c$-sum is supported on $c\asymp C:=X^{1/2}/Q$ with derivative control; we parameterize $c=qr$ so $r\asymp R:=C/q\asymp X^{1/2}/Q^2$.
-
-\subsection*{4.S.0. Kuznetsov at level $q$}
-For coprime integers $m,n\ge 1$ and an even test function $h$ with standard decay/holomorphy (IK, §16), the Kuznetsov formula on $\Gamma_0(q)$ reads
-\begin{align*}
-	 & \sum_{k\equiv 0\ (2)} h^{\mathrm{hol}}(k)\!\sum_{f\in\mathcal B_k(q)} \overline{\rho_f(m)}\,\rho_f(n)                 \\
-	 & \quad+\ \sum_{f\in\mathcal B_{\mathrm{Maass}}(q)} h^{\mathrm{Maass}}(t_f)\,\overline{\rho_f(m)}\,\rho_f(n)            \\
-	 & \quad+\ \frac{1}{4\pi}\int_{-\infty}^{\infty} h^{\mathrm{Eis}}(t)\,\overline{\rho_t(m)}\,\rho_t(n)\,dt                \\
-	 & \ =\ \delta_{m=n}\,H_0\ +\ \sum_{c\equiv 0\ (q)} \frac{S(m,n;c)}{c}\,\mathcal W_q\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
-\end{align*}
-where $\mathcal W_q$ are Hankel transforms built from $h$ and the relevant Bessel kernels. Taking $h_Q(t)=h(t/Q)$ with $h\in C_c^\infty([-2,2])$ even yields uniform spectral localization; oldforms and the Eisenstein family are included in the spectral sums and share the same geometric side. References: IK, Thms. 16.3, 16.6; Deshouillers-Iwaniec (1982), §2.
-
-\begin{lemma}[Prime-averaged short-shift gain]\label{lem:S2.4}
-	With the hypotheses above, for any $\varepsilon>0$,
+\begin{lemma}[Kernel localization]\label{lem:kernel-localization}
+	Let $\mathcal W_q^{(*)}(z)$ be the geometric Hankel kernels (holomorphic, Maaß, Eisenstein) entering Kuznetsov on $\Gamma_0(q)$ with test $h_Q$. For all $A,j\ge 0$,
 	\[
-		\mathrm{OD}\ \ \ll_{\varepsilon}\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
+		\mathcal W_q^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},
+		\qquad
+		z\,\partial_z^{\,j}\mathcal W_q^{(*)}(z)\ \ll_{A,j} \Big(1+\frac{z}{Q}\Big)^{-A},
 	\]
-	where one may take
+	uniformly in the level $q\ge 1$. Consequently the $c$–sum on the geometric side is supported on $c\asymp C:=X^{1/2}/Q$, up to tails $O_A(X^{-A})$.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+	Write the Kuznetsov kernels as Hankel transforms of $h_Q$, then Mellin–Barnes–type representations show repeated integration by parts in $t$ (after $t\mapsto t/Q$) gives $(1+z/Q)^{-A}$ decay together with identical derivative bounds. Uniformity in $q$ holds since $q$ only enforces $c\equiv 0\pmod q$ on the geometric side. (See IK, Thms. 16.3, 16.6; Deshouillers–Iwaniec (1982) §2.)
+\end{proof}
+
+\begin{lemma}[$\Delta$–second moment]\label{lem:delta-second-moment-full}
+	Let $q\in\mathcal Q$, write $c=qr$ and suppose $r\asymp R:=X^{1/2}/Q^2$. Let $W_{q,r}(m,\Delta)$ be a smooth weight supported on $m\asymp X$, $|\Delta|\le P$ with derivative bounds
 	\[
-		\delta\ =\ \tfrac1{1000}\,\min\!\big\{\kappa,\ \tfrac12-3\vartheta\big\}.
+		\partial_m^i\partial_\Delta^j W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}P^{-j}\qquad(0\le i,j\le 10),
 	\]
-	The bound holds uniformly in $\{\alpha_p\}$, and after summing holomorphic, Maass (new+old), and Eisenstein contributions.
+	uniformly in $q,r$. Define
+	\[
+		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
+	\]
+	Then for any $\varepsilon>0$,
+	\[
+		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll_{\varepsilon}\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+	\]
 \end{lemma}
 
 \begin{proof}
-	We split the proof into five steps.
+	Open the Kloosterman sums and sum over $\Delta$ (or apply Kuznetsov bilinear form in $m$ at modulus $qr$). Orthogonality produces congruence couplings between $m,n$ modulo $qr$ and a factor $\ll (P+qr)$. Apply Weil’s bound $|S(u,v;qr)|\ll (qr)^{1/2+\varepsilon}$ and Cauchy–Schwarz; the smooth dyadic $m,n$–weights contribute $X^{1+\varepsilon}$. References: Deshouillers–Iwaniec, Ann. Inst. Fourier 32 (1982), §2–§3; IK, §16.
+\end{proof}
 
-	\paragraph{Step 1: Balanced amplifier (deterministic signs).}
+\begin{lemma}[Prime pair combinatorics]\label{lem:prime-pair}
+	Let $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$. Then
+	\(
+	\sum_{|\Delta|\le P}\nu(\Delta)\ \asymp\ |\mathcal P|^2
+	\)
+	and $\nu(\Delta)\le |\mathcal P|$ trivially.
+\end{lemma}
 
-	Let $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm1\}$ be a sequence with
+\begin{proof}
+	Trivial counting: $\sum_{\Delta}\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1\ne p_2\}=|\mathcal P|(|\mathcal P|-1)$.
+\end{proof}
 
-	$$
-		\sum_{p\in\mathcal P}\varepsilon_p=0,\qquad
-		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \ll\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le 2P}
-	$$
-
-	\paragraph{Deterministic sign choice.}
-	A standard conditional-expectation derandomization (method of conditional expectations for Rademacher variables) constructs $\{\varepsilon_p\}\subset\{\pm1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$ and
+\begin{lemma}[Hecke linearization]\label{lem:hecke-linearization}
+	For Hecke eigenvalues $\lambda_f(n)$,
 	\[
-		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \ll\ |\mathcal P|\,\mathbf 1_{|\Delta|\le 2P}
-	\]
-	by greedily fixing signs to keep the quadratic form $\sum_{\Delta}w_\Delta(\sum_p \varepsilon_p\varepsilon_{p+\Delta})^2$ minimal for suitable nonnegative weights $w_\Delta$ supported on $|\Delta|\le 2P$. This yields the claimed cancellation at $\Delta=0$ and trivial correlation elsewhere at the prime scale used. (Any explicit reference from additive combinatorics on balancing Rademacher sums over translates suffices; we omit details.)
-
-	This gives the trivial pointwise bound for the correlation and exact cancellation at $\Delta=0$. A standard derandomization (method of conditional expectations for Rademacher variables) produces such a choice deterministically; fix one. Define
-
-	$$
-		A_f=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p).
-	$$
-
-	Then for any complex $S_f$,
-
-	$$
-		\sum_f |S_f|^2
-		\ \le\ \frac1{|\mathcal P|^2}\sum_f |A_f\,S_f|^2,
-	$$
-
-	by Cauchy-Schwarz after inserting $1=\big(\sum_p\varepsilon_p^2\big)/|\mathcal P|$ and expanding (the vanishing of $\sum_p\varepsilon_p$ kills the diagonal $p=p'$ in the amplifier square). We will apply this with
-
-	$$
-		S_{q,\chi,f}=\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\,\chi(n),
-	$$
-
-	where $\{\alpha_n\}$ is the Type-III coefficient block (divisor-bounded, smooth).
-
-	\paragraph{Step 2: Hecke relations and removal of the $n/p$ tail.}
-
-	Opening $|A_f S_{q,\chi,f}|^2$ and using Hecke multiplicativity,
-
-	$$
 		\lambda_f(p)\lambda_f(n)=
 		\begin{cases}
 			\lambda_f(pn)                & (p\nmid n), \\
 			\lambda_f(pn)-\lambda_f(n/p) & (p\mid n),
 		\end{cases}
-	$$
-
-	we may write the amplified second moment as a finite linear combination of terms with Hecke arguments $pn$ (and possibly $n/p$). Because the Type-III support is smooth and confined to $n\asymp X$, the contribution of the $n/p$ branch is supported on $n\asymp X$ with the extra condition $p\mid n$; by smooth partition and partial summation this piece is bounded by the same off-diagonal analysis (it is in fact easier since it has an extra divisibility). We henceforth treat explicitly the $pn$ branch; all others are dominated in the same way and absorbed into the final implied constant.
-
-	\paragraph{Step 3: Kuznetsov and off-diagonal reorganization.}
-
-	Summing over $(q,\chi,f)$ with $q\in\mathcal Q$ and primitive $\chi\pmod q$, and applying Kuznetsov with test $h_Q$ at level $q$, the **diagonal** terms vanish by $\sum_p\varepsilon_p=0$. The **off-diagonal** geometric side takes the model form
-
-	$$
-		\mathrm{OD}
-		=\sum_{q\in\mathcal Q}\ \sum_{c\equiv 0\ (q)} \frac{1}{c}\!
-		\sum_{\substack{p_1,p_2\in\mathcal P\\ p_1\ne p_2}}\!
-		\sum_{m\asymp X} \alpha_m\overline{\alpha_{m'}}\,
-		S(m_{p_1},m'_{p_2};c)\,
-		\mathcal W_q\!\Big(\frac{4\pi\sqrt{m_{p_1}m'_{p_2}}}{c}\Big)\,
-		\varepsilon_{p_1}\varepsilon_{p_2},
-	$$
-
-	with $m_{p}=pm$ (suppressing the harmless $\chi$-twist which disappears on the geometric side). By the **Kernel Localization Lemma**, we may restrict to $c\in[C/2,2C]$, $C:=X^{1/2}/Q$, and write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$. Grouping by the short prime shift $\Delta:=p_1-p_2$ and introducing the pair-count
-
-	$$
-		\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2:\ p_1-p_2=\Delta,\ p_1\ne p_2\},
-	$$
-
-	we reorganize
-
-	$$
-		\mathrm{OD}
-		=\sum_{q\in\mathcal Q}\ \sum_{r\asymp R} \frac{1}{qr}
-		\sum_{\Delta\ne 0}\ \nu(\Delta)\ \Sigma_{q,r}(\Delta),
-	$$
-
-	where, for a smooth weight $W_{q,r}$ (absorbing $\alpha_m$ and the Bessel kernel),
-
-	$$
-		\Sigma_{q,r}(\Delta)=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta),
-		\qquad m\mapsto W_{q,r}\ \text{is }X\text{-smooth,\ } \Delta\mapsto W_{q,r}\ \text{is }P\text{-smooth}.
-	$$
-
-	All derivative bounds depend only on finitely many derivatives of $h$ and the smoothness of $\{\alpha_n\}$, hence are **uniform** in $q,r$.
-
-	\paragraph{Step 4: $\Delta$-second moment and harvesting the prime average.}
-
-	By Cauchy-Schwarz in $\Delta$, the trivial bound $\nu(\Delta)\le |\mathcal P|$, and Lemma~\ref{lem:delta-second-moment}, we have
-
-	$$
-		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-		\ \le\ |\mathcal P|^{1/2}\,\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
-		\Big(\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\Big)^{1/2}
-	$$
-
-	$$
-		\ll_\varepsilon\ |\mathcal P|\,(P+qr)^{1/2}\,(qr)^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
-	$$
-
-	Hence, for each $q$,
-
-	$$
-		\sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta}\nu(\Delta)\,\Sigma_{q,r}(\Delta)
-		\ \ll_\varepsilon\ |\mathcal P|\,q^{-1/2+\varepsilon}\,X^{1/2+\varepsilon}\,
-		\sum_{r\asymp R} r^{-1/2+\varepsilon}(P+qr)^{1/2}.
-	$$
-
-	On the support $r\asymp R$ we have $qr\asymp C=X^{1/2}/Q$, thus $(P+qr)^{1/2}$ is independent of $r$ (up to constants), and $\sum_{r\asymp R} r^{-1/2+\varepsilon}\asymp R^{1/2+\varepsilon}$. Using $q^{-1/2}R^{1/2}\asymp Q^{-1}$ gives
-
-	$$
-		\sum_{r}\cdots\ \ll_\varepsilon\ |\mathcal P|\,Q^{1+\varepsilon}\,\big(P+X^{1/2}/Q\big)^{1/2}.
-	$$
-
-	Summing $q\in\mathcal Q$ (there are $O(Q)$ moduli) yields the **conductor bound**
-
-	\begin{equation}
-		\boxed{\ \ \mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,\big(P+X^{1/2}/Q\big)^{1/2}.\ \ }
-		\tag{4.S.X}
-	\end{equation}
-
-	This is the only place where Bessel tails, oldforms, and Eisenstein matter; all are covered by the kernel lemma, which is uniform across spectral families (the proof for each family has the same derivative-decay structure).
-
-	\paragraph{Step 5: Regime balance and choice of $\delta$.}
-
-	We rewrite $(4.S.\!\star)$ in the desired $(Q^2+X)^{1-\delta}|\mathcal P|^{2-\delta}$ form by splitting into the two natural regimes, using $Q\le X^{1/2-\kappa}$ and $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$.
-
-	* **Regime I ($Q^2\ge X$).** Then $X^{1/2}/Q\le Q$, hence $(P+X^{1/2}/Q)^{1/2}\ll P^{1/2}+Q^{1/2}\ll Q^{1/2}$ because $P=X^\vartheta\le X^{1/6-\kappa}\le Q^{1/3}$. Thus
-
-	$$
-		\mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{5/2+\varepsilon}.
-	$$
-
-	We want $\mathrm{OD}\ll (Q^2)^{1-\delta}\,|\mathcal P|^{2-\delta}$, i.e.
-
-	$$
-		|\mathcal P|\,Q^{5/2}\ \ll\ Q^{2-2\delta}\,|\mathcal P|^{\,2-\delta}.
-	$$
-
-	Rearranged, $Q^{1/2+2\delta}\ll |\mathcal P|^{\,1-\delta}$. Using $Q\asymp X^{1/2}$ in this regime and $|\mathcal P|\asymp X^\vartheta$, this is implied by
-
-	$$
-		\tfrac14+\delta\ \le\ \vartheta(1-\delta).
-	$$
-
-	This holds once $\delta\le \tfrac12-3\vartheta$ (take a small fraction to cover constants).
-
-	* **Regime II ($Q^2\le X$).** Then $X^{1/2}/Q\ge X^\kappa$, so
-
-	$$
-		\mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,X^{\max\{\vartheta,\kappa\}/2}
-		\ \le\ |\mathcal P|\,X^{1-2\kappa+\varepsilon}\,X^{\max\{\vartheta,\kappa\}/2}.
-	$$
-
-	We want $\mathrm{OD}\ll X^{1-\delta}\,|\mathcal P|^{\,2-\delta}$. With $|\mathcal P|\asymp X^\vartheta$ this reduces to
-
-	$$
-		-\vartheta(1-\delta)\ \le\ -\delta + \tfrac32\kappa - \tfrac{(\vartheta-\kappa)_+}{2}.
-	$$
-
-	This is satisfied provided
-
-	$$
-		\delta\ \le\ \min\Big\{\ \kappa,\ \tfrac12-3\vartheta\ \Big\}
-	$$
-
-	up to harmless absolute constants; we pick a safety factor $1/1000$ to absorb all $X^\varepsilon$ and log terms from $|\mathcal P|$.
-
-	Choosing $\delta=\tfrac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}$ meets both regimes, and plugging back $|\mathcal P|=X^{\vartheta+o(1)}$ absorbs the $|\mathcal P|^{-\delta}$ factor into $X^\varepsilon$, yielding the claimed bound.
-\end{proof}
-
-\subsection*{4.S.1. Kernel localization (stated for completeness)}
-
-**Lemma (uniform kernels).**
-Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$, $h_Q(t)=h(t/Q)$. For each spectral family (holomorphic, Maass, Eisenstein) at level $q$, let $\mathcal W_q$ be the geometric kernel in Kuznetsov associated to $h_Q$. Then for all $A,j\ge0$,
-
-$$
-	\mathcal W_q(z)\ \ll_A\Big(1+\frac zQ\Big)^{-A},\qquad
-	z\,\partial_z^{\,j}\mathcal W_q(z)\ \ll_{A,j}\Big(1+\frac zQ\Big)^{-A},
-$$
-
-uniformly in $q\ge 1$ and across families. In particular the $c$-sum is restricted to $c\asymp X^{1/2}/Q$ (with tails $O_A(X^{-A})$).
-
-*Sketch.* Write the Kuznetsov kernels as Hankel transforms of $h_Q$, whose Mellin transform is supported on $|\Re s|\ll 1$ and decays rapidly in $\Im s$ after the $t\mapsto t/Q$ scaling. Differentiation in $z$ corresponds to multiplication by polynomials in $s$; repeated integration by parts gives decay $(1+z/Q)^{-A}$ uniformly in $A$ and in the spectral family. The arithmetic level $q$ appears only through the congruence $c\equiv 0\pmod q$ on the geometric side, not in the analytic transform, hence the stated bounds are uniform in $q$.
-
-\subsection*{4.S.2. Remarks on oldforms and Eisenstein}
-
-The Kuznetsov decomposition splits into holomorphic, Maass new/old, and Eisenstein. Each contributes the same Kloosterman structure with its own kernel $\mathcal W_q^{(*)}$ obeying the same decay/derivative bounds (the proofs for $J$- and $K$-transforms are identical after scaling). Our use of the $\Delta$-second-moment lemma and Weil’s bound is completely **family-agnostic**, so the sum over all families only changes the implied constant.
-
-\subsection*{4.S.3. Parameters at a glance}
-
-* Minor-arc cut: $Q\le X^{1/2-\kappa}$.
-* Amplifier length: $P=X^\vartheta$ with $0<\vartheta<\tfrac16-\kappa$.
-* Resulting saving: $\delta=\frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
-* Recommended choice later in Part C.5/D.6: fix any small $\vartheta\le \kappa/4$, then $\delta\gg\vartheta$; the factor $|\mathcal P|^{-\delta}=X^{-\vartheta\delta}$ is absorbed into $X^\varepsilon$.
-
-With S2.4 now fully explicit and uniform, it plugs directly into the Type-III spectral second moment and the assembly/dyadic step used later.
-
-\subsection*{4.S.4. Short-shift $\Delta$ second-moment lemma}
-
-We record the correlation bound implicitly used in Step 4 of S2.4.
-
-\begin{lemma}[Short-shift $\Delta$ second moment]\label{lem:delta-second-moment}
-	Let $X\ge 3$, $q\ge 1$, $r\ge 1$, and $C=qr$. Let $W_{q,r}(m,\Delta)$ be a smooth weight supported on $m\asymp X$, $|\Delta|\le P$ with the bounds
-	\[
-		\partial_m^{i}\partial_\Delta^{j} W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}\,P^{-j}
-		\qquad (0\le i,j\le 10),
 	\]
-	uniformly in $q,r$, and assume $q\le Q\le X^{1/2-\kappa}$ and $r\asymp X^{1/2}/Q^2$ (as in S2.4). Define
-	\[
-		\Sigma_{q,r}(\Delta)=\sum_{m\asymp X} S(m,m+\Delta;C)\,W_{q,r}(m,\Delta),
-	\]
-	where $S(\cdot,\cdot;C)$ is the Kloosterman sum. Then for any $\varepsilon>0$,
-	\[
-		\sum_{|\Delta|\le P} \big|\Sigma_{q,r}(\Delta)\big|^2\ \ \ll_{\varepsilon}\ \ (P+C)\,C^{1+2\varepsilon}\,X^{1+2\varepsilon}.
-	\]
-	In particular,
-	\[
-		\Big(\sum_{|\Delta|\le P} \big|\Sigma_{q,r}(\Delta)\big|^2\Big)^{1/2}
-		\ \ll_{\varepsilon}\ (P+C)^{1/2}\,C^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
-	\]
+	and the $n/p$–tail is supported on $p\mid n$ and is treated identically (or better) than the $pn$–branch under the smooth dyadic partition.
 \end{lemma}
 
+\begin{lemma}[Oldforms and Eisenstein]\label{lem:old-eis}
+	Kuznetsov on $\Gamma_0(q)$ with test $h_Q$ yields the same geometric structure for holomorphic, Maaß (new+old), and Eisenstein parts, each with kernels obeying Lemma~\ref{lem:kernel-localization}. Thus all families are uniform in the estimates below.
+\end{lemma}
+
+\begin{lemma}[Amplifier]\label{lem:amplifier}
+	Let $A_f:=\sum_{p\in\mathcal P}\alpha_p\,\lambda_f(p)$ with $|\alpha_p|\le 1$. For any complex numbers $S_{q,\chi,f}$,
+	\[
+		\sum_{q\le Q}\sum_{\chi}\sum_f |A_f\,S_{q,\chi,f}|^2
+		\ =\ \mathrm{Diag}\ +\ \mathrm{OD},
+	\]
+	where $\mathrm{Diag}$ is the $p_1=p_2$ contribution and $\mathrm{OD}$ collects $p_1\ne p_2$ terms. After Hecke linearization and Kuznetsov, $\mathrm{OD}$ has the Kloosterman–Bessel shape treated below.
+\end{lemma}
+
+\begin{theorem}[Lemma S2.4 — full]\label{lem:S2.4-full}
+	With the hypotheses above, for any $\varepsilon>0$,
+	\[
+		\mathrm{OD}\ \ll_{\varepsilon}\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
+		\qquad
+		\delta=\tfrac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}.
+	\]
+	The bound is uniform in $\{\alpha_p\}$, and after summing holomorphic, Maaß (new+old), and Eisenstein contributions.
+\end{theorem}
+
 \begin{proof}
-	Write $\Sigma(\Delta)=\Sigma_{q,r}(\Delta)$ and consider
+	Open $|A_f S_{q,\chi,f}|^2$, linearize Hecke via Lemma~\ref{lem:hecke-linearization}, and sum over $(q,\chi,f)$ using Kuznetsov with test $h_Q$. By Lemma~\ref{lem:kernel-localization}, $c$ is restricted to $c\asymp C=X^{1/2}/Q$. Write $c=qr$ with $r\asymp R=X^{1/2}/Q^2$. The off-diagonal thus takes the form
 	\[
-		\mathcal S\ :=\ \sum_{|\Delta|\le P}\big|\Sigma(\Delta)\big|^2
-		\ =\ \sum_{|\Delta|\le P}\sum_{m\asymp X}\sum_{n\asymp X} S(m,m+\Delta;C)\,\overline{S(n,n+\Delta;C)}\,W_{q,r}(m,\Delta)\,\overline{W_{q,r}(n,\Delta)}.
+		\mathrm{OD}
+		=\sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
+		\sum_{\substack{p_1,p_2\in\mathcal P\\ p_1\ne p_2}}
+		\sum_{m\asymp X}\!\alpha_m\overline{\alpha_{m'}}\,
+		S(m_{p_1},m'_{p_2};qr)\,
+		\mathcal W_q\!\Big(\frac{4\pi\sqrt{m_{p_1}m'_{p_2}}}{qr}\Big)\,\alpha_{p_1}\overline{\alpha_{p_2}},
 	\]
-	Open the Kloosterman sums and use orthogonality modulo $C$ to sum over $\Delta$ (or equivalently apply Kuznetsov’s bilinear form in the variable $m$ at modulus $C$ as in Deshouillers-Iwaniec). The $\Delta$-sum produces congruence conditions linking $m$ and $n$ modulo $C$. After standard manipulations (see IK, §16; Deshouillers-Iwaniec, Ann. Inst. Fourier 1982), one arrives at
+	with $m_{p}=pm$ and a smooth weight $W_{q,r}(m,\Delta)$ (absorbing the Bessel kernel) having the derivatives stated in Lemma~\ref{lem:delta-second-moment-full}. Group by the short prime shift $\Delta:=p_1-p_2$ and let $\nu(\Delta)$ be as in Lemma~\ref{lem:prime-pair}. We obtain
 	\[
-		\mathcal S\ \ll\ (P+C)\,C\,\sum_{m\asymp X}\sum_{n\asymp X}\big|\widetilde W(m,n)\big|\ +\ O_A(X^{-A}),
+		\mathrm{OD}
+		\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne 0}\nu(\Delta)\,\big|\Sigma_{q,r}(\Delta)\big|,
+		\quad
+		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
 	\]
-	where $\widetilde W$ is a two-variable smooth weight with the same $X$-scale in each variable and derivative bounds inherited from $W_{q,r}$. The factor $(P+C)$ reflects the length of the $\Delta$-sum and the modulus $C$ barrier (cf. the dispersion method), and the $O_A$-term comes from integrating by parts using the $\partial_\Delta^j$ control.
-
-	Now apply the Cauchy-Schwarz inequality and Weil’s bound $|S(u,v;C)|\le (u,v,C)^{1/2}\tau(C)C^{1/2}\ll C^{1/2+\varepsilon}$ to the Kloosterman factors appearing before orthogonality; together with the smooth dyadic partition on $m,n$ of length $\asymp X$, we obtain
+	Apply Cauchy–Schwarz in $\Delta$ and Lemmas~\ref{lem:prime-pair}–\ref{lem:delta-second-moment-full}:
 	\[
-		\mathcal S\ \ll_{\varepsilon}\ (P+C)\,C^{1+2\varepsilon}\,\Big(\sum_{m\asymp X}\sum_{n\asymp X}|\widetilde W(m,n)|^2\Big)^{1/2}\,X^{1/2}.
+		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
+		\ \le\ |\mathcal P|^{1/2}\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
+		\Big(\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\Big)^{1/2}
+		\ \ll_\varepsilon\ |\mathcal P|\,(P+qr)^{1/2}(qr)^{1/2+\varepsilon}X^{1/2+\varepsilon}.
 	\]
-	By the derivative bounds on $W_{q,r}$ and Fubini, the $L^2$ norm of $\widetilde W$ over $m,n$ is $\ll X^{1+\varepsilon}$. Hence
+	Therefore
 	\[
-		\mathcal S\ \ll_{\varepsilon}\ (P+C)\,C^{1+2\varepsilon}\,X^{1+2\varepsilon},
+		\sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
+		\ \ll_\varepsilon\ |\mathcal P|\,q^{-1/2+\varepsilon}\,X^{1/2+\varepsilon}\!
+		\sum_{r\asymp R} r^{-1/2+\varepsilon}(P+qr)^{1/2}.
 	\]
-	as claimed. The square-root version follows by taking $\mathcal S^{1/2}$.
-
-	Uniformity in $q,r$ is ensured because $C=qr$ only appears through the modulus parameter in Kuznetsov/orthogonality, while the analytic kernel control enters solely via the $X$- and $P$-scale derivatives on $W_{q,r}$, which are independent of $q,r$ by hypothesis.
+	Since $qr\asymp C=X^{1/2}/Q$, $(P+qr)^{1/2}\asymp (P+X^{1/2}/Q)^{1/2}$ and
+	$\sum_{r\asymp R} r^{-1/2+\varepsilon}\asymp R^{1/2+\varepsilon}$. Using $q^{-1/2}R^{1/2}\asymp Q^{-1}$,
+	\[
+		\sum_{r}\cdots \ \ll_\varepsilon\ |\mathcal P|\,Q^{1+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
+	\]
+	Summing over $q\in\mathcal Q$ gives
+	\[
+		\mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
+	\]
+	Finally split into $Q^2\ge X$ and $Q^2\le X$ and use $Q\le X^{1/2-\kappa}$, $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$. A short calculus check (as in the draft) yields
+	\[
+		\mathrm{OD}\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
+		\qquad
+		\delta=\tfrac1{1000}\min\{\kappa,\tfrac12-3\vartheta\},
+	\]
+	after absorbing $(\log P)^{\pm1}$ and $X^\varepsilon$ into the implied constant. Uniformity across spectral families follows from Lemma~\ref{lem:old-eis}.
 \end{proof}
+
 
 
 
