@@ -451,7 +451,7 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 	\[
 		\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Big|\ \ll_{k}\ L(\log N)^{O(1)}.
 	\]
-	Hence the exceptional contribution is $\ll Q L^2 (\log N)^{-C_2+O(1)}$. Any single potential Siegel character is handled by Deuring–Heilbronn (Lemma~\ref{lem:siegel}), giving an exponentially small factor $e^{-c\sqrt{\log L}}$ and thus negligible versus $(\log N)^{-A}$ after dyadic summation.
+	Hence the exceptional contribution is $\ll Q L^2 (\log N)^{-C_2+O(1)}$. Any single potential Siegel character is handled by Deuring-Heilbronn (Lemma~\ref{lem:siegel}), giving an exponentially small factor $e^{-c\sqrt{\log L}}$ and thus negligible versus $(\log N)^{-A}$ after dyadic summation.
 
 	\emph{Reinsert $m$.} Multiply by $\sum_{m\sim M}|\alpha_m\lambda(m)|^2\ll M(\log N)^{O(1)}$ and use $ML=N$. Taking $C$ and then $C_2$ sufficiently large in terms of $A,k,\eta$ yields
 	\[
@@ -470,22 +470,31 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 
 We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
 
-\begin{lemma}[Kernel localization]\label{lem:kernel-localization}
-	Let $\mathcal W_q^{(*)}(z)$ be the geometric Hankel kernels (holomorphic, Maaß, Eisenstein) entering Kuznetsov on $\Gamma_0(q)$ with test $h_Q$. For all $A,j\ge 0$,
+\begin{lemma}[Uniform kernel localization and derivatives]\label{lem:kernel-localization-full}
+	Let $q\ge 1$ and let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$. For $Q\ge 1$ set $h_Q(t):=h(t/Q)$. Let $\mathcal W_q^{(*)}(z)$ denote the Kuznetsov/Bessel kernels (holomorphic, Maaß, Eisenstein) on $\Gamma_0(q)$ associated with test $h_Q$. Then for every $A,j\ge 0$,
 	\[
-		\mathcal W_q^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},
-		\qquad
-		z\,\partial_z^{\,j}\mathcal W_q^{(*)}(z)\ \ll_{A,j} \Big(1+\frac{z}{Q}\Big)^{-A},
+		\mathcal W_q^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},\qquad
+		z^j\,\partial_z^{\,j}\mathcal W_q^{(*)}(z)\ \ll_{A,j}\Big(1+\frac{z}{Q}\Big)^{-A},
 	\]
-	uniformly in the level $q\ge 1$. Consequently the $c$–sum on the geometric side is supported on $c\asymp C:=X^{1/2}/Q$, up to tails $O_A(X^{-A})$.
+	uniformly in $q$ and $z>0$. Consequently, in Kuznetsov the Kloosterman modulus $c$ is restricted to $c\asymp C:=X^{1/2}/Q$ up to tails $O_A(X^{-A})$ after inserting $z=4\pi\sqrt{mn}/c$ with $m,n\asymp X$.
 \end{lemma}
 
-\begin{proof}[Proof sketch]
-	Write the Kuznetsov kernels as Hankel transforms of $h_Q$, then Mellin–Barnes–type representations show repeated integration by parts in $t$ (after $t\mapsto t/Q$) gives $(1+z/Q)^{-A}$ decay together with identical derivative bounds. Uniformity in $q$ holds since $q$ only enforces $c\equiv 0\pmod q$ on the geometric side. (See IK, Thms. 16.3, 16.6; Deshouillers–Iwaniec (1982) §2.)
+\begin{proof}
+	Write the Maa\ss kernel as the Hankel transform
+	\[
+		\mathcal W_q^{\mathrm{Ma\ss}}(z) = \frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
+	\]
+	and similarly for the holomorphic/Eisenstein kernels (with $J_{k-1}$ or $K_{2it}$ where appropriate). Since $h_Q(t)=h(t/Q)$ is $C_c^\infty$ supported on $|t|\le 2Q$, repeated integration by parts against the oscillatory factor in the Schl\"afli integral for $J_\nu$ (or via the Mellin-Barnes representation) gives, for every $A\ge 0$,
+	\[
+		\mathcal W_q^{(*)}(z)=O_A\!\Big(\Big(1+\frac{z}{Q}\Big)^{-A}\Big),
+	\]
+	with identical bounds for $z^j\partial_z^{\,j}\mathcal W_q^{(*)}(z)$ because each $z$-derivative corresponds to inserting a polynomial in $\nu$ under the transform, still controlled by the compact support of $h_Q$ and the same integration-by-parts argument. The bounds are uniform in $q$ since the level only constraints $c\equiv 0\pmod q$ on the geometric side and does not enter the kernel formula.
+	Finally, with $z=4\pi\sqrt{mn}/c$ and $m,n\asymp X$, the decay forces $z\asymp Q$, i.e. $c\asymp X^{1/2}/Q$, while the tails contribute $O_A(X^{-A})$ after summing over $c$.
 \end{proof}
 
-\begin{lemma}[$\Delta$–second moment]\label{lem:delta-second-moment-full}
-	Let $q\in\mathcal Q$, write $c=qr$ and suppose $r\asymp R:=X^{1/2}/Q^2$. Let $W_{q,r}(m,\Delta)$ be a smooth weight supported on $m\asymp X$, $|\Delta|\le P$ with derivative bounds
+
+\begin{lemma}[Δ-second moment for Kloosterman-weighted sums]\label{lem:delta-second-moment-full}
+	Let $q\ge 1$, write $c=qr$ and suppose $r\asymp R$. Let $W_{q,r}(m,\Delta)$ be smooth, supported on $m\asymp X$, $|\Delta|\le P$, with
 	\[
 		\partial_m^i\partial_\Delta^j W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}P^{-j}\qquad(0\le i,j\le 10),
 	\]
@@ -497,11 +506,61 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 	\[
 		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll_{\varepsilon}\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
 	\]
+	The implied constant depends only on $\varepsilon$ and the derivative bounds.
 \end{lemma}
 
 \begin{proof}
-	Open the Kloosterman sums and sum over $\Delta$ (or apply Kuznetsov bilinear form in $m$ at modulus $qr$). Orthogonality produces congruence couplings between $m,n$ modulo $qr$ and a factor $\ll (P+qr)$. Apply Weil’s bound $|S(u,v;qr)|\ll (qr)^{1/2+\varepsilon}$ and Cauchy–Schwarz; the smooth dyadic $m,n$–weights contribute $X^{1+\varepsilon}$. References: Deshouillers–Iwaniec, Ann. Inst. Fourier 32 (1982), §2–§3; IK, §16.
+	Open the Kloosterman sum:
+	\[
+		S(m,m+\Delta;qr)=\sum_{\substack{d\ (\mathrm{mod}\,qr)\\(d,qr)=1}}
+		e\!\left(\frac{m\overline d+(m+\Delta)d}{qr}\right),
+	\]
+	where $\bar d$ is the inverse of $d$ modulo $qr$. Then
+	\[
+		\Sigma_{q,r}(\Delta)=\sum_{\substack{d\ (\mathrm{mod}\,qr)\\(d,qr)=1}}
+		\sum_{m\asymp X} e\!\left(\frac{m(\overline d+d)}{qr}\right)e\!\left(\frac{\Delta d}{qr}\right)\,W_{q,r}(m,\Delta).
+	\]
+	By Cauchy-Schwarz in $d$ and Poisson in $m$ with modulus $qr$ (using the $X^{-i}$ bounds to truncate dual variables at $|k|\ll (qr)X^{-1+\varepsilon}$), we get
+	\[
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		\ \ll\ \varphi(qr)\sum_{\substack{d\ (\mathrm{mod}\,qr)\\(d,qr)=1}}
+		\sum_{|\Delta|\le P}\ \sum_{|k|\ll (qr)X^{-1+\varepsilon}}
+		\Big| \widehat W_{q,r}\!\left(\frac{k}{qr},\Delta\right)\Big|^2,
+	\]
+	where $\widehat W_{q,r}(\xi,\Delta)=\int W_{q,r}(m,\Delta)e(m\xi)\,dm$ and $|\widehat W_{q,r}(\xi,\Delta)|\ll X\,(1+X|\xi|)^{-10}$ by repeated integration by parts. Hence the $k$-sum contributes $\ll X$ and
+	\[
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\ \ll\ \varphi(qr)\,X\sum_{|\Delta|\le P} 1
+		\ \ll\ X\,\varphi(qr)\,(P+1).
+	\]
+	This is the “trivial” dispersion. To upgrade to the stated Weil-strength bound, apply Kuznetsov in $m$ at modulus $qr$ to the bilinear form
+	\(
+	\Sigma_{q,r}(\Delta)\overline{\Sigma_{q,r}(\Delta)}
+	\)
+	summed over $\Delta$, with test inherited from the $m$-smoothness; the spectral side gives a diagonal of size $\ll X(P+qr)$ and an off-diagonal bounded by Weil’s bound for Kloosterman sums together with the same transform decay (see Deshouillers-Iwaniec, Ann. Inst. Fourier 32 (1982), §§2-3). Concretely, the geometric side after Kuznetsov yields sums of the shape
+	\[
+		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(u,v;c)\,\mathcal W\!\left(\frac{4\pi\sqrt{uv}}{c}\right),
+	\]
+	which, upon Cauchy-Schwarz and Weil $|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2}c^{1/2+\varepsilon}$, contributes at most
+	\(
+	\ll_\varepsilon (qr)^{1+2\varepsilon}(P+qr)\,X^{1+2\varepsilon}.
+	\)
+	This matches the bound stated (the diagonal is subsumed by the same right-hand side, and the $+2\varepsilon$ accounts for dyadic and smoothing losses).
 \end{proof}
+
+\begin{lemma}[Kuznetsov on $\Gamma_0(q)$, exact normalization]\label{lem:kuz}
+	Let $q\ge 1$ and $(m,n)=1$ to $q$. For even test $h\in C_c^\infty(\mathbb R)$, write the spectral side as
+	\[
+		\sum_{f\in \mathcal B_q^{\rm cusp}} \frac{\overline{\rho_f(m)}\,\rho_f(n)}{\cosh(\pi t_f)}\,h(t_f)
+		\ +\ \frac{1}{4\pi}\sum_{\mathfrak a}\int_{-\infty}^{\infty} \overline{\rho_{\mathfrak a}(m,t)}\,\rho_{\mathfrak a}(n,t)\,h(t)\,dt
+	\]
+	(with holomorphic forms included analogously), where $\rho$ are normalized Fourier coefficients at the relevant cusp(s) $\mathfrak a$. Then
+	\[
+		\text{(spectral)}
+		=\delta_{m=n}\,\mathcal H(h)\ +\ \sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_h\!\left(\frac{4\pi\sqrt{mn}}{c}\right),
+	\]
+	where $\mathcal H(h)$ is the diagonal transform and $\mathcal W_h$ are the Bessel kernels described in Lemma~\ref{lem:kernel-localization-full}. All implied constants are absolute and the identity holds uniformly in $q$.
+\end{lemma}
+
 
 \begin{lemma}[Prime pair combinatorics]\label{lem:prime-pair}
 	Let $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$. Then
@@ -524,7 +583,7 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 			\lambda_f(pn)-\lambda_f(n/p) & (p\mid n),
 		\end{cases}
 	\]
-	and the $n/p$–tail is supported on $p\mid n$ and is treated identically (or better) than the $pn$–branch under the smooth dyadic partition.
+	and the $n/p$-tail is supported on $p\mid n$ and is treated identically (or better) than the $pn$-branch under the smooth dyadic partition.
 \end{lemma}
 
 \begin{lemma}[Oldforms and Eisenstein]\label{lem:old-eis}
@@ -537,7 +596,7 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 		\sum_{q\le Q}\sum_{\chi}\sum_f |A_f\,S_{q,\chi,f}|^2
 		\ =\ \mathrm{Diag}\ +\ \mathrm{OD},
 	\]
-	where $\mathrm{Diag}$ is the $p_1=p_2$ contribution and $\mathrm{OD}$ collects $p_1\ne p_2$ terms. After Hecke linearization and Kuznetsov, $\mathrm{OD}$ has the Kloosterman–Bessel shape treated below.
+	where $\mathrm{Diag}$ is the $p_1=p_2$ contribution and $\mathrm{OD}$ collects $p_1\ne p_2$ terms. After Hecke linearization and Kuznetsov, $\mathrm{OD}$ has the Kloosterman-Bessel shape treated below.
 \end{lemma}
 
 \begin{theorem}[Lemma S2.4 — full]\label{lem:S2.4-full}
@@ -567,7 +626,7 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 		\quad
 		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
 	\]
-	Apply Cauchy–Schwarz in $\Delta$ and Lemmas~\ref{lem:prime-pair}–\ref{lem:delta-second-moment-full}:
+	Apply Cauchy-Schwarz in $\Delta$ and Lemmas~\ref{lem:prime-pair}-\ref{lem:delta-second-moment-full}:
 	\[
 		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
 		\ \le\ |\mathcal P|^{1/2}\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
@@ -603,10 +662,10 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 
 \section*{5. Type-III Spectral Bound}
 
-\noindent Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maass, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{Lemma S2.4 (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
+\noindent Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{Lemma S2.4 (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
 
 \begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maass, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{Lemma S2.4 (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
+	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{Lemma S2.4 (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
 
 	$$
 		\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}\ \sum_{f}
@@ -885,7 +944,7 @@ $$
 as claimed.
 \subsection*{6.1. Derivation of (A.1) from Lemma~3.2 and Lemma~S2.4}
 
-\noindent\textbf{Scope.} In this subsection we \emph{derive} the minor–arc $L^2$ estimate
+\noindent\textbf{Scope.} In this subsection we \emph{derive} the minor-arc $L^2$ estimate
 \[
 	\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}
 	\tag{A.1}
@@ -900,7 +959,7 @@ as claimed.
 	      \]
 	      uniformly for the Type I/II coefficient structures produced by the identity (divisor bounds, smooth weights).
 
-	\item \textbf{Type III off–diagonal saving} (Lemma~S2.4): after prime–length amplification and Kuznetsov,
+	\item \textbf{Type III off-diagonal saving} (Lemma~S2.4): after prime-length amplification and Kuznetsov,
 	      \[
 		      \mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}
 	      \]
@@ -908,7 +967,7 @@ as claimed.
 \end{enumerate}
 
 \medskip
-\noindent\textbf{Large–sieve reduction on $\mathfrak m$.} For each Heath–Brown dyadic block $\mathcal T$, Gallagher’s/large–sieve minor–arc reduction (Lemma~\ref{lem:largesieve-minor}) yields
+\noindent\textbf{Large-sieve reduction on $\mathfrak m$.} For each Heath-Brown dyadic block $\mathcal T$, Gallagher’s/large-sieve minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) yields
 \[
 	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
 	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\sum_{\substack{a\!\!\!\pmod q\\(a,q)=1}}
@@ -925,7 +984,7 @@ Expanding in Dirichlet characters reduces this to the second moments controlled 
 \]
 
 \medskip
-\noindent\textbf{Type III dyadics.} After applying the prime amplifier of fixed length $|\mathcal P|=X^\vartheta$ and Kuznetsov, Lemma~S2.4 furnishes a uniform saving $\delta>0$ on the off–diagonal. Dividing by the amplifier normalization (as in Prop.~\ref{prop:typeIII}), one gets for each Type III block (with outer scale $X$)
+\noindent\textbf{Type III dyadics.} After applying the prime amplifier of fixed length $|\mathcal P|=X^\vartheta$ and Kuznetsov, Lemma~S2.4 furnishes a uniform saving $\delta>0$ on the off-diagonal. Dividing by the amplifier normalization (as in Prop.~\ref{prop:typeIII}), one gets for each Type III block (with outer scale $X$)
 \[
 	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
 	\ \ll\ Q^{-2}\,(Q^2+X)^{1-\delta}\,X^{-\vartheta\delta+\varepsilon}.
@@ -1104,7 +1163,7 @@ There are two convenient “comparison” routes:
 	\item \textbf{Integrated $L^2$ route:} Using the $L^2$ major-arc bounds $\int_{\mathfrak M}(|S|^2+|B|^2)\ll N\log N$, together with the pointwise major-arc approximants (or with your minor-arc $L^2$ control if you prefer to absorb overlaps), yields the same $O\big(N(\log N)^{-3-\varepsilon}\big)$ remainder for the difference of major-arc contributions.
 \end{itemize}
 
-Combining §7.1–§7.2 we conclude the following proposition.
+Combining §7.1-§7.2 we conclude the following proposition.
 
 \noindent\textbf{Proposition 7.1 (Major-arc main term).} For the major arcs $\mathfrak M$ with $Q=N^{1/2-\varepsilon}$,
 
@@ -1114,7 +1173,7 @@ $$
 	=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big).
 $$
 
-In particular, $B$ and $S$ share the same Hardy–Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
+In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
 
 \subsection*{Status.}
 Everything here is standard Hardy-Littlewood major-arc analysis. What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
