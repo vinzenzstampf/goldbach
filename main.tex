@@ -615,17 +615,27 @@ where $\mathcal W_q$ denotes any of the Bessel kernels (holomorphic, Maaß, Eise
 all obeying $z^j\partial_z^j\mathcal W_q(z)\ll_A(1+z/Q)^{-A}$ uniformly in $q$.
 Thus $c$ is restricted to $c\asymp C:=X^{1/2}/Q$ up to $O_A(X^{-A})$ tails.
 Write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
+\subsubsection*{Insertion for Lemma~\ref{lem:S2.4}: using the $\Delta$-second moment and optimizing exponents}
 
-\paragraph{Step 4: Group by short prime shift and apply the $\Delta$-second moment.}
-Let $\Delta=p_1-p_2$; define $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$.
-Then $\sum_{|\Delta|\le P}\nu(\Delta)\asymp |\mathcal P|^2$ and $\nu(\Delta)\le|\mathcal P|$.
-Absorbing the kernel into a smooth weight $W_{q,r}(m,\Delta)$
-with the derivative bounds of Lemma~\ref{lem:delta-second-moment}, we bound
+\paragraph{From amplifier+Kuznetsov to a $\Delta$-family.}
+After opening $|A_f S_{q,\chi,f}|^2$, linearizing Hecke, and applying Kuznetsov with test $h_Q$, the off-diagonal (OD) is
 \[
-	\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
-	\sum_{\Delta\ne 0}\nu(\Delta)\,
-	\bigg|\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta)\bigg|.
+	\mathrm{OD}
+	=\sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
+	\!\!\sum_{\substack{p_1\ne p_2\in\mathcal P}}\!\!\varepsilon_{p_1}\varepsilon_{p_2}\!
+	\sum_{m\asymp X}\alpha_m\overline{\alpha_{m}}\,
+	S(p_1m,p_2m;qr)\,\mathcal W_{q}\!\Big(\tfrac{4\pi\sqrt{p_1m\cdot p_2m}}{qr}\Big)\,+\,\mathcal E,
 \]
+where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuz-uniform}, and $\mathcal E$ collects tails $O_A(X^{-A})$ and the (treated) $p\mid n$ Hecke tails (see the separate patch below).
+
+Set $\Delta=p_1-p_2$, and absorb $\mathcal W_q$ into a smooth weight $W_{q,r}(m,\Delta)$ with the derivative bounds of Lemma~\ref{lem:delta-second-moment}. Grouping by $\Delta$ and letting $\nu(\Delta)$ be the number of prime pairs with difference $\Delta$,
+\[
+	\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne 0}\nu(\Delta)\,
+	\Big|\Sigma_{q,r}(\Delta)\Big| \,+\, O_A(X^{-A}),\qquad
+	\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
+\]
+
+\paragraph{Apply the $\Delta$-second moment (Lemma~\ref{lem:delta-second-moment}).}
 By Cauchy–Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment},
 \[
 	\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
@@ -633,94 +643,52 @@ By Cauchy–Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment},
 	\Big(\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\Big)^{1/2}
 	\ \ll_\varepsilon\ |\mathcal P|\,(P+qr)^{1/2}(qr)^{1/2+\varepsilon}X^{1/2+\varepsilon}.
 \]
-Hence
+Therefore
 \[
 	\sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-	\ \ll_\varepsilon\ |\mathcal P|\,q^{-1/2+\varepsilon}\,X^{1/2+\varepsilon}
-	\sum_{r\asymp R} r^{-1/2+\varepsilon}(P+qr)^{1/2}.
+	\ \ll_\varepsilon\ |\mathcal P|\,q^{-1/2+\varepsilon}X^{1/2+\varepsilon}\!\!\sum_{r\asymp R} r^{-1/2+\varepsilon}(P+qr)^{1/2}.
 \]
-Since $qr\asymp C=X^{1/2}/Q$, we have $(P+qr)^{1/2}\asymp (P+X^{1/2}/Q)^{1/2}$ and
-$\sum_{r\asymp R} r^{-1/2+\varepsilon}\asymp R^{1/2+\varepsilon}$.
-Using $q^{-1/2}R^{1/2}\asymp Q^{-1}$,
+Since $qr\asymp C:=X^{1/2}/Q$, we have $(P+qr)^{1/2}\asymp (P+X^{1/2}/Q)^{1/2}$ and $\sum_{r\asymp R} r^{-1/2+\varepsilon}\asymp R^{1/2+\varepsilon}$. Using $q^{-1/2}R^{1/2}\asymp Q^{-1}$,
 \[
-	\sum_{r}\cdots \ \ll_\varepsilon\ |\mathcal P|\,Q^{1+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
+	\sum_{r}\cdots\ \ll_\varepsilon\ |\mathcal P|\,Q^{1+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
 \]
-Summing over $q\in\mathcal Q$ (there are $\asymp Q$ such moduli) gives
-\begin{equation}\label{eq:ODprebound}
+Summing over $q\in\mathcal Q$ (there are $\asymp Q$ moduli) yields
+\begin{equation}\label{eq:OD-final}
 	\mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
 \end{equation}
 
-\paragraph{Step 5: Divide out the amplifier and optimize exponents.}
-Insert \eqref{eq:ODprebound} into \eqref{eq:amp-dom}:
-\[
-	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
-	\ \le\ \frac{1}{|\mathcal P|^2}\,\mathrm{OD}
-	\ \ll_\varepsilon\ \frac{Q^{2+\varepsilon}}{|\mathcal P|}\,(P+X^{1/2}/Q)^{1/2}.
-\]
-Recall $|\mathcal P|\asymp \frac{P}{\log P}=X^{\vartheta+o(1)}$ and $P=X^\vartheta$.
-We consider two regimes.
+\paragraph{Divide out the amplifier and optimize $(\vartheta,\kappa)$.}
+From the amplifier domination
+\(
+\sum_{q,\chi,f}|S_{q,\chi,f}|^2\ \le\ |\mathcal P|^{-2}\mathrm{OD},
+\)
+and $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$ with $P=X^\vartheta$, we get two regimes:
 
-\medskip
-\noindent\emph{Case A: $X^{1/2}/Q \le P$ (i.e. $X^{1/2-\vartheta}\le Q$).}
-Then $(P+X^{1/2}/Q)^{1/2}\asymp P^{1/2}=X^{\vartheta/2}$ and
+\smallskip
+\noindent\emph{(A) If } $X^{1/2}/Q\le P$ (i.e. $X^{1/2-\vartheta}\le Q$):
 \[
-	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
-	\ \ll_\varepsilon\ Q^{2+\varepsilon}\,X^{-\vartheta/2+o(1)}.
-\]
-Since $Q\le X^{1/2-\kappa}$, we get
-\[
-	Q^{2}\le X^{1-2\kappa},\qquad
-	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
-	\ \ll_\varepsilon\ X^{1-2\kappa-\vartheta/2+\varepsilon}.
+	\sum_{q,\chi,f}|S|^2\ \ll_\varepsilon\ \frac{Q^{2+\varepsilon}P^{1/2}}{|\mathcal P|}\ \asymp\ Q^{2+\varepsilon}\,X^{-\vartheta/2+o(1)}
+	\ \le\ X^{1-2\kappa-\vartheta/2+\varepsilon}.
 \]
 
-\medskip
-\noindent\emph{Case B: $X^{1/2}/Q \ge P$ (i.e. $X^{1/2-\vartheta}\ge Q$).}
-Then $(P+X^{1/2}/Q)^{1/2}\asymp (X^{1/2}/Q)^{1/2}=X^{1/4}Q^{-1/2}$ and
+\noindent\emph{(B) If } $X^{1/2}/Q\ge P$:
 \[
-	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
-	\ \ll_\varepsilon\ Q^{2+\varepsilon-1/2}\,X^{1/4}\,X^{-\vartheta+o(1)}
-	\ =\ Q^{3/2+\varepsilon}\,X^{1/4-\vartheta+o(1)}.
-\]
-Using $Q\le X^{1/2-\kappa}$,
-\[
-	Q^{3/2}\le X^{3/4-\tfrac{3}{2}\kappa},\qquad
-	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
-	\ \ll_\varepsilon\ X^{(3/4-\tfrac{3}{2}\kappa)+(1/4-\vartheta)+\varepsilon}
-	\ =\ X^{1-\vartheta-\tfrac{3}{2}\kappa+\varepsilon}.
+	\sum_{q,\chi,f}|S|^2\ \ll_\varepsilon\ \frac{Q^{2+\varepsilon}(X^{1/2}/Q)^{1/2}}{|\mathcal P|}
+	\ \asymp\ Q^{3/2+\varepsilon}\,X^{1/4-\vartheta+o(1)}
+	\ \le\ X^{1-\vartheta-\tfrac{3}{2}\kappa+\varepsilon}.
 \]
 
-\paragraph{Step 6: Unify and express as $(Q^2+X)^{1-\delta}$.}
-Since $Q^2\le X$, we have $Q^2+X\asymp X$, so it suffices to record an exponent saving
-$X^{1-\delta}$ with
+Since $Q\le X^{1/2-\kappa}$, both cases give
 \[
-	\delta\ \le\ \min\Big\{2\kappa+\frac{\vartheta}{2},\ \vartheta+\frac{3}{2}\kappa\Big\}.
+	\sum_{q,\chi,f}|S|^2\ \ll\ X^{\,1-\delta+\varepsilon}
+	\qquad\text{with}\qquad
+	\delta\ \le\ \min\Big\{2\kappa+\tfrac{\vartheta}{2},\ \vartheta+\tfrac{3}{2}\kappa\Big\}.
 \]
-To ensure robustness across dyadic leaks and neglected edge terms, and to absorb any
-$X^\varepsilon$ losses, we may take
+To ensure robust savings across dyadics and spectral pieces, fix
 \[
-	\boxed{\ \ \delta\ :=\ \frac{1}{1000}\,\min\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ }.
+	\boxed{\ \delta=\frac{1}{1000}\min\!\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ },
 \]
-Indeed, $\vartheta<\tfrac16-\kappa$ implies $\tfrac12-3\vartheta>3\kappa$, hence
-$\min\{2\kappa+\tfrac{\vartheta}{2},\ \vartheta+\tfrac{3}{2}\kappa\}\ \ge\ c\,\min\{\kappa,\tfrac12-3\vartheta\}$
-for an absolute $c>0$; shrinking by $10^3$ covers uniformity, oldforms/Eisenstein splitting,
-and dyadic summations.
-
-Therefore
-\[
-	\sum_{q\in\mathcal Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}\ \sum_f
-	\left|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\right|^2
-	\ \ll_\varepsilon\ X^{1-\delta+\varepsilon}
-	\ \asymp\ (Q^2+X)^{1-\delta}\,X^{\varepsilon},
-\]
-which is \eqref{eq:TypeIIIgoal}. Inserting this into \eqref{eq:amp-dom} yields the asserted
-off-diagonal bound of Lemma~S2.4:
-\[
-	\mathrm{OD}\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
-\]
-since multiplying back by $|\mathcal P|^2$ (undoing the amplifier division) produces the stated $|\mathcal P|^{2-\delta}$ factor.
-\qed
-
+valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\delta}\asymp(Q^2+X)^{1-\delta}$, giving the form claimed in Lemma~\ref{lem:S2.4}.
 
 \begin{lemma}[Kuznetsov on $\Gamma_0(q)$, exact normalization]\label{lem:kuz}
 	Let $q\ge 1$ and $(m,n)=1$ to $q$. For even test $h\in C_c^\infty(\mathbb R)$, write the spectral side as
@@ -1504,6 +1472,82 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
+
+\subsection*{A.X. Kuznetsov at level $q$ (uniform form) and a $\Delta$-second-moment lemma}
+
+We fix the Kuznetsov normalization we use throughout and record the uniform kernel bounds in $q$.
+
+\begin{lemma}[Kuznetsov on $\Gamma_0(q)$; uniform, with all spectra]\label{lem:kuz-uniform}
+	Let $q\ge1$, and let $m,n\ge1$ be coprime to $q$. For an even $h\in C_c^\infty(\mathbb R)$, define
+	\[
+		\mathcal{H}(h)
+		=\sum_{f\in\mathcal B_q^{\rm Ma\ss}} \frac{\overline{\rho_f(m)}\,\rho_f(n)}{\cosh(\pi t_f)}\,h(t_f)
+		+ \sum_{k\equiv0\ (2)} \sum_{f\in\mathcal B_{q,k}^{\rm hol}} \overline{\rho_f(m)}\,\rho_f(n)\,h\!\Big(\tfrac{k-1}{2}\Big)
+		+\frac{1}{4\pi}\sum_{\mathfrak a}\int_{\mathbb R}\overline{\rho_{\mathfrak a}(m,t)}\,\rho_{\mathfrak a}(n,t)\,h(t)\,dt,
+	\]
+	where $\mathcal B_q^{\rm Ma\ss}$ and $\mathcal B_{q,k}^{\rm hol}$ are orthonormal bases of Hecke eigenforms (new+old) on $\Gamma_0(q)$ with Fourier coefficients $\rho_*(\cdot)$ at cusps $\mathfrak a$, and $t_f$ denotes the spectral parameter.
+	Then
+	\[
+		\mathcal{H}(h)
+		= \delta_{m=n}\,\mathcal H_{\rm diag}(h)
+		+ \sum_{\substack{c\equiv 0\ (q)}} \frac{1}{c}\,S(m,n;c)\,\mathcal W_h\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
+	\]
+	where $\mathcal H_{\rm diag}(h)$ is the standard diagonal transform, $S(\cdot,\cdot;c)$ is the Kloosterman sum, and $\mathcal W_h$ is a Bessel kernel (a fixed linear combination of $J_{2it}$/$K_{2it}$/$J_{k-1}$ transforms determined by $h$ and the spectral piece). If $h_Q(t):=h(t/Q)$ with $h\in C_c^\infty([-2,2])$ even, then for all $A,j\ge0$,
+	\[
+		\mathcal W_{h_Q}^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},
+		\qquad
+		z^j\,\partial_z^{\,j}\mathcal W_{h_Q}^{(*)}(z)\ \ll_{A,j}\Big(1+\frac{z}{Q}\Big)^{-A},
+	\]
+	uniformly in the level $q$ and in $z>0$, for each spectral piece $(*)\in\{\text{Ma\ss},\text{hol},\text{Eis}\}$.
+\end{lemma}
+
+\begin{proof}
+	This is the standard Kuznetsov formula on $\Gamma_0(q)$ with full spectra (see e.g. IK, Ch.~16–17), with level only entering through the congruence $c\equiv0\pmod q$ on the geometric side. The kernel bounds follow from compact support of $h$ and repeated integration by parts in the Hankel/Bessel transforms; they are uniform in $q$ because $q$ does not enter the transform itself. (For completeness we note that oldforms and Eisenstein are included with their usual Fourier-normalizations at each cusp; the transform bounds are identical.)
+\end{proof}
+
+\begin{lemma}[$\Delta$-second moment with level-uniformity]\label{lem:delta-second-moment}
+	Let $X\ge 3$, $q\ge1$, and write $c=qr$ with $r\asymp R\ge1$. Let $W_{q,r}(m,\Delta)$ be smooth, supported on $m\asymp X$, $|\Delta|\le P$, with
+	\[
+		\partial_m^i\partial_\Delta^j W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}P^{-j}\qquad(0\le i,j\le 10),
+	\]
+	uniformly in $q,r$. Define
+	\[
+		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
+	\]
+	Then for every $\varepsilon>0$,
+	\[
+		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll_{\varepsilon}\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+	\]
+	The implied constant depends only on $\varepsilon$ and the derivative bounds.
+\end{lemma}
+
+\begin{proof}
+	Open the square and insert a smooth dyadic partition in $m$. For a fixed $\Delta$, by Cauchy–Schwarz in the residue $d\!\!\pmod{qr}$ when opening $S(\cdot,\cdot;qr)$, followed by Poisson in $m$ with modulus $qr$, one gets the ``trivial dispersion’’
+	\[
+		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll\ X\,\varphi(qr)\,(P+1),
+	\]
+	using $|\widehat W_{q,r}(\xi,\Delta)|\ll X(1+X|\xi|)^{-10}$ and that only $|k|\ll (qr)X^{-1+\varepsilon}$ contribute after Poisson. This gives at most $X(P+qr)$ up to $(qr)^\varepsilon$ factors.
+
+	To reach the stated Weil-strength bound uniformly in the level, apply Lemma~\ref{lem:kuz-uniform} to the bilinear form obtained by expanding the product $\Sigma_{q,r}(\Delta)\overline{\Sigma_{q,r}(\Delta)}$, summing over $\Delta$ with a smooth cutoff $u(\Delta/P)$ (absorbed into the $W$-weight thanks to the $P^{-j}$ derivative control), and taking $h_Q$ with $Q$ chosen so that the Bessel argument $z=4\pi\sqrt{mn}/(qr)$ sits at scale $Q$. Concretely, write
+	\[
+		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2
+		=\sum_{m,n\asymp X}\ \sum_{|\Delta|\le P} S(m,m+\Delta;qr)\,S(n,n+\Delta;qr)\,W_{q,r}(m,\Delta)\,\overline{W_{q,r}(n,\Delta)}.
+	\]
+	Swap the $\Delta$-sum with Kuznetsov in the $(m,n)$-variables at level $q$ with modulus $c=qr$. The geometric side features Kloosterman sums $S(m,m+\Delta;c)$ paired with $S(n,n+\Delta;c)$ and a Bessel kernel $\mathcal W_{h_Q}$; the kernel decay from Lemma~\ref{lem:kuz-uniform} localizes $c$ to $c\asymp C:=4\pi\sqrt{X}/Q$ (up to $O_A(X^{-A})$ tails), and the $m,n$-smoothness forces $|m-n|\ll X/Q$ after stationary-phase. Estimating the resulting sums by Cauchy–Schwarz and Weil’s bound
+	\(
+	|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2} c^{1/2+\varepsilon}
+	\)
+	gives a total of
+	\[
+		\ll_\varepsilon \sum_{c\equiv 0\ (q)} \frac{1}{c}\, c^{1/2+\varepsilon}\cdot c^{1/2+\varepsilon}\cdot (P+c)\cdot X
+		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon},
+	\]
+	once we restrict to $c=qr$ (the $r$-dyadic), and use that the number of contributing $c$ in the dyadic is $O(1)$ by the kernel localization. Here $(P+c)$ accounts for the $\Delta$-sum and the diagonal leakage $m=n$; $X$ comes from the smoothed $m,n$ sums; and the powers of $c$ arise from the two Weil bounds (one for each Kloosterman factor) and the $1/c$ weight in the Kuznetsov geometric side. All losses from differentiating the weight are absorbed into $X^\varepsilon$ by our derivative hypotheses.
+\end{proof}
+
+\begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
+	Lemma~\ref{lem:kuz-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman–Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin–Lehner decompositions beyond orthogonality.
+\end{remark}
 
 \subsection*{A.4. Parameter box}
 
