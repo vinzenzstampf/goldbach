@@ -12,6 +12,17 @@
         }
     ],
     "latex-workshop.latex.rootFile.useSubFile": true,
+    "[latex]": {
+        "editor.defaultFormatter": "James-Yu.latex-workshop",
+        "editor.formatOnSave": true
+    },
+    "latex-workshop.formatting.latex": "latexindent",
+    "latex-workshop.latexindent.path": "/opt/homebrew/bin/latexindent",
+    "latex-workshop.latexindent.args": [
+        "-c",
+        "%DIR%", // look for local settings
+        "%TMPFILE%"
+    ],
     "latex-workshop.latex.recipes": [
         {
             "name": "tectonic",
