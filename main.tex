@@ -567,19 +567,28 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\ \ll\ \varphi(qr)\,X\sum_{|\Delta|\le P} 1
 		\ \ll\ X\,\varphi(qr)\,(P+1).
 	\]
-	This is the “trivial” dispersion. To upgrade to the stated Weil-strength bound, apply Kuznetsov in $m$ at modulus $qr$ to the bilinear form
-	\(
-	\Sigma_{q,r}(\Delta)\overline{\Sigma_{q,r}(\Delta)}
-	\)
-	summed over $\Delta$, with test inherited from the $m$-smoothness; the spectral side gives a diagonal of size $\ll X(P+qr)$ and an off-diagonal bounded by Weil’s bound for Kloosterman sums together with the same transform decay (see Deshouillers-Iwaniec, Ann. Inst. Fourier 32 (1982), §§2-3). Concretely, the geometric side after Kuznetsov yields sums of the shape
+
+	To upgrade this trivial dispersion to the claimed bound, we now apply the
+	Kuznetsov formula on $\Gamma_0(q)$ from Lemma~\ref{lem:kuz-uniform} to the
+	bilinear form in $(m,n)$ obtained after expanding
+	$\Sigma_{q,r}(\Delta)\,\overline{\Sigma_{q,r}(\Delta)}$ and summing $\Delta$
+	with the smooth cutoff inherited from $W_{q,r}$. By the kernel localization in
+	Lemma~\ref{lem:kuz-uniform}, the Kloosterman modulus is restricted to
+	$c\asymp qr$ (up to $O_A(X^{-A})$ tails), and the geometric side contributes
+	terms of the shape
 	\[
-		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(u,v;c)\,\mathcal W\!\left(\frac{4\pi\sqrt{uv}}{c}\right),
+		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(u,v;c)\,\mathcal W\!\Big(\frac{4\pi\sqrt{uv}}{c}\Big).
 	\]
-	which, upon Cauchy-Schwarz and Weil $|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2}c^{1/2+\varepsilon}$, contributes at most
-	\(
-	\ll_\varepsilon (qr)^{1+2\varepsilon}(P+qr)\,X^{1+2\varepsilon}.
-	\)
-	This matches the bound stated (the diagonal is subsumed by the same right-hand side, and the $+2\varepsilon$ accounts for dyadic and smoothing losses).
+	Applying Weil’s bound $|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2}c^{1/2+\varepsilon}$
+	\emph{twice} (once for each Kloosterman factor arising after Cauchy–Schwarz),
+	together with the $1/c$ weight from Kuznetsov and the derivative control on
+	$W_{q,r}$ (which yields an $X$ and $(P+c)$ factor), gives
+	\[
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon},
+	\]
+	which is the desired bound.
+
 \end{proof}
 
 \subsection*{4.X. Amplifier bookkeeping and exponent optimization (full details)}
