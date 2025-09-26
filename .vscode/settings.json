@@ -1,16 +1,17 @@
 {
-    "latex-workshop.intellisense.biblatexJSON.replace": {},
     "latex-workshop.latex.tools": [
         {
             "name": "tectonic",
-            "command": "tectonic",
+            "command": "/opt/homebrew/bin/tectonic",
             "args": [
-                "-X",
-                "compile",
-                "%DOC%"
+                "--synctex", // enable SyncTeX for PDF ↔ source sync
+                "--keep-logs", // keep .log files if you want debugging
+                "--keep-intermediates", // keep aux files (optional)
+                "%DOC%.tex"
             ]
         }
     ],
+    "latex-workshop.latex.rootFile.useSubFile": true,
     "latex-workshop.latex.recipes": [
         {
             "name": "tectonic",
