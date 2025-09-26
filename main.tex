@@ -637,7 +637,7 @@ Because $\sum_{p}\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to bo
 
 \paragraph{Step 3: Kuznetsov with test $h_Q$ and kernel localization.}
 Sum over $f$ and (orthogonally) over $\chi$ modulo $q$.
-Applying Kuznetsov (Lemma~\ref{lem:kuz}) with test $h_Q(t)=h(t/Q)$, and using Lemma~\ref{lem:kernel-localization},
+Applying Kuznetsov (Lemma~\ref{lem:kuz-uniform}) with test $h_Q(t)=h(t/Q)$, and using Lemma~\ref{lem:kernel-localization},
 the off-diagonal (OD) contribution can be written in the geometric form
 \[
 	\mathrm{OD}
@@ -724,20 +724,6 @@ To ensure robust savings across dyadics and spectral pieces, fix
 	\boxed{\ \delta=\frac{1}{1000}\min\!\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ },
 \]
 valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\delta}\asymp(Q^2+X)^{1-\delta}$, giving the form claimed in Lemma~\ref{lem:S2.4}.
-
-\begin{lemma}[Kuznetsov on $\Gamma_0(q)$, exact normalization]\label{lem:kuz}
-	Let $q\ge 1$ and $(m,n)=1$ to $q$. For even test $h\in C_c^\infty(\mathbb R)$, write the spectral side as
-	\[
-		\sum_{f\in \mathcal B_q^{\rm cusp}} \frac{\overline{\rho_f(m)}\,\rho_f(n)}{\cosh(\pi t_f)}\,h(t_f)
-		\ +\ \frac{1}{4\pi}\sum_{\mathfrak a}\int_{-\infty}^{\infty} \overline{\rho_{\mathfrak a}(m,t)}\,\rho_{\mathfrak a}(n,t)\,h(t)\,dt
-	\]
-	(with holomorphic forms included analogously), where $\rho$ are normalized Fourier coefficients at the relevant cusp(s) $\mathfrak a$. Then
-	\[
-		\text{(spectral)}
-		=\delta_{m=n}\,\mathcal H(h)\ +\ \sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_h\!\left(\frac{4\pi\sqrt{mn}}{c}\right),
-	\]
-	where $\mathcal H(h)$ is the diagonal transform and $\mathcal W_h$ are the Bessel kernels described in Lemma~\ref{lem:kernel-localization}. All implied constants are absolute and the identity holds uniformly in $q$.
-\end{lemma}
 
 
 \begin{lemma}[Prime pair combinatorics]\label{lem:prime-pair}
