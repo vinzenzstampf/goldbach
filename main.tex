@@ -761,7 +761,7 @@ We record the correlation bound implicitly used in Step 4 of S2.4.
 
 \begin{proof}[Proof using Lemma~\ref{lem:S2.4}]
 
-	\paragraph{Step 1: Balanced prime amplifier that kills the diagonal.}
+	\noindent\textbf{Step 1: Balanced prime amplifier that kills the diagonal.}
 	Let $\mathcal P$ be the set of primes $p\in[P,2P]$ with $P=X^\vartheta$ (to be chosen; Lemma S2.4 is uniform in $P$).
 	Choose deterministic signs $\varepsilon_p\in\{\pm 1\}$ so that
 
@@ -816,23 +816,23 @@ We record the correlation bound implicitly used in Step 4 of S2.4.
 		\tag{3.1}
 	\end{equation}
 
-	\paragraph{Step 3: Kuznetsov after opening the amplifier.}
+	\noindent\textbf{Step 3: Kuznetsov after opening the amplifier.}
 	Open $|A_f S_{q,\chi,f}|^2$ and use Hecke relations to rewrite prime factors $\lambda_f(p)\lambda_f(n)$ as a (short) combination of $\lambda_f(pn)$ and $\lambda_f(n/p)$ (the latter is discarded as $p\nmid n$ for Type-III supports). After summing over $(q,\chi,f)$ and applying Kuznetsov (including oldforms + Eisenstein), the contribution splits into:
 
 	\begin{itemize}
-		\item **Short-shift off-diagonal (OD):** correlations of the form
+		\item \textbf{Short-shift off-diagonal (OD):} correlations of the form
 		      $\sum_{p\neq p'\in\mathcal P}\varepsilon_p\varepsilon_{p'}\sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}\, \mathcal{K}_{q}(m, n; p-p')$,
 		      with Kloosterman sums $S(m,n;cq)$ and Bessel kernels;
-		\item **(Spectral) diagonal/main terms:** the parts that would arise from $p=p'$ or $\Delta=0$, but these are *annihilated* by $\sum_p\varepsilon_p=0$ and by our balanced-sign choice, leaving at most lower-order boundary terms absorbed in $X^{\varepsilon}$.
+		\item \textbf{(Spectral) diagonal/main terms:} the parts that would arise from $p=p'$ or $\Delta=0$, but these are annihilated by $\sum_p\varepsilon_p=0$ and by our balanced-sign choice, leaving at most lower-order boundary terms absorbed in $X^{\varepsilon}$.
 	\end{itemize}
 
 	Precisely this OD piece is what **Lemma S2.4** estimates *after* the amplifier and Kuznetsov:
 
-	> **Lemma S2.4 (assumed).** Uniformly in $P=X^\vartheta$,
-	>
-	> $$
-		> \mathrm{OD}\ \ \ll\ \ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}.
-		> $$
+	\noindent\textbf{Lemma S2.4 (assumed).} Uniformly in $P=X^\vartheta$,
+
+	$$
+		\mathrm{OD}\ \ \ll\ \ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}.
+	$$
 
 	All Bessel-kernel ranges (small/large) are handled there; Weil bounds for $S(\cdot,\cdot;\cdot)$, the $c\equiv0\pmod q$ constraint, oldforms and Eisenstein, and the short-shift averaging in $\Delta$ are already accounted for in the statement of S2.4.
 
@@ -845,7 +845,7 @@ We record the correlation bound implicitly used in Step 4 of S2.4.
 	\end{equation}
 
 
-	\paragraph{Step 4: Divide out the amplifier and optimize $P$.}
+	\noindent\textbf{Step 4: Divide out the amplifier and optimize $P$.}
 	Insert (3.2) into (3.1):
 
 	$$
@@ -868,11 +868,11 @@ We record the correlation bound implicitly used in Step 4 of S2.4.
 \subsection*{Remarks}
 
 \begin{itemize}
-	\item **Uniformity \& hypotheses.** The argument only used (i) Type-III structure (smooth $\alpha_n$, divisor bounds), (ii) balanced prime amplifier with $\sum \varepsilon_p=0$, (iii) Kuznetsov with full continuous and oldform ranges, and (iv) Lemma S2.4’s OD estimate. No further spectral gap input is needed beyond what S2.4 encapsulates.
+	\item \textbf{Uniformity \& hypotheses.} The argument only used (i) Type-III structure (smooth $\alpha_n$, divisor bounds), (ii) balanced prime amplifier with $\sum \varepsilon_p=0$, (iii) Kuznetsov with full continuous and oldform ranges, and (iv) Lemma S2.4’s OD estimate. No further spectral gap input is needed beyond what S2.4 encapsulates.
 
-	\item **Why the diagonal doesn’t spoil the saving.** The balanced amplifier removes the dangerous $p=p'$ contribution *before* applying Kuznetsov. What remains are genuinely shifted correlations $(\Delta\neq 0)$, to which S2.4 applies and gives the $(Q^2+X)^{1-\delta}$ saving.
+	\item \textbf{Why the diagonal doesn’t spoil the saving.} The balanced amplifier removes the dangerous $p=p'$ contribution \emph{before} applying Kuznetsov. What remains are genuinely shifted correlations $(\Delta\neq 0)$, to which S2.4 applies and gives the $(Q^2+X)^{1-\delta}$ saving.
 
-	\item **Choice of $\vartheta$.** Any fixed $\vartheta\in(0,1/2)$ permitted by S2.4 works; the $|\mathcal P|^{-\delta}$ factor improves the exponent, and we simply absorb it into $X^{\varepsilon}$.
+	\item \textbf{Choice of $\vartheta$.} Any fixed $\vartheta\in(0,1/2)$ permitted by S2.4 works; the $|\mathcal P|^{-\delta}$ factor improves the exponent, and we simply absorb it into $X^{\varepsilon}$.
 \end{itemize}
 
 This completes Part C.5 once Lemma S2.4 is rigorously in place.
@@ -886,7 +886,7 @@ This completes Part C.5 once Lemma S2.4 is rigorously in place.
 Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,w(n)\,e(\alpha n)$ with a fixed smooth weight $w$ supported on $[N/2,2N]$ and let $B(\alpha)$ be the parity-blind majorant from Part A. For the minor arcs $\mathfrak m$ defined with denominator cutoff $Q=N^{1/2-\varepsilon}$, assume the analytic inputs:
 
 \begin{itemize}
-	\item **(I/II)**: For any smooth Type-I/II coefficient structure $\{c_n\}$ with divisor bounds (arising from Vaughan/Heath-Brown), the second-moment Barban-Davenport-Halász-pretentious bound
+	\item \textbf{(I/II)}: For any smooth Type-I/II coefficient structure $\{c_n\}$ with divisor bounds (arising from Vaughan/Heath-Brown), the second-moment Barban-Davenport-Halász-pretentious bound
 
 	      \begin{equation}
 		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|^2
@@ -896,7 +896,7 @@ Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,w(n)\,e(\alpha n)$ with a fixed smooth w
 
 	      holds for each fixed $A>0$. (This is Lemma 3.2 and the “Route B Lemma” for the balanced ranges.)
 
-	\item **(III)**: For every dyadic Type-III block $\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)$ produced after amplification and Kuznetsov, the prime-averaged off-diagonal is bounded by
+	\item \textbf{(III)}: For every dyadic Type-III block $\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)$ produced after amplification and Kuznetsov, the prime-averaged off-diagonal is bounded by
 
 	      \begin{equation}
 		      \mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}
@@ -1100,15 +1100,15 @@ This completes the explicit proof of (A.1) using the parameter tuple in Appendix
 \subsection*{Parameter choices \& loss ledger (for ease of cross-checking)}
 
 \begin{itemize}
-	\item **Minor-arc cutoff**: $Q=N^{1/2-\varepsilon}$.
-	\item **HB cut parameters**: $U=V=W=N^{1/3}$ (any fixed exponents in $(1/4,1/2)$ that produce the standard Type I/II/III taxonomy will do).
-	\item **Amplifier**: primes of length $|\mathcal P|=X^\vartheta$ with $\vartheta=\delta/8$.
-	\item **Savings**:
+	\item \textbf{Minor-arc cutoff}: $Q=N^{1/2-\varepsilon}$.
+	\item \textbf{HB cut parameters}: $U=V=W=N^{1/3}$ (any fixed exponents in $(1/4,1/2)$ that produce the standard Type I/II/III taxonomy will do).
+	\item \textbf{Amplifier}: primes of length $|\mathcal P|=X^\vartheta$ with $\vartheta=\delta/8$.
+	\item \textbf{Savings}:
 
 	      * Large-sieve minor-arc reduction costs a factor $\asymp Q^{-2}$ which is recovered in (D.1)/(D.2).
 	      * Type I/II: pick $A$ so that $(\log N)^C$ dyadic inflation is dominated; we target $3+\varepsilon$ net powers of $\log$.
 	      * Type III: the $\delta$-saving from (D.2) after amplifier normalization yields uniform $X^{-\eta}$ decay, summable across dyadics.
-	\item **Exceptional characters / oldforms / Eisenstein**: already handled in the hypotheses of Lemma 3.2 and Lemma S2.4; their contributions obey the same $(\log N)^{-A}$ savings and therefore do not affect the sum.
+	\item \textbf{Exceptional characters / oldforms / Eisenstein}: already handled in the hypotheses of Lemma 3.2 and Lemma S2.4; their contributions obey the same $(\log N)^{-A}$ savings and therefore do not affect the sum.
 \end{itemize}
 
 \subsection*{Remark.}
@@ -1263,17 +1263,17 @@ is $\ll N(\log N)^{-A}$ after the same bookkeeping.
 
 * **Integrated $L^2$ route:** Using the $L^2$ major-arc bounds $\int_{\mathfrak M}(|S|^2+|B|^2)\ll N\log N$, together with the pointwise major-arc approximants (or with your minor-arc $L^2$ control if you prefer to absorb overlaps), yields the same $O\big(N(\log N)^{-3-\varepsilon}\big)$ remainder for the difference of major-arc contributions.
 
-Combining §7.1-§7.2 we conclude:
+Combining §7.1–§7.2 we conclude the following proposition.
 
-> **Proposition 7.1 (Major-arc main term).** For the major arcs $\mathfrak M$ with $Q=N^{1/2-\varepsilon}$,
->
-> $$
-	> \int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
-	> =\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-	> =\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big).
-	> $$
->
-> In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
+\noindent\textbf{Proposition 7.1 (Major-arc main term).} For the major arcs $\mathfrak M$ with $Q=N^{1/2-\varepsilon}$,
+
+$$
+	\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
+	=\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
+	=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big).
+$$
+
+In particular, $B$ and $S$ share the same Hardy–Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
 
 \subsection*{Status.}
 Everything here is standard Hardy-Littlewood major-arc analysis. What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
