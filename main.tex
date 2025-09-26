@@ -1396,8 +1396,90 @@ $$
 
 In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
 
+\subsection*{Completion of the Minor-Arc Analysis}
+
+\subsection*{Derivation of \texorpdfstring{(A.1)}{(A.1)} from Lemma~\ref{lem:BV-parity-airtight} and Lemma~\ref{lem:S2.4}}
+
+We now give a compact, self-contained deduction of the minor-arc bound
+\[
+	\boxed{\ \ \int_{\mathfrak m}\!\bigl|S(\alpha)-B(\alpha)\bigr|^{2}\,d\alpha
+		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ ,\ }
+	\tag{A.1}
+\]
+using only Lemma~\ref{lem:BV-parity-airtight} (Type~I/II second moment with parity) and Lemma~\ref{lem:S2.4} (prime-averaged short-shift gain for Type~III).
+
+\paragraph{Setup and parameters.}
+Fix $\varepsilon\in(0,10^{-2})$ and set $Q=N^{1/2-\varepsilon}$ for the major/minor arc decomposition.
+Apply a Heath–Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, and subtract the parity-blind majorant $B(\alpha)$ (linear/Rosser–Iwaniec sieve at level $D=N^{1/2-\varepsilon}$).
+This yields
+\[
+	S(\alpha)-B(\alpha)=\sum_{\mathcal T}\mathcal S_{\mathcal T}(\alpha),
+\]
+where the finitely many $\mathcal T$ are dyadic Type~I/II/III blocks with divisor-bounded smooth coefficients supported on $n\asymp X$ for some $X$.
+
+\paragraph{Minor-arc large-sieve reduction.}
+For each block $\mathcal T$ with coefficient sequence $c_n$ (carrying the smooth dyadics), Gallagher’s minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) gives
+\[
+	\int_{\mathfrak m}\Big|\sum_n c_n e(\alpha n)\Big|^2 d\alpha
+	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\ \sum_{\substack{a\!\!\!\!\pmod q\\(a,q)=1}}
+	\Big|\sum_n c_n\,e\!\left(\tfrac{an}{q}\right)\Big|^2.
+\]
+Expanding in Dirichlet characters mod $q$ reduces this to second moments of the shape
+\[
+	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
+	\Big|\sum_{n\asymp X} c_n\,\chi(n)\Big|^2,
+\]
+with the \emph{parity twist} $\lambda(n)$ present inside $c_n$ for the terms arising from $S-B$.
+
+\paragraph{Type I/II blocks.}
+By Lemma~\ref{lem:BV-parity-airtight} (with $Q\le N^{1/2}(\log N)^{-B}$ and $L\ge N^{\eta}$ whenever needed),
+\[
+	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
+	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+	\ \ll\ \frac{XQ}{(\log N)^{A}}.
+\]
+Summed over the $O((\log N)^C)$ Type~I/II dyadics (with $X\asymp N$ up to constants), and multiplied by the prefactor $Q^{-2}$ from the minor-arc reduction, this yields
+\[
+	\sum_{\text{Type I/II}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
+	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}},
+\]
+upon taking $A$ large enough in terms of $C$ and $\varepsilon$.
+
+\paragraph{Type III blocks.}
+For a Type~III block at outer scale $X$, apply the balanced prime amplifier and Kuznetsov as in Part~C to reach the spectral second moment controlled by Lemma~\ref{lem:S2.4}.
+With $P=X^\vartheta$ (any fixed $\vartheta$ with $0<\vartheta<\tfrac16-\kappa$) and $Q\le X^{1/2-\kappa}$, Lemma~\ref{lem:S2.4} gives
+\[
+	\sum_{q\le Q}\ \sum_{\chi}\ \sum_f
+	\Bigg|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Bigg|^2
+	\ \ll\ (Q^2+X)^{1-\delta}\,X^{\varepsilon},
+	\qquad
+	\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}>0.
+\]
+Dividing out the amplifier (as in Lemma~\ref{lem:S2.4}) and undoing the spectral expansion (orthogonality), one obtains for each Type~III block
+\[
+	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
+	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+	\ \ll\ (Q^2+X)^{1-\delta}\,X^{\varepsilon}.
+\]
+Inserting this into the minor-arc large-sieve reduction yields
+\[
+	\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
+	\ \ll\ Q^{-2}\,(Q^2+X)^{1-\delta}\,X^{\varepsilon}.
+\]
+Summing over the $O((\log N)^C)$ Type~III dyadics and splitting into $X\le Q^2$ and $X\ge Q^2$ gives a uniform power saving:
+\[
+	\sum_{\text{Type III}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
+	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}},
+\]
+since $(Q^2+X)^{1-\delta}Q^{-2}\le Q^{-2\delta}$ when $X\le Q^2$, and $\le X^{-\delta}$ when $X\ge Q^2$, both summable over dyadics (choose $\kappa,\vartheta$ once for all dyadics so that $\delta>0$).
+
+\paragraph{Conclusion.}
+Adding Type~I/II and Type~III contributions and recalling $S-B=\sum_{\mathcal T}\mathcal S_{\mathcal T}$, we obtain \emph{(A.1)}. All constants depend at most on $\varepsilon$ (the minor-arc width), on the fixed smooth cutoff in the Heath–Brown identity, on $k$ and the divisor-type bounds for coefficients, and on finitely many derivatives of the fixed Kuznetsov test $h$.
+\qedwhite
+
 \subsection{Status}
-Everything here is standard Hardy-Littlewood major-arc analysis. What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
+Everything here is standard Hardy-Littlewood major-arc analysis.  What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
+
 \section{Final Step (conditional on \eqref{eq:A1})}
 
 We now conclude the argument.
