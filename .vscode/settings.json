@@ -17,8 +17,8 @@
         "editor.formatOnSave": true
     },
     "latex-workshop.formatting.latex": "latexindent",
-    "latex-workshop.latexindent.path": "/opt/homebrew/bin/latexindent",
-    "latex-workshop.latexindent.args": [
+    "latex-workshop.formatting.latexindent.path": "/opt/homebrew/bin/latexindent",
+    "latex-workshop.formatting.latexindent.args": [
         "-c",
         "%DIR%", // look for local settings
         "%TMPFILE%"
