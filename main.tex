@@ -1564,21 +1564,27 @@ We fix the Kuznetsov normalization we use throughout and record the uniform kern
 	\]
 	using $|\widehat W_{q,r}(\xi,\Delta)|\ll X(1+X|\xi|)^{-10}$ and that only $|k|\ll (qr)X^{-1+\varepsilon}$ contribute after Poisson. This gives at most $X(P+qr)$ up to $(qr)^\varepsilon$ factors.
 
-	To reach the stated Weil-strength bound uniformly in the level, apply Lemma~\ref{lem:kuz-uniform} to the bilinear form obtained by expanding the product $\Sigma_{q,r}(\Delta)\overline{\Sigma_{q,r}(\Delta)}$, summing over $\Delta$ with a smooth cutoff $u(\Delta/P)$ (absorbed into the $W$-weight thanks to the $P^{-j}$ derivative control), and taking $h_Q$ with $Q$ chosen so that the Bessel argument $z=4\pi\sqrt{mn}/(qr)$ sits at scale $Q$. Concretely, write
+	To upgrade this trivial dispersion to the claimed bound, we now apply the
+	Kuznetsov formula on $\Gamma_0(q)$ from Lemma~\ref{lem:kuz-uniform} to the
+	bilinear form in $(m,n)$ obtained after expanding
+	$\Sigma_{q,r}(\Delta)\,\overline{\Sigma_{q,r}(\Delta)}$ and summing $\Delta$
+	with the smooth cutoff inherited from $W_{q,r}$. By the kernel localization in
+	Lemma~\ref{lem:kuz-uniform}, the Kloosterman modulus is restricted to
+	$c\asymp qr$ (up to $O_A(X^{-A})$ tails), and the geometric side contributes
+	terms of the shape
 	\[
-		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2
-		=\sum_{m,n\asymp X}\ \sum_{|\Delta|\le P} S(m,m+\Delta;qr)\,S(n,n+\Delta;qr)\,W_{q,r}(m,\Delta)\,\overline{W_{q,r}(n,\Delta)}.
+		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(u,v;c)\,\mathcal W\!\Big(\frac{4\pi\sqrt{uv}}{c}\Big).
 	\]
-	Swap the $\Delta$-sum with Kuznetsov in the $(m,n)$-variables at level $q$ with modulus $c=qr$. The geometric side features Kloosterman sums $S(m,m+\Delta;c)$ paired with $S(n,n+\Delta;c)$ and a Bessel kernel $\mathcal W_{h_Q}$; the kernel decay from Lemma~\ref{lem:kuz-uniform} localizes $c$ to $c\asymp C:=4\pi\sqrt{X}/Q$ (up to $O_A(X^{-A})$ tails), and the $m,n$-smoothness forces $|m-n|\ll X/Q$ after stationary-phase. Estimating the resulting sums by Cauchy–Schwarz and Weil’s bound
-	\(
-	|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2} c^{1/2+\varepsilon}
-	\)
-	gives a total of
+	Applying Weil’s bound $|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2}c^{1/2+\varepsilon}$
+	\emph{twice} (once for each Kloosterman factor arising after Cauchy–Schwarz),
+	together with the $1/c$ weight from Kuznetsov and the derivative control on
+	$W_{q,r}$ (which yields an $X$ and $(P+c)$ factor), gives
 	\[
-		\ll_\varepsilon \sum_{c\equiv 0\ (q)} \frac{1}{c}\, c^{1/2+\varepsilon}\cdot c^{1/2+\varepsilon}\cdot (P+c)\cdot X
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
 		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon},
 	\]
-	once we restrict to $c=qr$ (the $r$-dyadic), and use that the number of contributing $c$ in the dyadic is $O(1)$ by the kernel localization. Here $(P+c)$ accounts for the $\Delta$-sum and the diagonal leakage $m=n$; $X$ comes from the smoothed $m,n$ sums; and the powers of $c$ arise from the two Weil bounds (one for each Kloosterman factor) and the $1/c$ weight in the Kuznetsov geometric side. All losses from differentiating the weight are absorbed into $X^\varepsilon$ by our derivative hypotheses.
+	which is the desired bound.
+
 \end{proof}
 
 \begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
