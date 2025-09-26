@@ -28,7 +28,9 @@
 \newcommand{\cF}{\mathcal{F}}
 \newcommand{\cG}{\mathcal{G}}
 
-\newtheorem{lemma}{Lemma}[section]
+% Numbering: theorems/lemmas by Part (A, B, ...)
+\renewcommand{\thepart}{\Alph{part}}
+\newtheorem{lemma}{Lemma}[part]
 \newtheorem{theorem}[lemma]{Theorem}
 \newtheorem{proposition}[lemma]{Proposition}
 \newtheorem{corollary}[lemma]{Corollary}
@@ -36,6 +38,23 @@
 \newtheorem{definition}[lemma]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[lemma]{Remark}
+
+% Number equations by Part as (A.1), (A.2), ...
+\numberwithin{equation}{part}
+% Make hyperref's equation anchors match the Part-based numbering
+\makeatletter
+\renewcommand{\theHequation}{\thepart.\arabic{equation}}
+\makeatother
+
+% Number sections as A.1, A.2, ... and subsections as A.1.1, etc.
+\renewcommand{\thesection}{\thepart.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+\setcounter{secnumdepth}{3}
+% Reset section numbering at each new Part
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
 
  \geometry{
  a4paper,
@@ -88,21 +107,21 @@
 	Student & \theauthor \\
 \end{tabular}
 
-\part*{Part A. Framework}
+\part{Framework}
 
-\section*{Assumptions \& conditional result (at a glance)}
+\section{Assumptions \& conditional result (at a glance)}
 
-This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived on the minor-arc $L^2$ estimate (A.1) and the analytic inputs explicitly stated in Parts B-D. In particular:
+This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived on the minor-arc $L^2$ estimate \eqref{eq:A1} and the analytic inputs explicitly stated in Parts B-D. In particular:
 
 \begin{itemize}
-	\item Establishing (A.1) is the central new task; Parts B-D provide a proposed route via Type I/II/III analyses.
+	\item Establishing \eqref{eq:A1} is the central new task; Parts B-D provide a proposed route via Type I/II/III analyses.
 	\item Major-arc expansions for $S$ and for the sieve majorant $B$ are used with uniformity standard in the literature; precise statements are recorded in §7 with hypotheses.
-	\item The final positivity conclusion for $R(N)$ is conditional on (A.1) and the stated major-arc bounds.
+	\item The final positivity conclusion for $R(N)$ is conditional on \eqref{eq:A1} and the stated major-arc bounds.
 \end{itemize}
 
 A succinct punch-list of outstanding items appears in Appendix~B.
 
-\section*{1. Circle-Method Decomposition}
+\section{Circle-Method Decomposition}
 
 Let
 
@@ -141,7 +160,7 @@ $$
 $$
 
 
-\subsection*{Parity-blind majorant $B(\alpha)$}
+\subsection{Parity-blind majorant $B(\alpha)$}
 
 Let $\beta=\{\beta(n)\}_{n\le N}$ be a \textbf{parity-blind sieve majorant} for the primes at level $D=N^{1/2-\varepsilon}$, in the following sense:
 
@@ -165,7 +184,7 @@ $$
 $$
 
 
-\subsection*{Major arcs: main term from $B$}
+\subsection{Major arcs: main term from $B$}
 
 On $\mathfrak M(a,q)$ write $\alpha=\tfrac{a}{q}+\tfrac{\theta}{N}$ with
 $|\theta|\le Q/q$. By (B2)-(B3) and standard manipulations (Dirichlet characters, partial summation, and the prime number theorem in arithmetic progressions up to modulus $q\le Q$), one obtains the classical evaluation
@@ -185,18 +204,17 @@ $$
 Moreover, with the same tools one shows that on the major arcs $S(\alpha)$ may be replaced by $B(\alpha)$ in the quadratic integral at a total cost $o\!\left(\tfrac{N}{\log^2 N}\right)$ once the minor-arc estimate below is in place (see the reduction step).
 
 
-\subsection*{Reduction to a minor-arc $L^2$ bound}
+\subsection{Reduction to a minor-arc $L^2$ bound}
 
 We record the minor-arc target:
 
-\begin{equation}
-	\boxed{\ \ \int_{\mathfrak m}\!\bigl|S(\alpha)-B(\alpha)\bigr|^{2}\,d\alpha
-		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ .\ }
-	\tag{A.1}
+\begin{equation}\label{eq:A1}
+	\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
 \end{equation}
 
+\begin{equation}\label{eq:char-second-moment}\sum_{q\le Q}\ \sum_{\chi\,\bmod\, q}\left|\sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\right|^{2}\,\ll\, \frac{NQ}{(\log N)^A}\end{equation}
 \begin{proposition}[Reduction]\label{prop:reduction}
-	Assume (A.1). Then
+	Assume \eqref{eq:A1}. Then
 
 	$$
 		R(N)\;=\;\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha\;+\;O\!\left(\frac{N}{(\log N)^{3+\varepsilon/2}}\right),
@@ -233,31 +251,31 @@ We record the minor-arc target:
 		\int_0^1 |B(\alpha)|^2\,d\alpha \;=\; \sum_{n\le N}\beta(n)^2 \;\ll\; \frac{N}{\log N},
 	$$
 
-	so $\int_{\mathfrak m}|B|^2\le\int_0^1|B|^2\ll N/\log N$. Together with (A.1) this gives the cross-term contribution
+	so $\int_{\mathfrak m}|B|^2\le\int_0^1|B|^2\ll N/\log N$. Together with \eqref{eq:A1} this gives the cross-term contribution
 
 	$$
 		\ll \Bigl(\frac{N}{\log N}\Bigr)^{1/2}\Bigl(\frac{N}{(\log N)^{3+\varepsilon}}\Bigr)^{1/2}
 		\;=\;\frac{N}{(\log N)^{2+\varepsilon/2}}.
 	$$
 
-	The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in (A.1). On the major arcs, standard major-arc analysis (Vaughan’s identity or the explicit formula combined with (B2)-(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
+	The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in \eqref{eq:A1}. On the major arcs, standard major-arc analysis (Vaughan’s identity or the explicit formula combined with (B2)-(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
 \end{proof}
 
-\subsection*{What remains standard/checklist for $\beta$}
+\subsection{What remains standard/checklist for $\beta$}
 
 \begin{itemize}
 	\item \textbf{Choice of $\beta$:} take the Selberg upper-bound sieve weight at level $D=N^{1/2-\varepsilon}$ (or a GPY-type almost-prime majorant) so that (B1)-(B4) hold.
 	\item \textbf{Major-arc evaluation for $B$:} routine with (B2)-(B3), producing $\mathfrak S(N)N/\log^2 N$.
-	\item \textbf{Minor-arc task:} prove the $L^2$ estimate (A.1). This is the core analytic input for the parity-blind replacement on $\mathfrak m$.
+	\item \textbf{Minor-arc task:} prove the $L^2$ estimate \eqref{eq:A1}. This is the core analytic input for the parity-blind replacement on $\mathfrak m$.
 \end{itemize}
 
 
-\subsection*{Status (conditional to A.1)}
-With the above definitions and the reduction, Part A is complete \emph{conditional} on establishing the minor-arc bound (A.1). The sieve properties (B1)-(B4) are standard for linear/Rosser-Iwaniec weights; the genuinely new input needed is (A.1), which is the target of Parts B-D.
+\subsection{Status (conditional to A.1)}
+With the above definitions and the reduction, Part A is complete \emph{conditional} on establishing the minor-arc bound \eqref{eq:A1}. The sieve properties (B1)-(B4) are standard for linear/Rosser-Iwaniec weights; the genuinely new input needed is \eqref{eq:A1}, which is the target of Parts B-D.
 
-\part*{Part B. Type I / II Analysis}
+\part{Type I / II Analysis}
 
-\section*{2. Route B Lemma - Type II parity gain}
+\section{Route B Lemma - Type II parity gain}
 
 \begin{theorem}[Route B: Type-II parity gain]
 	Fix $A>0$ and $0<\varepsilon<10^{-3}$. Let $N$ be large, $Q\le N^{1/2-2\varepsilon}$. Let $M$ satisfy $N^{1/2-\varepsilon}\le M\le N^{1/2+\varepsilon}$ and set $X=N/M\asymp M$. For smooth dyadic coefficients $a_m,b_n$ supported on $m\sim M$, $n\sim X$ with $|a_m|,|b_n|\ll \tau(m)^C,\tau(n)^C$,
@@ -314,7 +332,7 @@ With the above definitions and the reduction, Part A is complete \emph{condition
 \end{itemize}
 
 
-\section*{3. Lemma 3.2 (BV with parity, second moment)}
+\section{Lemma 3.2 (BV with parity, second moment)}
 Fix $A>0$. Then there is $B=B(A)$ such that for all large $N$ and
 
 $$
@@ -405,7 +423,7 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 	Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbing this by increasing $A$ gives the stated bound.
 \end{proof}
 
-\subsection*{3.1. Lemma 3.2 (precise version and proof)}
+\subsection{Lemma 3.2 (precise version and proof)}
 
 \begin{lemma}[BV with parity; precise version]\label{lem:BV-parity-precise}
 	Fix $A>0$, $k\in\mathbb N$, and $0<\eta<1/6$. There exists $B=B(A,k,\eta)$ and $C_0=C_0(A,k,\eta)$ such that the following holds for all sufficiently large $N$.
@@ -464,9 +482,9 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 
 
 
-\part*{Part C. Type III Analysis}
+\part{Type III Analysis}
 
-\section*{4. Lemma S2.4 (Prime-averaged short-shift gain — full proof)}
+\section{Lemma S2.4 (Prime-averaged short-shift gain — full proof)}
 
 We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
 
@@ -527,7 +545,7 @@ We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kapp
 	Finally, with $z=4\pi\sqrt{mn}/c$ and $m,n\asymp X$, the decay forces $z\asymp Q$, i.e. $c\asymp X^{1/2}/Q$, while the tails contribute $O_A(X^{-A})$ after summing over $c$.
 \end{proof}
 
-\subsection*{4.X. Amplifier bookkeeping and exponent optimization (full details)}
+\subsection{Amplifier bookkeeping and exponent optimization (full details)}
 
 Recall the setup: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic $\mathcal Q\subset[Q,2Q]$,
 and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$.
@@ -596,7 +614,7 @@ By Lemma~\ref{lem:kernel-localization}, the kernel decay localizes the Kloosterm
 $c\asymp C:=X^{1/2}/Q$ up to $O_A(X^{-A})$ tails; write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
 Moreover, by Cauchy--Schwarz in $n$ together with the smooth dyadic partition (absorbing divisor-bounded coefficients into the weight), it suffices to treat the balanced same-variable case; we may reduce to sums with $n=m$ at the cost of a factor $X^{\varepsilon}$. This yields the $m$-only model used below.
 
-\subsubsection*{Insertion for Lemma~\ref{lem:S2.4}: using the $\Delta$-second moment and optimizing exponents}
+\subsubsection{Insertion for Lemma~\ref{lem:S2.4}: using the $\Delta$-second moment and optimizing exponents}
 
 \paragraph{From amplifier+Kuznetsov to a $\Delta$-family.}
 After opening $|A_f S_{q,\chi,f}|^2$, linearizing Hecke, and applying Kuznetsov with test $h_Q$, the off-diagonal (OD) is
@@ -775,7 +793,7 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 
 
-\section*{5. Type-III Spectral Bound}
+\section{Type-III Spectral Bound}
 
 \noindent Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{Lemma S2.4 (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
 
@@ -840,11 +858,10 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 	Summing over $q\le Q,\chi$ gives
 
-	\begin{equation}
+	\begin{equation}\label{eq:C31}
 		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
 		\ \ \le\ \ \frac{1}{|\mathcal P|^2}\,
 		\sum_{q\le Q}\sum_{\chi}\sum_f \big|A_f\,S_{q,\chi,f}\big|^2.
-		\tag{3.1}
 	\end{equation}
 
 	\noindent\textbf{Step 3: Kuznetsov after opening the amplifier.}
@@ -869,15 +886,14 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 	Therefore,
 
-	\begin{equation}
+	\begin{equation}\label{eq:C32}
 		\sum_{q\le Q}\sum_{\chi}\sum_f \big|A_f\,S_{q,\chi,f}\big|^2
 		\ \ \ll\ \ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}.
-		\tag{3.2}
 	\end{equation}
 
 
 	\noindent\textbf{Step 4: Divide out the amplifier and optimize $P$.}
-	Insert (3.2) into (3.1):
+	Insert \eqref{eq:C32} into \eqref{eq:C31}:
 
 	$$
 		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
@@ -896,7 +912,7 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 \end{proof}
 
-\subsection*{Remarks}
+\subsection{Remarks}
 
 \begin{itemize}
 	\item \textbf{Uniformity \& hypotheses.} The argument only used (i) Type-III structure (smooth $\alpha_n$, divisor bounds), (ii) balanced prime amplifier with $\sum \varepsilon_p=0$, (iii) Kuznetsov with full continuous and oldform ranges, and (iv) Lemma S2.4’s OD estimate. No further spectral gap input is needed beyond what S2.4 encapsulates.
@@ -908,31 +924,25 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 This completes Part C.5 once Lemma S2.4 is rigorously in place.
 
-\part*{Part D. Assembly}
+\part{Assembly}
+\section{Dyadic Decomposition (final)}
 
-\section*{6. Dyadic Decomposition (final)}
-
-\subsection*{Statement D.6.}
+\subsection{Statement}
 
 Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,w(n)\,e(\alpha n)$ with a fixed smooth weight $w$ supported on $[N/2,2N]$ and let $B(\alpha)$ be the parity-blind majorant from Part A. For the minor arcs $\mathfrak m$ defined with denominator cutoff $Q=N^{1/2-\varepsilon}$, assume the analytic inputs:
 
 \begin{itemize}
 	\item \textbf{(I/II)}: For any smooth Type-I/II coefficient structure $\{c_n\}$ with divisor bounds (arising from Vaughan/Heath-Brown), the second-moment Barban-Davenport-Halász-pretentious bound
 
-	      \begin{equation}
+	      \begin{equation}\label{eq:D1}
 		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|^2
 		      \ \ll\ \frac{NQ}{(\log N)^A}
-		      \tag{D.1}
 	      \end{equation}
-
 	      holds for each fixed $A>0$. (This is Lemma 3.2 and the “Route B Lemma” for the balanced ranges.)
 
 	\item \textbf{(III)}: For every dyadic Type-III block $\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)$ produced after amplification and Kuznetsov, the prime-averaged off-diagonal is bounded by
 
-	      \begin{equation}
-		      \mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}
-		      \tag{D.2}
-	      \end{equation}
+	      \begin{equation}\label{eq:D2}\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\end{equation}
 
 	      for some fixed $\delta>0$, uniformly for amplifier length $|\mathcal P|=X^\vartheta$ with $\vartheta=\vartheta(\delta)>0$, and with uniform control of oldforms/Eisenstein and Bessel kernels. (This is Lemma S2.4 and its Type-III spectral corollary.)
 \end{itemize}
@@ -944,7 +954,7 @@ $$
 	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
 $$
 
-\subsection*{Proof.}
+\subsection{Proof}
 
 \paragraph{Step 1: Identity and dyadic model.}
 Apply a 3-, 4-, or 5-fold Heath-Brown identity (any standard version suffices) to $\Lambda$ with cut parameters
@@ -973,19 +983,16 @@ All sums are partitioned into $\mathbf{O((\log N)^C)}$ dyadic blocks in all acti
 \paragraph{Step 2: Minor-arc $L^2$ via large sieve on dyadics.}
 Let $\mathfrak M(q,a)$ be the standard major arc around $a/q$ with width $\asymp (qQ)^{-1}$, and set $\mathfrak m=[0,1]\setminus \bigcup_{q\le Q}\bigcup_{(a,q)=1}\mathfrak M(q,a)$. On $\mathfrak m$ we use the standard large-sieve/dispersion reduction:
 
-\begin{equation}
-	\int_{\mathfrak m} \big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
-	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\sum_{\substack{a\bmod q\\(a,q)=1}}
-	\left|\sum_{n} c_n\,e\!\left(\frac{an}{q}\right)\right|^2,
-	\tag{D.3}
+\begin{equation}\label{eq:D2-alt}
+	\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}
 \end{equation}
+
 
 for suitable coefficients $c_n$ associated to the dyadic block $\mathcal T$. By opening the square and expanding in Dirichlet characters modulo $q$, (D.3) reduces to sums of the form
 
-\begin{equation}
+\begin{equation}\label{eq:D4}
 	\sum_{q\le Q}\ \sum_{\chi\bmod q}
-	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2,
-	\tag{D.4}
+	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
 \end{equation}
 
 or, in the Type-III case after the amplifier/Kuznetsov step, to a spectral second moment whose diagonal/off-diagonal split is controlled by (D.2).
@@ -993,7 +1000,7 @@ or, in the Type-III case after the amplifier/Kuznetsov step, to a spectral secon
 We now bound (D.4) block-wise and then sum the dyadics.
 
 
-\subsection*{Step 3: Type I/II dyadics.}
+\subsection{Step 3: Type I/II dyadics}
 Choose $U=N^{1/3}$ (any $\mu\in(1/4,1/2)$ is fine) so that all Type I/II ranges from the chosen Heath-Brown identity fall either in the “small-large” or “balanced” regimes. By the input (I/II), for any $A>0$,
 
 $$
@@ -1004,14 +1011,13 @@ $$
 
 Each Type I or Type II dyadic contributes $\ll NQ/(\log N)^A$. There are $\ll(\log N)^C$ such dyadics in total, so by taking $A\ge 3+C+10\varepsilon^{-1}$ we obtain
 
-\begin{equation}
+\begin{equation}\label{eq:D5}
 	\sum_{\text{Type I/II dyadics}}
 	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha
 	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
-	\tag{D.5}
 \end{equation}
 
-\subsection*{Step 4: Type III dyadics.}
+\subsection{Step 4: Type III dyadics}
 Fix $V=W=N^{1/3}$ so that the residual blocks with all variables $\ll N^{1/3+o(1)}$ are designated Type III. For such a block, let its “outer scale” be $X\asymp N^\xi$ with $\xi\in(0,1)$ determined by the product of the active variables. After applying the amplifier of length $|\mathcal P|=X^\vartheta$ and Kuznetsov, we face a spectral second moment whose off-diagonal obeys (D.2):
 
 $$
@@ -1028,27 +1034,17 @@ Take $\vartheta=\tfrac{\delta}{8}$ (any fixed small choice depending on $\delta$
 
 In both cases there is a fixed saving $X^{-\eta}$ (or $N^{-\eta}$) for some $\eta=\eta(\delta,\vartheta,\varepsilon)>0$ against the trivial diagonal scale, after the standard dispersion normalization. Consequently each Type III dyadic contributes
 
-\begin{equation}
-	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha
-	\ \ll\ \frac{N}{(\log N)^{A}}\,X^{-\eta}
-	\ \ +\ \ \text{(diagonal)}.
-	\tag{D.6}
-\end{equation}
+\begin{equation}\label{eq:D6}\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha\ \ll\ \frac{N}{(\log N)^{A}}\,X^{-\eta}+\text{(diagonal)}.\end{equation}
 
 The diagonal is controlled either by the amplifier normalization or by subtracting the parity-blind majorant $B(\alpha)$ (which removes the main term on $\mathfrak m$), leaving at most $\ll N/(\log N)^A$ per block. Summing (D.6) over the $\ll(\log N)^C$ Type-III dyadics and choosing $A$ large, we obtain
 
-\begin{equation}
-	\sum_{\text{Type III dyadics}}
-	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
-	\tag{D.7}
-\end{equation}
+\begin{equation}\label{eq:D7}\sum_{\text{Type III dyadics}}\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.\end{equation}
 
 \emph{Bookkeeping note.} The $X^{-\eta}$ saving is uniform in the dyadic location because $\delta>0$ is fixed and $\vartheta$ is chosen as a fixed fraction of $\delta$; any residual factors from Bessel kernels, oldforms, and Eisenstein are already absorbed in (D.2) by the uniform spectral analysis ensured in Lemma S2.4. The $q$-sum restriction $q\le Q$ matches the circle-method minor-arc decomposition, so no leakage arises.
 
 ---
 
-\subsection*{Step 5: Conclusion.}
+\subsection{Step 5: Conclusion}
 Adding (D.5) and (D.7) over all dyadics of all HB terms $\mathcal T$ yields
 
 $$
@@ -1057,15 +1053,10 @@ $$
 $$
 
 as claimed.
-\subsection*{6.1. Derivation of (A.1) from Lemma~3.2 and Lemma~S2.4}
+\subsection{Derivation of \eqref{eq:A1} from Lemma~3.2 and Lemma~S2.4}
 
 \noindent\textbf{Scope.} In this subsection we \emph{derive} the minor-arc $L^2$ estimate
-\[
-	\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}
-	\tag{A.1}
-\]
-\emph{assuming} the two analytic inputs already stated and proved earlier:
-
+\[\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\]
 \begin{enumerate}[label=(\roman*)]
 	\item \textbf{Type I/II second moment with parity} (Lemma~3.2): for $Q\le N^{1/2}(\log N)^{-B}$,
 	      \[
@@ -1107,9 +1098,9 @@ Expanding in Dirichlet characters reduces this to the second moments controlled 
 Summing over Type III dyadics and splitting $X\le Q^2$ and $X\ge Q^2$ yields a net contribution $\ll N(\log N)^{-3-\varepsilon}$ for fixed $\vartheta=\vartheta(\delta)>0$.
 
 \medskip
-\noindent\textbf{Conclusion.} Summing all dyadics gives (A.1). \emph{Thus, (A.1) holds provided Lemma~3.2 and Lemma~S2.4 hold in the stated uniform forms.} This is the only place where (A.1) depends on Part~B and Part~C.
+\noindent\textbf{Conclusion.} Summing all dyadics gives \eqref{eq:A1}. \emph{Thus, \eqref{eq:A1} holds provided Lemma~3.2 and Lemma~S2.4 hold in the stated uniform forms.} This is the only place where \eqref{eq:A1} depends on Part~B and Part~C.
 
-\subsection*{Parameter choices \& loss ledger (for ease of cross-checking)}
+\subsection{Parameter choices \& loss ledger (for ease of cross-checking)}
 
 \begin{itemize}
 	\item \textbf{Minor-arc cutoff}: $Q=N^{1/2-\varepsilon}$.
@@ -1124,11 +1115,11 @@ Summing over Type III dyadics and splitting $X\le Q^2$ and $X\ge Q^2$ yields a n
 	\item \textbf{Exceptional characters / oldforms / Eisenstein}: already handled in the hypotheses of Lemma 3.2 and Lemma S2.4; their contributions obey the same $(\log N)^{-A}$ savings and therefore do not affect the sum.
 \end{itemize}
 
-\subsection*{Remark.}
+\subsection{Remark}
 
 Nothing delicate hinges on the exact form of the identity (Vaughan vs. Heath-Brown) provided it yields (i) divisor-bounded smooth coefficients and (ii) a genuine three-variable “Type III” regime where Lemma S2.4 applies. Alternative cut choices merely reshuffle a finite number of dyadic families and do not change the final $(\log N)^{-3-\varepsilon}$ power once $A$ is taken large in the Type I/II inputs.
 
-\section*{7. Major-Arc Evaluation}
+\section{Major-Arc Evaluation}
 
 Let
 
@@ -1168,7 +1159,7 @@ Standard analysis yields $\mathfrak J=N+O(1)$ in the sharp case and $\mathfrak J
 
 We evaluate first the parity-blind majorant $B$, then transfer the main term to $S$.
 
-\subsection*{7.1. Major-arc evaluation for $B(\alpha)$.}
+\subsection{Major-arc evaluation for $B(\alpha)$}
 
 Let the sieve majorant be
 
@@ -1247,7 +1238,7 @@ $$
 
 \emph{Remark.} If a smooth weight $w$ is used, replace $V(\beta)$ by $\widehat w(\beta)$ throughout, and the same argument yields $\mathfrak J=\int|\widehat w|^2 e(-N\beta)\,d\beta$ with an identical error term.
 
-\subsection*{7.2. Transferring the main term to $S(\alpha)$.}
+\subsection{Transferring the main term to $S(\alpha)$}
 
 Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,e(n\alpha)$ (sharp or smooth as above). By the prime number theorem in arithmetic progressions with level of distribution $Q=N^{1/2-\varepsilon}$ (Siegel-Walfisz + Bombieri-Vinogradov in the smooth form used earlier), uniformly for $q\le Q$ and $|\beta|\le Q/(qN)$,
 
@@ -1290,9 +1281,9 @@ $$
 
 In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
 
-\subsection*{Status.}
+\subsection{Status}
 Everything here is standard Hardy-Littlewood major-arc analysis. What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
-\section*{8. Final Step (conditional on (A.1))}
+\section{Final Step (conditional on \eqref{eq:A1})}
 
 We now conclude the argument.
 
@@ -1302,7 +1293,7 @@ $$
 	\;+\;\int_{\mathfrak m} S(\alpha)^2 e(-N\alpha)\,d\alpha.
 $$
 
-\subsection*{Major arcs.}
+\subsection{Major arcs}
 
 By the Major-Arc Evaluation (Part D.7), we have, uniformly for even $N$,
 
@@ -1321,9 +1312,9 @@ $$
 
 which satisfies $\mathfrak S(N)>0$ for every even $N$, and $\mathfrak S(N)=0$ for odd $N$.
 
-\subsection*{Minor arcs.}
+\subsection{Minor arcs}
 
-Assume the minor-arc $L^2$ input (A.1):
+Assume the minor-arc $L^2$ input \eqref{eq:A1}:
 
 $$
 	\int_{\mathfrak m} |S(\alpha)-B(\alpha)|^2\,d\alpha
@@ -1340,9 +1331,9 @@ $$
 	\ \ll\ \frac{N}{(\log N)^{2+\varepsilon/2}},
 $$
 
-since $\int_0^1|B|^2\ll N/\log N$ by (B2)-(B3). The pure error $\int_{\mathfrak m}|S-B|^2$ is already $\ll N/(\log N)^{3+\varepsilon}$. Thus the minor arcs contribute $o\!\left(N/\log^2 N\right)$ under (A.1), without requiring any bound stronger than $\int_0^1|B|^2\ll N/\log N$.
+since $\int_0^1|B|^2\ll N/\log N$ by (B2)-(B3). The pure error $\int_{\mathfrak m}|S-B|^2$ is already $\ll N/(\log N)^{3+\varepsilon}$. Thus the minor arcs contribute $o\!\left(N/\log^2 N\right)$ under \eqref{eq:A1}, without requiring any bound stronger than $\int_0^1|B|^2\ll N/\log N$.
 
-\subsection*{Conclusion.}
+\subsection{Conclusion}
 
 Combining the two ranges,
 
@@ -1353,7 +1344,7 @@ $$
 
 Since $\mathfrak S(N)>0$ for every even $N$, it follows that $R(N)>0$ for all sufficiently large even $N$. Hence \textbf{every sufficiently large even integer is a sum of two primes.} $\qed$
 
-\subsection*{Remark (scope).}
+\subsection{Remark (scope)}
 If desired, the error can be recorded explicitly as
 
 $$
@@ -1364,9 +1355,9 @@ with the $\eta>0$ coming from your major-arc saving and the minor-arc $L^2$ boun
 
 For “all even $N$”, one needs a finite computational verification for $N\le N_0$ beyond which the asymptotic implies positivity. We do not specify $N_0$ here; determining it would require explicit constants throughout (major arcs, large sieve, and spectral bounds) and numerical estimates of $\mathfrak S(N)$.
 
-\section*{Appendix A. Technical Lemmas and Parameters}
+\section{Appendix A. Technical Lemmas and Parameters}
 
-\subsection*{A.1. Minor--arc large sieve reduction}
+\subsection{Minor--arc large sieve reduction}
 
 We record the precise form of the inequality used in Part~D.6.
 
@@ -1396,7 +1387,7 @@ We record the precise form of the inequality used in Part~D.6.
 	for each interval $I\subset[0,1)$. Applying this to each complementary arc of length $\gg (qQ)^{-1}$ gives the stated bound.
 \end{proof}
 
-\subsection*{A.2. Sieve weight $\beta$ and properties}
+\subsection{Sieve weight $\beta$ and properties}
 
 Fix parameters
 \[
@@ -1428,7 +1419,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\end{enumerate}
 \end{lemma}
 
-\subsection*{A.3. Major--arc uniform error}
+\subsection{Major--arc uniform error}
 
 \begin{lemma}[Major--arc approximants]\label{lem:major-errors}
 	Let $\alpha=a/q+\beta$ with $q\le Q$, $|\beta|\le Q/(qN)$. Then for any $A>0$,
@@ -1445,7 +1436,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
 
-\subsection*{A.X. Kuznetsov at level $q$ (uniform form) and a $\Delta$-second-moment lemma}
+\subsection{Kuznetsov at level $q$ (uniform form) and a $\Delta$-second-moment lemma}
 
 We fix the Kuznetsov normalization we use throughout and record the uniform kernel bounds in $q$.
 
@@ -1527,7 +1518,7 @@ We fix the Kuznetsov normalization we use throughout and record the uniform kern
 	Lemma~\ref{lem:kuz-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman–Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin–Lehner decompositions beyond orthogonality.
 \end{remark}
 
-\subsection*{A.4. Parameter box}
+\subsection{Parameter box}
 
 For clarity we record the global parameter choices:
 \begin{itemize}
@@ -1537,7 +1528,7 @@ For clarity we record the global parameter choices:
 	\item Amplifier: primes in $[P,2P]$ with $P=X^\vartheta$, $0<\vartheta<1/6-\kappa$.
 	\item Type~III saving: $\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
 \end{itemize}
-\subsection*{A.5. Auxiliary analytic inputs used in Part B}
+\subsection{Auxiliary analytic inputs used in Part B}
 
 We record the external inputs used in Lemma~\ref{lem:BV-parity-precise}; full proofs are standard and can be found in the cited references.
 
@@ -1565,7 +1556,7 @@ We record the external inputs used in Lemma~\ref{lem:BV-parity-precise}; full pr
 	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
 \end{lemma}
 
-\subsection*{A.6. Admissible parameter tuple and verification}
+\subsection{Admissible parameter tuple and verification}
 
 We fix explicit values valid for large $N$:
 
@@ -1578,9 +1569,9 @@ Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\l
 	\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
 \]
 
-Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{lem:BV-parity-precise}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give (A.1).
+Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{lem:BV-parity-precise}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
 
-\subsection*{A.7. Deterministic balanced signs for the amplifier}
+\subsection{Deterministic balanced signs for the amplifier}
 
 \begin{lemma}[Balanced signs]\label{lem:balanced-signs}
 	Let $\mathcal P=\{p\in[P,2P]: p\text{ prime}\}$. There exists a deterministic choice of signs $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm 1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$. Moreover, for every integer $\Delta$,
