@@ -577,7 +577,7 @@ and it follows by dividing by the amplifier after the off-diagonal bound (Lemma 
 \paragraph{Step 1: Balanced amplifier domination.}
 Let $\varepsilon_p\in\{\pm 1\}$ be signs with $\sum_{p\in\mathcal P}\varepsilon_p=0$ (Appendix A.7).
 Set $A_f=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$.
-By Cauchy–Schwarz in $(p,p')$ and $\sum\varepsilon_p^2=|\mathcal P|$, we have the standard domination
+By Cauchy-Schwarz in $(p,p')$ and $\sum\varepsilon_p^2=|\mathcal P|$, we have the standard domination
 \begin{equation}\label{eq:amp-dom}
 	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
 	\ \le\ \frac{1}{|\mathcal P|^2}\sum_{q,\chi,f}|A_f\,S_{q,\chi,f}|^2.
@@ -606,7 +606,7 @@ Because $\sum_{p}\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to bo
 
 \paragraph{Step 3: Kuznetsov with test $h_Q$ and kernel localization.}
 Sum over $f$ and (orthogonally) over $\chi$ modulo $q$.
-Applying Kuznetsov (Lemma~\ref{lem:kuz-uniform}) with test $h_Q(t)=h(t/Q)$ and using Lemma~\ref{lem:kernel-localization},
+Applying Kuznetsov (Lemma~\ref{lem:kuznetsov-uniform-kernel}) with test $h_Q(t)=h(t/Q)$ and using Lemma~\ref{lem:kernel-localization},
 the off-diagonal (OD) contribution can be written in the geometric form
 \[
 	\mathrm{OD}
@@ -631,7 +631,7 @@ After opening $|A_f S_{q,\chi,f}|^2$, linearizing Hecke, and applying Kuznetsov 
 	\sum_{m\asymp X}\alpha_m\overline{\alpha_{m}}\,
 	S(p_1m,p_2m;qr)\,\mathcal W_{q}\!\Big(\tfrac{4\pi\sqrt{p_1m\cdot p_2m}}{qr}\Big)\,+\,\mathcal E,
 \]
-where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuz-uniform},
+where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuznetsov-uniform-kernel},
 and $\mathcal E$ collects $O_A(X^{-A})$ kernel tails and the $p\mid n$ Hecke tails
 (bounded by Lemma~\ref{lem:hecke-tails}).
 
@@ -644,7 +644,7 @@ Set $\Delta=p_1-p_2$, and absorb $\mathcal W_q$ into a smooth weight $W_{q,r}(m,
 \]
 
 \paragraph{Apply the $\Delta$-second moment (Lemma~\ref{lem:delta-second-moment}).}
-By Cauchy–Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment},
+By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment},
 \[
 	\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
 	\ \le\ |\mathcal P|^{1/2}\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
@@ -1443,33 +1443,40 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 We fix the Kuznetsov normalization we use throughout and record the uniform kernel bounds in $q$.
 
-\begin{lemma}[Kuznetsov on $\Gamma_0(q)$; uniform, with all spectra]\label{lem:kuz-uniform}
-	Let $q\ge1$, and let $m,n\ge1$ be coprime to $q$. For an even $h\in C_c^\infty(\mathbb R)$, define
+\begin{lemma}[Kuznetsov on $\Gamma_0(q)$ with level-uniform kernel bounds]\label{lem:kuznetsov-uniform-kernel}
+	Let $q\ge1$, $m,n\ge1$ with $(mn,q)=1$. For an even $h\in C_c^\infty(\mathbb R)$ define $h_Q(t):=h(t/Q)$, $Q\ge1$. Write the Kuznetsov formula on $\Gamma_0(q)$ as
 	\[
-		\mathcal{H}(h)
-		=\sum_{f\in\mathcal B_q^{\rm Ma\text\ss}} \frac{\overline{\rho_f(m)}\,\rho_f(n)}{\cosh(\pi t_f)}\,h(t_f)
-		+ \sum_{k\equiv0\ (2)} \sum_{f\in\mathcal B_{q,k}^{\rm hol}} \overline{\rho_f(m)}\,\rho_f(n)\,h\!\Big(\tfrac{k-1}{2}\Big)
-		+\frac{1}{4\pi}\sum_{\mathfrak a}\int_{\mathbb R}\overline{\rho_{\mathfrak a}(m,t)}\,\rho_{\mathfrak a}(n,t)\,h(t)\,dt,
+		\mathcal{H}_q(h_Q;m,n)
+		=\delta_{m=n}\,\mathcal D_q(h_Q)
+		+ \sum_{\substack{c\equiv 0\ (q)}} \frac{1}{c}\,S(m,n;c)\,\mathcal W_{q}^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
 	\]
-	where $\mathcal B_q^{\rm Ma\text\ss}$ and $\mathcal B_{q,k}^{\rm hol}$ are orthonormal bases of Hecke eigenforms (new+old) on $\Gamma_0(q)$ with Fourier coefficients $\rho_*(\cdot)$ at cusps $\mathfrak a$, and $t_f$ denotes the spectral parameter.
-	Then
+	where $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$ denotes the Maa\ss/holomorphic/Eisenstein pieces. Then for every $A,j\ge0$,
 	\[
-		\mathcal{H}(h)
-		= \delta_{m=n}\,\mathcal H_{\rm diag}(h)
-		+ \sum_{\substack{c\equiv 0\ (q)}} \frac{1}{c}\,S(m,n;c)\,\mathcal W_h\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
+		\mathcal W_{q}^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},\qquad
+		z^j\,\partial_z^{\,j}\mathcal W_{q}^{(*)}(z)\ \ll_{A,j} \Big(1+\frac{z}{Q}\Big)^{-A},
 	\]
-	where $\mathcal H_{\rm diag}(h)$ is the standard diagonal transform, $S(\cdot,\cdot;c)$ is the Kloosterman sum, and $\mathcal W_h$ is a Bessel kernel (a fixed linear combination of $J_{2it}$/$K_{2it}$/$J_{k-1}$ transforms determined by $h$ and the spectral piece). If $h_Q(t):=h(t/Q)$ with $h\in C_c^\infty([-2,2])$ even, then for all $A,j\ge0$,
-	\[
-		\mathcal W_{h_Q}^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},
-		\qquad
-		z^j\,\partial_z^{\,j}\mathcal W_{h_Q}^{(*)}(z)\ \ll_{A,j}\Big(1+\frac{z}{Q}\Big)^{-A},
-	\]
-	uniformly in the level $q$ and in $z>0$, for each spectral piece $(*)\in\{\text{Ma\ss},\text{hol},\text{Eis}\}$.
+	uniformly in $q\ge1$, $z>0$, and in the spectral piece $(*)$. The implied constants depend only on $A,j$ and $h$ (via finitely many derivatives), not on $q$.
 \end{lemma}
 
 \begin{proof}
-	This is the standard Kuznetsov formula on $\Gamma_0(q)$ with full spectra (see e.g. IK, Ch.~16–17), with level only entering through the congruence $c\equiv0\pmod q$ on the geometric side. The kernel bounds follow from compact support of $h$ and repeated integration by parts in the Hankel/Bessel transforms; they are uniform in $q$ because $q$ does not enter the transform itself. (For completeness we note that oldforms and Eisenstein are included with their usual Fourier-normalizations at each cusp; the transform bounds are identical.)
+	We record the Maa\ss case; the holomorphic and Eisenstein kernels are analogous. For Maa\ss forms the kernel is a Hankel transform
+	\[
+		\mathcal W_{q}^{\mathrm{Ma\text\ss}}(z)
+		= \frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt.
+	\]
+	Since $h\in C_c^\infty([-2,2])$ is fixed, $h_Q(t)=h(t/Q)$ is supported on $|t|\le 2Q$ and satisfies $\|h_Q^{(r)}\|_\infty\ll_r Q^{-r}$. Use the Schl\"afli representation
+	\[
+		J_{2it}(z)=\frac{1}{2\pi}\int_{-\pi}^{\pi} e^{iz\sin\theta}\,e^{-2it\theta}\,d\theta,
+	\]
+	or, equivalently, Mellin-Barnes representations; either way, after interchanging integrals (justified by compact support) one integrates by parts in $t$ repeatedly against the factor $e^{-2it\theta}$. Each $t$-derivative falls on $h_Q(t)\tanh(\pi t)\,t$, gaining a factor $\ll Q^{-1}$ thanks to the $h_Q^{(r)}$ bounds and polynomial growth control of $\tanh$ and $t\mapsto t$. Thus for any $R\ge0$,
+	\[
+		\mathcal W_{q}^{\mathrm{Ma\text\ss}}(z) \ll_R \int_{-\pi}^{\pi} \big(1+|z\sin\theta|\big)^{-R}\,d\theta
+		\ll_R \big(1+z\big)^{-R}.
+	\]
+	To insert the $Q$-scale, rescale $t\mapsto Qt$ in the definition of $h_Q$; every integration-by-parts step gains a factor $(1+z/Q)^{-1}$ rather than $(1+z)^{-1}$, yielding
+	$\mathcal W_{q}^{\mathrm{Ma\text\ss}}(z)\ll_A (1+z/Q)^{-A}$ for all $A$. For $z$-derivatives one differentiates under the integral; each $z\partial_z$ inserts a bounded polynomial in $t$ multiplying $J_{2it}$ (via Bessel ODE or by differentiating the oscillatory integral), which is absorbed by the same integration-by-parts argument because $|t|\le 2Q$. Uniformity in $q$ is immediate: $q$ appears only as the congruence condition $c\equiv 0\pmod q$ on the geometric side; it does not enter the kernel transform. The holomorphic and Eisenstein kernels are handled identically (replace $J_{2it}$ by $J_{k-1}$ or $K_{2it}$; compact support in $t$ gives the same decay).
 \end{proof}
+
 
 \begin{lemma}[$\Delta$-second moment with level-uniformity]\label{lem:delta-second-moment}
 	Let $X\ge 3$, $q\ge1$, and write $c=qr$ with $r\asymp R\ge1$. Let $W_{q,r}(m,\Delta)$ be smooth, supported on $m\asymp X$, $|\Delta|\le P$, with
@@ -1488,25 +1495,25 @@ We fix the Kuznetsov normalization we use throughout and record the uniform kern
 \end{lemma}
 
 \begin{proof}
-	Open the square and insert a smooth dyadic partition in $m$. For a fixed $\Delta$, by Cauchy–Schwarz in the residue $d\!\!\pmod{qr}$ when opening $S(\cdot,\cdot;qr)$, followed by Poisson in $m$ with modulus $qr$, one gets the ``trivial dispersion’’
+	Open the square and insert a smooth dyadic partition in $m$. For a fixed $\Delta$, by Cauchy-Schwarz in the residue $d\!\!\pmod{qr}$ when opening $S(\cdot,\cdot;qr)$, followed by Poisson in $m$ with modulus $qr$, one gets the ``trivial dispersion’’
 	\[
 		\sum_{|\Delta|\le P}\!|\Sigma_{q,r}(\Delta)|^2 \ \ll\ X\,\varphi(qr)\,(P+1),
 	\]
 	using $|\widehat W_{q,r}(\xi,\Delta)|\ll X(1+X|\xi|)^{-10}$ and that only $|k|\ll (qr)X^{-1+\varepsilon}$ contribute after Poisson. This gives at most $X(P+qr)$ up to $(qr)^\varepsilon$ factors.
 
 	To upgrade this trivial dispersion to the claimed bound, we now apply the
-	Kuznetsov formula on $\Gamma_0(q)$ from Lemma~\ref{lem:kuz-uniform} to the
+	Kuznetsov formula on $\Gamma_0(q)$ from Lemma~\ref{lem:kuznetsov-uniform-kernel} to the
 	bilinear form in $(m,n)$ obtained after expanding
 	$\Sigma_{q,r}(\Delta)\,\overline{\Sigma_{q,r}(\Delta)}$ and summing $\Delta$
 	with the smooth cutoff inherited from $W_{q,r}$. By the kernel localization in
-	Lemma~\ref{lem:kuz-uniform}, the Kloosterman modulus is restricted to
+	Lemma~\ref{lem:kuznetsov-uniform-kernel}, the Kloosterman modulus is restricted to
 	$c\asymp qr$ (up to $O_A(X^{-A})$ tails), and the geometric side contributes
 	terms of the shape
 	\[
 		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(u,v;c)\,\mathcal W\!\Big(\frac{4\pi\sqrt{uv}}{c}\Big).
 	\]
 	Applying Weil’s bound $|S(u,v;c)|\ll_\varepsilon (u,v,c)^{1/2}c^{1/2+\varepsilon}$
-	\emph{twice} (once for each Kloosterman factor arising after Cauchy–Schwarz),
+	\emph{twice} (once for each Kloosterman factor arising after Cauchy-Schwarz),
 	together with the $1/c$ weight from Kuznetsov and the derivative control on
 	$W_{q,r}$ (which yields an $X$ and $(P+c)$ factor), gives
 	\[
@@ -1518,7 +1525,7 @@ We fix the Kuznetsov normalization we use throughout and record the uniform kern
 \end{proof}
 
 \begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
-	Lemma~\ref{lem:kuz-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman–Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin–Lehner decompositions beyond orthogonality.
+	Lemma~\ref{lem:kuznetsov-uniform-kernel} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
 \end{remark}
 
 \subsection{Parameter box}
