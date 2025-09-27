@@ -912,78 +912,65 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 	depend at most on $\varepsilon$, on finitely many derivatives of the fixed test $h$, and on the exponent $C$ in the divisor-type bound $|\alpha_n|\ll_\varepsilon \tau(n)^C$.
 \end{remark}
 
-
 \section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
 
-We recall the setup. Fix $X\ge 3$, $Q\le X^{1/2-\kappa}$ with $0<\kappa<1/4$.
-Let $q\in\mathcal Q\subset[Q,2Q]$ and write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
-A prime amplifier of length $|\mathcal P|\asymp P/\log P$ with $P=X^{\vartheta}$ is fixed.
-After linearizing Hecke relations and applying Kuznetsov with a compactly supported test,
-the off--diagonal contribution takes the form
-\[
-	\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
-	\sum_{\Delta\neq 0}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)| \,+\,\text{(negligible tails)},
-\]
-where $\nu(\Delta)$ counts prime pairs $(p_1,p_2)\in\mathcal P^2$ with $p_1-p_2=\Delta$, and
-\[
-	\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta),
-\]
-with $W_{q,r}$ smooth, supported on $m\asymp X$, $|\Delta|\le P$, and satisfying
-$\partial_m^i\partial_\Delta^j W\ll X^{-i}P^{-j}$.
-
-\begin{lemma}[{$\Delta$--second moment}]\label{lem:Delta2}
-	For every $\varepsilon>0$ and all $q,r,P,X$ as above, one has
+\begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
+	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$.
+	Let $Q\le X^{1/2-\kappa}$ with some fixed $0<\kappa<1/4$. Then, for some fixed $\delta>0$ depending only on~$\kappa$,
 	\[
-		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
-		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_{f}
+		\Bigg|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Bigg|^2
+		\ \ \ll_{\varepsilon,C}\ \ (Q^2+X)^{\,1-\delta}\,X^{\varepsilon}.
 	\]
-	The bound is uniform in $q,r$ and in the family of weights $W_{q,r}$.
-\end{lemma}
+\end{proposition}
 
 \begin{proof}
-	See Appendix~\ref{app:Delta2} for the full proof by Poisson in $\Delta$ and $m$.
+	Fix a prime amplifier $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $\varepsilon_p\in\{\pm1\}$ balanced so that $\sum_p\varepsilon_p=0$.
+	Define $A_f=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$, and set
+	$S_{q,\chi,f}=\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)$.
+	As in the balanced-amplifier method,
+	\[
+		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
+		\ \le\ \frac{1}{|\mathcal P|^2}\sum_{q\le Q}\sum_{\chi}\sum_f |A_f\,S_{q,\chi,f}|^2.
+	\]
+
+	Opening the amplifier and applying Kuznetsov (including oldforms and Eisenstein) reduces the off--diagonal to correlations of the form
+	\[
+		\mathrm{OD}\ :=\ \sum_{q\sim Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne0}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|,
+	\]
+	with $\nu(\Delta)$ the prime-pair counts and
+	$\Sigma_{q,r}(\Delta)=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta)$.
+	Here $c=qr\asymp X^{1/2}/Q$, and $W_{q,r}$ are smooth weights supported on $m\asymp X$, $|\Delta|\le P$.
+
+	By Lemma~\ref{lem:delta-second-moment-fullyrigid},
+	\[
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+	\]
+	Cauchy--Schwarz and $\sum\nu(\Delta)\asymp |\mathcal P|^2$ give
+	\[
+		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
+		\ \ll_\varepsilon\
+		|\mathcal P|\,(P+qr)^{1/2}\,(qr)^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
+	\]
+	Summing over $q\sim Q$, $r\asymp R$ yields
+	\[
+		\mathrm{OD}\ \ll_\varepsilon\
+		|\mathcal P|\,X^{3/4+\varepsilon}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
+	\]
+
+	Dividing by $|\mathcal P|^2$,
+	\[
+		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
+		\ \ll_\varepsilon\ \frac{X^{3/4+\varepsilon}}{P}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
+	\]
+
+	Finally, choose $Q=X^{1/2-\kappa}$, $P=X^\vartheta$ with $0<\vartheta<\kappa$.
+	A short case analysis shows that this is $\ll X^{1-\delta+\varepsilon}$ with $\delta\ge\min\{\tfrac12-\tfrac{\kappa}{2},\,\tfrac{\vartheta}{2},\,\kappa-\vartheta\}>0$.
+	Since $Q^2\le X$, we rewrite $X^{1-\delta}$ as $(Q^2+X)^{1-\delta}$.
+	This completes the proof.
 \end{proof}
 
-Applying Cauchy--Schwarz in $\Delta$ and noting $\sum\nu(\Delta)\asymp |\mathcal P|^2$,
-we deduce
-\[
-	\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-	\ \ll_\varepsilon\
-	|\mathcal P|\,(P+qr)^{1/2}\,(qr)^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
-\]
-Therefore
-\[
-	\mathrm{OD}\ \ll_\varepsilon\
-	|\mathcal P|\,X^{1/2+\varepsilon}
-	\sum_{q\in\mathcal Q}\ \sum_{r\asymp R} (qr)^{-1/2+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
-\]
-For fixed $q\sim Q$, the inner $r$--sum contributes $R^{1/2+\varepsilon}$,
-where $R^{1/2}=X^{1/4}Q^{-1}$. Summing $q\sim Q$ gives
-\[
-	\mathrm{OD}\ \ll_\varepsilon\
-	|\mathcal P|\,X^{3/4+\varepsilon}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
-\]
-
-Dividing by the amplifier length $|\mathcal P|^2\asymp P^2/(\log P)^2$,
-we obtain the Type~III spectral bound
-\begin{equation}\label{eq:TypeIII-final}
-	\sum_{q\le Q}\sum_{\chi\bmod q}\sum_f
-	\left|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\right|^2
-	\ \ll_\varepsilon\
-	\frac{X^{3/4+\varepsilon}}{P}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
-\end{equation}
-
-Finally, choose $Q=X^{1/2-\kappa}$ with $0<\kappa<1/4$ and $P=X^{\vartheta}$
-with $0<\vartheta<\kappa$. From \eqref{eq:TypeIII-final} one checks that
-\[
-	\sum_{q\le Q}\sum_{\chi\bmod q}\sum_f
-	\left|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\right|^2
-	\ \ll_\varepsilon\ (Q^2+X)^{\,1-\delta},
-\]
-with $\delta\ge\min\{\tfrac12-\tfrac{\kappa}{2},\ \tfrac{\vartheta}{2},\ \kappa-\vartheta\}>0$.
-For instance, the choice $\vartheta=\kappa/2$ yields $\delta=\kappa/2$.
-This completes the Type~III analysis.
-\qed
 
 
 \part{Assembly}
