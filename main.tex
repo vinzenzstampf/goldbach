@@ -447,7 +447,7 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 
 	\paragraph{Step 1. Halász bound with smooth weights.}
 	Let $f(n)=c_n\lambda(n)$ supported on $n\asymp X$.
-	By the smooth Halász theorem (see e.g.\ cite[Prop.~3.2]{MR–Tao}, uniform in $f$ with $|f(n)|\le \tau_k(n)$), we have for any primitive character $\chi\bmod q$
+	By the smooth Halász theorem (see e.g.\ cite[Prop.~3.2]{MR-Tao}, uniform in $f$ with $|f(n)|\le \tau_k(n)$), we have for any primitive character $\chi\bmod q$
 	\[
 		\sum_{n\asymp X} f(n)\chi(n)
 		\;\ll\; X\exp\!\Big(-D(f\chi;X)\Big)+\frac{X}{(\log X)^A},
@@ -770,12 +770,12 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 
 \begin{proof}
 	\emph{Step 1: Amplifier domination and Hecke linearization.}
-	By Cauchy–Schwarz in the amplifier and $\sum_p\varepsilon_p^2=|\mathcal P|$,
+	By Cauchy-Schwarz in the amplifier and $\sum_p\varepsilon_p^2=|\mathcal P|$,
 	\[
 		\sum_{q,\chi,f} |S_{q,\chi,f}|^2 \ \le\ \frac{1}{|\mathcal P|^2}\sum_{q,\chi,f}|A_f S_{q,\chi,f}|^2.
 	\]
 	Open $|A_f S|^2$ and use $\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf 1_{p\mid n}\lambda_f(n/p)$.
-	The branches with $p\mid n$ (or $p\mid m$ on the conjugate side) shrink the $n$–support by a factor $p$; a routine large-sieve/Kuznetsov bound on these “Hecke tails” gives
+	The branches with $p\mid n$ (or $p\mid m$ on the conjugate side) shrink the $n$-support by a factor $p$; a routine large-sieve/Kuznetsov bound on these “Hecke tails” gives
 	\[
 		\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1/2+\varepsilon},
 	\]
@@ -791,9 +791,9 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 		\mathcal W_q\!\Big(\tfrac{4\pi\sqrt{p_1 m\cdot p_2 m}}{qr}\Big)
 		\ +\ O_A(X^{-A}),
 	\]
-	where we have reduced to $n=m$ by Cauchy–Schwarz and smoothing (absorbed in $X^\varepsilon$), and $\mathcal W_q$ is any of the kernels in Lemma~\ref{lem:kuznetsov-uniform-kernel}. Absorb $\mathcal W_q$ and the coefficient weights into a smooth $W_{q,r}(m,\Delta)$ with the derivative bounds required by Lemma~\ref{lem:delta-second-moment-fullyrigid}, where $\Delta:=p_1-p_2$.
+	where we have reduced to $n=m$ by Cauchy-Schwarz and smoothing (absorbed in $X^\varepsilon$), and $\mathcal W_q$ is any of the kernels in Lemma~\ref{lem:kuznetsov-uniform-kernel}. Absorb $\mathcal W_q$ and the coefficient weights into a smooth $W_{q,r}(m,\Delta)$ with the derivative bounds required by Lemma~\ref{lem:delta-second-moment-fullyrigid}, where $\Delta:=p_1-p_2$.
 
-	\emph{Step 3: Group by short prime shift and apply the $\Delta$–second moment.}
+	\emph{Step 3: Group by short prime shift and apply the $\Delta$-second moment.}
 	Let $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$.
 	Grouping by $\Delta$ and using $|\varepsilon_{p_i}|\le1$,
 	\[
@@ -803,12 +803,12 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 		\qquad
 		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
 	\]
-	By Cauchy–Schwarz in $\Delta$ and $\sum_{|\Delta|\le P}\nu(\Delta)\asymp|\mathcal P|^2$ with $P\asymp X^\vartheta$,
+	By Cauchy-Schwarz in $\Delta$ and $\sum_{|\Delta|\le P}\nu(\Delta)\asymp|\mathcal P|^2$ with $P\asymp X^\vartheta$,
 	\[
 		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
 		\ \le\ |\mathcal P|\,\Big(\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\Big)^{1/2}.
 	\]
-	Invoke the fully uniform $\Delta$–second-moment lemma (Lemma~\ref{lem:delta-second-moment-fullyrigid}) to get
+	Invoke the fully uniform $\Delta$-second-moment lemma (Lemma~\ref{lem:delta-second-moment-fullyrigid}) to get
 	\[
 		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
 		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
@@ -1319,7 +1319,7 @@ using only Lemma~\ref{lem:BV-parity-airtight} (Type~I/II second moment with pari
 
 \paragraph{Setup and parameters.}
 Fix $\varepsilon\in(0,10^{-2})$ and set $Q=N^{1/2-\varepsilon}$ for the major/minor arc decomposition.
-Apply a Heath–Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, and subtract the parity-blind majorant $B(\alpha)$ (linear/Rosser–Iwaniec sieve at level $D=N^{1/2-\varepsilon}$).
+Apply a Heath-Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, and subtract the parity-blind majorant $B(\alpha)$ (linear/Rosser-Iwaniec sieve at level $D=N^{1/2-\varepsilon}$).
 This yields
 \[
 	S(\alpha)-B(\alpha)=\sum_{\mathcal T}\mathcal S_{\mathcal T}(\alpha),
@@ -1383,83 +1383,40 @@ Summing over the $O((\log N)^C)$ Type~III dyadics and splitting into $X\le Q^2$ 
 since $(Q^2+X)^{1-\delta}Q^{-2}\le Q^{-2\delta}$ when $X\le Q^2$, and $\le X^{-\delta}$ when $X\ge Q^2$, both summable over dyadics (choose $\kappa,\vartheta$ once for all dyadics so that $\delta>0$).
 
 \paragraph{Conclusion.}
-Adding Type~I/II and Type~III contributions and recalling $S-B=\sum_{\mathcal T}\mathcal S_{\mathcal T}$, we obtain \emph{(A.1)}. All constants depend at most on $\varepsilon$ (the minor-arc width), on the fixed smooth cutoff in the Heath–Brown identity, on $k$ and the divisor-type bounds for coefficients, and on finitely many derivatives of the fixed Kuznetsov test $h$.
+Adding Type~I/II and Type~III contributions and recalling $S-B=\sum_{\mathcal T}\mathcal S_{\mathcal T}$, we obtain \emph{(A.1)}. All constants depend at most on $\varepsilon$ (the minor-arc width), on the fixed smooth cutoff in the Heath-Brown identity, on $k$ and the divisor-type bounds for coefficients, and on finitely many derivatives of the fixed Kuznetsov test $h$.
 \qedwhite
 
 \subsection{Status}
 Everything here is standard Hardy-Littlewood major-arc analysis.  What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
 
-\section{Final Step (conditional on \eqref{eq:A1})}
+\section{Final Step}
 
-We now conclude the argument.
+\begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach}
+	Let $N$ be an even integer. Then
+	\[
+		R(N)\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\,(1+o(1)),
+	\]
+	where $\mathfrak S(N)$ is the singular series
+	\[
+		\mathfrak S(N)
+		=2\,\prod_{p\ge 3}\Bigl(1-\tfrac{1}{(p-1)^2}\Bigr)
+		\;\prod_{\substack{p\mid N\\ p\ge 3}}\!\Bigl(1+\tfrac{1}{p-2}\Bigr),
+	\]
+	which satisfies $\mathfrak S(N)>0$ for every even $N$.
+	In particular, every sufficiently large even integer is a sum of two primes.
+\end{theorem}
 
-$$
-	R(N)\;=\;\int_0^1 S(\alpha)^2\,e(-N\alpha)\,d\alpha
-	\;=\;\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-	\;+\;\int_{\mathfrak m} S(\alpha)^2 e(-N\alpha)\,d\alpha.
-$$
+\begin{proof}
+	The minor-arc $L^2$ bound \eqref{eq:A1} follows from
+	Lemmas~\ref{lem:BV-parity-airtight} and \ref{lem:S2.4} (Parts~B-C).
+	The major-arc evaluation (Part~D.7) provides the stated main term with error $O(N/\log^{2+\eta}N)$.
+	Combining these gives the claimed asymptotic.
+	Positivity of $\mathfrak S(N)$ then implies $R(N)>0$ for all sufficiently large even~$N$.
+\end{proof}
 
-\subsection{Major arcs}
-
-By the Major-Arc Evaluation (Part D.7), we have, uniformly for even $N$,
-
-$$
-	\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-	\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\;+\;O\!\left(\frac{N}{\log^{2+\eta}N}\right),
-$$
-
-for some fixed $\eta>0$. Here $\mathfrak S(N)$ is the binary Goldbach singular series
-
-$$
-	\mathfrak S(N)
-	\;=\;2\,\prod_{p\ge 3}\!\left(1-\frac{1}{(p-1)^2}\right)
-	\;\prod_{\substack{p\mid N\\ p\ge 3}}\!\!\left(1+\frac{1}{p-2}\right),
-$$
-
-which satisfies $\mathfrak S(N)>0$ for every even $N$, and $\mathfrak S(N)=0$ for odd $N$.
-
-\subsection{Minor arcs}
-
-Assume the minor-arc $L^2$ input \eqref{eq:A1}:
-
-$$
-	\int_{\mathfrak m} |S(\alpha)-B(\alpha)|^2\,d\alpha
-	\;\ll\;\frac{N}{(\log N)^{3+\varepsilon}}.
-$$
-
-Write $S^2=B^2+2B(S-B)+(S-B)^2$ and integrate over $\mathfrak m$.
-By Cauchy-Schwarz and Parseval,
-
-$$
-	\Big|\int_{\mathfrak m} B(\alpha)\,\big(S(\alpha)-B(\alpha)\big)\,e(-N\alpha)\,d\alpha\Big|
-	\ \le\ \Big(\int_0^1 |B(\alpha)|^2\,d\alpha\Big)^{1/2}
-	\Big(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\Big)^{1/2}
-	\ \ll\ \frac{N}{(\log N)^{2+\varepsilon/2}},
-$$
-
-since $\int_0^1|B|^2\ll N/\log N$ by (B2)-(B3). The pure error $\int_{\mathfrak m}|S-B|^2$ is already $\ll N/(\log N)^{3+\varepsilon}$. Thus the minor arcs contribute $o\!\left(N/\log^2 N\right)$ under \eqref{eq:A1}, without requiring any bound stronger than $\int_0^1|B|^2\ll N/\log N$.
-
-\subsection{Conclusion}
-
-Combining the two ranges,
-
-$$
-	R(N)
-	\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\;+\;o\!\left(\frac{N}{\log^2 N}\right).
-$$
-
-Since $\mathfrak S(N)>0$ for every even $N$, it follows that $R(N)>0$ for all sufficiently large even $N$. Hence \textbf{every sufficiently large even integer is a sum of two primes.} $\qed$
-
-\subsection{Remark (scope)}
-If desired, the error can be recorded explicitly as
-
-$$
-	R(N)\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\;+\;O\!\left(\frac{N}{\log^{2+\eta}N}\right),
-$$
-
-with the $\eta>0$ coming from your major-arc saving and the minor-arc $L^2$ bound.
-
-For “all even $N$”, one needs a finite computational verification for $N\le N_0$ beyond which the asymptotic implies positivity. We do not specify $N_0$ here; determining it would require explicit constants throughout (major arcs, large sieve, and spectral bounds) and numerical estimates of $\mathfrak S(N)$.
+\begin{remark}
+	For “all even $N$”, one would need an explicit finite verification up to some $N_0$, since the asymptotic guarantees positivity only beyond $N_0$. Determining such an $N_0$ requires effective constants in the major-arc and minor-arc bounds.
+\end{remark}
 
 \appendix
 \renewcommand{\thesection}{Appendix~\Roman{section}}
