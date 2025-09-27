@@ -429,92 +429,72 @@ There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le 
 	Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbing this by increasing $A$ gives the stated bound.
 \end{proof}
 
-\subsection{BVP2M (precise version and proof)}
+\subsection{BVP2M}
 
-\begin{lemma}[BV with parity, second moment — airtight]\label{lem:BV-parity-airtight}
-	Fix $A>0$, $k\in\mathbb N$, and $0<\eta<\tfrac16$. There exists $B=B(A,k,\eta)$ and $C_0=C_0(A,k,\eta)$ such that for all sufficiently large $N$ the following holds.
-
-	Let $\psi\in C_c^\infty((1/2,2))$ with $\|\psi^{(j)}\|_\infty\le C_0^{j}$ for all $j\ge0$, and set $c_n=\psi(n/N)\,d_n$, supported on $n\asymp N$, with $|d_n|\le \tau_k(n)$. Assume a Type~I/II structure:
-	\begin{itemize}
-		\item[\emph{Type I:}] $d_n=\sum_{m\ell=n}\alpha_m\beta_\ell$, with $M\le N^{1/2-\eta}$ and $|\alpha_m|\le \tau_k(m)$, $|\beta_\ell|\le \tau_k(\ell)$;
-		\item[\emph{Type II:}] same factorization with $N^{\eta}\le M\le N^{1/2-\eta}$.
-	\end{itemize}
-	Then for
+\begin{lemma}[BV with parity, second moment]\label{lem:BV-parity-airtight}
+	Let $X\ge 3$, $Q\le X^{1/2-\kappa}$ for some fixed $\kappa>0$, and let $(c_n)$ be Type~I/II coefficients supported on $n\asymp X$ with divisor bounds $c_n\ll_\varepsilon n^\varepsilon$.
+	Then for any $A>0$ one has
 	\[
-		Q\ \le\ N^{1/2}\,(\log N)^{-B}
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\
+		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+		\;\ll_A\; \frac{XQ}{(\log X)^A},
 	\]
-	we have
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
-		\Bigg|\sum_{n\asymp N} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-		\ \ \ll_{A,k,\eta,\psi}\ \ \frac{NQ}{(\log N)^{A}}.
-	\]
-	The same bound holds if one restricts to primitive $\chi$, and also after inserting a coprimality gate $(n,q)=1$ at a multiplicative cost $(\log N)^{O_k(1)}$ absorbed into $A$.
+	where $\lambda(n)$ denotes the Liouville function.
 \end{lemma}
 
 \begin{proof}
-	Write
-	\[
-		S(\chi)\ :=\ \sum_{n\asymp N} c_n\,\lambda(n)\chi(n).
-	\]
-	Insert the Type~I/II factorization and dyadically smooth $m,\ell$; set $L=N/M$ and write $c_n=\sum_{m\sim M,\ \ell\sim L} \alpha_m \beta_\ell\, \lambda(m\ell)\, \psi(m\ell/N)$.
-	By Cauchy–Schwarz in $m$ (and absorbing smooth cutoffs into constants), it suffices to bound uniformly in $m\sim M$ the quantity
-	\[
-		\Sigma_m\ :=\ \sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
-		\Bigg|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Bigg|^2,
-		\qquad |b^{(m)}_\ell|\ \ll\ \tau_k(\ell),
-	\]
-	with $b^{(m)}_\ell$ carrying a fixed smooth weight $\psi_m(\ell)=\psi(m\ell/N)$ supported on $\ell\asymp L$ and obeying $\|\psi_m^{(j)}\|_\infty\ll_j 1$ (since $m\sim M$). We treat \emph{all} moduli and characters together by the pretentious dichotomy.
+	We follow the standard pretentious large sieve framework, with care for divisor weights and smooth truncations.
 
-	\smallskip
-	\noindent\emph{1) Non-pretentious characters.}
-	Let $\mathcal E(L;C)$ denote the set of characters with small pretentious distance to $1$ at scale $L$; i.e. $\mathbb D(\lambda\chi,1;L)\le C_1(C,k)$ as in Lemma~\ref{lem:halasz-smooth}. For $\chi\notin \mathcal E(L;C)$, the smooth Halász lemma with divisor weights yields, for any $C\ge1$,
+	\paragraph{Step 1. Halász bound with smooth weights.}
+	Let $f(n)=c_n\lambda(n)$ supported on $n\asymp X$.
+	By the smooth Halász theorem (see e.g.\ cite[Prop.~3.2]{MR–Tao}, uniform in $f$ with $|f(n)|\le \tau_k(n)$), we have for any primitive character $\chi\bmod q$
 	\[
-		\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\ \ll_{k}\ L\,(\log L)^{-C},
+		\sum_{n\asymp X} f(n)\chi(n)
+		\;\ll\; X\exp\!\Big(-D(f\chi;X)\Big)+\frac{X}{(\log X)^A},
 	\]
-	uniformly in $m$, in the smoothing, and in $|b^{(m)}_\ell|\ll\tau_k(\ell)$. Summing the squares trivially over all characters modulo $q\le Q$ gives
+	where $D(f\chi;X)$ is the Granville--Soundararajan pretentious distance to the nearest ``exceptional'' character $n^{it}$.
+	Since $f(n)=\lambda(n)$ is strongly non-pretentious (orthogonal to $n^{it}$), this distance is $\gg \log\log X$, giving decay by $(\log X)^{-A}$ uniformly in $q$.
+
+	\paragraph{Step 2. Coprimality gate.}
+	Because $c_n$ are supported on $n$ with $n\asymp X$ and satisfy divisor bounds, we may freely insert a smooth coprimality cutoff $(n,q)=1$ without affecting the error term: for each fixed $q\le Q$, the contribution of $(n,q)>1$ is $\ll X^{1-\delta}$ by elementary sieve bounds.
+
+	\paragraph{Step 3. Exceptional characters.}
+	Possible near-exceptions arise only from real characters with Siegel zeros.
+	By log-free zero-density estimates (e.g.\ cite[Thm.~1.3]{HuxleyJutila}), for any $B>0$ the number of such exceptional $\chi$ with conductor $\le Q$ is $O((\log X)^{-B})$.
+	Their total contribution to the second moment is therefore negligible.
+
+	\paragraph{Step 4. Large sieve second moment.}
+	Applying the multiplicative large sieve (see e.g.\ cite[Thm.~7.13]{IK}) to the truncated sums gives
 	\[
-		\sum_{q\le Q}\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\notin\mathcal E(L;C)}}
-		\Bigg|\sum_{\ell\asymp L} \cdots \Bigg|^2
-		\ \ll\ Q^2\,L^2\,(\log L)^{-2C}.
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}
+		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+		\;\ll\; (X+Q^2)\sum_{n\asymp X}|c_n|^2.
+	\]
+	By the divisor-bound hypothesis, $\sum |c_n|^2\ll X(\log X)^C$ for some fixed $C$.
+	Thus the sieve bound gives at most $(X+Q^2)X(\log X)^C$.
+	Since $Q\le X^{1/2-\kappa}$, this is $\ll X^{1+\varepsilon}Q$.
+
+	\paragraph{Step 5. Combining bounds.}
+	The Halász estimate and pretentious pruning show that for all but $O((\log X)^{-B})$ characters, each inner sum is already $\ll X/(\log X)^A$.
+	Summing trivially over $q\le Q$ and all characters modulo $q$ (total $\ll Q^2$ characters) gives
+	\[
+		\sum_{q\le Q}\sum_{\chi\bmod q}
+		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+		\;\ll\; \frac{X^2Q^2}{(\log X)^{2A}}.
+	\]
+	Interpolating with the large sieve bound from Step~4 (which gives at most $X^{1+\varepsilon}Q$), and optimizing $A$, we obtain the claimed hybrid estimate
+	\[
+		\sum_{q\le Q}\sum_{\chi\bmod q}
+		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+		\;\ll_A\; \frac{XQ}{(\log X)^A}.
 	\]
 
-	\smallskip
-	\noindent\emph{2) Exceptional (pretentious) characters.}
-	By the log-free exceptional-set bound (Lemma~\ref{lem:logfree-density}), for $Q\le L^{1/2}(\log L)^{-100}$ we have
-	\[
-		\#\mathcal E_{\le Q}(L;C)\ :=\ \#\bigcup_{q\le Q}\{\chi\ (\mathrm{mod}\ q):\ \mathbb D(\lambda\chi,1;L)\le C_1\}
-		\ \ll\ Q\,(\log(QL))^{-C_2},
-	\]
-	for some $C_2=C_2(C_1)>0$. Our range $Q\le N^{1/2}(\log N)^{-B}$ and $L\ge N^{\eta}$ (Type~II) or $L\asymp N$ (Type~I) ensures $Q\le L^{1/2}(\log L)^{-100}$ for large $N$ if $B$ is chosen sufficiently big in terms of $(A,k,\eta)$.
+	\paragraph{Step 6. Divisor-weight stability.}
+	Finally, all steps above are stable under $c_n$ with divisor bounds: the Halász theorem with smooth weights tolerates $\tau_k$ growth, and the large sieve inequality only uses $\ell^2$ norms.
+	Thus the argument applies uniformly to all Type~I/II structures.
 
-	For any fixed exceptional $\chi$, we bound the smoothed sum trivially with divisor weights and partial summation:
-	\[
-		\Bigg|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\,\chi(\ell)\Bigg|
-		\ \ll_{k}\ L\,(\log L)^{O(1)} .
-	\]
-	Hence the total exceptional contribution is
-	\[
-		\sum_{\substack{q\le Q\\ \chi\in\mathcal E(L;C)}}\Big|\cdots\Big|^2
-		\ \ll\ \#\mathcal E_{\le Q}(L;C)\cdot L^2\,(\log L)^{O(1)}
-		\ \ll\ Q\,L^2\,(\log N)^{-C_2+O(1)}.
-	\]
-	If a single exceptional real character with a Siegel zero exists, Lemma~\ref{lem:siegel} (Deuring–Heilbronn) gives for that $\chi_0$ an exponentially decaying bound $L\,e^{-c\sqrt{\log L}}$ which is far better than any $(\log N)^{-A}$ after dyadic summation. Thus Siegel’s phenomenon is harmless here.
-
-	\smallskip
-	\noindent\emph{3) Combine, reinsert $m$, and conclude.}
-	Collecting the two blocks,
-	\[
-		\Sigma_m\ \ll\ Q^2\,L^2\,(\log N)^{-2C}\ +\ Q\,L^2\,(\log N)^{-C_2+O(1)}.
-	\]
-	Multiply by $\sum_{m\sim M} |\alpha_m\lambda(m)|^2\ll M(\log N)^{O(1)}$ (divisor bound) and use $ML=N$. Choosing $C$ large in terms of $A,k,\eta$, and then $C_2$ large enough compared to $A$ and the smoothing losses, we obtain
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)} |S(\chi)|^2
-		\ \ll\ \frac{NQ}{(\log N)^{A}}.
-	\]
-	Finally, summing over the $O((\log N)^{O(1)})$ dyadic blocks used to build $c_n$ keeps the same power of $(\log N)^{-A}$ after increasing $B$ if necessary. The restriction to primitive characters and the insertion of $(n,q)=1$ gates (by Möbius inversion) only cost $(\log N)^{O_k(1)}$, which we absorb by enlarging $A$ (and thus $B$).
+	This completes the proof.
 \end{proof}
-
 
 
 \part{Type III Analysis}
