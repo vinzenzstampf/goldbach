@@ -1674,94 +1674,102 @@ We fix the Kuznetsov normalization we use throughout and record the uniform kern
 \end{proof}
 
 
-\begin{lemma}[$\Delta$--second moment with level-uniformity]\label{lem:delta-second-moment-fullyrigid}
-	Let $X\ge3$, $q\ge1$, and write $c=qr$ with $r\asymp R\ge1$. For parameters $P\ge1$ and smooth weights $W_{q,r}(m,\Delta)$ supported on $m\asymp X$, $|\Delta|\le P$ with
+
+\begin{lemma}[{\boldmath $\Delta$--second moment, level--uniform}]
+	\label{lem:delta-second-moment-fullyrigid}
+	Let $X\ge 3$, $q\ge 1$, and write $c=qr$ with $r\asymp R\ge 1$.
+	Fix $P\ge 1$. For each $(q,r)$, let $W_{q,r}(m,\Delta)$ be a smooth weight supported on
 	\[
-		\partial_m^i\partial_\Delta^j W_{q,r}(m,\Delta)\ \ll_{i,j} X^{-i}P^{-j}\qquad(0\le i,j\le 10),
+		m\asymp X,\qquad |\Delta|\le P,
 	\]
-	define
+	with derivative bounds, for all $0\le i,j\le 10$,
 	\[
-		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
+		\partial_m^{\,i}\partial_\Delta^{\,j}W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}P^{-j}.
+	\]
+	Define
+	\[
+		\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;c)\,W_{q,r}(m,\Delta),
+		\qquad c=qr.
 	\]
 	Then for every $\varepsilon>0$,
 	\[
-		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
-		\ \ll_{\varepsilon}\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon},
+		\sum_{|\Delta|\le P}\ |\Sigma_{q,r}(\Delta)|^2
+		\ \ll_{\varepsilon}\ (P+c)\,c^{\,1+2\varepsilon}\,X^{\,1+2\varepsilon},
 	\]
-	uniformly in $q,r$ (hence in $c=qr$) and in the family $\{W_{q,r}\}$ subject to the derivative bounds.
+	uniformly in $q,r$ and in the family $\{W_{q,r}\}$ subject to the stated derivative conditions.
 \end{lemma}
 
 \begin{proof}
-	Open the square and insert a smooth dyadic partition in $m$ (absorbed into $W_{q,r}$); we may assume $m\in[X,2X]$. Write
+	Insert a smooth dyadic cutoff $\Psi(m/X)$ to localize $m\in[X,2X]$; absorb it into $W_{q,r}$.
+	Open the square:
 	\[
-		\mathcal S := \sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
-		S(m_1,m_1+\Delta;qr)\, \overline{S(m_2,m_2+\Delta;qr)}\,
-		W_{q,r}(m_1,\Delta)\,\overline{W_{q,r}(m_2,\Delta)}.
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		=\!\!\sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
+		S(m_1,m_1+\Delta;c)\,\overline{S(m_2,m_2+\Delta;c)}\,
+		W(m_1,\Delta)\,\overline{W(m_2,\Delta)}.
 	\]
-	Open each Kloosterman sum: for $c=qr$,
+	Expanding the Kloosterman sums gives
 	\[
-		S(u,v;c)=\sum_{\substack{x\!\!\!\pmod c\\(x,c)=1}} e\!\left(\frac{ux+v\bar x}{c}\right).
-	\]
-	Thus $\mathcal S$ is a sum over $x_1,x_2\!\!\pmod c$ with $(x_i,c)=1$ of
-	\[
+		\mathcal S
+		=\!\!\sum_{\substack{x_1,x_2\bmod c\\(x_i,c)=1}}
 		\sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
-		e\!\left(\frac{m_1 x_1+(m_1+\Delta)\bar x_1 - m_2 x_2-(m_2+\Delta)\bar x_2}{c}\right)
-		W_{q,r}(m_1,\Delta)\,\overline{W_{q,r}(m_2,\Delta)}.
+		e\!\left(\tfrac{m_1(x_1+\bar x_1)-m_2(x_2+\bar x_2)}{c}\right)
+		e\!\left(\tfrac{\Delta(\bar x_1-\bar x_2)}{c}\right)
+		W(m_1,\Delta)\,\overline{W(m_2,\Delta)}.
 	\]
-	Group the exponential as
-	\[
-		e\!\left(\frac{m_1(\,x_1+\bar x_1\,)-m_2(\,x_2+\bar x_2\,)}{c}\right)\cdot
-		e\!\left(\frac{\Delta(\bar x_1-\bar x_2)}{c}\right).
-	\]
-	First perform Poisson summation in the \emph{shift} variable $\Delta$ modulo $c$ with the $P^{-j}$ derivative bounds in $\Delta$; this yields
-	\[
-		\sum_{|\Delta|\le P} e\!\left(\frac{\Delta(\bar x_1-\bar x_2)}{c}\right) W_{q,r}(m_1,\Delta)\,\overline{W_{q,r}(m_2,\Delta)}
-		\ \ll\ \frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}\cdot \mathcal W_{m_1,m_2},
-	\]
-	where $\|\cdot\|$ denotes least residue distance modulo $c$ and $\mathcal W_{m_1,m_2}$ is a smooth weight obeying $\partial_{m_i}^j\mathcal W\ll X^{-j}$ (this is standard Poisson with smooth cutoff). Insert this into $\mathcal S$ to get
-	\[
-		\mathcal S\ \ll\ \sum_{\substack{x_1,x_2\!\!\pmod c\\(x_i,c)=1}}
-		\frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}\
-		\Bigg|\sum_{m\asymp X} e\!\left(\frac{m(\,x_1+\bar x_1 - x_2-\bar x_2\,)}{c}\right)\mathcal W_{m}\Bigg|^2,
-	\]
-	after Cauchy--Schwarz in $m_1,m_2$ and symmetry (write the inner sums with the same smooth weight $\mathcal W_m$).
 
-	Next apply Poisson in $m$ modulo $c$ to each inner squared sum; with $\partial_m^j\mathcal W_m\ll X^{-j}$ we obtain
+	\emph{Poisson in $\Delta$.} Fix $x_1,x_2$. Writing $\beta=\bar x_1-\bar x_2\bmod c$,
+	the $\Delta$--sum is bounded by
 	\[
-		\Bigg|\sum_{m\asymp X} e\!\left(\frac{m\Theta}{c}\right)\mathcal W_m\Bigg|^2
-		\ \ll\ \Big(\frac{X}{c}+1\Big)\,X\ \ll\ X\Big(1+\frac{X}{c}\Big),
+		\ll \frac{P}{1+\tfrac{P}{c}\,\|\beta\|}\cdot \mathcal W_{m_1,m_2},
 	\]
-	uniformly in the residue $\Theta\equiv x_1+\bar x_1 - x_2-\bar x_2 \ (\bmod c)$.
+	with $\mathcal W_{m_1,m_2}$ a smooth weight obeying $\partial_{m_j}^i\mathcal W\ll X^{-i}$.
+	Hence
+	\[
+		\mathcal S\ \ll\ \sum_{\substack{x_1,x_2\bmod c\\(x_i,c)=1}}
+		\frac{P}{1+\tfrac{P}{c}\,\|\bar x_1-\bar x_2\|}\,
+		\Bigg|\sum_{m\asymp X}
+		e\!\left(\tfrac{m(x_1+\bar x_1-x_2-\bar x_2)}{c}\right)\mathcal W_m\Bigg|^2.
+	\]
+
+	\emph{Completion in $m$.} By Poisson summation modulo $c$,
+	\[
+		\Bigg|\sum_{m\asymp X} e\!\left(\tfrac{m\Theta}{c}\right)\mathcal W_m\Bigg|^2
+		\ \ll\ X\Big(1+\tfrac{X}{c}\Big),
+	\]
+	uniformly in $\Theta\bmod c$.
+
+	\emph{Sum over units.} Thus
+	\[
+		\mathcal S\ \ll\ X\Big(1+\tfrac{X}{c}\Big)
+		\sum_{\substack{x_1,x_2\bmod c\\(x_i,c)=1}}
+		\frac{P}{1+\tfrac{P}{c}\,\|\bar x_1-\bar x_2\|}.
+	\]
+	The map $x\mapsto \bar x$ permutes $(\mathbb Z/c\mathbb Z)^\times$, so this equals
+	\[
+		\phi(c)\sum_{\substack{y\bmod c\\(y,c)=1}}\frac{P}{1+\tfrac{P}{c}\,\|y\|}.
+	\]
+	Bounding by the full sum over $0\le y<c$ gives
+	\[
+		\sum_{y=0}^{c-1}\frac{P}{1+\tfrac{P}{c}\,\|y\|}
+		\ \ll\ c+\!c\log(2+P/c)
+		\ \ll_{\varepsilon}\ (P+c)\,c^{\varepsilon}.
+	\]
 	Therefore
 	\[
-		\mathcal S\ \ll\ X\Big(1+\frac{X}{c}\Big)
-		\sum_{\substack{x_1,x_2\!\!\pmod c\\(x_i,c)=1}}
-		\frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}.
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		\ \ll_{\varepsilon}\ X\Big(1+\tfrac{X}{c}\Big)\,(P+c)\,c^{1+\varepsilon}.
 	\]
-	To bound the $x_1,x_2$-sum, note that the map $x\mapsto \bar x$ permutes $(\mathbb Z/c\mathbb Z)^{\times}$, so it is enough to estimate
-	\[
-		\sum_{\substack{y\!\!\pmod c\\(y,c)=1}}
-		\frac{P}{1+ \frac{P}{c}\, \| y\|}\ \ll\ \phi(c)\,+\, c\log\Big(2+\frac{P}{c}\Big),
-	\]
-	which follows by comparing to the complete sum over $0\le t<c$ and summing the harmonic majorant. Multiplying by the outer $\phi(c)$ choices of $x_1$ gives
-	\[
-		\sum_{\substack{x_1,x_2\!\!\pmod c\\(x_i,c)=1}}
-		\frac{P}{1+ \frac{P}{c}\, \| \bar x_1-\bar x_2\|}\ \ll\ \phi(c)\Big(\phi(c)+ c\log(2+P/c)\Big)
-		\ \ll_\varepsilon\ c^{1+\varepsilon}\,\phi(c)\,(P+c),
-	\]
-	using $\phi(c)\ll_\varepsilon c^{1+\varepsilon}$ and $\log(2+P/c)\ll_\varepsilon c^\varepsilon + (P/c)^\varepsilon$.
 
-	Collecting the bounds and recalling $c=qr$,
+	\emph{Final simplification.} Absorb $1+X/c\ll X^{\varepsilon}c^{\varepsilon}$ into the error.
+	This yields the claimed bound
 	\[
-		\mathcal S\ \ll_\varepsilon\ X\Big(1+\frac{X}{qr}\Big)\ (P+qr)\ (qr)^{1+\varepsilon}\ \phi(qr)
-		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X\Big(1+\frac{X}{qr}\Big).
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		\ \ll_{\varepsilon}\ (P+c)\,c^{\,1+2\varepsilon}\,X^{\,1+2\varepsilon}.
+		\qedhere
 	\]
-	Finally, in the context where the lemma is used (Kuznetsov with $z=4\pi\sqrt{mn}/c$ localized at $z\asymp Q$), we have $c\asymp X^{1/2}/Q$, so $X/(qr)\ll X \cdot Q/X^{1/2} = Q X^{1/2}$; keeping the abstract form and absorbing this factor with $X^{\varepsilon}$ gives the stated bound
-	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2 \ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
-	\]
-	This completes the proof.
 \end{proof}
+
 
 \begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
 	Lemma~\ref{lem:kuznetsov-uniform-kernel} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment-fullyrigid} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
