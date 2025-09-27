@@ -913,136 +913,78 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 \end{remark}
 
 
-\section{Type-III Spectral Bound}
+\section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
 
-\noindent Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{PASSG (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
+We recall the setup. Fix $X\ge 3$, $Q\le X^{1/2-\kappa}$ with $0<\kappa<1/4$.
+Let $q\in\mathcal Q\subset[Q,2Q]$ and write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
+A prime amplifier of length $|\mathcal P|\asymp P/\log P$ with $P=X^{\vartheta}$ is fixed.
+After linearizing Hecke relations and applying Kuznetsov with a compactly supported test,
+the off--diagonal contribution takes the form
+\[
+	\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
+	\sum_{\Delta\neq 0}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)| \,+\,\text{(negligible tails)},
+\]
+where $\nu(\Delta)$ counts prime pairs $(p_1,p_2)\in\mathcal P^2$ with $p_1-p_2=\Delta$, and
+\[
+	\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta),
+\]
+with $W_{q,r}$ smooth, supported on $m\asymp X$, $|\Delta|\le P$, and satisfying
+$\partial_m^i\partial_\Delta^j W\ll X^{-i}P^{-j}$.
 
-\begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$. For $Q\ge 1$, let the outer sums range over moduli $q\le Q$, primitive characters $\chi\pmod q$, and an orthonormal Hecke basis $f$ (holomorphic + Maa\ss, including oldforms and Eisenstein as in Kuznetsov). Assume \textbf{PASSG (Prime-averaged short-shift gain)} holds with some fixed $\delta>0$. Then, for any $\varepsilon>0$,
+\begin{lemma}[{$\Delta$--second moment}]\label{lem:Delta2}
+	For every $\varepsilon>0$ and all $q,r,P,X$ as above, one has
+	\[
+		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
+		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+	\]
+	The bound is uniform in $q,r$ and in the family of weights $W_{q,r}$.
+\end{lemma}
 
-	$$
-		\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}\ \sum_{f}
-		\Bigg|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Bigg|^2
-		\ \ \ll_{\varepsilon,C}\ \ (Q^2+X)^{\,1-\delta}\,X^{\varepsilon}.
-	$$
-
-\end{proposition}
-
-\begin{proof}[Proof using Lemma~\ref{lem:S2.4}]
-
-	\noindent\textbf{Step 1: Balanced prime amplifier that kills the diagonal.}
-	Let $\mathcal P$ be the set of primes $p\in[P,2P]$ with $P=X^\vartheta$ (to be chosen; PASSG is uniform in $P$).
-	Choose deterministic signs $\varepsilon_p\in\{\pm 1\}$ so that
-
-	$$
-		\sum_{p\in\mathcal P}\varepsilon_p=0
-		\qquad\text{and}\qquad
-		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \ll\ |\mathcal P|\cdot \mathbf{1}_{|\Delta|\le P^{1-o(1)}},
-	$$
-
-	i.e. a “balanced Rademacher” choice; a random choice satisfies this with probability $\gg 1$, and we fix one such choice.
-
-	Define the amplifier on the spectrum:
-
-	$$
-		A_f \ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p).
-	$$
-
-	Because $\sum_p\varepsilon_p=0$, expanding $|A_f|^2$ removes the pure diagonal $p=p'$ on average over signs, leaving only short prime shifts $p\neq p'$ with $\Delta = p-p'$ (the “short-shift” structure needed for PASSG).
-
-	\noindent\textbf{Step 2: Diagonal-free reduction by polarization.}
-	For any complex numbers $S_f$,
-
-	$$
-		\sum_f |S_f|^2
-		=\frac{1}{\sum_{p\in\mathcal P}\varepsilon_p^2}\,
-		\sum_f |S_f|^2\cdot \Big(\sum_{p\in\mathcal P}\varepsilon_p^2\Big)
-		=\frac{1}{|\mathcal P|}\sum_f |S_f|^2\cdot \sum_{p\in\mathcal P}1.
-	$$
-
-	Insert $1=\frac{1}{|\mathcal P|}\sum_{p\in\mathcal P}\varepsilon_p^2$ and then \emph{complete the square} with $A_f$:
-
-	$$
-		\sum_f |S_f|^2
-		=\frac{1}{|\mathcal P|^2}\sum_f |S_f|^2\cdot \sum_{p,p'\in\mathcal P}\varepsilon_p\varepsilon_{p'}\,\lambda_f(p)\lambda_f(p')
-		\ \ \le\ \ \frac{1}{|\mathcal P|^2}\sum_f |A_f\,S_f|^2,
-	$$
-
-	where the inequality is Cauchy-Schwarz in $\sum_{p,p'}$ (this is the standard “balanced-amplifier domination”: the diagonal $p=p'$ having zero mean is what prevents a trivial loss).
-
-	Apply this with
-
-	$$
-		S_{q,\chi,f}\ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n).
-	$$
-
-	Summing over $q\le Q,\chi$ gives
-
-	\begin{equation}\label{eq:C31}
-		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
-		\ \ \le\ \ \frac{1}{|\mathcal P|^2}\,
-		\sum_{q\le Q}\sum_{\chi}\sum_f \big|A_f\,S_{q,\chi,f}\big|^2.
-	\end{equation}
-
-	\noindent\textbf{Step 3: Kuznetsov after opening the amplifier.}
-	Open $|A_f S_{q,\chi,f}|^2$ and use Hecke relations to rewrite prime factors $\lambda_f(p)\lambda_f(n)$ as a (short) combination of $\lambda_f(pn)$ and $\lambda_f(n/p)$ (the latter is discarded as $p\nmid n$ for Type-III supports). After summing over $(q,\chi,f)$ and applying Kuznetsov (including oldforms + Eisenstein), the contribution splits into:
-
-	\begin{itemize}
-		\item \textbf{Short-shift off-diagonal (OD):} correlations of the form
-		      $\sum_{p\neq p'\in\mathcal P}\varepsilon_p\varepsilon_{p'}\sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}\, \mathcal{K}_{q}(m, n; p-p')$,
-		      with Kloosterman sums $S(m,n;cq)$ and Bessel kernels;
-		\item \textbf{(Spectral) diagonal/main terms:} the parts that would arise from $p=p'$ or $\Delta=0$, but these are annihilated by $\sum_p\varepsilon_p=0$ and by our balanced-sign choice, leaving at most lower-order boundary terms absorbed in $X^{\varepsilon}$.
-	\end{itemize}
-
-	Precisely this OD piece is what \textbf{PASSG} estimates \emph{after} the amplifier and Kuznetsov:
-
-	\noindent\textbf{PASSG (assumed).} Uniformly in $P=X^\vartheta$,
-
-	$$
-		\mathrm{OD}\ \ \ll\ \ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}.
-	$$
-
-	All Bessel-kernel ranges (small/large) are handled there; Weil bounds for $S(\cdot,\cdot;\cdot)$, the $c\equiv0\pmod q$ constraint, oldforms and Eisenstein, and the short-shift averaging in $\Delta$ are already accounted for in the statement of S2.4.
-
-	Therefore,
-
-	\begin{equation}\label{eq:C32}
-		\sum_{q\le Q}\sum_{\chi}\sum_f \big|A_f\,S_{q,\chi,f}\big|^2
-		\ \ \ll\ \ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}.
-	\end{equation}
-
-
-	\noindent\textbf{Step 4: Divide out the amplifier and optimize $P$.}
-	Insert \eqref{eq:C32} into \eqref{eq:C31}:
-
-	$$
-		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
-		\ \ \ll\ \ \frac{1}{|\mathcal P|^2}\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}
-		\ =\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{-\delta}\,X^{\varepsilon}.
-	$$
-
-	Choose any fixed $\vartheta>0$ (e.g. $\vartheta=\delta/4$) so that $|\mathcal P|=P/\log P=X^{\vartheta+o(1)}$ and absorb $|\mathcal P|^{-\delta}=X^{-\vartheta\delta+o(1)}$ into $X^{\varepsilon}$ (by shrinking $\varepsilon$). This yields
-
-	$$
-		\sum_{q\le Q}\sum_{\chi}\sum_f \Big|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Big|^2
-		\ \ \ll\ \ (Q^2+X)^{1-\delta}\,X^{\varepsilon},
-	$$
-
-	as claimed. $\square$
-
+\begin{proof}
+	See Appendix~\ref{app:Delta2} for the full proof by Poisson in $\Delta$ and $m$.
 \end{proof}
 
-\subsection{Remarks}
+Applying Cauchy--Schwarz in $\Delta$ and noting $\sum\nu(\Delta)\asymp |\mathcal P|^2$,
+we deduce
+\[
+	\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
+	\ \ll_\varepsilon\
+	|\mathcal P|\,(P+qr)^{1/2}\,(qr)^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
+\]
+Therefore
+\[
+	\mathrm{OD}\ \ll_\varepsilon\
+	|\mathcal P|\,X^{1/2+\varepsilon}
+	\sum_{q\in\mathcal Q}\ \sum_{r\asymp R} (qr)^{-1/2+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
+\]
+For fixed $q\sim Q$, the inner $r$--sum contributes $R^{1/2+\varepsilon}$,
+where $R^{1/2}=X^{1/4}Q^{-1}$. Summing $q\sim Q$ gives
+\[
+	\mathrm{OD}\ \ll_\varepsilon\
+	|\mathcal P|\,X^{3/4+\varepsilon}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
+\]
 
-\begin{itemize}
-	\item \textbf{Uniformity \& hypotheses.} The argument only used (i) Type-III structure (smooth $\alpha_n$, divisor bounds), (ii) balanced prime amplifier with $\sum \varepsilon_p=0$, (iii) Kuznetsov with full continuous and oldform ranges, and (iv) PASSG’s OD estimate. No further spectral gap input is needed beyond what S2.4 encapsulates.
+Dividing by the amplifier length $|\mathcal P|^2\asymp P^2/(\log P)^2$,
+we obtain the Type~III spectral bound
+\begin{equation}\label{eq:TypeIII-final}
+	\sum_{q\le Q}\sum_{\chi\bmod q}\sum_f
+	\left|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\right|^2
+	\ \ll_\varepsilon\
+	\frac{X^{3/4+\varepsilon}}{P}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
+\end{equation}
 
-	\item \textbf{Why the diagonal doesn’t spoil the saving.} The balanced amplifier removes the dangerous $p=p'$ contribution \emph{before} applying Kuznetsov. What remains are genuinely shifted correlations $(\Delta\neq 0)$, to which S2.4 applies and gives the $(Q^2+X)^{1-\delta}$ saving.
+Finally, choose $Q=X^{1/2-\kappa}$ with $0<\kappa<1/4$ and $P=X^{\vartheta}$
+with $0<\vartheta<\kappa$. From \eqref{eq:TypeIII-final} one checks that
+\[
+	\sum_{q\le Q}\sum_{\chi\bmod q}\sum_f
+	\left|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\right|^2
+	\ \ll_\varepsilon\ (Q^2+X)^{\,1-\delta},
+\]
+with $\delta\ge\min\{\tfrac12-\tfrac{\kappa}{2},\ \tfrac{\vartheta}{2},\ \kappa-\vartheta\}>0$.
+For instance, the choice $\vartheta=\kappa/2$ yields $\delta=\kappa/2$.
+This completes the Type~III analysis.
+\qed
 
-	\item \textbf{Choice of $\vartheta$.} Any fixed $\vartheta\in(0,1/2)$ permitted by S2.4 works; the $|\mathcal P|^{-\delta}$ factor improves the exponent, and we simply absorb it into $X^{\varepsilon}$.
-\end{itemize}
-
-This completes Part C.5 once PASSG is rigorously in place.
 
 \part{Assembly}
 \section{Dyadic Decomposition (final)}
