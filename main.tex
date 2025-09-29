@@ -1449,7 +1449,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
 
-\subsection{Kuznetsov at level $q$ with level-uniform kernel bounds}
+\subsection{Kuznetsov at level \textit{q} with level-uniform kernel bounds}
 
 We fix normalizations so that the geometric side always has the factor
 $\sum_{c\equiv 0\ (q)} c^{-1} S(m,n;c)\,\mathcal W^{(*)}_{q}\!\big(4\pi\sqrt{mn}/c\big)$,
@@ -1598,7 +1598,7 @@ with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 	Lemma~\ref{lem:kuznetsov-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment-fullyrigid} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
 \end{remark}
 
-\subsection{Hecke $p\mid n$ tails are negligible}\label{sec:hecke-tails}
+\subsection{Hecke \textit p \textbar  \textit n tails are negligible}\label{sec:hecke-tails}
 
 We isolate the ``shorter-support'' branches created by the Hecke relation inside the amplified second moment.
 
@@ -1639,17 +1639,6 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
 \end{remark}
 
-\subsection{Parameter box}
-
-For clarity we record the global parameter choices:
-\begin{itemize}
-	\item Minor--arc cutoff: $Q=N^{1/2-\varepsilon}$ with fixed $\varepsilon\in(0,10^{-2})$.
-	\item Sieve level: $D=N^{1/2-\varepsilon}$, small prime cutoff $z=N^\eta$ with $0<\eta\ll\varepsilon$.
-	\item Heath--Brown identity: cut parameters $U=V=W=N^{1/3}$ producing standard Type~I/II/III ranges.
-	\item Amplifier: primes in $[P,2P]$ with $P=X^\vartheta$, $0<\vartheta<1/6-\kappa$.
-	\item Type~III saving: $\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
-\end{itemize}
-
 \subsection{Auxiliary analytic inputs used in Part B}
 
 We record the external inputs used in Lemma~\ref{thm:BVP2M}; full proofs are standard and can be found in the cited references.
@@ -1678,21 +1667,6 @@ We record the external inputs used in Lemma~\ref{thm:BVP2M}; full proofs are sta
 	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
 \end{lemma}
 
-\subsection{Admissible parameter tuple and verification}
-
-We fix explicit values valid for large $N$:
-
-\[
-	\varepsilon=10^{-3},\qquad \eta=10^{-4},\qquad \kappa=10^{-3},\qquad \vartheta=\kappa/8=1.25\times 10^{-4}.
-\]
-
-Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\le L^{1/2}(\log L)^{-100}$ for large $N$, so Lemma~\ref{lem:logfree-density} applies. In Part C, $P=X^{\vartheta}$ satisfies $\vartheta<1/6-\kappa$, and
-\[
-	\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
-\]
-
-Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{thm:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
-
 \subsection{Deterministic balanced signs for the amplifier}
 
 \begin{lemma}[Balanced signs]\label{lem:balanced-signs}
@@ -1708,6 +1682,32 @@ Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~
 \end{proof}
 
 \bigskip
+
+\subsection{Admissible parameter tuple and verification}
+
+For clarity we record the global parameter choices:
+\begin{itemize}
+	\item Minor--arc cutoff: $Q=N^{1/2-\varepsilon}$ with fixed $\varepsilon\in(0,10^{-2})$.
+	\item Sieve level: $D=N^{1/2-\varepsilon}$, small prime cutoff $z=N^\eta$ with $0<\eta\ll\varepsilon$.
+	\item Heath--Brown identity: cut parameters $U=V=W=N^{1/3}$ producing standard Type~I/II/III ranges.
+	\item Amplifier: primes in $[P,2P]$ with $P=X^\vartheta$, $0<\vartheta<1/6-\kappa$.
+	\item Type~III saving: $\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
+\end{itemize}
+
+
+We fix explicit values valid for large $N$:
+
+\[
+	\varepsilon=10^{-3},\qquad \eta=10^{-4},\qquad \kappa=10^{-3},\qquad \vartheta=\kappa/8=1.25\times 10^{-4}.
+\]
+
+Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\le L^{1/2}(\log L)^{-100}$ for large $N$, so Lemma~\ref{lem:logfree-density} applies. In Part C, $P=X^{\vartheta}$ satisfies $\vartheta<1/6-\kappa$, and
+\[
+	\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
+\]
+
+Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{thm:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
+
 
 \section*{References (standard sources)}
 H. Montgomery and R. Vaughan, Multiplicative Number Theory I. Classical Theory, Cambridge Univ. Press.
