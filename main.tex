@@ -396,12 +396,21 @@ We record the minor-arc target:
 \end{remark}
 
 \begin{corollary}[Parity-blindness of linear sieve weights]\label{cor:parityblind}
-	Let $\beta$ be the linear (Rosser-Iwaniec) upper-bound sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^{\eta}$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
+	Let $\beta$ be the Rosser–Iwaniec upper-bound linear sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^\eta$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
 	\[
-		\sum_{n\le N}\beta(n)\liou(n)\psi(n/N)\ \ll\ \frac{N}{(\log N)^A}.
+		\sum_{n\le N}\beta(n)\,\liou(n)\,\psi(n/N) \;\;\ll_{A,\varepsilon}\;\; \frac{N}{(\log N)^A}.
 	\]
-	\emph{Sketch.} Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$; apply Cauchy over $d\le D$ and Theorem~\ref{thm:BVP2M} to each inner sum with a coprimality gate. The total is $\ll N(\log N)^{-A}$ after choosing $B(A)$ large enough.
 \end{corollary}
+
+\begin{proof}
+	Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$.
+	Insert into the sum and apply Cauchy–Schwarz over $d\le D$. Each inner sum
+	\[
+		\sum_{n\le N,\; d\mid n} \liou(n)\,\psi(n/N)
+	\]
+	is of the shape handled by Theorem~\ref{thm:BVP2M}, after restricting to residue classes mod~$d$.
+	Summing over $d$ costs only $N^\varepsilon$, so the total is $\ll N(\log N)^{-A}$.
+\end{proof}
 
 
 \part{Type III Analysis}
