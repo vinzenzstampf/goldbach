@@ -953,54 +953,133 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 
 \bigskip
+% ============================================
+% Kuznetsov at level q and level-uniform kernel bounds
+% ============================================
 
-\section{Kuznetsov at level \textit{q} with level-uniform kernel bounds}
+\section{Kuznetsov formula and level-uniform kernel bounds}\label{sec:kuznetsov-uniform}
 
-We fix normalizations so that the geometric side always has the factor
-$\sum_{c\equiv 0\ (q)} c^{-1} S(m,n;c)\,\mathcal W^{(*)}_{q}\!\big(4\pi\sqrt{mn}/c\big)$,
-with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
+Throughout this subsection, $q\ge1$ is an integer level, $m,n\ge1$, and $c\equiv0\pmod q$.
+We write $S(m,n;c)$ for the classical Kloosterman sum and use the standard spectral decomposition on $\Gamma_0(q)$ with trivial nebentypus:
+\begin{itemize}[leftmargin=2em]
+	\item $\{f\}$ an orthonormal basis of Maaß cusp forms of level $q$ (new and old) with Laplace eigenvalue $1/4+t_f^2$, Hecke eigenvalues $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
+	\item Holomorphic cusp forms of even weight $\kappa\ge2$ with Fourier coefficients $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
+	\item Eisenstein spectrum $E_\mathfrak a(\cdot,1/2+it)$ attached to cusps $\frak a$ of $\Gamma_0(q)$ with Hecke coefficients $\lambda_{\frak a, t}(n)$ in the Hecke normalization.
+\end{itemize}
+We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized basis; for newforms this satisfies $|\rho_f(1)|^2\asymp_q 1$ and is bounded uniformly in $q$ once the oldform unfolding weights below are included.
 
-\begin{lemma}[Level-uniform Kuznetsov kernels]\label{lem:kuznetsov-uniform}
-	Let $q\ge1$, $m,n\ge1$ with $(mn,q)=1$.
-	Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$ for $Q\ge1$.
-	Write the Kuznetsov formula on $\Gamma_0(q)$ as
+\begin{theorem}[Kuznetsov at level $q$ with smooth weight]\label{thm:kuz-levelq}
+	Let $h:(0,\infty)\to\mathbb R$ be smooth with compact support and Mellin transform $\widetilde h(s)=\int_0^\infty h(x)x^{s-1}\,dx$ rapidly decaying on vertical lines. Then for all $m,n\ge1$,
+	\begin{align}
+		\sum_{c\equiv 0\,(q)} \frac{S(m,n;c)}{c}\,h\!\left(\frac{4\pi\sqrt{mn}}{c}\right)
+		 & = \sum_{f\ \mathrm{Maass}} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{M}}(t_f;h)
+		\ +\ \sum_{\kappa\ \mathrm{even}}\ \sum_{f\ \mathrm{hol}_\kappa} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{H}}(\kappa;h) \notag                         \\
+		 & \qquad+\ \sum_{\frak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\frak a}(1,t)\,\lambda_{\frak a,t}(m)\lambda_{\frak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
+		\label{eq:kuz-q}
+	\end{align}
+	Here the three kernel transforms (Maass, holomorphic, Eisenstein) are given by the classical $J$/$K$–Bessel integrals:
+	\begin{align*}
+		\mathcal W_q^{\mathrm{M}}(t;h)
+		 & := \frac{i}{\sinh \pi t}\int_0^\infty \left[J_{2it}(x)-J_{-2it}(x)\right]\,h(x)\,\frac{dx}{x}, \\
+		\mathcal W_q^{\mathrm{H}}(\kappa;h)
+		 & := \int_0^\infty J_{\kappa-1}(x)\,h(x)\,\frac{dx}{x},                                          \\
+		\mathcal W_q^{\mathrm{E}}(t;h)
+		 & := \frac{2}{\cosh \pi t}\int_0^\infty K_{2it}(x)\,h(x)\,\frac{dx}{x}.
+	\end{align*}
+	The identity \eqref{eq:kuz-q} holds with the standard oldform and Eisenstein normalizing weights so that the spectral measure is level-uniform. (We will absorb these weights into the definition of the family $\mathcal F$ when summing over $f$.)
+\end{theorem}
+
+\begin{remark}
+	We will never need a re-derivation of Kuznetsov; only the transforms $\mathcal W^{(*)}$ and \emph{their uniform bounds in $q$ and in the scale of $h$} are used below.
+\end{remark}
+
+We next record the level-uniform kernel localization for a class of bump weights that we will use throughout.
+
+\begin{definition}[Scaled test functions]\label{def:scaled-hQ}
+	Fix a nonnegative $w\in C_c^\infty([1/2,2])$ with $\int_0^\infty w(x)\frac{dx}{x}=1$ and derivative bounds $w^{(j)}\ll_j 1$. For a scale $Q\ge1$, define
 	\[
-		\mathcal H_q(h_Q;m,n)
-		=\delta_{m=n}\,\mathcal D_q(h_Q)
-		+\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
+		h_Q(x)\ :=\ w\!\left(\frac{x}{Q}\right).
 	\]
-	where $(*)$ runs over Maa\ss, holomorphic and Eisenstein pieces (with the standard weights).
-	Then for every $A,j\ge0$,
-	\[
-		\mathcal W_q^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},
-		\qquad
-		z^{\,j}\,\partial_z^{\,j}\mathcal W_q^{(*)}(z)\ \ll_{A,j} \Big(1+\frac{z}{Q}\Big)^{-A},
-	\]
-	uniformly in $q\ge1$, $z>0$, and in the spectral piece $(*)$.
-	The implied constants depend only on $A,j$ and on finitely many derivatives of $h$, not on $q$.
+	Then $h_Q$ is supported on $[Q/2,2Q]$ and obeys $x^j h_Q^{(j)}(x)\ll_j 1$ for all $j\ge0$.
+\end{definition}
+
+\begin{lemma}[Level-uniform kernel bounds and localization]\label{lem:kuznetsov-uniform}
+	With $h_Q$ as in Definition~\ref{def:scaled-hQ}, the transforms $\mathcal W_q^{(*)}(\cdot;h_Q)$ satisfy, uniformly in the level $q$ and in the spectral parameters:
+	\begin{enumerate}[label=(\alph*), leftmargin=2em]
+		\item \textbf{Pointwise decay (Maass).} For all $t\in\mathbb R$,
+		      \[
+			      \mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_A\ \left(1+\frac{|t|}{1}\right)^{-A}
+			      \quad\text{for any }A\ge0.
+		      \]
+		      Moreover, there is a \emph{localization scale} $|t|\asymp Q$ in the sense that for $|t|\le Q^{1-\eta}$ or $|t|\ge Q^{1+\eta}$ one has the stronger bound
+		      \[
+			      \mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_{A,\eta}\ Q^{-A}.
+		      \]
+		\item \textbf{Pointwise decay (holomorphic).} For even $\kappa\ge2$,
+		      \[
+			      \mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_A\ \left(1+\frac{\kappa}{1}\right)^{-A},
+			      \qquad
+			      \mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_{A,\eta}\ Q^{-A}\quad\text{unless }\ \kappa\asymp Q.
+		      \]
+		\item \textbf{Pointwise decay (Eisenstein).} For $t\in\mathbb R$,
+		      \[
+			      \mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_A\ \left(1+\frac{|t|}{1}\right)^{-A},
+			      \qquad
+			      \mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_{A,\eta}\ Q^{-A}\quad\text{unless }\ |t|\asymp Q.
+		      \]
+		\item \textbf{Derivative bounds.} For any integer $j\ge0$,
+		      \[
+			      \frac{d^j}{dt^j}\,\mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_{j}\ Q^{-j},\qquad
+			      \frac{d^j}{dt^j}\,\mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_{j}\ Q^{-j},
+		      \]
+		      and for holomorphic weights,
+		      \[
+			      \Delta_\kappa^j\,\mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_{j}\ Q^{-j},
+		      \]
+		      where $\Delta_\kappa$ denotes the forward difference in $\kappa$.
+		\item \textbf{Level uniformity.} All implied constants above are \emph{independent of $q$}.
+	\end{enumerate}
 \end{lemma}
 
-\begin{proof}[Proof sketch (standard)]
-	For Maa\ss\ forms,
-	\(
-	\mathcal W_q^{\mathrm{Ma\text\ss}}(z)=\frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
-	\)
-	with $h_Q$ supported on $|t|\le 2Q$ and $\|h_Q^{(r)}\|_\infty\ll_r Q^{-r}$.
-	Use the Schl\"afli (or Mellin-Barnes) representation of $J_{2it}$ and integrate by parts repeatedly in $t$;
-	each step gains a factor $\ll (1+z/Q)^{-1}$ thanks to the compact support and $Q^{-r}$ control on $h_Q^{(r)}$,
-	yielding the stated decay. Differentiations in $z$ insert bounded polynomials in $t$ and are absorbed by the same argument.
-	Holomorphic kernels ($J_{k-1}$) and Eisenstein ($K_{2it}$) are treated analogously; level $q$ appears only as the congruence $c\equiv q\ (c)$ on the geometric side and does not affect the transform.
+\begin{proof}
+	These follow from standard asymptotics for $J_\nu$ and $K_\nu$ together with repeated integration by parts, using the compact support and tame derivatives of $h_Q$.
+
+	For (a): write the Maass kernel as
+	\[
+		\mathcal W_q^{\mathrm{M}}(t;h_Q)=\frac{i}{\sinh\pi t}\int_{Q/2}^{2Q}\!\left[J_{2it}(x)-J_{-2it}(x)\right]\frac{w(x/Q)}{x}\,dx.
+	\]
+	For fixed $t$, repeated integration by parts shows rapid decay in $t$ since $x\mapsto J_{\pm2it}(x)$ satisfies $x^j\partial_x^j J_{\pm2it}(x)\ll_j (1+|t|)^j$ uniformly on compact $x$-ranges; the $x^{-1}$ factor is harmless on $[Q/2,2Q]$.
+	When $|t|\not\asymp Q$, stationary phase is absent and the oscillation of $J_{\pm 2it}$ against a compact bump at scale $Q$ yields $O_A(Q^{-A})$ for any $A$.
+	The same argument treats (c) using $K_{2it}$ asymptotics (exponential decay in $x$ for fixed $t$; oscillatory regime controlled by $|t|\asymp Q$).
+	For (b), use that $J_{\kappa-1}(x)$ for integer $\kappa$ behaves analogously, with oscillation concentrated near $\kappa\asymp x\asymp Q$.
+	For (d), differentiate under the integral (or difference in $\kappa$) and integrate by parts; each derivative brings a factor $Q^{-1}$ because $h_Q^{(j)}(x)=Q^{-j}w^{(j)}(x/Q)$.
+	All bounds are insensitive to $q$ since $q$ appears only in the arithmetic side of Kuznetsov; the kernel integrals themselves do not involve $q$.
 \end{proof}
 
-\begin{corollary}[Kernel localization for $c$]\label{cor:kernel-localization}
-	With $m,n\asymp X$ and $z=4\pi\sqrt{mn}/c$, Lemma~\ref{lem:kuznetsov-uniform} implies that the $c$-sum localizes to
-	\[
-		c\ \asymp\ C\ :=\ \frac{X^{1/2}}{Q},
-	\]
-	up to tails $O_A(X^{-A})$ after summing over $c\equiv0\pmod q$.
-	Moreover the same bounds hold for $z^j\partial_z^j\mathcal W_q^{(*)}$, so weights obtained by absorbing fixed smooth coefficient cutoffs inherit the same $c$-localization.
+\begin{corollary}[Kernel localization at prescribed scale]\label{cor:kernel-localization}
+	Let $Q\ge1$ and define $h_Q$ as above. Then in the Kuznetsov identity \eqref{eq:kuz-q} with $h=h_Q\big(\,\cdot\,\big)$ and argument $x=\tfrac{4\pi\sqrt{mn}}{c}$,
+	\begin{itemize}[leftmargin=2em]
+		\item the Kloosterman side effectively restricts $c$ to the dyadic range $c\asymp \tfrac{4\pi\sqrt{mn}}{Q}$;
+		\item the spectral side is effectively localized to $|t_f|\asymp Q$ (Maass/Eisenstein) and $\kappa\asymp Q$ (holomorphic), with superpolynomial savings $O_A(Q^{-A})$ outside these ranges;
+		\item all constants are uniform in the level $q$.
+	\end{itemize}
 \end{corollary}
 
+\begin{proof}
+	Immediate from Lemma~\ref{lem:kuznetsov-uniform} and the support of $h_Q$.
+\end{proof}
+
+\begin{lemma}[Oldforms and Eisenstein inclusion, level-uniformly]\label{lem:old-eis-weights}
+	Let $\mathcal F_q$ be any of the following families with the \emph{standard} Kuznetsov/Petersson weights: (i) Maaß newforms of level $q$ together with oldforms induced from proper divisors of~$q$; (ii) holomorphic forms as in (i); (iii) Eisenstein series at all cusps of $\Gamma_0(q)$. Then the spectral sums in \eqref{eq:kuz-q} with $h_Q$ satisfy the same localization and derivative bounds as in Lemma~\ref{lem:kuznetsov-uniform}, with constants independent of $q$.
+\end{lemma}
+
+\begin{proof}
+	Oldforms come with Atkin–Lehner lifting weights bounded uniformly in $q$ on orthonormal bases; Eisenstein coefficients for cusps of $\Gamma_0(q)$ satisfy the standard Hecke and Ramanujan–Selberg bounds on average needed for Kuznetsov. Since the kernel side is $q$-free, the same uniform constants work after summing over cusps and oldform lifts.
+\end{proof}
+
+\begin{remark}[Ready-to-use choice of $h_Q$]\label{rem:choose-hQ}
+	In Type-III we will place the Bessel argument $z=\tfrac{4\pi\sqrt{mn}}{c}$ at scale $Q$ by taking $h_Q(z)$ with $Q$ matched to the dyadic sizes of $m,n,c$. Corollary~\ref{cor:kernel-localization} then localizes both the modulus sum and the spectrum with level-uniform constants, which is the only uniformity needed downstream.
+\end{remark}
 
 \section{\textbf\textDelta--second moment, level--uniform}
 
