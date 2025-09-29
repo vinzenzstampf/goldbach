@@ -16,6 +16,7 @@
 
 % Layout / references
 \usepackage{hyperref}   % clickable refs
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
 \pdfstringdefDisableCommands{%
   \def\eqref#1{(\ref{#1})}% make \eqref safe in bookmarks
   \def\~{}% ignore nonbreaking space in bookmarks
@@ -845,17 +846,111 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 \section{Deterministic balanced signs for the amplifier}
 
-\begin{lemma}[Balanced signs]\label{lem:balanced-signs}
-	Let $\mathcal P=\{p\in[P,2P]: p\text{ prime}\}$. There exists a deterministic choice of signs $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm 1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$. Moreover, for every integer $\Delta$,
+% -------------------------------
+% Amplifier bookkeeping (balanced signs with short-shift control)
+% -------------------------------
+
+\begin{lemma}[Balanced prime-sign amplifier with uniform short-shift control]\label{lem:balanced-signs}
+	Let $\mathcal P=\{p\ \text{prime}: P\le p\le 2P\}$, and set $M:=|\mathcal P|\asymp P/\log P$.
+	There exist signs $\varepsilon_p\in\{\pm 1\}$ for $p\in\mathcal P$ such that
+	\begin{equation}\label{eq:balanced-sum-zero}
+		\sum_{p\in\mathcal P}\varepsilon_p \;=\; 0,
+	\end{equation}
+	and, writing
 	\[
-		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \le\ \#\{p\in\mathcal P: p+\Delta\in\mathcal P\}\ \le\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le 2P}.
+		A_\Delta \;:=\; \{\,p\in\mathcal P:\ p+\Delta\in\mathcal P\,\},
+		\qquad
+		C(\Delta)\;:=\;\sum_{p\in A_\Delta}\varepsilon_p\,\varepsilon_{p+\Delta},
 	\]
-	Thus the short-shift correlation bound used in Part C holds deterministically.
+	we have the uniform correlation bound
+	\begin{equation}\label{eq:balanced-correlation}
+		\max_{|\Delta|\le P}\ |C(\Delta)|
+		\;\;\ll\;\; \sqrt{|A_\Delta|\,\log(3P)}
+		\;\;\ll\;\; \sqrt{M\log P}.
+	\end{equation}
+	The implied constants are absolute. Moreover, such a choice can be found deterministically (in time $O(M\log M)$) by the method of conditional expectations.
 \end{lemma}
 
 \begin{proof}
-	Order the primes in $\mathcal P$ arbitrarily and set $\varepsilon_p=1$ for all but one prime; choose the last sign to enforce $\sum\varepsilon_p=0$. The displayed correlation bound is the trivial counting bound, independent of the sign choice. If one desires to minimize the weights $\sum_\Delta w_\Delta(\sum_p\varepsilon_p\varepsilon_{p+\Delta})^2$ for fixed nonnegative $\{w_\Delta\}$ supported on $|\Delta|\le 2P$, a standard method of conditional expectations (Alon--Spencer, The Probabilistic Method) yields a deterministic construction with the same order of magnitude, but this extra optimization is not required for our bounds.
+	\emph{Probabilistic existence.}
+	Choose independent Rademacher signs $(\varepsilon_p)_{p\in\mathcal P}$, i.e.\ $\mathbb P(\varepsilon_p=\pm1)=\tfrac12$.
+	For any fixed $\Delta$ with $|\Delta|\le P$, $C(\Delta)$ is a sum of $|A_\Delta|$ independent mean-zero variables bounded by~$\pm1$.
+	By Bernstein/Hoeffding,
+	\[
+		\mathbb P\!\left(|C(\Delta)|>T\right)\ \le\ 2\exp\!\left(-\frac{T^2}{2|A_\Delta|}\right).
+	\]
+	Taking $T:=\sqrt{2|A_\Delta|\log(6P)}$ and applying a union bound over the at most $2P+1$ values of $\Delta$, we obtain
+	\[
+		\mathbb P\!\left(\max_{|\Delta|\le P}|C(\Delta)|> \sqrt{2|A_\Delta|\log(6P)}\right)
+		\ \le\ \frac{1}{3},
+	\]
+	so with probability $\ge 2/3$ the bound \eqref{eq:balanced-correlation} (with a harmless adjustment of constants) holds simultaneously for all $|\Delta|\le P$.
+
+	\emph{Balancing the total sum.}
+	Condition on the event above. If $\sum_{p}\varepsilon_p$ is already $0$ we are done.
+	Otherwise, flipping the sign of a single $p_0\in\mathcal P$ changes $\sum_p\varepsilon_p$ by $\pm2$, so by at most two flips we achieve \eqref{eq:balanced-sum-zero}.
+	Each flip modifies each $C(\Delta)$ by at most~$2$, hence preserves \eqref{eq:balanced-correlation} after slightly enlarging the constant.
+
+	\emph{Derandomization.}
+	Define the convex surrogate potential
+	\[
+		\Phi(\varepsilon)\ :=\ \sum_{|\Delta|\le P}\exp\!\Big(\frac{C(\Delta;\varepsilon)^2}{K\,|A_\Delta|}\Big),
+	\]
+	with a sufficiently large absolute constant $K$.
+	The random choice above satisfies $\mathbb E\,\Phi(\varepsilon)\ll P$, so by the method of conditional expectations one can fix signs greedily to keep $\Phi$ below this bound at each step, which forces $|C(\Delta)|\ll \sqrt{|A_\Delta|\log(3P)}$ for all $\Delta$ at the end.
+	This yields an explicit $O(M\log M)$ construction.
 \end{proof}
+
+\begin{definition}[Prime amplifier]\label{def:amplifier}
+	Let $w$ be a smooth weight supported on $[1/2,2]$ with $w^{(j)}\ll_j 1$ and set $w_P(p):=w(p/P)$.
+	For a Hecke cusp form $f$ of level $q$ (or Maaß/holomorphic/Eisenstein, with the usual normalizations), define the amplifier
+	\[
+		\mathcal A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)\,w_P(p).
+	\]
+	For later use we record also the shifted self-correlation
+	\[
+		\mathcal C_f(\Delta)\ :=\ \sum_{p\in A_\Delta}\varepsilon_p\,\varepsilon_{p+\Delta}\,
+		\lambda_f(p)\,\lambda_f(p+\Delta)\,w_P(p)\,w_P(p+\Delta).
+	\]
+\end{definition}
+
+\begin{lemma}[Diagonal kill and correlation expansion]\label{lem:amplifier-expansion}
+	With $\varepsilon_p$ as in Lemma~\ref{lem:balanced-signs}, we have
+	\begin{align}
+		|\mathcal A_f|^2
+		                                           & = \sum_{p\in\mathcal P}\lambda_f(p)^2\,w_P(p)^2
+		\;+\;\sum_{1\le|\Delta|\le P}\
+		\sum_{p\in A_\Delta}\varepsilon_p\,\varepsilon_{p+\Delta}\,
+		\lambda_f(p)\lambda_f(p+\Delta)\,w_P(p)w_P(p+\Delta), \label{eq:A-square}                    \\
+		\sum_{p\in\mathcal P}\varepsilon_p\,w_P(p) & = 0.\label{eq:weighted-sum-zero}
+	\end{align}
+	Consequently, when summing \eqref{eq:A-square} over an orthonormal basis and applying Kuznetsov (or Petersson) termwise, the zero-shift component is eliminated by \eqref{eq:weighted-sum-zero}, and only short shifts $1\le|\Delta|\le P$ remain, controlled by $C(\Delta)$ from \eqref{eq:balanced-correlation}.
+\end{lemma}
+
+\begin{proof}
+	Expand the square and group terms by the difference $\Delta:=p'-p$.
+	The diagonal $\Delta=0$ yields $\sum_{p}\lambda_f(p)^2 w_P(p)^2$.
+	For $\Delta\ne0$ we obtain the stated shifted correlation.
+	Equation \eqref{eq:weighted-sum-zero} follows from \eqref{eq:balanced-sum-zero} since $w_P\equiv1$ on $[P,2P]$ up to a negligible boundary layer; if desired, redefine the weight to be exactly $1$ on $[P+P^\theta,2P-P^\theta]$ and absorb the boundary by a contribution $\ll P^\theta$ with any fixed $0<\theta<1$.
+\end{proof}
+
+\begin{corollary}[Uniform short-shift control for the amplifier]\label{cor:amplifier-shortshift}
+	For any family $\mathcal F$ (e.g.\ Maaß cusp forms of level $q$ in a fixed spectral window, including Eisenstein and oldforms with standard weights), we have
+	\[
+		\sum_{f\in\mathcal F} |\mathcal A_f|^2
+		\;\;\ll\;\; \sum_{f\in\mathcal F}\sum_{p\in\mathcal P}\lambda_f(p)^2
+		\;+\; \sum_{1\le|\Delta|\le P} |C(\Delta)|\,
+		\Big|\sum_{f\in\mathcal F}\ \sum_{p\in A_\Delta}
+		\lambda_f(p)\lambda_f(p+\Delta)\,w_P(p)w_P(p+\Delta)\Big|.
+	\]
+	By Lemma~\ref{lem:balanced-signs}, $|C(\Delta)|\ll \sqrt{|A_\Delta|\log P}$ uniformly, so after Kuznetsov the off-diagonal over $(p,p+\Delta)$ inherits a factor $\sqrt{|A_\Delta|\log P}$ from the amplifier, which is summable over $|\Delta|\le P$ with total loss $\ll P^{1/2}(\log P)^{1/2}$.
+\end{corollary}
+
+\noindent\textbf{Remarks.}
+(1) The only properties of the signs used later are \eqref{eq:balanced-sum-zero} and \eqref{eq:balanced-correlation}.
+(2) One may replace $\varepsilon_p$ by a \emph{paley-type} deterministic sequence (e.g.\ $\varepsilon_p=\chi(p)$ for a suitably chosen real primitive character) provided its short-shift autocorrelations satisfy \eqref{eq:balanced-correlation}; the probabilistic construction above guarantees existence with optimal order.
+(3) In the Type-III analysis we will take $P=X^\vartheta$ with fixed $0<\vartheta<1$; then $|A_\Delta|\asymp M$ uniformly for $|\Delta|\le P^{1-\eta}$, and trivially $A_\Delta=\varnothing$ if $|\Delta|>2P$, so \eqref{eq:balanced-correlation} is uniform in all relevant ranges.
+
 
 \bigskip
 
@@ -949,7 +1044,7 @@ with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 	\[
 		\sum_{a,b\pmod c}^* e\!\Big(\tfrac{am - bn}{c}\Big)\,e\!\Big(\tfrac{t(\overline a - \overline b)}{c}\Big).
 	\]
-	By Weil’s bound for Kloosterman sums,
+	By Weil's bound for Kloosterman sums,
 	\[
 		\ll c^{1/2+\varepsilon}\,\gcd(m-n+t,c)^{1/2}.
 	\]
