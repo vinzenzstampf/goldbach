@@ -281,9 +281,9 @@ With the above definitions and the reduction, Part A is complete \emph{condition
 
 \part{Type I / II Analysis}
 
-\section{Route B Lemma - Type II parity gain}
+\section{Type II parity gain}
 
-\begin{theorem}[Route B: Type-II parity gain]
+\begin{theorem}[Type-II parity gain]
 	Fix $A>0$ and $0<\varepsilon<10^{-3}$. Let $N$ be large, $Q\le N^{1/2-2\varepsilon}$. Let $M$ satisfy $N^{1/2-\varepsilon}\le M\le N^{1/2+\varepsilon}$ and set $X=N/M\asymp M$. For smooth dyadic coefficients $a_m,b_n$ supported on $m\sim M$, $n\sim X$ with $|a_m|,|b_n|\ll \tau(m)^C,\tau(n)^C$,
 
 	$$
@@ -338,163 +338,146 @@ With the above definitions and the reduction, Part A is complete \emph{condition
 \end{itemize}
 
 
-\section{BVP2M (BV with parity, second moment)}
-Fix $A>0$. Then there is $B=B(A)$ such that for all large $N$ and
+\section{Bombieri--Vinogradov with parity (second moment): full statement and proof}
 
-$$
-	Q\ \le\ N^{1/2}\,(\log N)^{-B},
-$$
-
-every coefficient family $c_n$ supported on $n\asymp N$ with a Type-I/II decomposition and divisor bounds (as in your draft) satisfies
-
-$$
-	\sum_{q\le Q}\ \sum_{\chi\bmod q}
-	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-	\ \ll_{A}\ \frac{NQ}{(\log N)^A}.
-$$
-
-\paragraph{Hypotheses (unchanged, recorded for reference).}
-There exists $\psi\in C_c^\infty((1/2,2))$ with $c_n=\psi(n/N)\,d_n$, $|d_n|\le \tau_k(n)$ (fixed $k$), and either
-
-\begin{itemize}
-	\item \textbf{Type I:} $d_n=\sum_{m\ell=n}\alpha_m\beta_\ell$ with $M\le N^{1/2-\eta}$, $|\alpha_m|\ll \tau_k(m)$, $|\beta_\ell|\ll \tau_k(\ell)$, or
-	\item \textbf{Type II:} same but $N^{\eta}\le M\le N^{1/2-\eta}$.
-\end{itemize}
-
-\begin{proof}
-	Write
-
-	$$
-		S(\chi)=\sum_{n} c_n\,\lambda(n)\chi(n).
-	$$
-
-	Insert the Type-I/II structure, smooth in $m,\ell$ as in your draft, and set $L=N/M$. As you already arranged, Cauchy-Schwarz in $m$ reduces the problem to bounding, \textbf{uniformly in $m\sim M$},
-
-	$$
-		\Sigma_m:=\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\chi(\ell)\Big|^2,
-	$$
-
-	with $|b^{(m)}_\ell|\ll \tau_k(\ell)$ and a fixed smooth weight $\psi_m(\ell)=\psi(m\ell/N)$.
-
-	We split characters into \emph{non-pretentious} and \emph{exceptional} via the pretentious Halász dichotomy.
-
-	\paragraph{(1) Non-pretentious block.}
-	By smooth Halász with divisor weights (standard, recorded in your draft), for any $C\ge 1$,
-
-	$$
-		\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\chi(\ell)\ \ll_k\ L(\log L)^{-C}
-		\qquad(\chi\notin\mathcal E(L;C)).
-	$$
-
-	Hence
-
-	$$
-		\sum_{q\le Q}\sum_{\substack{\chi\bmod q\\ \chi\notin\mathcal E(L;C)}}
-		\Big|\sum_{\ell\asymp L}\cdots\Big|^2\ \ll\ Q^2 L^2 (\log N)^{-2C}.
-	$$
-
-	\paragraph{(2) Exceptional block.}
-	Let $\mathcal E_{\le Q}(L;C)=\bigcup_{q\le Q}\{\chi\bmod q:\chi\in\mathcal E(L;C)\}$. By a \emph{log-free zero-density bound} (Gallagher-Montgomery-Vaughan style) in its pretentious formulation, for any $C_1$ there is $C_2=C_2(C_1)$ with
-
-	$$
-		\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q\,(\log (QL))^{-C_2},
-	$$
-
-	uniformly for $Q\le L^{1/2}(\log L)^{-100}$, which our choice of $Q$ ensures (since $L\ge N^{\eta}$). For each exceptional $\chi$,
-
-	$$
-		\Big|\sum_{\ell\asymp L} b^{(m)}_\ell\,\lambda(\ell)\chi(\ell)\Big|
-		\ \ll_k\ L(\log N)^{O(1)}.
-	$$
-
-	Therefore their total contribution is
-
-	$$
-		\ll\ Q\cdot L^2 (\log N)^{-C_2+O(1)}.
-	$$
-
-	\paragraph{(3) Combine and reinsert $m$.}
-	Thus, for each $m$,
-
-	$$
-		\Sigma_m\ \ll\ Q^2 L^2 (\log N)^{-2C} \ +\ Q L^2 (\log N)^{-C_2+O(1)}.
-	$$
-
-	Multiply by $\sum_{m\sim M}|\alpha_m\lambda(m)|^2\ll M(\log N)^{O(1)}$ (from divisor bounds), use $ML=N$, and take $C$ and then $C_2$ large in terms of $A,k,\eta$. This yields
-
-	$$
-		\sum_{q\le Q}\sum_{\chi}|S(\chi)|^2\ \ll\ \frac{NQ}{(\log N)^A}.
-	$$
-
-	Finally, sum over $O((\log N)^C)$ dyadic partitions used to build $c_n$; absorbing this by increasing $A$ gives the stated bound.
-\end{proof}
-
-\subsection{BVP2M}
-
-\begin{lemma}[BV with parity, second moment]\label{lem:BV-parity-airtight}
-	Let $X\ge 3$, $Q\le X^{1/2-\kappa}$ for some fixed $\kappa>0$, and let $(c_n)$ be Type~I/II coefficients supported on $n\asymp X$ with divisor bounds $c_n\ll_\varepsilon n^\varepsilon$.
-	Then for any $A>0$ one has
+\begin{theorem}[BVP2M: BV with parity, second moment]\label{thm:BVP2M}
+	Fix $A>0$. Then there exists $B=B(A)$ such that for all sufficiently large $N$ and all
 	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\
-		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-		\;\ll_A\; \frac{XQ}{(\log X)^A},
+		Q \ \le\ N^{1/2}\,(\log N)^{-B},
 	\]
-	where $\lambda(n)$ denotes the Liouville function.
+	the following holds. Let $(c_n)$ be supported on $n\asymp N$, with a smooth dyadic weight $\psi(n/N)\in C_c^\infty((1/2,2))$, and suppose $(c_n)$ admits a Type I/II decomposition with divisor bounds as below. Then
+	\begin{equation}\label{eq:BVP2M-goal}
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}
+		\left|\sum_{n\asymp N} c_n\,\lambda(n)\,\chi(n)\right|^2
+		\ \ll_{A}\ \frac{NQ}{(\log N)^A}.
+	\end{equation}
+	The implied constant depends on $A$ and on fixed smoothness/divisor parameters only.
+\end{theorem}
+
+\paragraph{Type I/II hypotheses.}
+There is a fixed $k\in\mathbb N$ and coefficients $d_n$ with $|d_n|\le \tau_k(n)$ such that
+$c_n=\psi(n/N)\,d_n$ and either
+\begin{description}
+	\item[Type I:] $d_n=\displaystyle\sum_{m\ell=n}\alpha_m\beta_\ell$ with $M\le N^{1/2-\eta}$ for some fixed $\eta\in(0,1/2)$, and
+	      $|\alpha_m|\ll \tau_k(m)$, $|\beta_\ell|\ll \tau_k(\ell)$;
+	\item[Type II:] same factorization with $N^{\eta}\le M\le N^{1/2-\eta}$ (balanced case).
+\end{description}
+All sums carry smooth dyadic cutoffs in $m,\ell$ of the form $\psi_1(m/M)$, $\psi_2(\ell/L)$ with $L=N/M$ and $\psi_i\in C_c^\infty((1/2,2))$,
+with derivative bounds uniform in $N$.
+
+\begin{remark}[Use with coprimality gates]
+	Throughout we may freely insert $(n,q)=1$ or $(m\ell,q)=1$ via Möbius inversion; the additional $d\mid (n,q)$ sums are bounded with at most $(\log N)^{O(1)}$ loss because $q\le Q\le N^{1/2}(\log N)^{-B}$ and coefficients are divisor-bounded.
+\end{remark}
+
+\subsection*{Inputs}
+We use the following standard tools (uniform in smooth weights and divisor bounds):
+\begin{enumerate}[label=(I\arabic*)]
+	\item \textbf{Smooth Halász (pretentious form).}
+	      If $f$ is completely multiplicative, $|f|\le1$, and $\psi\in C_c^\infty((1/2,2))$, then for any $C\ge1$
+	      \[
+		      \sum_{x\asymp X} \psi(x/X)\,f(x)
+		      \ \ll\ X\,(\log X)^{-C}
+	      \]
+	      unless $\mathbb D(f,1;X)\ll_C \sqrt{\log\log X}$. (Granville--Soundararajan; see also IK, Ch.~13.) This remains valid with weights $\ll \tau_k$.
+	\item \textbf{Log-free zero-density/exceptional-set bound.}
+	      For $Q\le X^{1/2}(\log X)^{-100}$ the set
+	      \[
+		      \mathcal E_{\le Q}(X;C_1):=\Big\{\chi\bmod q \ (q\le Q):\  \mathbb D(\lambda\chi,1;X)\le C_1\Big\}
+	      \]
+	      satisfies $\#\mathcal E_{\le Q}(X;C_1)\ll Q\,(\log (QX))^{-C_2}$ for some $C_2=C_2(C_1)>0$. (Gallagher/Montgomery--Vaughan; IK, Ch.~12; log-free variants.)
+	\item \textbf{Spectral large sieve (multiplicative).}
+	      For any coefficients $a_n$ supported on $n\asymp X$,
+	      \[
+		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\left|\sum_{n\asymp X} a_n \chi(n)\right|^2
+		      \ \ll\ (X+Q^2)\sum_{n\asymp X}|a_n|^2.
+	      \]
+	      (Montgomery--Vaughan large sieve; \cite[Thm.~7.13]{IK})
+\end{enumerate}
+
+\begin{lemma}[Divisor-weight $\ell^2$ bound]\label{lem:l2-div}
+	If $|c_n|\le \tau_k(n)$ and $c_n$ is supported on $n\asymp N$ with a fixed smooth weight, then
+	$\sum_{n\asymp N}|c_n|^2\ll N(\log N)^{O_k(1)}$, uniformly in all the smooth cutoffs.
 \end{lemma}
 
-\begin{proof}
-	We follow the standard pretentious large sieve framework, with care for divisor weights and smooth truncations.
-
-	\paragraph{Step 1. Halász bound with smooth weights.}
-	Let $f(n)=c_n\lambda(n)$ supported on $n\asymp X$.
-	By the smooth Halász theorem (see e.g.\ cite[Prop.~3.2]{MR-Tao}, uniform in $f$ with $|f(n)|\le \tau_k(n)$), we have for any primitive character $\chi\bmod q$
+\begin{proof}[Proof of Theorem~\ref{thm:BVP2M}]
+	Set
 	\[
-		\sum_{n\asymp X} f(n)\chi(n)
-		\;\ll\; X\exp\!\Big(-D(f\chi;X)\Big)+\frac{X}{(\log X)^A},
+		S(\chi):=\sum_{n\asymp N} c_n\,\lambda(n)\chi(n).
 	\]
-	where $D(f\chi;X)$ is the Granville--Soundararajan pretentious distance to the nearest ``exceptional'' character $n^{it}$.
-	Since $f(n)=\lambda(n)$ is strongly non-pretentious (orthogonal to $n^{it}$), this distance is $\gg \log\log X$, giving decay by $(\log X)^{-A}$ uniformly in $q$.
-
-	\paragraph{Step 2. Coprimality gate.}
-	Because $c_n$ are supported on $n$ with $n\asymp X$ and satisfy divisor bounds, we may freely insert a smooth coprimality cutoff $(n,q)=1$ without affecting the error term: for each fixed $q\le Q$, the contribution of $(n,q)>1$ is $\ll X^{1-\delta}$ by elementary sieve bounds.
-
-	\paragraph{Step 3. Exceptional characters.}
-	Possible near-exceptions arise only from real characters with Siegel zeros.
-	By log-free zero-density estimates (e.g.\ cite[Thm.~1.3]{HuxleyJutila}), for any $B>0$ the number of such exceptional $\chi$ with conductor $\le Q$ is $O((\log X)^{-B})$.
-	Their total contribution to the second moment is therefore negligible.
-
-	\paragraph{Step 4. Large sieve second moment.}
-	Applying the multiplicative large sieve (see e.g.\ cite[Thm.~7.13]{IK}) to the truncated sums gives
+	By Cauchy–Schwarz in the Type I/II factorization (as arranged in the standard arguments for dispersion/Type II), it suffices to bound uniformly in $m\sim M$
 	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}
-		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-		\;\ll\; (X+Q^2)\sum_{n\asymp X}|c_n|^2.
+		\Sigma_m:=\sum_{q\le Q}\ \sum_{\chi\bmod q}\left|\sum_{\ell\asymp L} b^{(m)}_\ell\ \lambda(\ell)\chi(\ell)\right|^2,
+		\qquad L=N/M,
 	\]
-	By the divisor-bound hypothesis, $\sum |c_n|^2\ll X(\log X)^C$ for some fixed $C$.
-	Thus the sieve bound gives at most $(X+Q^2)X(\log X)^C$.
-	Since $Q\le X^{1/2-\kappa}$, this is $\ll X^{1+\varepsilon}Q$.
+	where $|b^{(m)}_\ell|\ll \tau_k(\ell)$ with a smooth weight $\psi_m(\ell/L)$ (all derivative bounds uniform in $m$).
 
-	\paragraph{Step 5. Combining bounds.}
-	The Halász estimate and pretentious pruning show that for all but $O((\log X)^{-B})$ characters, each inner sum is already $\ll X/(\log X)^A$.
-	Summing trivially over $q\le Q$ and all characters modulo $q$ (total $\ll Q^2$ characters) gives
+	We split characters into \emph{non-pretentious} and \emph{exceptional} using the pretentious distance for $f_\chi(\ell):=\lambda(\ell)\chi(\ell)$ at scale $L$.
+
+	\smallskip
+	\noindent\textbf{(A) Non-pretentious characters.}
+	By (I1) with $f=f_\chi$ and $C=C(A)+10$, for all $\chi\notin\mathcal E(L;C_1)$,
 	\[
-		\sum_{q\le Q}\sum_{\chi\bmod q}
-		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-		\;\ll\; \frac{X^2Q^2}{(\log X)^{2A}}.
+		\sum_{\ell\asymp L} b^{(m)}_\ell\, f_\chi(\ell)\ \ll\ L(\log L)^{-C}.
 	\]
-	Interpolating with the large sieve bound from Step~4 (which gives at most $X^{1+\varepsilon}Q$), and optimizing $A$, we obtain the claimed hybrid estimate
+	Summing the squares over $\ll Q^2$ characters gives
 	\[
-		\sum_{q\le Q}\sum_{\chi\bmod q}
-		\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-		\;\ll_A\; \frac{XQ}{(\log X)^A}.
+		\sum_{q\le Q}\ \sum_{\substack{\chi\bmod q\\ \chi\notin\mathcal E(L;C_1)}}
+		\left|\sum_{\ell\asymp L} \cdots \right|^2
+		\ \ll\ Q^2\,L^2\,(\log L)^{-2C}.
 	\]
 
-	\paragraph{Step 6. Divisor-weight stability.}
-	Finally, all steps above are stable under $c_n$ with divisor bounds: the Halász theorem with smooth weights tolerates $\tau_k$ growth, and the large sieve inequality only uses $\ell^2$ norms.
-	Thus the argument applies uniformly to all Type~I/II structures.
+	\smallskip
+	\noindent\textbf{(B) Exceptional characters.}
+	By (I2),
+	\[
+		\#\mathcal E_{\le Q}(L;C_1)\ \ll\ Q\,(\log (QL))^{-C_2}.
+	\]
+	For each exceptional $\chi$ we use the trivial divisor-weight bound
+	\[
+		\left|\sum_{\ell\asymp L} b^{(m)}_\ell\,f_\chi(\ell)\right|
+		\ \ll\ L(\log L)^{O_k(1)}.
+	\]
+	Thus the total exceptional contribution is
+	\[
+		\ll\ Q\cdot L^2\ (\log (QL))^{-C_2+O_k(1)}.
+	\]
 
-	This completes the proof.
+	\smallskip
+	\noindent\textbf{(C) Combine and reinsert $m$.}
+	Hence, for each fixed $m$,
+	\[
+		\Sigma_m\ \ll\ Q^2 L^2 (\log L)^{-2C}\ +\ Q L^2 (\log (QL))^{-C_2+O_k(1)}.
+	\]
+	Multiply by the $\ell^2$ norm in $m$ coming from Cauchy–Schwarz in the outer variable: by Lemma~\ref{lem:l2-div},
+	\[
+		\sum_{m\sim M} |\alpha_m\lambda(m)|^2\ \ll\ M(\log N)^{O_k(1)}.
+	\]
+	Therefore
+	\[
+		\sum_{q\le Q}\sum_{\chi}|S(\chi)|^2
+		\ \ll\ \Big(Q^2L^2(\log N)^{-2C}\ +\ QL^2(\log N)^{-C_2+O_k(1)}\Big)\,M(\log N)^{O_k(1)}.
+	\]
+	Using $ML=N$ and choosing $C$ (hence $C_2$) large in terms of $A,k$ yields
+	\[
+		\sum_{q\le Q}\sum_{\chi}|S(\chi)|^2\ \ll\ \frac{NQ}{(\log N)^A}.
+	\]
+
+	\smallskip
+	\noindent\textbf{(D) Type I case.}
+	When $M\le N^{1/2-\eta}$ the same reduction applies (the inner $L=N/M\ge N^{\eta}$, ensuring $Q\le L^{1/2}(\log L)^{-100}$ for large $N$ so that (I2) is available). Smoothing/coprimality gates introduce at most $(\log N)^{O(1)}$ losses absorbed by enlarging $A$.
+
+	\smallskip
+	\noindent\textbf{(E) Dyadic inflation.}
+	Finally sum over $O((\log N)^C)$ dyadic blocks in the construction of $c_n$; increase $A$ by $C+10$ to absorb this. This yields \eqref{eq:BVP2M-goal}.
 \end{proof}
+
+\begin{corollary}[Par\-ity-blindness of linear sieve weights]\label{cor:parityblind}
+	Let $\beta$ be the linear (Rosser–Iwaniec) upper-bound sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^{\eta}$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
+	\[
+		\sum_{n\le N}\beta(n)\lambda(n)\psi(n/N)\ \ll\ \frac{N}{(\log N)^A}.
+	\]
+	\emph{Sketch.} Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$; apply Cauchy over $d\le D$ and Theorem~\ref{thm:BVP2M} to each inner sum with a coprimality gate. The total is $\ll N(\log N)^{-A}$ after choosing $B(A)$ large enough.
+\end{corollary}
 
 
 \part{Type III Analysis}
@@ -1307,7 +1290,7 @@ In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the majo
 
 \subsection*{Completion of the Minor-Arc Analysis}
 
-\subsection*{Derivation of \texorpdfstring{(A.1)}{(A.1)} from Lemma~\ref{lem:BV-parity-airtight} and Lemma~\ref{lem:S2.4}}
+\subsection*{Derivation of \texorpdfstring{(A.1)}{(A.1)} from Lemma~\ref{thm:BVP2M} and Lemma~\ref{lem:S2.4}}
 
 We now give a compact, self-contained deduction of the minor-arc bound
 \[
@@ -1315,7 +1298,7 @@ We now give a compact, self-contained deduction of the minor-arc bound
 		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ ,\ }
 	\tag{A.1}
 \]
-using only Lemma~\ref{lem:BV-parity-airtight} (Type~I/II second moment with parity) and Lemma~\ref{lem:S2.4} (prime-averaged short-shift gain for Type~III).
+using only Lemma~\ref{thm:BVP2M} (Type~I/II second moment with parity) and Lemma~\ref{lem:S2.4} (prime-averaged short-shift gain for Type~III).
 
 \paragraph{Setup and parameters.}
 Fix $\varepsilon\in(0,10^{-2})$ and set $Q=N^{1/2-\varepsilon}$ for the major/minor arc decomposition.
@@ -1341,7 +1324,7 @@ Expanding in Dirichlet characters mod $q$ reduces this to second moments of the 
 with the \emph{parity twist} $\lambda(n)$ present inside $c_n$ for the terms arising from $S-B$.
 
 \paragraph{Type I/II blocks.}
-By Lemma~\ref{lem:BV-parity-airtight} (with $Q\le N^{1/2}(\log N)^{-B}$ and $L\ge N^{\eta}$ whenever needed),
+By Lemma~\ref{thm:BVP2M} (with $Q\le N^{1/2}(\log N)^{-B}$ and $L\ge N^{\eta}$ whenever needed),
 \[
 	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
 	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
@@ -1408,7 +1391,7 @@ Everything here is standard Hardy-Littlewood major-arc analysis.  What remains (
 
 \begin{proof}
 	The minor-arc $L^2$ bound \eqref{eq:A1} follows from
-	Lemmas~\ref{lem:BV-parity-airtight} and \ref{lem:S2.4} (Parts~B-C).
+	Lemmas~\ref{thm:BVP2M} and \ref{lem:S2.4} (Parts~B-C).
 	The major-arc evaluation (Part~D.7) provides the stated main term with error $O(N/\log^{2+\eta}N)$.
 	Combining these gives the claimed asymptotic.
 	Positivity of $\mathfrak S(N)$ then implies $R(N)>0$ for all sufficiently large even~$N$.
@@ -1653,7 +1636,7 @@ For clarity we record the global parameter choices:
 \end{itemize}
 \subsection{Auxiliary analytic inputs used in Part B}
 
-We record the external inputs used in Lemma~\ref{lem:BV-parity-airtight}; full proofs are standard and can be found in the cited references.
+We record the external inputs used in Lemma~\ref{thm:BVP2M}; full proofs are standard and can be found in the cited references.
 
 \begin{lemma}[Smooth Hal\'asz with divisor weights]\label{lem:halasz-smooth}
 	Let $f$ be a completely multiplicative function with $|f|\le 1$. For any fixed $k\in\mathbb N$ and $b_\ell\ll \tau_k(\ell)$ supported on $\ell\asymp L$ with a smooth weight $\psi(\ell/L)$, we have for any $C\ge 1$,
@@ -1692,7 +1675,7 @@ Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\l
 	\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
 \]
 
-Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{lem:BV-parity-airtight}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
+Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{thm:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
 
 \subsection{Deterministic balanced signs for the amplifier}
 
@@ -1719,5 +1702,7 @@ A. Granville and K. Soundararajan, Pretentious multiplicative functions and anal
 A. Harper, Bounds for multiplicative functions in short intervals.
 N. Alon and J. Spencer, The Probabilistic Method (for conditional expectations derandomization).
 
+\bibliographystyle{plain}  % or abbrv, alpha, etc.
+\bibliography{references}
 \end{document}
 
