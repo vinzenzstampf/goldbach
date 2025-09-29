@@ -7,7 +7,6 @@
 \contentsline {section}{\numberline {1}Type II parity gain}{4}{section.2.1}%
 \contentsline {paragraph}{Remarks.}{5}{section*.2}%
 \contentsline {section}{\numberline {2}Bombieri--Vinogradov with parity (second moment): full statement and proof}{5}{section.2.2}%
-\contentsline {paragraph}{Type I/II hypotheses.}{5}{section*.3}%
 \contentsline {part}{C\hspace {1em}Type III Analysis}{7}{part.3}%
 \contentsline {section}{\numberline {1}PASSG (Prime-averaged short-shift gain — full proof)}{7}{section.3.1}%
 \contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{9}{section.3.2}%
