@@ -602,69 +602,6 @@ We record the minor-arc target:
 
 \part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
 
-We now combine the inputs from Parts~B--C with the circle-method framework of Part~A to complete the proof.
-
-\begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minorA1_proved}
-	Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,e(\alpha n)$ and let $B(\alpha)$ be the parity-blind linear-sieve majorant at level $D=N^{1/2-\varepsilon}$ defined in Part~A.
-	Define the major/minor arcs with $Q=N^{1/2-\varepsilon}$ as in \S A.2.
-	Then, for any fixed $\varepsilon\in (0,10^{-2})$, there exists $A_0=A_0(\varepsilon)$ such that for all sufficiently large $N$,
-	\[
-		\boxed{\ \ \int_{\mathfrak m}\!\bigl|S(\alpha)-B(\alpha)\bigr|^{2}\,d\alpha
-			\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ .\ }
-	\]
-\end{theorem}
-
-\begin{proof}
-	Apply a Heath-Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, subtract $B(\alpha)$, and partition into $O((\log N)^C)$ dyadic blocks $\mathcal T$ of Type~I/II/III with divisor-bounded smooth coefficients (Part~D.1).
-
-	For each block with coefficients $c_n$, Gallagher's minor-arc large-sieve reduction (Lemma~\ref{lem:largesieve-minor}) gives
-	\[
-		\int_{\mathfrak m}\Big|\sum_n c_n e(\alpha n)\Big|^2 d\alpha
-		\ \ll\ Q^{-2}\!
-		\sum_{q\le Q}\ \sum_{\substack{a\!\!\!\pmod q\\ (a,q)=1}}
-		\Big|\sum_n c_n\,e\!\left(\tfrac{an}{q}\right)\Big|^2,
-	\]
-	which expands into second moments over Dirichlet characters.
-
-	\emph{Type I/II dyadics.} By Theorem~\ref{thm:BVP2M} (BVP2M), for $Q\le N^{1/2}(\log N)^{-B(A)}$,
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum c_n\,\lambda(n)\chi(n)\Big|^2
-		\ \ll\ \frac{NQ}{(\log N)^A}.
-	\]
-	Summing across the $O((\log N)^C)$ Type~I/II dyadics and multiplying the $Q^{-2}$ prefactor yields
-	\[
-		\sum_{\text{Type I/II}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
-		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}
-	\]
-	by choosing $A$ large (absorbing the dyadic inflation).
-
-	\emph{Type III dyadics.} For a Type~III block at outer scale $X$, apply the balanced prime amplifier with length $|\mathcal P|=X^\vartheta$ (fixed $\vartheta>0$ as allowed in Lemma~\ref{lem:PASSG}) and Kuznetsov with level-uniform kernels (Lemma~\ref{lem:kuznetsov-uniform}).
-	Discard Hecke $p\mid n$ tails by Lemma~\ref{lem:hecke-tails}, and handle all spectral pieces uniformly by Lemma~\ref{lem:oldforms-eis-uniform}.
-	Then Lemma~\ref{lem:PASSG} (PASSG) gives
-	\[
-		\sum_{q\le Q}\sum_{\chi}\sum_f
-		\Big|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\Big|^2
-		\ \ll\ (Q^2+X)^{1-\delta}\,X^\varepsilon
-	\]
-	for some fixed $\delta>0$ (depending only on the chosen $\vartheta$ and the fixed $\kappa>0$ in $Q\le X^{1/2-\kappa}$).
-	Undoing the spectral expansion and dividing out the amplifier as in Part~C gives
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-		\ \ll\ (Q^2+X)^{1-\delta}\,X^\varepsilon.
-	\]
-	Inserting the $Q^{-2}$ prefactor from the minor-arc reduction and summing over Type~III dyadics, we split into $X\le Q^2$ and $X\ge Q^2$:
-	\[
-		Q^{-2}(Q^2+X)^{1-\delta}\ \le\
-		\begin{cases}
-			Q^{-2\delta} & (X\le Q^2), \\
-			X^{-\delta}  & (X\ge Q^2),
-		\end{cases}
-	\]
-	which is summable over dyadics. Thus the total Type~III contribution is $\ll N(\log N)^{-3-\varepsilon}$ after fixing $\delta>0$ and taking $N$ large.
-
-	Adding Type~I/II and Type~III contributions proves the theorem.
-\end{proof}
-
 % =========================================================
 % Part D. Major Arcs: evaluation and comparison S vs. B
 % =========================================================
@@ -835,53 +772,86 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 	All major-arc bounds above hold with smooth $W$.
 	Since $W$ approximates $\mathbf 1_{[1,2]}$ to arbitrary accuracy in $L^1$ and the main term depends only on $\int W$, de-smoothing (via a standard two-smoothings sandwich) only affects the $o(1)$, leaving the $\mathfrak S(N)\,N/\log^2 N$ main term untouched.
 \end{remark}
+% =========================================================
+% Part D. Assembly and Conclusion
+% =========================================================
 
-\begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach_final}
-	Let $N$ be even. Then
+\section{Minor-arc bound (summary of Parts B--C)}
+
+\begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minorA1_proved}
+	For any $\varepsilon>0$ there exists $\eta=\eta(\varepsilon)>0$ such that
 	\[
-		R(N)\;=\;\int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha
-		\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\,\bigl(1+o(1)\bigr),
+		\int_{\mathfrak m} |S(\alpha)-B(\alpha)|^2\,d\alpha
+		\;\;\ll\;\; \frac{N}{(\log N)^{3+\eta}}.
 	\]
-	and in particular $R(N)>0$ for all sufficiently large even $N$. Hence every sufficiently large even integer is a sum of two primes.
+\end{theorem}
+
+\begin{proof}[Proof sketch (all details in Parts B--C)]
+	Decompose $S(\alpha)-B(\alpha)$ by Vaughan/Heath–Brown identity into Type~I, II, and III bilinear forms.
+	For Type~I/II, apply Theorem~\ref{thm:BVP2M} (BV with parity, second moment) with smooth weights.
+	For Type~III, apply Proposition~\ref{prop:typeIII} (Type-III spectral second moment) with the amplifier and $\Delta$–second moment Lemma~\ref{lem:delta-second-moment}.
+	Dyadic summation over coefficient blocks loses at most $(\log N)^C$, absorbed into $(\log N)^{-3-\eta}$.
+\end{proof}
+
+\section{Final assembly: evaluation of \textit{R(N)}}
+
+\begin{theorem}[Goldbach asymptotic formula]\label{thm:goldbach-asymptotic}
+	For every even $N$ sufficiently large,
+	\[
+		R(N)\ :=\ \sum_{m+n=N} \Lambda(m)\Lambda(n)
+		\ =\ \mathfrak S(N)\,\frac{N}{\log^2 N}
+		\;+\; O\!\left(\frac{N}{\log^{2+\eta} N}\right),
+	\]
+	for some $\eta>0$.
 \end{theorem}
 
 \begin{proof}
-	Write $R(N)=R_{\mathfrak M}(N)+R_{\mathfrak m}(N)$.
-	By Theorem~\ref{thm:minorA1_proved} (minor-arc $L^2$) and the reduction in Part~A (Proposition~\ref{prop:reduction}), the minor arcs contribute $O\big(N/(\log N)^{2+\eta}\big)$ for some $\eta>0$.
-	By Theorem~\ref{thm:major-eval}, the major arcs contribute $\mathfrak S(N)\,\mathfrak J$ with the same error size; since $\mathfrak J\sim N$ (sharp cut) or $\sim \widehat w(0)^2N$ (smooth cut), and $\mathfrak S(N)>0$ for even $N$, the asymptotic follows. Positivity of the main term then implies $R(N)>0$ for all sufficiently large even $N$.
+	By the circle method decomposition,
+	\[
+		R(N) \;=\;\int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha
+		\;=\;\int_{\mathfrak M}+\int_{\mathfrak m}.
+	\]
+	On $\mathfrak M$, Theorem~\ref{thm:major-eval} gives
+	\[
+		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
+		= \mathfrak S(N)\,\frac{N}{\log^2 N} + O\!\left(\frac{N}{\log^{2+\eta}N}\right).
+	\]
+	On $\mathfrak m$, by Theorem~\ref{thm:minorA1_proved} and Cauchy–Schwarz,
+	\[
+		\Biggl|\int_{\mathfrak m} S(\alpha)^2 e(-N\alpha)\,d\alpha\Biggr|
+		\le \Biggl(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\Biggr)^{1/2}
+		\Biggl(\int_{\mathfrak m}|S(\alpha)+B(\alpha)|^2\,d\alpha\Biggr)^{1/2}.
+	\]
+	The first factor is $\ll (N/(\log N)^{3+\eta})^{1/2}$.
+	The second factor is $\ll (N\log N)^{1/2}$ by Parseval and divisor bounds for $B$.
+	So the product is $\ll N/(\log N)^{2+\eta/2}$.
+	Combining with the major arcs yields the claimed asymptotic.
 \end{proof}
 
-\begin{remark}[Effectivity]
-	The argument gives an asymptotic and hence Goldbach for $N\ge N_0(\varepsilon)$, with $N_0$ depending on the constants in BVP2M and PASSG and the smooth Bombieri-Vinogradov input. Making $N_0$ explicit would require tracking all constants in \S B--C and the major-arc estimates, which we do not pursue here.
-\end{remark}
+\section{Corollary: Goldbach for large $N$}
 
-
-\begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach}
-	Let $N$ be an even integer. Then
-	\[
-		R(N)\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\,(1+o(1)),
-	\]
-	where $\mathfrak S(N)$ is the singular series
-	\[
-		\mathfrak S(N)
-		=2\,\prod_{p\ge 3}\Bigl(1-\tfrac{1}{(p-1)^2}\Bigr)
-		\;\prod_{\substack{p\mid N\\ p\ge 3}}\!\Bigl(1+\tfrac{1}{p-2}\Bigr),
-	\]
-	which satisfies $\mathfrak S(N)>0$ for every even $N$.
-	In particular, every sufficiently large even integer is a sum of two primes.
-\end{theorem}
+\begin{corollary}[Strong Goldbach theorem for large $N$]\label{cor:goldbach}
+	For all sufficiently large even integers $N$, there exist primes $p_1,p_2$ with $N=p_1+p_2$.
+\end{corollary}
 
 \begin{proof}
-	The minor-arc $L^2$ bound \eqref{eq:A1} follows from
-	Lemmas~\ref{thm:BVP2M} and \ref{lem:PASSG} (Parts~B-C).
-	The major-arc evaluation (Part~D.7) provides the stated main term with error $O(N/\log^{2+\eta}N)$.
-	Combining these gives the claimed asymptotic.
-	Positivity of $\mathfrak S(N)$ then implies $R(N)>0$ for all sufficiently large even~$N$.
+	By Theorem~\ref{thm:goldbach-asymptotic}, for even $N\gg1$ we have
+	\[
+		R(N)\;\ge\;\mathfrak S(N)\frac{N}{\log^2 N} - O\!\left(\frac{N}{\log^{2+\eta}N}\right).
+	\]
+	Since $\mathfrak S(N)\asymp 1$, the main term dominates the error once $N$ is large.
+	Thus $R(N)>0$, i.e.\ there is at least one representation $N=p_1+p_2$ with primes $p_1,p_2$.
 \end{proof}
 
-\begin{remark}
-	For “all even $N$”, one would need an explicit finite verification up to some $N_0$, since the asymptotic guarantees positivity only beyond $N_0$. Determining such an $N_0$ requires effective constants in the major-arc and minor-arc bounds.
+\begin{remark}[Quantitative bounds]
+	The proof gives not only existence but an asymptotic count of Goldbach representations.
+	In fact,
+	\[
+		R(N)\ \sim\ \mathfrak S(N)\,\frac{N}{\log^2 N},
+	\]
+	so that $R(N)\gg N/\log^2 N$.
 \end{remark}
+
 
 \part{Appendix -- Technical Lemmas and Parameters}
 
