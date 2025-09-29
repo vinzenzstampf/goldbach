@@ -1,46 +1,25 @@
-\contentsline {part}{A\hspace {1em}Framework}{3}{part.1}%
-\contentsline {section}{\numberline {1}Circle-Method Decomposition}{3}{section.1.1}%
-\contentsline {subsection}{\numberline {1.1}Parity-blind majorant $B(\alpha )$}{4}{subsection.1.1.1}%
-\contentsline {subsection}{\numberline {1.2}Major arcs: main term from \textit {B}}{4}{subsection.1.1.2}%
-\contentsline {subsection}{\numberline {1.3}Reduction to a minor-arc $L^2$ bound}{4}{subsection.1.1.3}%
-\contentsline {part}{B\hspace {1em}Type I / II Analysis}{5}{part.2}%
-\contentsline {section}{\numberline {1}Type II parity gain}{5}{section.2.1}%
-\contentsline {paragraph}{Remarks.}{6}{section*.2}%
-\contentsline {section}{\numberline {2}Bombieri--Vinogradov with parity (second moment): full statement and proof}{6}{section.2.2}%
-\contentsline {paragraph}{Type I/II hypotheses.}{6}{section*.3}%
-\contentsline {part}{C\hspace {1em}Type III Analysis}{8}{part.3}%
-\contentsline {section}{\numberline {1}PASSG (Prime-averaged short-shift gain — full proof)}{8}{section.3.1}%
-\contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{10}{section.3.2}%
-\contentsline {part}{D\hspace {1em}Assembly}{10}{part.4}%
-\contentsline {section}{\numberline {1}Dyadic Decomposition (final)}{10}{section.4.1}%
-\contentsline {subsection}{\numberline {1.1}Statement}{10}{subsection.4.1.1}%
-\contentsline {subsection}{\numberline {1.2}Proof}{11}{subsection.4.1.2}%
-\contentsline {paragraph}{Step 1: Identity and dyadic model.}{11}{section*.5}%
-\contentsline {paragraph}{Step 2: Minor-arc $L^2$ via large sieve on dyadics.}{11}{section*.6}%
-\contentsline {subsection}{\numberline {1.3}Step 3: Type I/II dyadics}{12}{subsection.4.1.3}%
-\contentsline {subsection}{\numberline {1.4}Step 4: Type III dyadics}{12}{subsection.4.1.4}%
-\contentsline {subsection}{\numberline {1.5}Step 5: Conclusion}{13}{subsection.4.1.5}%
-\contentsline {subsection}{\numberline {1.6}Derivation of \textup {\hbox {\mathsurround \z@ \normalfont (\ignorespaces \ref {eq:A1}\unskip \@@italiccorr )}} from BVP2M and PASSG}{13}{subsection.4.1.6}%
-\contentsline {subsection}{\numberline {1.7}Parameter choices \& loss ledger (for ease of cross-checking)}{14}{subsection.4.1.7}%
-\contentsline {subsection}{\numberline {1.8}Remark}{14}{subsection.4.1.8}%
-\contentsline {section}{\numberline {2}Major-Arc Evaluation}{14}{section.4.2}%
-\contentsline {subsection}{\numberline {2.1}Major-arc evaluation for \textit {B}(\textalpha )}{15}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {2.2}Transferring the main term to \textit {S}(\textalpha )}{16}{subsection.4.2.2}%
-\contentsline {paragraph}{Setup and parameters.}{16}{section*.10}%
-\contentsline {paragraph}{Minor-arc large-sieve reduction.}{17}{section*.11}%
-\contentsline {paragraph}{Type I/II blocks.}{17}{section*.12}%
-\contentsline {paragraph}{Type III blocks.}{17}{section*.13}%
-\contentsline {paragraph}{Conclusion.}{17}{section*.14}%
-\contentsline {subsection}{\numberline {2.3}Status}{18}{subsection.4.2.3}%
-\contentsline {section}{\numberline {3}Final Step}{18}{section.4.3}%
-\contentsline {part}{E\hspace {1em}Appendix -- Technical Lemmas and Parameters}{18}{part.5}%
-\contentsline {section}{\numberline {1}Minor--arc large sieve reduction}{18}{section.5.1}%
-\contentsline {section}{\numberline {2}Sieve weight \textbeta \ and properties}{19}{section.5.2}%
-\contentsline {section}{\numberline {3}Major--arc uniform error}{19}{section.5.3}%
-\contentsline {section}{\numberline {4}Auxiliary analytic inputs used in Part B}{20}{section.5.4}%
-\contentsline {section}{\numberline {5}Deterministic balanced signs for the amplifier}{20}{section.5.5}%
-\contentsline {section}{\numberline {6}Kuznetsov at level \textit {q} with level-uniform kernel bounds}{20}{section.5.6}%
-\contentsline {section}{\numberline {7}\textbf \textDelta --second moment, level--uniform}{21}{section.5.7}%
-\contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{22}{section.5.8}%
-\contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{23}{section.5.9}%
-\contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{23}{section.5.10}%
+\contentsline {part}{A\hspace {1em}Framework}{2}{part.1}%
+\contentsline {section}{\numberline {1}Circle-Method Decomposition}{2}{section.1.1}%
+\contentsline {subsection}{\numberline {1.1}Parity-blind majorant $B(\alpha )$}{3}{subsection.1.1.1}%
+\contentsline {subsection}{\numberline {1.2}Major arcs: main term from \textit {B}}{3}{subsection.1.1.2}%
+\contentsline {subsection}{\numberline {1.3}Reduction to a minor-arc $L^2$ bound}{3}{subsection.1.1.3}%
+\contentsline {part}{B\hspace {1em}Type I / II Analysis}{4}{part.2}%
+\contentsline {section}{\numberline {1}Type II parity gain}{4}{section.2.1}%
+\contentsline {paragraph}{Remarks.}{5}{section*.2}%
+\contentsline {section}{\numberline {2}Bombieri--Vinogradov with parity (second moment): full statement and proof}{5}{section.2.2}%
+\contentsline {paragraph}{Type I/II hypotheses.}{5}{section*.3}%
+\contentsline {part}{C\hspace {1em}Type III Analysis}{7}{part.3}%
+\contentsline {section}{\numberline {1}PASSG (Prime-averaged short-shift gain — full proof)}{7}{section.3.1}%
+\contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{9}{section.3.2}%
+\contentsline {part}{D\hspace {1em}Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit {N}}{9}{part.4}%
+\contentsline {part}{E\hspace {1em}Appendix -- Technical Lemmas and Parameters}{11}{part.5}%
+\contentsline {section}{\numberline {1}Minor--arc large sieve reduction}{11}{section.5.1}%
+\contentsline {section}{\numberline {2}Sieve weight \textbeta \ and properties}{12}{section.5.2}%
+\contentsline {section}{\numberline {3}Major--arc uniform error}{12}{section.5.3}%
+\contentsline {section}{\numberline {4}Auxiliary analytic inputs used in Part B}{13}{section.5.4}%
+\contentsline {section}{\numberline {5}Deterministic balanced signs for the amplifier}{13}{section.5.5}%
+\contentsline {section}{\numberline {6}Kuznetsov at level \textit {q} with level-uniform kernel bounds}{14}{section.5.6}%
+\contentsline {section}{\numberline {7}\textbf \textDelta --second moment, level--uniform}{14}{section.5.7}%
+\contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{16}{section.5.8}%
+\contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{16}{section.5.9}%
+\contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{17}{section.5.10}%

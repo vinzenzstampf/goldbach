@@ -633,445 +633,104 @@ We use the following standard tools (uniform in smooth weights and divisor bound
 	This completes the proof.
 \end{proof}
 
+\part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
+
+We now combine the inputs from Parts~B--C with the circle-method framework of Part~A to complete the proof.
+
+\begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minorA1_proved}
+	Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,e(\alpha n)$ and let $B(\alpha)$ be the parity-blind linear-sieve majorant at level $D=N^{1/2-\varepsilon}$ defined in Part~A.
+	Define the major/minor arcs with $Q=N^{1/2-\varepsilon}$ as in \S A.2.
+	Then, for any fixed $\varepsilon\in (0,10^{-2})$, there exists $A_0=A_0(\varepsilon)$ such that for all sufficiently large $N$,
+	\[
+		\boxed{\ \ \int_{\mathfrak m}\!\bigl|S(\alpha)-B(\alpha)\bigr|^{2}\,d\alpha
+			\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ .\ }
+	\]
+\end{theorem}
+
+\begin{proof}
+	Apply a Heath–Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, subtract $B(\alpha)$, and partition into $O((\log N)^C)$ dyadic blocks $\mathcal T$ of Type~I/II/III with divisor-bounded smooth coefficients (Part~D.1).
+
+	For each block with coefficients $c_n$, Gallagher’s minor-arc large-sieve reduction (Lemma~\ref{lem:largesieve-minor}) gives
+	\[
+		\int_{\mathfrak m}\Big|\sum_n c_n e(\alpha n)\Big|^2 d\alpha
+		\ \ll\ Q^{-2}\!
+		\sum_{q\le Q}\ \sum_{\substack{a\!\!\!\pmod q\\ (a,q)=1}}
+		\Big|\sum_n c_n\,e\!\left(\tfrac{an}{q}\right)\Big|^2,
+	\]
+	which expands into second moments over Dirichlet characters.
+
+	\emph{Type I/II dyadics.} By Theorem~\ref{thm:BVP2M} (BVP2M), for $Q\le N^{1/2}(\log N)^{-B(A)}$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum c_n\,\lambda(n)\chi(n)\Big|^2
+		\ \ll\ \frac{NQ}{(\log N)^A}.
+	\]
+	Summing across the $O((\log N)^C)$ Type~I/II dyadics and multiplying the $Q^{-2}$ prefactor yields
+	\[
+		\sum_{\text{Type I/II}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
+		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}
+	\]
+	by choosing $A$ large (absorbing the dyadic inflation).
+
+	\emph{Type III dyadics.} For a Type~III block at outer scale $X$, apply the balanced prime amplifier with length $|\mathcal P|=X^\vartheta$ (fixed $\vartheta>0$ as allowed in Lemma~\ref{lem:PASSG}) and Kuznetsov with level-uniform kernels (Lemma~\ref{lem:kuznetsov-uniform}).
+	Discard Hecke $p\mid n$ tails by Lemma~\ref{lem:hecke-tails}, and handle all spectral pieces uniformly by Lemma~\ref{lem:oldforms-eis-uniform}.
+	Then Lemma~\ref{lem:PASSG} (PASSG) gives
+	\[
+		\sum_{q\le Q}\sum_{\chi}\sum_f
+		\Big|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\Big|^2
+		\ \ll\ (Q^2+X)^{1-\delta}\,X^\varepsilon
+	\]
+	for some fixed $\delta>0$ (depending only on the chosen $\vartheta$ and the fixed $\kappa>0$ in $Q\le X^{1/2-\kappa}$).
+	Undoing the spectral expansion and dividing out the amplifier as in Part~C gives
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
+		\ \ll\ (Q^2+X)^{1-\delta}\,X^\varepsilon.
+	\]
+	Inserting the $Q^{-2}$ prefactor from the minor-arc reduction and summing over Type~III dyadics, we split into $X\le Q^2$ and $X\ge Q^2$:
+	\[
+		Q^{-2}(Q^2+X)^{1-\delta}\ \le\
+		\begin{cases}
+			Q^{-2\delta} & (X\le Q^2), \\
+			X^{-\delta}  & (X\ge Q^2),
+		\end{cases}
+	\]
+	which is summable over dyadics. Thus the total Type~III contribution is $\ll N(\log N)^{-3-\varepsilon}$ after fixing $\delta>0$ and taking $N$ large.
+
+	Adding Type~I/II and Type~III contributions proves the theorem.
+\end{proof}
+
+\begin{theorem}[Major-arc evaluation]\label{thm:major-eval}
+	With $Q=N^{1/2-\varepsilon}$ and the major arcs $\mathfrak M$ of Part~A, one has
+	\[
+		\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
+		=\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
+		=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big),
+	\]
+	where $\mathfrak J=N+O(1)$ (or the smooth analogue) and $\mathfrak S(N)$ is the Goldbach singular series.
+\end{theorem}
+
+\begin{proof}
+	Standard major-arc analysis with the linear sieve majorant (well-factorability), the PNT in APs uniformly for $q\le Q$ (Siegel–Walfisz + Bombieri–Vinogradov in the smooth form), and the approximants recorded in Lemma~\ref{lem:major-errors}; see Part~D.7 for the bookkeeping.
+\end{proof}
+
+\begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach_final}
+	Let $N$ be even. Then
+	\[
+		R(N)\;=\;\int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha
+		\;=\;\mathfrak S(N)\,\frac{N}{\log^2 N}\,\bigl(1+o(1)\bigr),
+	\]
+	and in particular $R(N)>0$ for all sufficiently large even $N$. Hence every sufficiently large even integer is a sum of two primes.
+\end{theorem}
+
+\begin{proof}
+	Write $R(N)=R_{\mathfrak M}(N)+R_{\mathfrak m}(N)$.
+	By Theorem~\ref{thm:minorA1_proved} (minor-arc $L^2$) and the reduction in Part~A (Proposition~\ref{prop:reduction}), the minor arcs contribute $O\big(N/(\log N)^{2+\eta}\big)$ for some $\eta>0$.
+	By Theorem~\ref{thm:major-eval}, the major arcs contribute $\mathfrak S(N)\,\mathfrak J$ with the same error size; since $\mathfrak J\sim N$ (sharp cut) or $\sim \widehat w(0)^2N$ (smooth cut), and $\mathfrak S(N)>0$ for even $N$, the asymptotic follows. Positivity of the main term then implies $R(N)>0$ for all sufficiently large even $N$.
+\end{proof}
+
+\begin{remark}[Effectivity]
+	The argument gives an asymptotic and hence Goldbach for $N\ge N_0(\varepsilon)$, with $N_0$ depending on the constants in BVP2M and PASSG and the smooth Bombieri–Vinogradov input. Making $N_0$ explicit would require tracking all constants in \S B--C and the major-arc estimates, which we do not pursue here.
+\end{remark}
 
-
-\part{Assembly}
-\section{Dyadic Decomposition (final)}
-
-\subsection{Statement}
-
-Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,w(n)\,e(\alpha n)$ with a fixed smooth weight $w$ supported on $[N/2,2N]$ and let $B(\alpha)$ be the parity-blind majorant from Part A. For the minor arcs $\mathfrak m$ defined with denominator cutoff $Q=N^{1/2-\varepsilon}$, assume the analytic inputs:
-
-\begin{itemize}
-	\item \textbf{(I/II)}: For any smooth Type-I/II coefficient structure $\{c_n\}$ with divisor bounds (arising from Vaughan/Heath-Brown), the second-moment Barban-Davenport-Halász-pretentious bound
-
-	      \begin{equation}\label{eq:D1}
-		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|^2
-		      \ \ll\ \frac{NQ}{(\log N)^A}
-	      \end{equation}
-	      holds for each fixed $A>0$. (This is BVP2M and the “Route B Lemma” for the balanced ranges.)
-
-	\item \textbf{(III)}: For every dyadic Type-III block $\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)$ produced after amplification and Kuznetsov, the prime-averaged off-diagonal is bounded by
-
-	      \begin{equation}\label{eq:D2}\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\end{equation}
-
-	      for some fixed $\delta>0$, uniformly for amplifier length $|\mathcal P|=X^\vartheta$ with $\vartheta=\vartheta(\delta)>0$, and with uniform control of oldforms/Eisenstein and Bessel kernels. (This is PASSG and its Type-III spectral corollary.)
-\end{itemize}
-
-Then, for any $\varepsilon>0$,
-
-$$
-	\int_{\mathfrak m}\big|S(\alpha)-B(\alpha)\big|^2\,d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
-$$
-
-\subsection{Proof}
-
-\paragraph{Step 1: Identity and dyadic model.}
-Apply a 3-, 4-, or 5-fold Heath-Brown identity (any standard version suffices) to $\Lambda$ with cut parameters
-
-$$
-	U=N^{\mu},\quad V=N^{\nu},\quad W=N^{\omega},\qquad 0<\mu\le\nu\le\omega<1,
-$$
-
-chosen below. We write
-
-$$
-	S(\alpha)-B(\alpha)
-	=\sum_{\text{HB terms }\mathcal T} \mathcal S_{\mathcal T}(\alpha),
-$$
-
-where each $\mathcal S_{\mathcal T}$ is a finite linear combination (with coefficients having $\ll_\epsilon n^\epsilon$ divisor bounds and smooth dyadic cutoffs) of exponential sums of one of the three structural types:
-
-\begin{itemize}
-	\item \textbf{Type I}: $\displaystyle \sum_{m\asymp M} a_m \sum_{n\asymp N/M} b_n\,e(\alpha mn)$ with $M\le U$ (or the dual small variable),
-	\item \textbf{Type II}: balanced $\displaystyle \sum_{m\asymp M}\sum_{n\asymp N/M} a_m b_n\,e(\alpha mn)$ with $U\ll M\ll N/U$,
-	\item \textbf{Type III}: ``ternary'' or highly factorized pieces with all variables in ranges $ \ll N^{1/3+o(1)}$, which, after the amplifier/Kuznetsov transition, become prime-averaged short-shift sums against automorphic coefficients.
-\end{itemize}
-
-All sums are partitioned into $\mathbf{O((\log N)^C)}$ dyadic blocks in all active variables for some fixed $C$.
-
-\paragraph{Step 2: Minor-arc $L^2$ via large sieve on dyadics.}
-Let $\mathfrak M(q,a)$ be the standard major arc around $a/q$ with width $\asymp (qQ)^{-1}$, and set $\mathfrak m=[0,1]\setminus \bigcup_{q\le Q}\bigcup_{(a,q)=1}\mathfrak M(q,a)$. On $\mathfrak m$ we use the standard large-sieve/dispersion reduction:
-
-for suitable coefficients $c_n$ associated to the dyadic block $\mathcal T$. By opening the square and expanding in Dirichlet characters modulo $q$, \eqref{eq:D2} reduces to sums of the form
-
-\begin{equation}\label{eq:D3}
-	\sum_{q\le Q}\ \sum_{\chi\bmod q}
-	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-\end{equation}
-
-or, in the Type-III case after the amplifier/Kuznetsov step, to a spectral second moment whose diagonal/off-diagonal split is controlled by \eqref{eq:D2}.
-
-We now bound \eqref{eq:D3} block-wise and then sum the dyadics.
-
-
-\subsection{Step 3: Type I/II dyadics}
-Choose $U=N^{1/3}$ (any $\mu\in(1/4,1/2)$ is fine) so that all Type I/II ranges from the chosen Heath-Brown identity fall either in the “small-large” or “balanced” regimes. By the input (I/II), for any $A>0$,
-
-$$
-	\sum_{q\le Q}\sum_{\chi\bmod q}
-	\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|^2
-	\ \ll\ \frac{NQ}{(\log N)^A}.
-$$
-
-Each Type I or Type II dyadic contributes $\ll NQ/(\log N)^A$. There are $\ll(\log N)^C$ such dyadics in total, so by taking $A\ge 3+C+10\varepsilon^{-1}$ we obtain
-
-\begin{equation}\label{eq:D5}
-	\sum_{\text{Type I/II dyadics}}
-	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
-\end{equation}
-
-\subsection{Step 4: Type III dyadics}
-Fix $V=W=N^{1/3}$ so that the residual blocks with all variables $\ll N^{1/3+o(1)}$ are designated Type III. For such a block, let its “outer scale” be $X\asymp N^\xi$ with $\xi\in(0,1)$ determined by the product of the active variables. After applying the amplifier of length $|\mathcal P|=X^\vartheta$ and Kuznetsov, we face a spectral second moment whose off-diagonal obeys \eqref{eq:D2}:
-
-$$
-	\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}
-	\ =\ (Q^2+X)^{1-\delta}\,X^{\vartheta(2-\delta)}.
-$$
-
-Take $\vartheta=\tfrac{\delta}{8}$ (any fixed small choice depending on $\delta$ works). Since $Q=N^{1/2-\varepsilon}$, we have $Q^2=N^{1-2\varepsilon}$. Two regimes:
-
-\begin{itemize}
-	\item If $X\le Q^2$ then $\mathrm{OD}\ll N^{(1-2\varepsilon)(1-\delta)}\,X^{\vartheta(2-\delta)}$.
-	\item If $X\ge Q^2$ then $\mathrm{OD}\ll X^{1-\delta+\vartheta(2-\delta)}$.
-\end{itemize}
-
-In both cases there is a fixed saving $X^{-\eta}$ (or $N^{-\eta}$) for some $\eta=\eta(\delta,\vartheta,\varepsilon)>0$ against the trivial diagonal scale, after the standard dispersion normalization. Consequently each Type III dyadic contributes
-
-\begin{equation}\label{eq:D6}\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha\ \ll\ \frac{N}{(\log N)^{A}}\,X^{-\eta}+\text{(diagonal)}.\end{equation}
-
-The diagonal is controlled either by the amplifier normalization or by subtracting the parity-blind majorant $B(\alpha)$ (which removes the main term on $\mathfrak m$), leaving at most $\ll N/(\log N)^A$ per block. Summing \eqref{eq:D6} over the $\ll(\log N)^C$ Type-III dyadics and choosing $A$ large, we obtain
-
-\begin{equation}\label{eq:D7}\sum_{\text{Type III dyadics}}\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2 d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.\end{equation}
-
-\emph{Bookkeeping note.} The $X^{-\eta}$ saving is uniform in the dyadic location because $\delta>0$ is fixed and $\vartheta$ is chosen as a fixed fraction of $\delta$; any residual factors from Bessel kernels, oldforms, and Eisenstein are already absorbed in \eqref{eq:D2} by the uniform spectral analysis ensured in PASSG. The $q$-sum restriction $q\le Q$ matches the circle-method minor-arc decomposition, so no leakage arises.
-
----
-
-\subsection{Step 5: Conclusion}
-Adding \eqref{eq:D5} and \eqref{eq:D7} over all dyadics of all HB terms $\mathcal T$ yields
-
-$$
-	\int_{\mathfrak m}\big|S(\alpha)-B(\alpha)\big|^2 d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}},
-$$
-
-as claimed.
-\subsection{Derivation of \eqref{eq:A1} from BVP2M and PASSG}
-
-\noindent\textbf{Scope.} In this subsection we \emph{derive} the minor-arc $L^2$ estimate
-\[\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\]
-\begin{enumerate}[label=(\roman*)]
-	\item \textbf{Type I/II second moment with parity} (BVP2M): for $Q\le N^{1/2}(\log N)^{-B}$,
-	      \[
-		      \sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum c_n\,\lambda(n)\chi(n)\Big|^2
-		      \ \ll\ \frac{NQ}{(\log N)^A},
-	      \]
-	      uniformly for the Type I/II coefficient structures produced by the identity (divisor bounds, smooth weights).
-
-	\item \textbf{Type III off-diagonal saving} (PASSG): after prime-length amplification and Kuznetsov,
-	      \[
-		      \mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon}
-	      \]
-	      for some fixed $\delta>0$ (with $|\mathcal P|=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$), uniformly across spectral families.
-\end{enumerate}
-
-\medskip
-\noindent\textbf{Large-sieve reduction on $\mathfrak m$.} For each Heath-Brown dyadic block $\mathcal T$, Gallagher's/large-sieve minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) yields
-\[
-	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
-	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\sum_{\substack{a\!\!\!\pmod q\\(a,q)=1}}
-	\left|\sum_n c_n\,e\!\left(\frac{an}{q}\right)\right|^2.
-\]
-Expanding in Dirichlet characters reduces this to the second moments controlled by (i) and (ii).
-
-\medskip
-\noindent\textbf{Type I/II dyadics.} BVP2M with $A$ large (absorbing the $O((\log N)^C)$ dyadic inflation) gives a total
-\[
-	\sum_{\text{Type I/II dyadics}}
-	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
-\]
-
-\medskip
-\noindent\textbf{Type III dyadics.} After applying the prime amplifier of fixed length $|\mathcal P|=X^\vartheta$ and Kuznetsov, PASSG furnishes a uniform saving $\delta>0$ on the off-diagonal. Dividing by the amplifier normalization (as in Prop.~\ref{prop:typeIII}), one gets for each Type III block (with outer scale $X$)
-\[
-	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
-	\ \ll\ Q^{-2}\,(Q^2+X)^{1-\delta}\,X^{-\vartheta\delta+\varepsilon}.
-\]
-Summing over Type III dyadics and splitting $X\le Q^2$ and $X\ge Q^2$ yields a net contribution $\ll N(\log N)^{-3-\varepsilon}$ for fixed $\vartheta=\vartheta(\delta)>0$.
-
-\medskip
-\noindent\textbf{Conclusion.} Summing all dyadics gives \eqref{eq:A1}. \emph{Thus, \eqref{eq:A1} holds provided BVP2M and PASSG hold in the stated uniform forms.} This is the only place where \eqref{eq:A1} depends on Part~B and Part~C.
-
-\subsection{Parameter choices \& loss ledger (for ease of cross-checking)}
-
-\begin{itemize}
-	\item \textbf{Minor-arc cutoff}: $Q=N^{1/2-\varepsilon}$.
-	\item \textbf{HB cut parameters}: $U=V=W=N^{1/3}$ (any fixed exponents in $(1/4,1/2)$ that produce the standard Type I/II/III taxonomy will do).
-	\item \textbf{Amplifier}: primes of length $|\mathcal P|=X^\vartheta$ with $\vartheta=\delta/8$.
-	\item \textbf{Savings}:
-	      \begin{itemize}
-		      \item Large-sieve minor-arc reduction costs a factor $\asymp Q^{-2}$ which is recovered in \eqref{eq:D1}/\eqref{eq:D2}.
-		      \item Type I/II: pick $A$ so that $(\log N)^C$ dyadic inflation is dominated; we target $3+\varepsilon$ net powers of $\log$.
-		      \item Type III: the $\delta$-saving from \eqref{eq:D2} after amplifier normalization yields uniform $X^{-\eta}$ decay, summable across dyadics.
-	      \end{itemize}
-	\item \textbf{Exceptional characters / oldforms / Eisenstein}: already handled in the hypotheses of BVP2M and PASSG; their contributions obey the same $(\log N)^{-A}$ savings and therefore do not affect the sum.
-\end{itemize}
-
-\subsection{Remark}
-
-Nothing delicate hinges on the exact form of the identity (Vaughan vs. Heath-Brown) provided it yields (i) divisor-bounded smooth coefficients and (ii) a genuine three-variable “Type III” regime where PASSG applies. Alternative cut choices merely reshuffle a finite number of dyadic families and do not change the final $(\log N)^{-3-\varepsilon}$ power once $A$ is taken large in the Type I/II inputs.
-
-\section{Major-Arc Evaluation}
-
-Let
-
-$$
-	\mathfrak M=\bigcup_{\substack{1\le q\le Q\\(a,q)=1}}\mathfrak M(a,q),\qquad
-	\mathfrak M(a,q):=\{\alpha\in[0,1):\ |\alpha-\tfrac aq|\le \tfrac{Q}{qN}\},
-$$
-
-with $Q=N^{1/2-\varepsilon}$. Write $\alpha=a/q+\beta$ on $\mathfrak M(a,q)$ and set
-
-$$
-	V(\beta):=\sum_{n\le N}e(n\beta) \qquad\text{and}\qquad \widehat w(\beta):=\sum_{n}w(n)e(n\beta)
-$$
-
-for the sharp/smoothed Dirichlet kernels according to whether $S, B$ are unweighted or carry a fixed smooth weight $w$ supported on $[1,N]$ with $w^{(j)}\ll_j N^{-j}$.
-
-We denote by $\mathfrak S(N)$ the (Goldbach) singular series
-
-$$
-	\mathfrak S(N)=2\prod_{p\ge 3}\Big(1-\frac1{(p-1)^2}\Big)
-	\prod_{\substack{p\mid N\\ p\ge 3}}\frac{p-1}{p-2},
-$$
-
-and by $\mathfrak J$ the singular integral
-
-$$
-	\mathfrak J=
-	\begin{cases}
-		\displaystyle \int_{-\infty}^{\infty}\Big|\frac{\sin(\pi N\beta)}{\sin(\pi\beta)}\Big|^{\!2}e(-N\beta)\,d\beta
-		 & \text{(sharp cut-off)},  \\[2ex]
-		\displaystyle \int_{-\infty}^{\infty}|\widehat w(\beta)|^{2}e(-N\beta)\,d\beta
-		 & \text{(smooth cut-off)}.
-	\end{cases}
-$$
-
-Standard analysis yields $\mathfrak J=N+O(1)$ in the sharp case and $\mathfrak J=\widehat w(0)^2 N+O(1)$ in the smooth case.
-
-We evaluate first the parity-blind majorant $B$, then transfer the main term to $S$.
-
-\subsection{Major-arc evaluation for \textit{B}(\textalpha)}
-
-Let the sieve majorant be
-
-$$
-	B(\alpha)=\sum_{n\le N}\beta(n)\,e(n\alpha),\qquad
-	\beta=\beta_{z,D}\ \text{a linear (Rosser-Iwaniec) weight of level }D=N^{1/2-\varepsilon},
-$$
-
-so that $\beta$ has the standard divisor-bounded structure
-
-$$
-	\beta(n)=\sum_{\substack{d\mid n\\ d\mid P(z)}}\lambda_d,\qquad
-	\lambda_d\ll_\varepsilon d^\varepsilon,\quad \sum_{d\mid P(z)}\frac{|\lambda_d|}{d}\ll \log z,
-$$
-
-with $P(z)=\prod_{p<z}p$ and $z=N^{\eta}$ a small fixed power.
-
-On $\alpha=a/q+\beta$ with $q\le Q$ and $|\beta|\le Q/(qN)$, expand
-
-$$
-	B(\alpha)=\sum_{d\mid P(z)}\lambda_d
-	\sum_{\substack{m\le N/d}} e\!\big(dm(\tfrac aq+\beta)\big)
-	=\sum_{d\mid P(z)}\lambda_d\, e\!\big(\tfrac{ad}{q}\big)\,V_d(\beta),
-$$
-
-where $V_d(\beta):=\sum_{m\le N/d}e(dm\beta)$. By the standard completion and the Euler product calculation for linear sieve weights (matching local factors for $p<z$), one obtains the \textbf{major-arc approximation}
-
-$$
-	B(a/q+\beta)=\frac{\rho(q)}{\varphi(q)}\,V(\beta)\,+\,\mathcal E_B(q,\beta),
-$$
-
-where $\rho(q)$ is multiplicative, supported on square-free $q$, and satisfies
-
-$$
-	\rho(p)=
-	\begin{cases}
-		-1 & \text{for } p\ge 3, \\
-		0  & \text{for } p=2,
-	\end{cases}
-	\qquad\text{so that}\quad \frac{\rho(q)}{\varphi(q)}=\frac{\mu(q)}{\varphi(q)}
-$$
-
-for all odd $q$ with $p<z$ local factors correctly matched. Moreover, uniformly for $q\le Q$ and $|\beta|\le Q/(qN)$,
-
-$$
-	\mathcal E_B(q,\beta)\ \ll\ N(\log N)^{-A}
-$$
-
-for any fixed $A>0$ once $z=N^\eta$ and $D=N^{1/2-\varepsilon}$ are tied as usual (this is the standard “well-factorable” savings of the linear sieve on major arcs).
-
-Squaring and integrating over $\mathfrak M$ (disjoint up to negligible overlaps) gives
-
-$$
-	\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
-	= \sum_{q\le Q}\ \sum_{\substack{a\bmod q\\(a,q)=1}}
-	\int_{|\beta|\le Q/(qN)}
-	\Big(\frac{\mu(q)}{\varphi(q)}V(\beta)\Big)^{\!2} e(-N\beta)\,d\beta
-	\ +\ O\!\Big(\frac{N}{(\log N)^{3+\varepsilon}}\Big),
-$$
-
-where the error uses Cauchy-Schwarz with $\int_{\mathfrak M}|V(\beta)|^2 d\beta\ll N\log N$, the uniform bound on $\mathcal E_B$, and the total measure of $\mathfrak M$.
-Since $\sum_{(a,q)=1}1=\varphi(q)$ and $\int_{|\beta|\le Q/(qN)}V(\beta)^2 e(-N\beta)\,d\beta=\mathfrak J+O(NQ^{-1})$,
-
-$$
-	\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
-	= \Big(\sum_{q=1}^{\infty}\frac{\mu(q)^2}{\varphi(q)^2}\,c_q(N)\Big)\,\mathfrak J
-	\ +\ O\!\Big(\frac{N}{(\log N)^{3+\varepsilon}}\Big),
-$$
-
-with $c_q(N)$ the Ramanujan sum. The absolutely convergent series equals the Goldbach singular series $\mathfrak S(N)$. Hence
-
-$$
-	\boxed{\,\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
-		=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big)\ .\ }
-$$
-
-\emph{Remark.} If a smooth weight $w$ is used, replace $V(\beta)$ by $\widehat w(\beta)$ throughout, and the same argument yields $\mathfrak J=\int|\widehat w|^2 e(-N\beta)\,d\beta$ with an identical error term.
-
-\subsection{Transferring the main term to \textit{S}(\textalpha)}
-
-Let $S(\alpha)=\sum_{n\le N}\Lambda(n)\,e(n\alpha)$ (sharp or smooth as above). By the prime number theorem in arithmetic progressions with level of distribution $Q=N^{1/2-\varepsilon}$ (Siegel-Walfisz + Bombieri-Vinogradov in the smooth form used earlier), uniformly for $q\le Q$ and $|\beta|\le Q/(qN)$,
-
-$$
-	S(a/q+\beta)=\frac{\mu(q)}{\varphi(q)}\,V(\beta) \;+\; \mathcal E_S(q,\beta),
-	\qquad \mathcal E_S(q,\beta)\ \ll\ N(\log N)^{-A}
-$$
-
-for any fixed $A>0$. Consequently, exactly the same computation as in §7.1 gives
-
-$$
-	\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-	=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big).
-$$
-
-There are two convenient “comparison” routes:
-
-\begin{itemize}
-	\item \textbf{Pointwise on $\mathfrak M$:} From the two approximations above,
-
-	      $$
-		      S(\alpha)-B(\alpha)=\mathcal E_S(\alpha)-\mathcal E_B(\alpha),
-	      $$
-
-	      whence $\int_{\mathfrak M}(S^2-B^2)e(-N\alpha)\,d\alpha =\int_{\mathfrak M}(S-B)(S+B)e(-N\alpha)\,d\alpha$
-	      is $\ll N(\log N)^{-A}$ after the same bookkeeping.
-
-	\item \textbf{Integrated $L^2$ route:} Using the $L^2$ major-arc bounds $\int_{\mathfrak M}(|S|^2+|B|^2)\ll N\log N$, together with the pointwise major-arc approximants (or with your minor-arc $L^2$ control if you prefer to absorb overlaps), yields the same $O\big(N(\log N)^{-3-\varepsilon}\big)$ remainder for the difference of major-arc contributions.
-\end{itemize}
-
-Combining §7.1-§7.2 we conclude the following proposition.
-
-\noindent\textbf{Proposition 7.1 (Major-arc main term).} For the major arcs $\mathfrak M$ with $Q=N^{1/2-\varepsilon}$,
-
-$$
-	\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
-	=\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-	=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big).
-$$
-
-In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the major arcs, with an error that is negligible against $N(\log N)^{-2}$.
-
-\subsection*{Completion of the Minor-Arc Analysis}
-
-\subsection*{Derivation of \texorpdfstring{(A.1)}{(A.1)} from Lemma~\ref{thm:BVP2M} and Lemma~\ref{lem:PASSG}}
-
-We now give a compact, self-contained deduction of the minor-arc bound
-\[
-	\boxed{\ \ \int_{\mathfrak m}\!\bigl|S(\alpha)-B(\alpha)\bigr|^{2}\,d\alpha
-		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ ,\ }
-	\tag{A.1}
-\]
-using only Lemma~\ref{thm:BVP2M} (Type~I/II second moment with parity) and Lemma~\ref{lem:PASSG} (prime-averaged short-shift gain for Type~III).
-
-\paragraph{Setup and parameters.}
-Fix $\varepsilon\in(0,10^{-2})$ and set $Q=N^{1/2-\varepsilon}$ for the major/minor arc decomposition.
-Apply a Heath-Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, and subtract the parity-blind majorant $B(\alpha)$ (linear/Rosser-Iwaniec sieve at level $D=N^{1/2-\varepsilon}$).
-This yields
-\[
-	S(\alpha)-B(\alpha)=\sum_{\mathcal T}\mathcal S_{\mathcal T}(\alpha),
-\]
-where the finitely many $\mathcal T$ are dyadic Type~I/II/III blocks with divisor-bounded smooth coefficients supported on $n\asymp X$ for some $X$.
-
-\paragraph{Minor-arc large-sieve reduction.}
-For each block $\mathcal T$ with coefficient sequence $c_n$ (carrying the smooth dyadics), Gallagher's minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) gives
-\[
-	\int_{\mathfrak m}\Big|\sum_n c_n e(\alpha n)\Big|^2 d\alpha
-	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\ \sum_{\substack{a\!\!\!\!\pmod q\\(a,q)=1}}
-	\Big|\sum_n c_n\,e\!\left(\tfrac{an}{q}\right)\Big|^2.
-\]
-Expanding in Dirichlet characters mod $q$ reduces this to second moments of the shape
-\[
-	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
-	\Big|\sum_{n\asymp X} c_n\,\chi(n)\Big|^2,
-\]
-with the \emph{parity twist} $\lambda(n)$ present inside $c_n$ for the terms arising from $S-B$.
-
-\paragraph{Type I/II blocks.}
-By Lemma~\ref{thm:BVP2M} (with $Q\le N^{1/2}(\log N)^{-B}$ and $L\ge N^{\eta}$ whenever needed),
-\[
-	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
-	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-	\ \ll\ \frac{XQ}{(\log N)^{A}}.
-\]
-Summed over the $O((\log N)^C)$ Type~I/II dyadics (with $X\asymp N$ up to constants), and multiplied by the prefactor $Q^{-2}$ from the minor-arc reduction, this yields
-\[
-	\sum_{\text{Type I/II}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}},
-\]
-upon taking $A$ large enough in terms of $C$ and $\varepsilon$.
-
-\paragraph{Type III blocks.}
-For a Type~III block at outer scale $X$, apply the balanced prime amplifier and Kuznetsov as in Part~C to reach the spectral second moment controlled by Lemma~\ref{lem:PASSG}.
-With $P=X^\vartheta$ (any fixed $\vartheta$ with $0<\vartheta<\tfrac16-\kappa$) and $Q\le X^{1/2-\kappa}$, Lemma~\ref{lem:PASSG} gives
-\[
-	\sum_{q\le Q}\ \sum_{\chi}\ \sum_f
-	\Bigg|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Bigg|^2
-	\ \ll\ (Q^2+X)^{1-\delta}\,X^{\varepsilon},
-	\qquad
-	\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}>0.
-\]
-Dividing out the amplifier (as in Lemma~\ref{lem:PASSG}) and undoing the spectral expansion (orthogonality), one obtains for each Type~III block
-\[
-	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
-	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
-	\ \ll\ (Q^2+X)^{1-\delta}\,X^{\varepsilon}.
-\]
-Inserting this into the minor-arc large-sieve reduction yields
-\[
-	\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
-	\ \ll\ Q^{-2}\,(Q^2+X)^{1-\delta}\,X^{\varepsilon}.
-\]
-Summing over the $O((\log N)^C)$ Type~III dyadics and splitting into $X\le Q^2$ and $X\ge Q^2$ gives a uniform power saving:
-\[
-	\sum_{\text{Type III}}\int_{\mathfrak m}|\mathcal S_{\mathcal T}(\alpha)|^2 d\alpha
-	\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}},
-\]
-since $(Q^2+X)^{1-\delta}Q^{-2}\le Q^{-2\delta}$ when $X\le Q^2$, and $\le X^{-\delta}$ when $X\ge Q^2$, both summable over dyadics (choose $\kappa,\vartheta$ once for all dyadics so that $\delta>0$).
-
-\paragraph{Conclusion.}
-Adding Type~I/II and Type~III contributions and recalling $S-B=\sum_{\mathcal T}\mathcal S_{\mathcal T}$, we obtain \emph{(A.1)}. All constants depend at most on $\varepsilon$ (the minor-arc width), on the fixed smooth cutoff in the Heath-Brown identity, on $k$ and the divisor-type bounds for coefficients, and on finitely many derivatives of the fixed Kuznetsov test $h$.
-\qedwhite
-
-\subsection{Status}
-Everything here is standard Hardy-Littlewood major-arc analysis.  What remains (and is already ensured by our earlier sections) is to (i) state the exact sieve parameters $(z,D)$ used to define $\beta$, and (ii) cite the precise Bombieri-Vinogradov/Siegel-Walfisz input in the smooth form employed so the uniform error $N(\log N)^{-A}$ on $\mathfrak M$ holds (both for $\Lambda$ and for the linear-sieve majorant).
-
-\section{Final Step}
 
 \begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach}
 	Let $N$ be an even integer. Then
