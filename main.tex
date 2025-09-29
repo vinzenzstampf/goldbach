@@ -107,6 +107,8 @@
 
 \begin{document}
 
+\tableofcontents
+
 \maketitle
 
 \noindent\begin{tabular}{@{}ll}
@@ -264,7 +266,7 @@ We record the minor-arc target:
 		\;=\;\frac{N}{(\log N)^{2+\varepsilon/2}}.
 	$$
 
-	The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in \eqref{eq:A1}. On the major arcs, standard major-arc analysis (Vaughan’s identity or the explicit formula combined with (B2)-(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
+	The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in \eqref{eq:A1}. On the major arcs, standard major-arc analysis (Vaughan's identity or the explicit formula combined with (B2)-(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
 \end{proof}
 
 \subsection{What remains standard/checklist for \textbeta}
@@ -680,9 +682,24 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 	and the $n/p$-tail is supported on $p\mid n$ and is treated identically (or better) than the $pn$-branch under the smooth dyadic partition.
 \end{lemma}
 
-\begin{lemma}[Oldforms and Eisenstein]\label{lem:old-eis}
-	Kuznetsov on $\Gamma_0(q)$ with test $h_Q$ yields the same geometric structure for holomorphic, Maaß (new+old), and Eisenstein parts, each with kernels obeying Lemma~\ref{lem:kernel-localization}. Thus all families are uniform in the estimates below.
+\subsection{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
+
+\begin{lemma}[Uniformity across spectral pieces]\label{lem:oldforms-eis-uniform}
+	In the Kuznetsov formula on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$ as in Lemma~\ref{lem:kuznetsov-uniform},
+	the holomorphic, Maa\ss\ (new+old), and Eisenstein contributions all share the same geometric side
+	\[
+		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
+	\]
+	with kernels $\mathcal W_q^{(*)}$ satisfying the identical level-uniform decay/derivative bounds of Lemma~\ref{lem:kuznetsov-uniform}.
+	Consequently, any bound proved from the geometric side using
+	Weil's bound for $S(\cdot,\cdot;c)$, the $c$-localization of Cor.~\ref{cor:kernel-localization},
+	and smooth coefficient derivatives (in $m,n,\Delta$) holds \emph{uniformly} across the full spectrum.
 \end{lemma}
+
+\begin{proof}
+	Standard from the derivation of Kuznetsov and the compact support of $h_Q$, which controls all spectral weights uniformly in $q$ and $t$ (and $k$ in the holomorphic case). The oldforms are handled either by explicit decomposition or by working directly with the full orthonormal basis at level $q$; in both approaches the geometric side and kernel bounds are unchanged.
+\end{proof}
+
 
 \begin{lemma}[Amplifier]\label{lem:amplifier}
 	Let $A_f:=\sum_{p\in\mathcal P}\alpha_p\,\lambda_f(p)$ with $|\alpha_p|\le 1$. For any complex numbers $S_{q,\chi,f}$,
@@ -1025,7 +1042,7 @@ $$
 $$
 
 as claimed.
-\subsection{Derivation of \eqref{eq:A1} from BVP2M and PASSGs}
+\subsection{Derivation of \eqref{eq:A1} from BVP2M and PASSG}
 
 \noindent\textbf{Scope.} In this subsection we \emph{derive} the minor-arc $L^2$ estimate
 \[\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\]
@@ -1045,7 +1062,7 @@ as claimed.
 \end{enumerate}
 
 \medskip
-\noindent\textbf{Large-sieve reduction on $\mathfrak m$.} For each Heath-Brown dyadic block $\mathcal T$, Gallagher’s/large-sieve minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) yields
+\noindent\textbf{Large-sieve reduction on $\mathfrak m$.} For each Heath-Brown dyadic block $\mathcal T$, Gallagher's/large-sieve minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) yields
 \[
 	\int_{\mathfrak m}\big|\mathcal S_{\mathcal T}(\alpha)\big|^2\,d\alpha
 	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\sum_{\substack{a\!\!\!\pmod q\\(a,q)=1}}
@@ -1275,7 +1292,7 @@ This yields
 where the finitely many $\mathcal T$ are dyadic Type~I/II/III blocks with divisor-bounded smooth coefficients supported on $n\asymp X$ for some $X$.
 
 \paragraph{Minor-arc large-sieve reduction.}
-For each block $\mathcal T$ with coefficient sequence $c_n$ (carrying the smooth dyadics), Gallagher’s minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) gives
+For each block $\mathcal T$ with coefficient sequence $c_n$ (carrying the smooth dyadics), Gallagher's minor-arc reduction (Lemma~\ref{lem:largesieve-minor}) gives
 \[
 	\int_{\mathfrak m}\Big|\sum_n c_n e(\alpha n)\Big|^2 d\alpha
 	\ \ll\ \frac{1}{Q^2}\sum_{q\le Q}\ \sum_{\substack{a\!\!\!\!\pmod q\\(a,q)=1}}
@@ -1392,7 +1409,7 @@ We record the precise form of the inequality used in Part~D.6.
 
 \begin{proof}[Sketch]
 	Partition $[0,1)$ into $\{\mathfrak M(q,a)\}$ and $\mathfrak m$. For $\alpha\in\mathfrak m$ one has
-	$|\alpha-\tfrac aq|\ge 1/(qQ)$ for all $q\le Q$. Expanding the square and integrating against the Dirichlet kernel yields Gallagher’s lemma in the form
+	$|\alpha-\tfrac aq|\ge 1/(qQ)$ for all $q\le Q$. Expanding the square and integrating against the Dirichlet kernel yields Gallagher's lemma in the form
 	\[
 		\int_{I} \Big|\sum c_n e(\alpha n)\Big|^2 d\alpha
 		\ \ll\ \frac{1}{|I|^2}\sum_{q\le 1/|I|}\ \sum_{a\pmod q}\Big|\sum c_n e(an/q)\Big|^2
