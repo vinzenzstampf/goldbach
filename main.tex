@@ -1488,39 +1488,53 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 We fix the Kuznetsov normalization we use throughout and record the uniform kernel bounds in $q$.
 
-\begin{lemma}[Kuznetsov on $\Gamma_0(q)$ with level-uniform kernel bounds]\label{lem:kuznetsov-uniform-kernel}
-	Let $q\ge1$, $m,n\ge1$ with $(mn,q)=1$. For an even $h\in C_c^\infty(\mathbb R)$ define $h_Q(t):=h(t/Q)$, $Q\ge1$. Write the Kuznetsov formula on $\Gamma_0(q)$ as
+\section{Kuznetsov at level $q$ with level-uniform kernel bounds}
+
+We fix normalizations so that the geometric side always has the factor
+$\sum_{c\equiv 0\ (q)} c^{-1} S(m,n;c)\,\mathcal W^{(*)}_{q}\!\big(4\pi\sqrt{mn}/c\big)$,
+with $(*)\in\{\mathrm{Ma\ss},\mathrm{hol},\mathrm{Eis}\}$.
+
+\begin{lemma}[Level-uniform Kuznetsov kernels]\label{lem:kuznetsov-uniform}
+	Let $q\ge1$, $m,n\ge1$ with $(mn,q)=1$.
+	Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$ for $Q\ge1$.
+	Write the Kuznetsov formula on $\Gamma_0(q)$ as
 	\[
-		\mathcal{H}_q(h_Q;m,n)
+		\mathcal H_q(h_Q;m,n)
 		=\delta_{m=n}\,\mathcal D_q(h_Q)
-		+ \sum_{\substack{c\equiv 0\ (q)}} \frac{1}{c}\,S(m,n;c)\,\mathcal W_{q}^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
+		+\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
 	\]
-	where $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$ denotes the Maa\ss/holomorphic/Eisenstein pieces. Then for every $A,j\ge0$,
+	where $(*)$ runs over Maa\ss, holomorphic and Eisenstein pieces (with the standard weights).
+	Then for every $A,j\ge0$,
 	\[
-		\mathcal W_{q}^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},\qquad
-		z^j\,\partial_z^{\,j}\mathcal W_{q}^{(*)}(z)\ \ll_{A,j} \Big(1+\frac{z}{Q}\Big)^{-A},
+		\mathcal W_q^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},
+		\qquad
+		z^{\,j}\,\partial_z^{\,j}\mathcal W_q^{(*)}(z)\ \ll_{A,j} \Big(1+\frac{z}{Q}\Big)^{-A},
 	\]
-	uniformly in $q\ge1$, $z>0$, and in the spectral piece $(*)$. The implied constants depend only on $A,j$ and $h$ (via finitely many derivatives), not on $q$.
+	uniformly in $q\ge1$, $z>0$, and in the spectral piece $(*)$.
+	The implied constants depend only on $A,j$ and on finitely many derivatives of $h$, not on $q$.
 \end{lemma}
 
-\begin{proof}
-	We record the Maa\ss case; the holomorphic and Eisenstein kernels are analogous. For Maa\ss forms the kernel is a Hankel transform
-	\[
-		\mathcal W_{q}^{\mathrm{Ma\text\ss}}(z)
-		= \frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt.
-	\]
-	Since $h\in C_c^\infty([-2,2])$ is fixed, $h_Q(t)=h(t/Q)$ is supported on $|t|\le 2Q$ and satisfies $\|h_Q^{(r)}\|_\infty\ll_r Q^{-r}$. Use the Schl\"afli representation
-	\[
-		J_{2it}(z)=\frac{1}{2\pi}\int_{-\pi}^{\pi} e^{iz\sin\theta}\,e^{-2it\theta}\,d\theta,
-	\]
-	or, equivalently, Mellin-Barnes representations; either way, after interchanging integrals (justified by compact support) one integrates by parts in $t$ repeatedly against the factor $e^{-2it\theta}$. Each $t$-derivative falls on $h_Q(t)\tanh(\pi t)\,t$, gaining a factor $\ll Q^{-1}$ thanks to the $h_Q^{(r)}$ bounds and polynomial growth control of $\tanh$ and $t\mapsto t$. Thus for any $R\ge0$,
-	\[
-		\mathcal W_{q}^{\mathrm{Ma\text\ss}}(z) \ll_R \int_{-\pi}^{\pi} \big(1+|z\sin\theta|\big)^{-R}\,d\theta
-		\ll_R \big(1+z\big)^{-R}.
-	\]
-	To insert the $Q$-scale, rescale $t\mapsto Qt$ in the definition of $h_Q$; every integration-by-parts step gains a factor $(1+z/Q)^{-1}$ rather than $(1+z)^{-1}$, yielding
-	$\mathcal W_{q}^{\mathrm{Ma\text\ss}}(z)\ll_A (1+z/Q)^{-A}$ for all $A$. For $z$-derivatives one differentiates under the integral; each $z\partial_z$ inserts a bounded polynomial in $t$ multiplying $J_{2it}$ (via Bessel ODE or by differentiating the oscillatory integral), which is absorbed by the same integration-by-parts argument because $|t|\le 2Q$. Uniformity in $q$ is immediate: $q$ appears only as the congruence condition $c\equiv 0\pmod q$ on the geometric side; it does not enter the kernel transform. The holomorphic and Eisenstein kernels are handled identically (replace $J_{2it}$ by $J_{k-1}$ or $K_{2it}$; compact support in $t$ gives the same decay).
+\begin{proof}[Proof sketch (standard)]
+	For Maa\ss\ forms,
+	\(
+	\mathcal W_q^{\mathrm{Ma\ss}}(z)=\frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
+	\)
+	with $h_Q$ supported on $|t|\le 2Q$ and $\|h_Q^{(r)}\|_\infty\ll_r Q^{-r}$.
+	Use the Schl\"afli (or Mellin–Barnes) representation of $J_{2it}$ and integrate by parts repeatedly in $t$;
+	each step gains a factor $\ll (1+z/Q)^{-1}$ thanks to the compact support and $Q^{-r}$ control on $h_Q^{(r)}$,
+	yielding the stated decay. Differentiations in $z$ insert bounded polynomials in $t$ and are absorbed by the same argument.
+	Holomorphic kernels ($J_{k-1}$) and Eisenstein ($K_{2it}$) are treated analogously; level $q$ appears only as the congruence $c\equiv q\ (c)$ on the geometric side and does not affect the transform.
 \end{proof}
+
+\begin{corollary}[Kernel localization for $c$]\label{cor:kernel-localization}
+	With $m,n\asymp X$ and $z=4\pi\sqrt{mn}/c$, Lemma~\ref{lem:kuznetsov-uniform} implies that the $c$-sum localizes to
+	\[
+		c\ \asymp\ C\ :=\ \frac{X^{1/2}}{Q},
+	\]
+	up to tails $O_A(X^{-A})$ after summing over $c\equiv0\pmod q$.
+	Moreover the same bounds hold for $z^j\partial_z^j\mathcal W_q^{(*)}$, so weights obtained by absorbing fixed smooth coefficient cutoffs inherit the same $c$-localization.
+\end{corollary}
+
 
 
 
