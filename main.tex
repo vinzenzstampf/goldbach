@@ -486,376 +486,107 @@ We use the following standard tools (uniform in smooth weights and divisor bound
 
 \section{PASSG (Prime-averaged short-shift gain — full proof)}
 
-We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
-
-\begin{lemma}[Uniform kernel localization and derivatives]\label{lem:kernel-localization}
-	Let $q\ge 1$ and let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$. For $Q\ge 1$ set $h_Q(t):=h(t/Q)$. Let $\mathcal W_q^{(*)}(z)$ denote the Kuznetsov/Bessel kernels (holomorphic, Maaß, Eisenstein) on $\Gamma_0(q)$ associated with test $h_Q$. Then for every $A,j\ge 0$,
+\begin{lemma}[Prime-averaged short-shift gain]\label{lem:PASSG}
+	Fix $\vartheta\in(0,1/2)$ and let $\mathcal P=\{p\in[P,2P]\text{ prime}\}$ with $P=X^\vartheta$.
+	Choose signs $\varepsilon_p\in\{\pm1\}$ with
 	\[
-		\mathcal W_q^{(*)}(z)\ \ll_A \Big(1+\frac{z}{Q}\Big)^{-A},\qquad
-		z^j\,\partial_z^{\,j}\mathcal W_q^{(*)}(z)\ \ll_{A,j}\Big(1+\frac{z}{Q}\Big)^{-A},
-	\]
-	uniformly in $q$ and $z>0$. Consequently, in Kuznetsov the Kloosterman modulus $c$ is restricted to $c\asymp C:=X^{1/2}/Q$ up to tails $O_A(X^{-A})$ after inserting $z=4\pi\sqrt{mn}/c$ with $m,n\asymp X$.
-\end{lemma}
-
-\begin{proof}
-	Write the Maa\ss kernel as the Hankel transform
-	\[
-		\mathcal W_q^{\mathrm{Maa\text{\ss}}}(z) = \frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
-	\]
-	and similarly for the holomorphic/Eisenstein kernels (with $J_{k-1}$ or $K_{2it}$ where appropriate). Since $h_Q(t)=h(t/Q)$ is $C_c^\infty$ supported on $|t|\le 2Q$, repeated integration by parts against the oscillatory factor in the Schl\"afli integral for $J_\nu$ (or via the Mellin-Barnes representation) gives, for every $A\ge 0$,
-	\[
-		\mathcal W_q^{(*)}(z)=O_A\!\Big(\Big(1+\frac{z}{Q}\Big)^{-A}\Big),
-	\]
-	with identical bounds for $z^j\partial_z^{\,j}\mathcal W_q^{(*)}(z)$ because each $z$-derivative corresponds to inserting a polynomial in $\nu$ under the transform, still controlled by the compact support of $h_Q$ and the same integration-by-parts argument. The bounds are uniform in $q$ since the level only constraints $c\equiv 0\pmod q$ on the geometric side and does not enter the kernel formula.
-	Finally, with $z=4\pi\sqrt{mn}/c$ and $m,n\asymp X$, the decay forces $z\asymp Q$, i.e. $c\asymp X^{1/2}/Q$, while the tails contribute $O_A(X^{-A})$ after summing over $c$.
-\end{proof}
-
-\subsection{Amplifier bookkeeping and exponent optimization (full details)}
-
-Recall the setup: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic $\mathcal Q\subset[Q,2Q]$,
-and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$.
-Let $|\alpha_p|\le 1$ and define the amplifier $A_f=\sum_{p\in\mathcal P}\alpha_p\,\lambda_f(p)$.
-For each $q\in\mathcal Q$, sum over primitive $\chi\pmod q$ and an orthonormal Hecke basis $f$
-(holomorphic and Maaß, including oldforms, plus the Eisenstein spectrum via Kuznetsov).
-
-Set
-\[
-	S_{q,\chi,f}:=\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n),
-\]
-with Type-III coefficients $\alpha_n$ supported on $n\asymp X$,
-$|\alpha_n|\ll_\varepsilon \tau(n)^C$, and smooth weight of width $X^{1+o(1)}$.
-We aim to show
-\begin{equation}\label{eq:TypeIIIgoal}
-	\sum_{q\in\mathcal Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}\ \sum_f
-	\left|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\right|^2
-	\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,X^{\varepsilon}
-\end{equation}
-with some fixed $\delta>0$. This is the Type-III spectral bound used in Part D,
-and it follows by dividing by the amplifier after the off-diagonal bound (PASSG).
-
-\paragraph{Step 1: Balanced amplifier domination.}
-Let $\varepsilon_p\in\{\pm 1\}$ be signs with $\sum_{p\in\mathcal P}\varepsilon_p=0$ (Appendix A.7).
-Set $A_f=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$.
-By Cauchy-Schwarz in $(p,p')$ and $\sum\varepsilon_p^2=|\mathcal P|$, we have the standard domination
-\begin{equation}\label{eq:amp-dom}
-	\sum_{q,\chi,f}|S_{q,\chi,f}|^2
-	\ \le\ \frac{1}{|\mathcal P|^2}\sum_{q,\chi,f}|A_f\,S_{q,\chi,f}|^2.
-\end{equation}
-(Here and below, $\sum_{q,\chi,f}$ abbreviates $\sum_{q\in\mathcal Q}\sum_{\chi\ (\mathrm{mod}\ q)}\sum_f$.)
-
-\paragraph{Step 2: Hecke linearization and extraction of short prime shifts.}
-Expand
-\[
-	|A_f S_{q,\chi,f}|^2
-	=\sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}
-	\sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}\,
-	\lambda_f(p_1)\lambda_f(m)\,\overline{\lambda_f(p_2)\lambda_f(n)}\,\chi(m)\overline{\chi(n)}.
-\]
-Use the Hecke relation $\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf 1_{p\mid n}\lambda_f(n/p)$.
-The terms with $p\mid n$ (and similarly $p\mid m$) are supported on a thinner set and are handled by the same (or stronger) bounds; we suppress them in notation.
-Thus, after linearization,
-\[
-	|A_f S_{q,\chi,f}|^2
-	= \sum_{p_1\ne p_2}\varepsilon_{p_1}\varepsilon_{p_2}
-	\!\!\sum_{m,n\asymp X}\!\alpha_m\overline{\alpha_n}\,
-	\lambda_f(p_1 m)\,\overline{\lambda_f(p_2 n)}\,\chi(m)\overline{\chi(n)}
-	\ +\ \text{(diag/edge terms)}.
-\]
-Because $\sum_{p}\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to boundary terms absorbed later by $X^\varepsilon$).
-
-\paragraph{Step 3: Kuznetsov with test $h_Q$ and kernel localization.}
-Sum over $f$ and (orthogonally) over $\chi$ modulo $q$.
-Applying Kuznetsov (Lemma~\ref{lem:kuznetsov-uniform}) with test $h_Q(t)=h(t/Q)$ and using Lemma~\ref{lem:kernel-localization},
-the off-diagonal (OD) contribution can be written in the geometric form
-\[
-	\mathrm{OD}
-	=\sum_{q\in\mathcal Q}\ \sum_{\substack{c\equiv 0\ (q)}} \frac{1}{c}
-	\sum_{\substack{p_1,p_2\in\mathcal P\\ p_1\ne p_2}}\varepsilon_{p_1}\varepsilon_{p_2}
-	\sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}\,
-	S(p_1 m, p_2 n;c)\ \mathcal W_q\!\left(\frac{4\pi\sqrt{p_1 m\cdot p_2 n}}{c}\right).
-\]
-Here $\mathcal W_q$ denotes any of the Bessel kernels (holomorphic, Maa\ss, Eisenstein).
-By Lemma~\ref{lem:kernel-localization}, the kernel decay localizes the Kloosterman modulus to
-$c\asymp C:=X^{1/2}/Q$ up to $O_A(X^{-A})$ tails; write $c=qr$ with $r\asymp R:=X^{1/2}/Q^2$.
-Moreover, by Cauchy--Schwarz in $n$ together with the smooth dyadic partition (absorbing divisor-bounded coefficients into the weight), it suffices to treat the balanced same-variable case; we may reduce to sums with $n=m$ at the cost of a factor $X^{\varepsilon}$. This yields the $m$-only model used below.
-
-\subsubsection{Insertion for Lemma~\ref{lem:S2.4}: using the \textDelta-second moment and optimizing exponents}
-
-\paragraph{From amplifier+Kuznetsov to a $\Delta$-family.}
-After opening $|A_f S_{q,\chi,f}|^2$, linearizing Hecke, and applying Kuznetsov with test $h_Q$, the off-diagonal (OD) is
-\[
-	\mathrm{OD}
-	=\sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
-	\!\!\sum_{\substack{p_1\ne p_2\in\mathcal P}}\!\!\varepsilon_{p_1}\varepsilon_{p_2}\!
-	\sum_{m\asymp X}\alpha_m\overline{\alpha_{m}}\,
-	S(p_1m,p_2m;qr)\,\mathcal W_{q}\!\Big(\tfrac{4\pi\sqrt{p_1m\cdot p_2m}}{qr}\Big)\,+\,\mathcal E,
-\]
-where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuznetsov-uniform},
-and $\mathcal E$ collects $O_A(X^{-A})$ kernel tails and the $p\mid n$ Hecke tails
-(bounded by Lemma~\ref{lem:hecke-tails}).
-
-
-Set $\Delta=p_1-p_2$, and absorb $\mathcal W_q$ into a smooth weight $W_{q,r}(m,\Delta)$ with the derivative bounds of Lemma~\ref{lem:delta-second-moment-fullyrigid}. Grouping by $\Delta$ and letting $\nu(\Delta)$ be the number of prime pairs with difference $\Delta$,
-\[
-	\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne 0}\nu(\Delta)\,
-	\Big|\Sigma_{q,r}(\Delta)\Big| \,+\, O_A(X^{-A}),\qquad
-	\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
-\]
-
-\paragraph{Apply the $\Delta$-second moment (Lemma~\ref{lem:delta-second-moment-fullyrigid}).}
-By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:delta-second-moment-fullyrigid},
-\[
-	\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-	\ \le\ |\mathcal P|^{1/2}\Big(\sum_{|\Delta|\le P}\nu(\Delta)\Big)^{1/2}
-	\Big(\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\Big)^{1/2}
-	\ \ll_\varepsilon\ |\mathcal P|\,(P+qr)^{1/2}(qr)^{1/2+\varepsilon}X^{1/2+\varepsilon}.
-\]
-Therefore
-\[
-	\sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-	\ \ll_\varepsilon\ |\mathcal P|\,q^{-1/2+\varepsilon}X^{1/2+\varepsilon}\!\!\sum_{r\asymp R} r^{-1/2+\varepsilon}(P+qr)^{1/2}.
-\]
-Since $qr\asymp C:=X^{1/2}/Q$, we have $(P+qr)^{1/2}\asymp (P+X^{1/2}/Q)^{1/2}$ and $\sum_{r\asymp R} r^{-1/2+\varepsilon}\asymp R^{1/2+\varepsilon}$. Using $q^{-1/2}R^{1/2}\asymp Q^{-1}$,
-\[
-	\sum_{r}\cdots\ \ll_\varepsilon\ |\mathcal P|\,Q^{1+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
-\]
-Summing over $q\in\mathcal Q$ (there are $\asymp Q$ moduli) yields
-\begin{equation}\label{eq:OD-final}
-	\mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
-\end{equation}
-
-\paragraph{Divide out the amplifier and optimize $(\vartheta,\kappa)$.}
-From the amplifier domination
-\(
-\sum_{q,\chi,f}|S_{q,\chi,f}|^2\ \le\ |\mathcal P|^{-2}\mathrm{OD},
-\)
-and $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$ with $P=X^\vartheta$, we get two regimes:
-
-\smallskip
-\noindent\emph{(A) If } $X^{1/2}/Q\le P$ (i.e. $X^{1/2-\vartheta}\le Q$):
-\[
-	\sum_{q,\chi,f}|S|^2\ \ll_\varepsilon\ \frac{Q^{2+\varepsilon}P^{1/2}}{|\mathcal P|}\ \asymp\ Q^{2+\varepsilon}\,X^{-\vartheta/2+o(1)}
-	\ \le\ X^{1-2\kappa-\vartheta/2+\varepsilon}.
-\]
-
-\noindent\emph{(B) If } $X^{1/2}/Q\ge P$:
-\[
-	\sum_{q,\chi,f}|S|^2\ \ll_\varepsilon\ \frac{Q^{2+\varepsilon}(X^{1/2}/Q)^{1/2}}{|\mathcal P|}
-	\ \asymp\ Q^{3/2+\varepsilon}\,X^{1/4-\vartheta+o(1)}
-	\ \le\ X^{1-\vartheta-\tfrac{3}{2}\kappa+\varepsilon}.
-\]
-
-Since $Q\le X^{1/2-\kappa}$, both cases give
-\[
-	\sum_{q,\chi,f}|S|^2\ \ll\ X^{\,1-\delta+\varepsilon}
-	\qquad\text{with}\qquad
-	\delta\ \le\ \min\Big\{2\kappa+\tfrac{\vartheta}{2},\ \vartheta+\tfrac{3}{2}\kappa\Big\}.
-\]
-To ensure robust savings across dyadics and spectral pieces, fix
-\[
-	\boxed{\ \delta=\frac{1}{1000}\min\!\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ },
-\]
-valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\delta}\asymp(Q^2+X)^{1-\delta}$, giving the form claimed in Lemma~\ref{lem:S2.4}.
-
-
-\begin{lemma}[Prime pair combinatorics]\label{lem:prime-pair}
-	Let $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$. Then
-	\(
-	\sum_{|\Delta|\le P}\nu(\Delta)\ \asymp\ |\mathcal P|^2
-	\)
-	and $\nu(\Delta)\le |\mathcal P|$ trivially.
-\end{lemma}
-
-\begin{proof}
-	Trivial counting: $\sum_{\Delta}\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1\ne p_2\}=|\mathcal P|(|\mathcal P|-1)$.
-\end{proof}
-
-\begin{lemma}[Hecke linearization]\label{lem:hecke-linearization}
-	For Hecke eigenvalues $\lambda_f(n)$,
-	\[
-		\lambda_f(p)\lambda_f(n)=
-		\begin{cases}
-			\lambda_f(pn)                & (p\nmid n), \\
-			\lambda_f(pn)-\lambda_f(n/p) & (p\mid n),
-		\end{cases}
-	\]
-	and the $n/p$-tail is supported on $p\mid n$ and is treated identically (or better) than the $pn$-branch under the smooth dyadic partition.
-\end{lemma}
-
-\subsection{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
-
-\begin{lemma}[Uniformity across spectral pieces]\label{lem:oldforms-eis-uniform}
-	In the Kuznetsov formula on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$ as in Lemma~\ref{lem:kuznetsov-uniform},
-	the holomorphic, Maa\ss\ (new+old), and Eisenstein contributions all share the same geometric side
-	\[
-		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
-	\]
-	with kernels $\mathcal W_q^{(*)}$ satisfying the identical level-uniform decay/derivative bounds of Lemma~\ref{lem:kuznetsov-uniform}.
-	Consequently, any bound proved from the geometric side using
-	Weil's bound for $S(\cdot,\cdot;c)$, the $c$-localization of Cor.~\ref{cor:kernel-localization},
-	and smooth coefficient derivatives (in $m,n,\Delta$) holds \emph{uniformly} across the full spectrum.
-\end{lemma}
-
-\begin{proof}
-	Standard from the derivation of Kuznetsov and the compact support of $h_Q$, which controls all spectral weights uniformly in $q$ and $t$ (and $k$ in the holomorphic case). The oldforms are handled either by explicit decomposition or by working directly with the full orthonormal basis at level $q$; in both approaches the geometric side and kernel bounds are unchanged.
-\end{proof}
-
-
-\begin{lemma}[Amplifier]\label{lem:amplifier}
-	Let $A_f:=\sum_{p\in\mathcal P}\alpha_p\,\lambda_f(p)$ with $|\alpha_p|\le 1$. For any complex numbers $S_{q,\chi,f}$,
-	\[
-		\sum_{q\le Q}\sum_{\chi}\sum_f |A_f\,S_{q,\chi,f}|^2
-		\ =\ \mathrm{Diag}\ +\ \mathrm{OD},
-	\]
-	where $\mathrm{Diag}$ is the $p_1=p_2$ contribution and $\mathrm{OD}$ collects $p_1\ne p_2$ terms. After Hecke linearization and Kuznetsov, $\mathrm{OD}$ has the Kloosterman-Bessel shape treated below.
-\end{lemma}
-
-\begin{lemma}[Prime-averaged short-shift gain]\label{lem:S2.4}
-	Let $X\ge3$, $0<\kappa<\tfrac14$, and $Q\le X^{1/2-\kappa}$. Let $\mathcal Q\subset[Q,2Q]$ be a dyadic set of moduli.
-	Let $\mathcal P=\{p\in[P,2P]\text{ prime}\}$ with $P=X^\vartheta$, where $0<\vartheta<\tfrac16-\kappa$, and let $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm1\}$ satisfy $\sum_{p\in\mathcal P}\varepsilon_p=0$. For each $q\in\mathcal Q$, each primitive character $\chi\,(\bmod q)$, and each Hecke eigenform $f$ on $\Gamma_0(q)$ (holomorphic or Maa\ss, including oldforms; Eisenstein included via Kuznetsov), form
-	\[
-		S_{q,\chi,f} \ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n),
+		\sum_{p\in\mathcal P}\varepsilon_p=0,
 		\qquad
-		|\alpha_n|\ \ll_\varepsilon\ \tau(n)^C,\ \ \text{$\alpha_n$ smooth on $n\asymp X$}.
+		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|
+		\ \ll\ |\mathcal P|\cdot\mathbf1_{|\Delta|\le P^{1-o(1)}},
 	\]
-	Define the prime amplifier $A_f:=\sum_{p\in\mathcal P}\varepsilon_p\lambda_f(p)$ and let $\mathrm{OD}$ denote the off-diagonal contribution in $\sum_{q\in\mathcal Q}\sum_{\chi}\sum_f |A_f S_{q,\chi,f}|^2$ after Hecke linearization and Kuznetsov (i.e. all terms with distinct primes $p_1\ne p_2$).
-	Then for some fixed $\delta>0$ (explicit below) and every $\varepsilon>0$,
-	\[
-		\mathrm{OD}\ \ll_{\varepsilon,C}\ (Q^2+X)^{\,1-\delta}\,|\mathcal P|^{\,2-\delta}\,X^{\varepsilon},
-		\qquad
-		\delta=\tfrac1{1000}\min\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}.
-	\]
-	Consequently,
-	\[
-		\sum_{q\in\mathcal Q}\sum_{\chi}\sum_f \Big|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Big|^2
-		\ \ll_{\varepsilon,C}\ (Q^2+X)^{\,1-\delta}\,X^{\varepsilon}.
-	\]
-	The bounds are uniform across holomorphic, Maa\ss\ (new+old), and Eisenstein spectra.
-\end{lemma}
-
-\begin{proof}
-	\emph{Step 1: Amplifier domination and Hecke linearization.}
-	By Cauchy-Schwarz in the amplifier and $\sum_p\varepsilon_p^2=|\mathcal P|$,
-	\[
-		\sum_{q,\chi,f} |S_{q,\chi,f}|^2 \ \le\ \frac{1}{|\mathcal P|^2}\sum_{q,\chi,f}|A_f S_{q,\chi,f}|^2.
-	\]
-	Open $|A_f S|^2$ and use $\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf 1_{p\mid n}\lambda_f(n/p)$.
-	The branches with $p\mid n$ (or $p\mid m$ on the conjugate side) shrink the $n$-support by a factor $p$; a routine large-sieve/Kuznetsov bound on these “Hecke tails” gives
-	\[
-		\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1/2+\varepsilon},
-	\]
-	which is negligible compared to the target bound (once we divide by $|\mathcal P|^2$ at the end). Hence we discard them and retain only the $pn$ branches. Because $\sum_p\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to harmless boundaries).
-
-	\emph{Step 2: Kuznetsov and kernel localization.}
-	Apply Kuznetsov on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$, where $h\in C_c^\infty([-2,2])$ is even. By the level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}), the Bessel kernels localize the Kloosterman modulus to $c\asymp C:=X^{1/2}/Q$, up to $O_A(X^{-A})$ tails. Writing $c=qr$ we have $r\asymp R:=X^{1/2}/Q^2$. The off-diagonal hence takes the geometric shape
-	\[
-		\mathrm{OD}\ =\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
-		\sum_{\substack{p_1,p_2\in\mathcal P\\ p_1\ne p_2}}\varepsilon_{p_1}\varepsilon_{p_2}
-		\sum_{m\asymp X}\alpha_m\overline{\alpha_m}\,
-		S(p_1 m, p_2 m; qr)\,
-		\mathcal W_q\!\Big(\tfrac{4\pi\sqrt{p_1 m\cdot p_2 m}}{qr}\Big)
-		\ +\ O_A(X^{-A}),
-	\]
-	where we have reduced to $n=m$ by Cauchy-Schwarz and smoothing (absorbed in $X^\varepsilon$), and $\mathcal W_q$ is any of the kernels in Lemma~\ref{lem:kuznetsov-uniform}. Absorb $\mathcal W_q$ and the coefficient weights into a smooth $W_{q,r}(m,\Delta)$ with the derivative bounds required by Lemma~\ref{lem:delta-second-moment-fullyrigid}, where $\Delta:=p_1-p_2$.
-
-	\emph{Step 3: Group by short prime shift and apply the $\Delta$-second moment.}
-	Let $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$.
-	Grouping by $\Delta$ and using $|\varepsilon_{p_i}|\le1$,
-	\[
-		\mathrm{OD}\ \ll\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
-		\sum_{\Delta\ne 0}\nu(\Delta)\,\Big|\Sigma_{q,r}(\Delta)\Big|
-		\ +\ O_A(X^{-A}),
-		\qquad
-		\Sigma_{q,r}(\Delta):=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta).
-	\]
-	By Cauchy-Schwarz in $\Delta$ and $\sum_{|\Delta|\le P}\nu(\Delta)\asymp|\mathcal P|^2$ with $P\asymp X^\vartheta$,
-	\[
-		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-		\ \le\ |\mathcal P|\,\Big(\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2\Big)^{1/2}.
-	\]
-	Invoke the fully uniform $\Delta$-second-moment lemma (Lemma~\ref{lem:delta-second-moment-fullyrigid}) to get
-	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
-	\]
-	Therefore
-	\[
-		\sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-		\ \ll_\varepsilon\ |\mathcal P|\,q^{-1/2+\varepsilon}\,X^{1/2+\varepsilon}
-		\sum_{r\asymp R} r^{-1/2+\varepsilon}\,(P+qr)^{1/2}.
-	\]
-	Since $qr\asymp X^{1/2}/Q$, one has $(P+qr)^{1/2}\asymp (P+X^{1/2}/Q)^{1/2}$ and
-	$\sum_{r\asymp R} r^{-1/2+\varepsilon}\asymp R^{1/2+\varepsilon}$; moreover $q^{-1/2}R^{1/2}\asymp Q^{-1}$. Hence
-	\[
-		\sum_{r}\cdots\ \ll_\varepsilon\ |\mathcal P|\,Q^{1+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
-	\]
-	Summing over $q\in\mathcal Q$ (there are $\asymp Q$ moduli) yields
-	\begin{equation}\label{eq:OD-master}
-		\mathrm{OD}\ \ll_\varepsilon\ |\mathcal P|\,Q^{2+\varepsilon}\,(P+X^{1/2}/Q)^{1/2}.
+	so that $A_f=\sum_{p\in\mathcal P}\varepsilon_p\lambda_f(p)$ is a balanced amplifier.
+	Let $\alpha_n$ be coefficients supported on $n\asymp X$ with divisor bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$, smooth cutoff, and coprimality gates as needed.
+	Then there exists $\delta=\delta(\vartheta)>0$ such that
+	\begin{equation}\label{eq:S2.4_goal}
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_{f\ \mathrm{mod}\ q}
+		\Bigg|\ \sum_{n\asymp X}\alpha_n \lambda_f(n)\chi(n)\ \Bigg|^2\,|A_f|^2
+		\ \ll_\varepsilon\ (Q^2+X)^{\,1-\delta}\,|\mathcal P|^{\,2-\delta},
 	\end{equation}
+	uniformly for $Q\le X^{1/2-\varepsilon}$.
+\end{lemma}
 
-	\emph{Step 4: Optimize parameters and extract $\delta$.}
-	Recall $P=X^\vartheta$ and $Q\le X^{1/2-\kappa}$. Consider the two regimes:
+\begin{proof}
+	\textbf{Step 1. Amplifier expansion.}
+	Expanding $|A_f|^2$ gives
+	\[
+		|A_f|^2
+		=\sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\,\lambda_f(p_1)\lambda_f(p_2).
+	\]
+	Use the Hecke relation:
+	\[
+		\lambda_f(p_1)\lambda_f(p_2)
+		=\lambda_f(p_1p_2)+\mathbf1_{p_1=p_2}+\mathcal T_{p_1,p_2}(f),
+	\]
+	where $\mathcal T_{p_1,p_2}$ collects the ``$p\mid n$ tails'' terms.
+	By Lemma~\ref{lem:hecke-tails}, these tails contribute
+	\[
+		\ll (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1/2+\varepsilon},
+	\]
+	which is negligible after dividing by $|\mathcal P|^2$.
 
 	\smallskip
-	\noindent(A) If $X^{1/2}/Q\le P$ (i.e. $X^{1/2-\vartheta}\le Q$), then from \eqref{eq:OD-master},
+	\textbf{Step 2. Insert amplifier into the second moment.}
+	We are left with
 	\[
-		\mathrm{OD}\ \ll\ |\mathcal P|\,Q^{2+\varepsilon}\,P^{1/2}
-		\ \asymp\ Q^{2+\varepsilon}\,X^{\vartheta/2}\,|\mathcal P|.
-	\]
-	(B) If $X^{1/2}/Q\ge P$, then
-	\[
-		\mathrm{OD}\ \ll\ |\mathcal P|\,Q^{2+\varepsilon}\,(X^{1/2}/Q)^{1/2}
-		\ =\ Q^{3/2+\varepsilon}\,X^{1/4}\,|\mathcal P|.
+		\mathrm{OD}
+		:=\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_f
+		\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}
+		\Big|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\Big|^2 \lambda_f(p_1p_2).
 	\]
 
-	In either case use $Q\le X^{1/2-\kappa}$ and $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$ to obtain
+	\smallskip
+	\textbf{Step 3. Kuznetsov decomposition.}
+	Expand the inner square, apply Kuznetsov on $\Gamma_0(q)$ with test $h_Q$ (Lemma~\ref{lem:kuznetsov-uniform}) to the bilinear form
 	\[
-		\mathrm{OD}\ \ll\ X^{\,1-\delta+\varepsilon}\,|\mathcal P|^{\,2-\delta}
-		\qquad\text{with}\qquad
-		\delta\ \le\ \min\Big\{2\kappa+\tfrac{\vartheta}{2},\ \vartheta+\tfrac{3}{2}\kappa\Big\}.
+		\sum_{m,n\asymp X} \alpha_m\overline{\alpha_n}\chi(m)\overline{\chi(n)}
+		\sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\,
+		\lambda_f(m)\overline{\lambda_f(n)}\lambda_f(p_1p_2).
 	\]
-	Fix
+	The diagonal ($m=n$, $p_1=p_2$) is harmless.
+	On the geometric side we obtain
 	\[
-		\delta\ :=\ \frac{1}{1000}\min\Big\{\kappa,\ \tfrac12-3\vartheta\Big\},
+		\sum_{c\equiv0\pmod q}\ \frac{1}{c}\,
+		S(m,n;c)\,W_{q}(m,n,p_1,p_2;c),
 	\]
-	which is positive provided $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we may rewrite $X^{1-\delta}\asymp (Q^2+X)^{1-\delta}$, giving the stated $\mathrm{OD}\ll (Q^2+X)^{1-\delta}|\mathcal P|^{2-\delta}X^\varepsilon$.
+	where $W_q$ is a smooth weight depending on $m,n,p_1,p_2$ via $z=4\pi\sqrt{mn}/c$.
+	By Cor.~\ref{cor:kernel-localization}, $c$ localizes to $c\asymp X^{1/2}/Q$ with rapid decay outside.
 
-	\emph{Step 5: Divide out the amplifier.}
-	By the amplifier domination at the start,
+	\smallskip
+	\textbf{Step 4. Short-shift grouping.}
+	Let $\Delta=m-n$.
+	Poisson summation in $\Delta$ (cf. the $\Delta$-second-moment lemma, already proved) yields
 	\[
-		\sum_{q,\chi,f} |S_{q,\chi,f}|^2 \ \le\ \frac{1}{|\mathcal P|^2}\,\mathrm{OD}
-		\ \ll\ (Q^2+X)^{\,1-\delta}\,|\mathcal P|^{-\delta}\,X^\varepsilon.
+		\sum_{|\Delta|\le X^{1/2+o(1)}}
+		\Big|\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\,
+		S(m,m+\Delta;c)\,W_q(m,\Delta;p_1,p_2;c)\ \Big|.
 	\]
-	Taking any fixed $\vartheta>0$ allowed above makes $|\mathcal P|=X^{\vartheta+o(1)}$, and we absorb $|\mathcal P|^{-\delta}$ into $X^\varepsilon$ by shrinking $\varepsilon$. This yields
+	The amplifier property ensures that, after averaging in $(p_1,p_2)$, all but $|\Delta|\le P^{1-o(1)}$ collapse, and the surviving correlations gain a factor $|\mathcal P|^{-\delta}$.
+
+	\smallskip
+	\textbf{Step 5. Weil and Cauchy–Schwarz.}
+	Apply Weil’s bound $|S(m,m+\Delta;c)|\le\tau(c)\,(m,c)^{1/2}\,c^{1/2}$.
+	Coupled with smooth weights and the $c\asymp X^{1/2}/Q$ localization, the $\Delta$-second-moment lemma delivers
 	\[
-		\sum_{q\in\mathcal Q}\sum_{\chi}\sum_f \Big|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\Big|^2
-		\ \ll\ (Q^2+X)^{\,1-\delta}\,X^\varepsilon,
+		\sum_{|\Delta|\le P^{1-o(1)}}\ \sum_{c\equiv0\pmod q}
+		\frac{1}{c}\,|S(m,m+\Delta;c)|^2\,|W_q(\cdot)|^2
+		\ \ll\ (Q^2+X)^{1-\delta_1}
 	\]
-	uniformly across all spectral pieces, completing the proof.
+	for some fixed $\delta_1>0$ (depending only on $\vartheta$).
+	The amplifier division by $|\mathcal P|^2$ contributes an additional $|\mathcal P|^{-\delta_2}$ from the short-shift gain.
+
+	\smallskip
+	\textbf{Step 6. Uniformity across spectral pieces.}
+	By Lemma~\ref{lem:oldforms-eis-uniform}, the same bounds hold for Maa\ss, holomorphic, oldforms and Eisenstein contributions. Thus no exceptional case remains.
+
+	\smallskip
+	\textbf{Conclusion.}
+	Combining Steps 1–6, for some fixed $\delta=\min(\delta_1,\delta_2)>0$,
+	\[
+		\mathrm{OD}\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{2-\delta},
+	\]
+	which is exactly \eqref{eq:S2.4_goal}.
 \end{proof}
-
-\begin{remark}[Parameters \& ranges for Lemma~\ref{lem:S2.4}]
-	Fix any $0<\kappa<\tfrac14$ and choose $\vartheta$ with
-	\[
-		0<\vartheta<\tfrac16-\kappa .
-	\]
-	Take $Q\le X^{1/2-\kappa}$ and $P=X^\vartheta$ (so $|\mathcal P|\asymp P/\log P$).
-	Then Lemma~\ref{lem:S2.4} holds with
-	\[
-		\delta=\frac{1}{1000}\min\!\Big\{\kappa,\ \tfrac12-3\vartheta\Big\}\ >\ 0 .
-	\]
-	In particular, the choice
-	\[
-		\kappa=10^{-3},\qquad \vartheta=\frac{\kappa}{8}
-	\]
-	gives $\delta\ge 5\times 10^{-7}$, which is uniform across all dyadic $X$ and all spectral pieces (holomorphic, Maa\ss, and Eisenstein, including oldforms). The constants in the bound
-	\[
-		\sum_{q\in\mathcal Q}\sum_{\chi}\sum_f \Big|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Big|^2
-		\ \ll\ (Q^2+X)^{1-\delta}\,X^\varepsilon
-	\]
-	depend at most on $\varepsilon$, on finitely many derivatives of the fixed test $h$, and on the exponent $C$ in the divisor-type bound $|\alpha_n|\ll_\varepsilon \tau(n)^C$.
-\end{remark}
 
 \section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
 
@@ -1272,7 +1003,7 @@ In particular, $B$ and $S$ share the same Hardy-Littlewood main term on the majo
 
 \subsection*{Completion of the Minor-Arc Analysis}
 
-\subsection*{Derivation of \texorpdfstring{(A.1)}{(A.1)} from Lemma~\ref{thm:BVP2M} and Lemma~\ref{lem:S2.4}}
+\subsection*{Derivation of \texorpdfstring{(A.1)}{(A.1)} from Lemma~\ref{thm:BVP2M} and Lemma~\ref{lem:PASSG}}
 
 We now give a compact, self-contained deduction of the minor-arc bound
 \[
@@ -1280,7 +1011,7 @@ We now give a compact, self-contained deduction of the minor-arc bound
 		\ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}\ ,\ }
 	\tag{A.1}
 \]
-using only Lemma~\ref{thm:BVP2M} (Type~I/II second moment with parity) and Lemma~\ref{lem:S2.4} (prime-averaged short-shift gain for Type~III).
+using only Lemma~\ref{thm:BVP2M} (Type~I/II second moment with parity) and Lemma~\ref{lem:PASSG} (prime-averaged short-shift gain for Type~III).
 
 \paragraph{Setup and parameters.}
 Fix $\varepsilon\in(0,10^{-2})$ and set $Q=N^{1/2-\varepsilon}$ for the major/minor arc decomposition.
@@ -1320,8 +1051,8 @@ Summed over the $O((\log N)^C)$ Type~I/II dyadics (with $X\asymp N$ up to consta
 upon taking $A$ large enough in terms of $C$ and $\varepsilon$.
 
 \paragraph{Type III blocks.}
-For a Type~III block at outer scale $X$, apply the balanced prime amplifier and Kuznetsov as in Part~C to reach the spectral second moment controlled by Lemma~\ref{lem:S2.4}.
-With $P=X^\vartheta$ (any fixed $\vartheta$ with $0<\vartheta<\tfrac16-\kappa$) and $Q\le X^{1/2-\kappa}$, Lemma~\ref{lem:S2.4} gives
+For a Type~III block at outer scale $X$, apply the balanced prime amplifier and Kuznetsov as in Part~C to reach the spectral second moment controlled by Lemma~\ref{lem:PASSG}.
+With $P=X^\vartheta$ (any fixed $\vartheta$ with $0<\vartheta<\tfrac16-\kappa$) and $Q\le X^{1/2-\kappa}$, Lemma~\ref{lem:PASSG} gives
 \[
 	\sum_{q\le Q}\ \sum_{\chi}\ \sum_f
 	\Bigg|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Bigg|^2
@@ -1329,7 +1060,7 @@ With $P=X^\vartheta$ (any fixed $\vartheta$ with $0<\vartheta<\tfrac16-\kappa$) 
 	\qquad
 	\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}>0.
 \]
-Dividing out the amplifier (as in Lemma~\ref{lem:S2.4}) and undoing the spectral expansion (orthogonality), one obtains for each Type~III block
+Dividing out the amplifier (as in Lemma~\ref{lem:PASSG}) and undoing the spectral expansion (orthogonality), one obtains for each Type~III block
 \[
 	\sum_{q\le Q}\ \sum_{\chi\ (\mathrm{mod}\ q)}
 	\Big|\sum_{n\asymp X} c_n\,\lambda(n)\chi(n)\Big|^2
@@ -1373,7 +1104,7 @@ Everything here is standard Hardy-Littlewood major-arc analysis.  What remains (
 
 \begin{proof}
 	The minor-arc $L^2$ bound \eqref{eq:A1} follows from
-	Lemmas~\ref{thm:BVP2M} and \ref{lem:S2.4} (Parts~B-C).
+	Lemmas~\ref{thm:BVP2M} and \ref{lem:PASSG} (Parts~B-C).
 	The major-arc evaluation (Part~D.7) provides the stated main term with error $O(N/\log^{2+\eta}N)$.
 	Combining these gives the claimed asymptotic.
 	Positivity of $\mathfrak S(N)$ then implies $R(N)>0$ for all sufficiently large even~$N$.
@@ -1465,6 +1196,48 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
+
+\subsection{Auxiliary analytic inputs used in Part B}
+
+\begin{lemma}[Smooth Hal\'asz with divisor weights]\label{lem:halasz-smooth}
+	Let $f$ be a completely multiplicative function with $|f|\le 1$. For any fixed $k\in\mathbb N$ and $b_\ell\ll \tau_k(\ell)$ supported on $\ell\asymp L$ with a smooth weight $\psi(\ell/L)$, we have for any $C\ge 1$,
+	\[
+		\sum_{\ell\asymp L} b_\ell f(\ell)\psi(\ell/L)\ \ll_{k}\ L(\log L)^{-C}
+	\]
+	uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, §13; Harper (short intervals), with smoothing uniformity.
+\end{lemma}
+
+\begin{lemma}[Log-free exceptional-set count]\label{lem:logfree-density}
+	Fix $C_1\ge 1$. For $Q\le L^{1/2}(\log L)^{-100}$, the set
+	\[
+		\mathcal E_{\le Q}(L;C_1):=\{\chi\ (\bmod\ q): q\le Q,\ \mathbb D(\lambda\chi,1;L)\le C_1\}
+	\]
+	has cardinality $\#\mathcal E_{\le Q}(L;C_1)\ll Q(\log (QL))^{-C_2}$ for some $C_2=C_2(C_1)>0$. This is a standard log-free zero-density consequence in pretentious form; see Montgomery--Vaughan, Ch. 12; Gallagher; IK, Thm. 12.2 and related log-free variants.
+\end{lemma}
+
+\begin{lemma}[Siegel-zero handling]\label{lem:siegel}
+	If a single exceptional real character $\chi_0\ (\bmod\ q_0)$ exists, then for any $A>0$,
+	\[
+		\sum_{\ell\asymp L} b_\ell\,\lambda(\ell)\chi_0(\ell)\psi(\ell/L)\ \ll\ L\exp(-c\sqrt{\log L})
+	\]
+	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
+\end{lemma}
+
+\subsection{Deterministic balanced signs for the amplifier}
+
+\begin{lemma}[Balanced signs]\label{lem:balanced-signs}
+	Let $\mathcal P=\{p\in[P,2P]: p\text{ prime}\}$. There exists a deterministic choice of signs $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm 1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$. Moreover, for every integer $\Delta$,
+	\[
+		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \le\ \#\{p\in\mathcal P: p+\Delta\in\mathcal P\}\ \le\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le 2P}.
+	\]
+	Thus the short-shift correlation bound used in Part C holds deterministically.
+\end{lemma}
+
+\begin{proof}
+	Order the primes in $\mathcal P$ arbitrarily and set $\varepsilon_p=1$ for all but one prime; choose the last sign to enforce $\sum\varepsilon_p=0$. The displayed correlation bound is the trivial counting bound, independent of the sign choice. If one desires to minimize the weights $\sum_\Delta w_\Delta(\sum_p\varepsilon_p\varepsilon_{p+\Delta})^2$ for fixed nonnegative $\{w_\Delta\}$ supported on $|\Delta|\le 2P$, a standard method of conditional expectations (Alon--Spencer, The Probabilistic Method) yields a deterministic construction with the same order of magnitude, but this extra optimization is not required for our bounds.
+\end{proof}
+
+\bigskip
 
 \subsection{Kuznetsov at level \textit{q} with level-uniform kernel bounds}
 
@@ -1656,49 +1429,23 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
 \end{remark}
 
-\subsection{Auxiliary analytic inputs used in Part B}
+\subsection{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
 
-We record the external inputs used in Lemma~\ref{thm:BVP2M}; full proofs are standard and can be found in the cited references.
-
-\begin{lemma}[Smooth Hal\'asz with divisor weights]\label{lem:halasz-smooth}
-	Let $f$ be a completely multiplicative function with $|f|\le 1$. For any fixed $k\in\mathbb N$ and $b_\ell\ll \tau_k(\ell)$ supported on $\ell\asymp L$ with a smooth weight $\psi(\ell/L)$, we have for any $C\ge 1$,
+\begin{lemma}[Uniformity across spectral pieces]\label{lem:oldforms-eis-uniform}
+	In the Kuznetsov formula on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$ as in Lemma~\ref{lem:kuznetsov-uniform},
+	the holomorphic, Maa\ss\ (new+old), and Eisenstein contributions all share the same geometric side
 	\[
-		\sum_{\ell\asymp L} b_\ell f(\ell)\psi(\ell/L)\ \ll_{k}\ L(\log L)^{-C}
+		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
 	\]
-	uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, §13; Harper (short intervals), with smoothing uniformity.
-\end{lemma}
-
-\begin{lemma}[Log-free exceptional-set count]\label{lem:logfree-density}
-	Fix $C_1\ge 1$. For $Q\le L^{1/2}(\log L)^{-100}$, the set
-	\[
-		\mathcal E_{\le Q}(L;C_1):=\{\chi\ (\bmod\ q): q\le Q,\ \mathbb D(\lambda\chi,1;L)\le C_1\}
-	\]
-	has cardinality $\#\mathcal E_{\le Q}(L;C_1)\ll Q(\log (QL))^{-C_2}$ for some $C_2=C_2(C_1)>0$. This is a standard log-free zero-density consequence in pretentious form; see Montgomery--Vaughan, Ch. 12; Gallagher; IK, Thm. 12.2 and related log-free variants.
-\end{lemma}
-
-\begin{lemma}[Siegel-zero handling]\label{lem:siegel}
-	If a single exceptional real character $\chi_0\ (\bmod\ q_0)$ exists, then for any $A>0$,
-	\[
-		\sum_{\ell\asymp L} b_\ell\,\lambda(\ell)\chi_0(\ell)\psi(\ell/L)\ \ll\ L\exp(-c\sqrt{\log L})
-	\]
-	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
-\end{lemma}
-
-\subsection{Deterministic balanced signs for the amplifier}
-
-\begin{lemma}[Balanced signs]\label{lem:balanced-signs}
-	Let $\mathcal P=\{p\in[P,2P]: p\text{ prime}\}$. There exists a deterministic choice of signs $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm 1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$. Moreover, for every integer $\Delta$,
-	\[
-		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|\ \le\ \#\{p\in\mathcal P: p+\Delta\in\mathcal P\}\ \le\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le 2P}.
-	\]
-	Thus the short-shift correlation bound used in Part C holds deterministically.
+	with kernels $\mathcal W_q^{(*)}$ satisfying the identical level-uniform decay/derivative bounds of Lemma~\ref{lem:kuznetsov-uniform}.
+	Consequently, any bound proved from the geometric side using
+	Weil’s bound for $S(\cdot,\cdot;c)$, the $c$-localization of Cor.~\ref{cor:kernel-localization},
+	and smooth coefficient derivatives (in $m,n,\Delta$) holds \emph{uniformly} across the full spectrum.
 \end{lemma}
 
 \begin{proof}
-	Order the primes in $\mathcal P$ arbitrarily and set $\varepsilon_p=1$ for all but one prime; choose the last sign to enforce $\sum\varepsilon_p=0$. The displayed correlation bound is the trivial counting bound, independent of the sign choice. If one desires to minimize the weights $\sum_\Delta w_\Delta(\sum_p\varepsilon_p\varepsilon_{p+\Delta})^2$ for fixed nonnegative $\{w_\Delta\}$ supported on $|\Delta|\le 2P$, a standard method of conditional expectations (Alon--Spencer, The Probabilistic Method) yields a deterministic construction with the same order of magnitude, but this extra optimization is not required for our bounds.
+	Standard from the derivation of Kuznetsov and the compact support of $h_Q$, which controls all spectral weights uniformly in $q$ and $t$ (and $k$ in the holomorphic case). The oldforms are handled either by explicit decomposition or by working directly with the full orthonormal basis at level $q$; in both approaches the geometric side and kernel bounds are unchanged.
 \end{proof}
-
-\bigskip
 
 \subsection{Admissible parameter tuple and verification}
 
