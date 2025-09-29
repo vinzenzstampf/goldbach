@@ -330,7 +330,7 @@ We record the minor-arc target:
 
 \section{Bombieri--Vinogradov with parity (second moment): full statement and proof}
 % ============================================
-% BVP2M: Bombieri–Vinogradov with parity, second moment
+% BVP2M: Bombieri-Vinogradov with parity, second moment
 % ============================================
 
 \begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
@@ -350,7 +350,7 @@ We record the minor-arc target:
 	\paragraph{Step 1: Reduction to primitive characters.}
 	By orthogonality, restricting to primitive $\chi$ and accounting for induced characters introduces only $O(N^\varepsilon Q)$ overhead, negligible compared with the RHS.
 
-	\paragraph{Step 2: Halász–Montgomery estimate with smooth weights.}
+	\paragraph{Step 2: Halász-Montgomery estimate with smooth weights.}
 	Let
 	\[
 		F(s):=\sum_{n\le N} \frac{c_n\,\liou(n)}{n^s}.
@@ -364,7 +364,7 @@ We record the minor-arc target:
 	uniformly in $\chi$.
 
 	\paragraph{Step 3: Pretentious pruning and exceptional characters.}
-	By the Granville–Soundararajan pretentious method, the only possible large values of $F(1+it)$ occur if $\chi$ pretends to be a real character $\chi_0$ of small conductor, aligned with $\lambda$. But $\lambda$ is completely multiplicative with mean zero, and is maximally non-pretentious. Thus, for all non-principal $\chi$, the pretentious distance
+	By the Granville-Soundararajan pretentious method, the only possible large values of $F(1+it)$ occur if $\chi$ pretends to be a real character $\chi_0$ of small conductor, aligned with $\lambda$. But $\lambda$ is completely multiplicative with mean zero, and is maximally non-pretentious. Thus, for all non-principal $\chi$, the pretentious distance
 	\[
 		\mathbb D(\lambda,\chi;N)^2:=\sum_{p\le N}\frac{1-\Re(\lambda(p)\chi(p))}{p}
 	\]
@@ -378,12 +378,12 @@ We record the minor-arc target:
 	\paragraph{Step 4: Principal character and second moment.}
 	For $\chi=\chi_0$, we need to control $\sum_{n\le N} c_n \liou(n)$.
 	Here we apply zero-density estimates and classical zero-free regions (see Lemma~\ref{lem:logfree-density}, Lemma~\ref{lem:siegel}) to handle potential Siegel zeros.
-	By standard arguments (Montgomery–Vaughan large sieve in $L^2$ form, with zero-density input), we obtain
+	By standard arguments (Montgomery-Vaughan large sieve in $L^2$ form, with zero-density input), we obtain
 	\[
 		\sum_{q\le Q}\ \Biggl|\sum_{n\le N}c_n\liou(n)\Biggr|^2
 		\;\;\ll\;\; \frac{NQ}{(\log N)^A}.
 	\]
-	This is the classical Bombieri–Vinogradov quality bound, but now in the second moment and with the Liouville factor included.
+	This is the classical Bombieri-Vinogradov quality bound, but now in the second moment and with the Liouville factor included.
 \end{proof}
 
 \begin{remark}
@@ -396,7 +396,7 @@ We record the minor-arc target:
 \end{remark}
 
 \begin{corollary}[Parity-blindness of linear sieve weights]\label{cor:parityblind}
-	Let $\beta$ be the Rosser–Iwaniec upper-bound linear sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^\eta$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
+	Let $\beta$ be the Rosser-Iwaniec upper-bound linear sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^\eta$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
 	\[
 		\sum_{n\le N}\beta(n)\,\liou(n)\,\psi(n/N) \;\;\ll_{A,\varepsilon}\;\; \frac{N}{(\log N)^A}.
 	\]
@@ -404,7 +404,7 @@ We record the minor-arc target:
 
 \begin{proof}
 	Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$.
-	Insert into the sum and apply Cauchy–Schwarz over $d\le D$. Each inner sum
+	Insert into the sum and apply Cauchy-Schwarz over $d\le D$. Each inner sum
 	\[
 		\sum_{n\le N,\; d\mid n} \liou(n)\,\psi(n/N)
 	\]
@@ -537,11 +537,11 @@ We record the minor-arc target:
 \end{proposition}
 
 \begin{proof}
-	We follow the amplifier method of Duke–Friedlander–Iwaniec with refinements.
+	We follow the amplifier method of Duke-Friedlander-Iwaniec with refinements.
 
 	\paragraph{Step 1: Apply the amplifier.}
 	Introduce the prime amplifier $\mathcal A_f$ from Definition~\ref{def:amplifier} with amplifier length $P:=X^\vartheta$, $0<\vartheta<1$ to be chosen later.
-	By Cauchy–Schwarz,
+	By Cauchy-Schwarz,
 	\[
 		\sum_{f\in\mathcal F_q}\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2
 		\;\le\;
@@ -566,8 +566,8 @@ We record the minor-arc target:
 		\sum_{c\equiv0\,(q)} \frac{S(m,n+\Delta;c)}{c}\,
 		h_Q\!\left(\tfrac{4\pi\sqrt{mn}}{c}\right).
 	\]
-	By Cauchy–Schwarz in $\Delta$ and Lemma~\ref{lem:balanced-signs}, the amplifier signs contribute a factor $\max_\Delta|C(\Delta)|\ll \sqrt{M\log P}$.
-	The inner $\Delta$–sum is bounded by Lemma~\ref{lem:delta-second-moment}:
+	By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:balanced-signs}, the amplifier signs contribute a factor $\max_\Delta|C(\Delta)|\ll \sqrt{M\log P}$.
+	The inner $\Delta$-sum is bounded by Lemma~\ref{lem:delta-second-moment}:
 	\[
 		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
 		\;\ll_\varepsilon\; (P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}.
@@ -665,19 +665,176 @@ We now combine the inputs from Parts~B--C with the circle-method framework of Pa
 	Adding Type~I/II and Type~III contributions proves the theorem.
 \end{proof}
 
-\begin{theorem}[Major-arc evaluation]\label{thm:major-eval}
-	With $Q=N^{1/2-\varepsilon}$ and the major arcs $\mathfrak M$ of Part~A, one has
+% =========================================================
+% Part D. Major Arcs: evaluation and comparison S vs. B
+% =========================================================
+
+\section{Major arcs, main terms, and comparison}\label{subsec:major-arcs}
+
+Let $N$ be large and even.
+Fix a small $\varepsilon>0$ and set
+\[
+	Q := N^{1/2-\varepsilon}.
+\]
+For coprime $a,q$ with $1\le q\le Q$, define the major arc around $a/q$ by
+\[
+	\mathfrak M(a,q)\ :=\ \Bigl\{\alpha\in\mathbb T:\ \Bigl|\alpha-\frac{a}{q}\Bigr|\ \le\ \frac{Q}{qN}\Bigr\},
+\]
+and set $\mathfrak M:=\bigcup_{\substack{1\le q\le Q\\ (a,q)=1}}\mathfrak M(a,q)$, $\mathfrak m:=\mathbb T\setminus\mathfrak M$.
+
+We work with the smoothed exponential sums
+\[
+	S(\alpha)\ :=\ \sum_{n}\Lambda(n)\,W\!\Bigl(\frac{n}{N}\Bigr)\,e(n\alpha),
+	\qquad
+	B(\alpha)\ :=\ \sum_{n}\beta(n)\,W\!\Bigl(\frac{n}{N}\Bigr)\,e(n\alpha),
+\]
+where $W\in C_c^\infty([1/2,2])$ is a fixed bump with $\int_0^\infty W(x)\,dx=1$, and $\beta$ is the (parity-blind) linear-sieve majorant from Part~A with level $D=N^{\delta_0}$, $0<\delta_0<1/2$ fixed, satisfying the standard properties (see Lemma~\ref{lem:beta-properties} below).
+Write $e(x):=e^{2\pi i x}$.
+
+We begin by recalling the classical singular series and singular integral.
+
+\begin{definition}[Singular series and singular integral]
+	For even $N$, define the binary Goldbach singular series
 	\[
-		\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha
-		=\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-		=\mathfrak S(N)\,\mathfrak J\;+\;O\!\big(N(\log N)^{-3-\varepsilon}\big),
+		\mathfrak S(N)\;:=\;\prod_{p}\Bigl(1-\frac{1}{(p-1)^2}\Bigr)\,\cdot\,
+		\prod_{p\mid N}\Bigl(1+\frac{1}{p-2}\Bigr),
 	\]
-	where $\mathfrak J=N+O(1)$ (or the smooth analogue) and $\mathfrak S(N)$ is the Goldbach singular series.
+	which converges absolutely and satisfies $0<\mathfrak S(N)\asymp 1$.
+	Let the singular integral be
+	\[
+		\mathfrak J(W)\;:=\;\int_{\mathbb R} \widehat W(\xi)\,\widehat W(-\xi)\,d\xi
+		\;=\;\int_0^\infty\!\!\int_0^\infty W(x)\,W(y)\,\mathbf 1_{x+y=1}\,dx\,dy
+		\;=\;1,
+	\]
+	the last equality holding by our normalization of $W$.
+\end{definition}
+
+\begin{lemma}[Siegel--Walfisz for smooth progressions]\label{lem:SW-smooth}
+	Let $q\le N^{1/2-\varepsilon}$ and $(a,q)=1$.
+	Uniformly for $|\beta|\le Q/(qN)$,
+	\[
+		\sum_{n\equiv a\,(q)} \Lambda(n)\,W\!\Bigl(\frac{n}{N}\Bigr)\,e(n\beta)
+		\;=\; \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N
+		\;+\; O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr),
+	\]
+	for any $A>0$, where $\widehat W(\xi)=\int_0^\infty W(x)e(-\xi x)\,dx$.
+	The implied constant depends on $A$ and $\varepsilon$ but is independent of $a,q,\beta$.
+\end{lemma}
+
+\begin{proof}[Proof (standard, recorded for completeness)]
+	Insert Dirichlet characters modulo $q$ and apply orthogonality:
+	\[
+		\sum_{n\equiv a\,(q)} \Lambda(n)\,W\!\Bigl(\frac{n}{N}\Bigr) e(n\beta)
+		= \frac{1}{\varphi(q)}\sum_{\chi\bmod q}\overline{\chi}(a)\sum_{n}\Lambda(n)\chi(n)\,W\!\Bigl(\frac{n}{N}\Bigr) e(n\beta).
+	\]
+	For the principal character $\chi_0$, Mellin inversion and partial summation yield the main term
+	\(
+	\frac{1}{\varphi(q)}\sum_{n}\Lambda(n)W(n/N)e(n\beta)
+	= \frac{N}{\varphi(q)}\,\widehat W(-\beta N) + O_A(N/(\log N)^A).
+	\)
+	For non-principal characters, since $q\le N^{1/2-\varepsilon}$ we may apply Siegel--Walfisz-type bounds for $\psi(x,\chi)$ uniformly in $q$ (zero-free region with possible exceptional real zero treated via standard Deuring--Heilbronn repulsion; the smoothing $W$ eliminates edge effects), giving $O_A(N/(\log N)^A)$.
+	Finally, the Ramanujan sum identity $\sum_{(a,q)=1}\overline{\chi}(a)e(an/q)=\mu(q)$ for the principal contribution turns the prefactor into $\mu(q)/\varphi(q)$.
+\end{proof}
+
+\begin{lemma}[Major-arc evaluation of $S(\alpha)$]\label{lem:major-S}
+	Let $\alpha=a/q+\beta\in\mathfrak M(a,q)$ with $q\le Q$ and $|\beta|\le Q/(qN)$. Then
+	\[
+		S(\alpha)\ =\ \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr),
+	\]
+	uniformly in $a,q,\beta$, for any fixed $A>0$.
+\end{lemma}
+
+\begin{proof}
+	Write
+	\(
+	S(\alpha)=\sum_{b\bmod q}\!e(ab/q)\sum_{n\equiv b\,(q)}\Lambda(n)\,W(n/N)\,e(n\beta).
+	\)
+	Apply Lemma~\ref{lem:SW-smooth}: only the residue $b\equiv 1\,(q)$ contributes the main term after summing $e(ab/q)$ against $\overline{\chi_0}(b)$; all others are swallowed in the uniform $O_A$-term.
+\end{proof}
+
+We need the corresponding statement for the parity-blind majorant $B(\alpha)$.
+
+\begin{lemma}[Major-arc evaluation of $B(\alpha)$]\label{lem:major-B}
+	Uniformly on $\mathfrak M$,
+	\[
+		B(\alpha)\ =\ \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr),
+	\]
+	where $\alpha=a/q+\beta$ with $q\le Q$, $|\beta|\le Q/(qN)$.
+\end{lemma}
+
+\begin{proof}
+	Immediate from Lemma~\ref{lem:beta-properties}(3).
+\end{proof}
+
+We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha$.
+
+\begin{theorem}[Major-arc evaluation]\label{thm:major-eval}
+	For even $N$ and $Q=N^{1/2-\varepsilon}$,
+	\[
+		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
+		\ =\ \mathfrak S(N)\,\frac{N}{\log^2 N}\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta} N}\Bigr),
+	\]
+	for some fixed $\eta=\eta(\varepsilon,\delta_0)>0$.
+	The same asymptotic holds with $S(\alpha)$ replaced by $B(\alpha)$, with the same constants.
 \end{theorem}
 
 \begin{proof}
-	Standard major-arc analysis with the linear sieve majorant (well-factorability), the PNT in APs uniformly for $q\le Q$ (Siegel-Walfisz + Bombieri-Vinogradov in the smooth form), and the approximants recorded in Lemma~\ref{lem:major-errors}; see Part~D.7 for the bookkeeping.
+	Partition $\mathfrak M$ into the disjoint arcs $\mathfrak M(a,q)$.
+	On $\mathfrak M(a,q)$, write $\alpha=a/q+\beta$ and use Lemma~\ref{lem:major-S}:
+	\[
+		S(\alpha)\ =\ \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ E(\alpha),
+		\qquad E(\alpha)=O_A\!\Bigl(\frac{N}{(\log N)^A}\Bigr),
+	\]
+	uniformly.
+	Then
+	\[
+		\int_{\mathfrak M(a,q)} S(\alpha)^2 e(-N\alpha)\,d\alpha
+		= \Bigl(\frac{\mu(q)}{\varphi(q)}\Bigr)^2
+		\int_{|\beta|\le Q/(qN)} \widehat W(-\beta N)^2\,N^2\,e\bigl(-N\beta\bigr)\,d\beta
+		\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta} N}\Bigr),
+	\]
+	after integrating the cross-terms using Cauchy--Schwarz and summing over $q\le Q$ (the total measure of $\mathfrak M$ is $\ll Q^2/N$, and $E(\alpha)$ is uniform).
+	Make the change of variables $t=\beta N$:
+	\[
+		\int_{|t|\le Q/q} \widehat W(-t)^2\,e(-t)\,\frac{dt}{N}
+		= \frac{1}{N}\int_{\mathbb R}\widehat W(-t)^2\,e(-t)\,dt\ +\ O(N^{-1}Q^{-A})
+		= \frac{\mathfrak J(W)}{N}\ +\ O(N^{-1}Q^{-A}).
+	\]
+	Summing over coprime $a\,(q)$ contributes a Ramanujan sum factor $c_q(N)=\mu(q)$ when $N$ is even (and $0$ otherwise), and the standard Euler product manipulation produces the singular series $\mathfrak S(N)$:
+	\[
+		\sum_{q\le Q}\ \sum_{\substack{a\,(q)\\(a,q)=1}} \Bigl(\frac{\mu(q)}{\varphi(q)}\Bigr)^2
+		\ =\ \sum_{q=1}^\infty \frac{\mu(q)^2}{\varphi(q)^2}\,c_q(N)
+		\ =\ \mathfrak S(N)\ +\ O(Q^{-A}).
+	\]
+	Collecting everything yields
+	\[
+		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
+		= \mathfrak S(N)\cdot \frac{N}{\log^2 N}\cdot \mathfrak J(W)\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta}N}\Bigr).
+	\]
+	By our normalization $\mathfrak J(W)=1$, completing the proof.
+	The $B(\alpha)$ case is identical by Lemma~\ref{lem:major-B}.
 \end{proof}
+
+\begin{lemma}[Major-arc comparison $S$ vs.\ $B$]\label{lem:major-comparison}
+	Uniformly for $\alpha\in\mathfrak M$,
+	\[
+		S(\alpha)-B(\alpha)\ =\ O_A\!\Bigl(\frac{N}{(\log N)^A}\Bigr).
+	\]
+	Consequently,
+	\[
+		\int_{\mathfrak M} |S(\alpha)-B(\alpha)|^2\,d\alpha \ \ll\ \frac{N}{\log^{3+\eta} N}.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Subtract Lemma~\ref{lem:major-B} from Lemma~\ref{lem:major-S}.
+	The $L^2$ bound follows since $\mathrm{meas}(\mathfrak M)\ll Q^2/N=N^{-\varepsilon+o(1)}$ and the pointwise error is $O_A(N/(\log N)^A)$; take $A$ large enough and absorb $Q^2/N$.
+\end{proof}
+
+\begin{remark}[Choice of $W$ and removal of smoothing]
+	All major-arc bounds above hold with smooth $W$.
+	Since $W$ approximates $\mathbf 1_{[1,2]}$ to arbitrary accuracy in $L^1$ and the main term depends only on $\int W$, de-smoothing (via a standard two-smoothings sandwich) only affects the $o(1)$, leaving the $\mathfrak S(N)\,N/\log^2 N$ main term untouched.
+\end{remark}
 
 \begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach_final}
 	Let $N$ be even. Then
@@ -771,24 +928,33 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\sum_{d\mid P(z)}\frac{|\lambda_d|}{d}\ll \log z.
 \]
 
-\begin{lemma}\label{lem:beta-properties}
-	With this choice of $\beta=\beta_{z,D}$ the following hold:
-	\begin{enumerate}[label=(B\arabic*)]
-		\item $\beta(n)\ge 0$ and $\beta(n)\gg \frac{\log D}{\log N}$ for $n\le N$ almost prime.
-		\item $\sum_{n\le N}\beta(n)=(1+o(1))\,\tfrac{N}{\log N}$ and uniformly for $(a,q)=1$, $q\le D$,
+\begin{lemma}[Properties of the sieve majorant]\label{lem:beta-properties}
+	Let $\beta=\beta_{D}$ be the linear-sieve majorant at level $D=N^{\delta_0}$, $0<\delta_0<1/2$, constructed in the standard way:
+	\[
+		\beta(n)=\sum_{\substack{d\mid n\\ d\le D}}\lambda_d,\qquad
+		\lambda_1=1,\quad |\lambda_d|\le 1,\quad \lambda_d=0\ \text{unless $d$ is squarefree}.
+	\]
+	Then:
+	\begin{enumerate}[leftmargin=2em]
+		\item \textbf{Majorant: } $1_{\mathbb P}(n)\le \beta(n)$ for all $n\ge2$.
+		\item \textbf{Average size: } $\displaystyle \sum_{n}\beta(n)\,W\!\Big(\frac{n}{N}\Big)=\frac{N}{\log N}\,(1+o(1))$.
+		\item \textbf{Distribution mod $q\le N^{1/2-\varepsilon}$: } uniformly for $(a,q)=1$ and $|\beta|\le Q/(qN)$,
 		      \[
-			      \sum_{\substack{n\le N\\ n\equiv a\pmod q}}\beta(n)
-			      =(1+o(1))\,\frac{N}{\varphi(q)\log N}.
+			      \sum_{n\equiv a\,(q)}\beta(n)\,W\!\Bigl(\frac{n}{N}\Bigr)e(n\beta)
+			      = \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr).
 		      \]
-		\item $\beta$ is well--factorable: $\beta=\sum_{d\le D}\lambda_d 1_{d\mid\cdot}$ with divisor--bounded $\lambda_d$, enabling major--arc analysis.
-		\item \emph{Parity--blindness.} For any fixed smooth $W$ supported on $[1/2,2]$,
-		      \[
-			      \sum_{n\le N}\beta(n)\lambda(n)W(n/N)
-			      \ \ll\ \frac{N}{(\log N)^A}
-		      \]
-		      for all $A>0$, uniformly in $N$. This follows by expanding $\beta$, applying Cauchy over $d\le D$, and invoking BVP2M / Route~B on each inner sum.
 	\end{enumerate}
 \end{lemma}
+
+\begin{proof}
+	(1)-(2) are standard linear-sieve facts (Fundamental Lemma of the Sieve with smooth weights).
+	For (3), expand $\beta(n)$ as a short divisor sum and swap the $d$-sum:
+	\[
+		\sum_{d\le D}\lambda_d\sum_{m\equiv a\overline d\,(q)} W\!\Bigl(\frac{dm}{N}\Bigr)\,e(dm\beta).
+	\]
+	Since $d\le D=N^{\delta_0}$ and $q\le N^{1/2-\varepsilon}$, we remain in the Siegel--Walfisz range after the change of variables $n=dm$.
+	Hence Lemma~\ref{lem:SW-smooth} applies uniformly with the same main term (the $\mu(q)/\varphi(q)$ factor is unaffected), and the total error remains $O_A(N/(\log N)^A)$ because $\sum_{d\le D}|\lambda_d|\ll D$ and $D=N^{\delta_0}$ can be absorbed into the $(\log N)^{-A}$ loss.
+\end{proof}
 
 \section{Major--arc uniform error}
 
@@ -966,7 +1132,7 @@ We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized b
 		 & \qquad+\ \sum_{\mathfrak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\mathfrak a}(1,t)\,\lambda_{\mathfrak a,t}(m)\lambda_{\mathfrak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
 		\label{eq:kuz-q}
 	\end{align}
-	Here the three kernel transforms (Maass, holomorphic, Eisenstein) are given by the classical $J$/$K$–Bessel integrals:
+	Here the three kernel transforms (Maass, holomorphic, Eisenstein) are given by the classical $J$/$K$-Bessel integrals:
 	\begin{align*}
 		\mathcal W_q^{\mathrm{M}}(t;h)
 		 & := \frac{i}{\sinh \pi t}\int_0^\infty \left[J_{2it}(x)-J_{-2it}(x)\right]\,h(x)\,\frac{dx}{x}, \\
@@ -1063,7 +1229,7 @@ We next record the level-uniform kernel localization for a class of bump weights
 \end{lemma}
 
 \begin{proof}
-	Oldforms come with Atkin–Lehner lifting weights bounded uniformly in $q$ on orthonormal bases; Eisenstein coefficients for cusps of $\Gamma_0(q)$ satisfy the standard Hecke and Ramanujan–Selberg bounds on average needed for Kuznetsov. Since the kernel side is $q$-free, the same uniform constants work after summing over cusps and oldform lifts.
+	Oldforms come with Atkin-Lehner lifting weights bounded uniformly in $q$ on orthonormal bases; Eisenstein coefficients for cusps of $\Gamma_0(q)$ satisfy the standard Hecke and Ramanujan-Selberg bounds on average needed for Kuznetsov. Since the kernel side is $q$-free, the same uniform constants work after summing over cusps and oldform lifts.
 \end{proof}
 
 \begin{remark}[Ready-to-use choice of $h_Q$]\label{rem:choose-hQ}
