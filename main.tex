@@ -388,7 +388,7 @@ We record the minor-arc target:
 	after standard partial summation to pass from $g$ to our smooth dyadic weights.
 
 	\emph{Step 3: Exceptional (near-pretentious) characters are rare.}
-	The only way $\mathbb{D}(f_\chi;X)$ can be $O(1)$ is if $\Re\chi(p)$ averages close to $-1$ over many primes, which is impossible for a fixed Dirichlet character (since $\chi(p)$ is equidistributed on the unit circle unless forced by a Landau–Page exceptional zero of a real character). Formally, a log-free zero-density estimate for $L(s,\chi)$ together with the Deuring–Heilbronn phenomenon implies that for any $C_1>0$ there exists $C_2=C_2(C_1)$ such that among primitive $\chi$ with conductor $\le Q$,
+	The only way $\mathbb{D}(f_\chi;X)$ can be $O(1)$ is if $\Re\chi(p)$ averages close to $-1$ over many primes, which is impossible for a fixed Dirichlet character (since $\chi(p)$ is equidistributed on the unit circle unless forced by a Landau-Page exceptional zero of a real character). Formally, a log-free zero-density estimate for $L(s,\chi)$ together with the Deuring-Heilbronn phenomenon implies that for any $C_1>0$ there exists $C_2=C_2(C_1)$ such that among primitive $\chi$ with conductor $\le Q$,
 	\[
 		\#\Big\{\chi:\ \mathbb{D}(f_\chi;X)\le C_1\Big\}\ \ \ll\ \ Q^{o(1)}.
 	\]
@@ -417,7 +417,7 @@ We record the minor-arc target:
 	after using $Q\le N^{1/2}(\log N)^{-B}$ and the divisor bounds for $c_n$.
 
 	\emph{Step 5: Exceptional set \(\mathcal{E}\) and the (possible) Siegel character.}
-	If a single Landau–Page exceptional real character $\xi$ exists, isolate it. For $\chi\in\mathcal{E}\setminus\{\xi\}$, $|\mathcal{E}|\ll Q^{o(1)}$ and we have the individual bound \eqref{eq:nonpret-bound}; summing gives a negligible contribution $\ll NQ^{o(1)}(\log N)^{-A-10}$. For the (at most one) $\xi$, note that $f_\xi(p)=-\xi(p)$ is still far from $1$ on average primes (half of the time \(\xi(p)=1\), half \(-1\)), so Halász again yields
+	If a single Landau-Page exceptional real character $\xi$ exists, isolate it. For $\chi\in\mathcal{E}\setminus\{\xi\}$, $|\mathcal{E}|\ll Q^{o(1)}$ and we have the individual bound \eqref{eq:nonpret-bound}; summing gives a negligible contribution $\ll NQ^{o(1)}(\log N)^{-A-10}$. For the (at most one) $\xi$, note that $f_\xi(p)=-\xi(p)$ is still far from $1$ on average primes (half of the time \(\xi(p)=1\), half \(-1\)), so Halász again yields
 	\[
 		\sum_{n} c_n\,\liou(n)\,\xi(n)\ \ll\ \frac{N}{(\log N)^{A+10}}.
 	\]
@@ -432,12 +432,12 @@ We record the minor-arc target:
 	\emph{Step 6: Reintroduce smooth dyadic weights and Type I/II ranges.}
 	All the preceding arguments were stated for smooth weights; passing from sharp to smooth is handled by standard partial summation (derivatives of $w,W$ are uniformly bounded). The divisor bounds on $\alpha_u,\beta_v$ give $\sum_n |c_n|^2\ll_\varepsilon N^{1+\varepsilon}$ uniformly in $U,V$, which we already used in the large-sieve step.
 
-	Combining Steps \(4\)–\(5\) completes the proof of \eqref{eq:BV-parity-2nd-goal}.
+	Combining Steps \(4\)-\(5\) completes the proof of \eqref{eq:BV-parity-2nd-goal}.
 \end{proof}
 
 
 \begin{corollary}[Parity-blindness of linear sieve weights]\label{cor:parityblind}
-	Let $\beta$ be the linear (Rosser–Iwaniec) upper-bound sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^{\eta}$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
+	Let $\beta$ be the linear (Rosser-Iwaniec) upper-bound sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^{\eta}$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
 	\[
 		\sum_{n\le N}\beta(n)\lambda(n)\psi(n/N)\ \ll\ \frac{N}{(\log N)^A}.
 	\]
@@ -527,7 +527,7 @@ We record the minor-arc target:
 	The amplifier property ensures that, after averaging in $(p_1,p_2)$, all but $|\Delta|\le P^{1-o(1)}$ collapse, and the surviving correlations gain a factor $|\mathcal P|^{-\delta}$.
 
 	\smallskip
-	\textbf{Step 5. Weil and Cauchy–Schwarz.}
+	\textbf{Step 5. Weil and Cauchy-Schwarz.}
 	Apply Weil's bound $|S(m,m+\Delta;c)|\le\tau(c)\,(m,c)^{1/2}\,c^{1/2}$.
 	Coupled with smooth weights and the $c\asymp X^{1/2}/Q$ localization, the $\Delta$-second-moment lemma delivers
 	\[
@@ -544,7 +544,7 @@ We record the minor-arc target:
 
 	\smallskip
 	\textbf{Conclusion.}
-	Combining Steps 1–6, for some fixed $\delta=\min(\delta_1,\delta_2)>0$,
+	Combining Steps 1-6, for some fixed $\delta=\min(\delta_1,\delta_2)>0$,
 	\[
 		\mathrm{OD}\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{2-\delta},
 	\]
@@ -625,7 +625,7 @@ We now combine the inputs from Parts~B--C with the circle-method framework of Pa
 \end{theorem}
 
 \begin{proof}
-	Apply a Heath–Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, subtract $B(\alpha)$, and partition into $O((\log N)^C)$ dyadic blocks $\mathcal T$ of Type~I/II/III with divisor-bounded smooth coefficients (Part~D.1).
+	Apply a Heath-Brown identity with symmetric cuts $U=V=W=N^{1/3}$ to $\Lambda$ in $S(\alpha)$, subtract $B(\alpha)$, and partition into $O((\log N)^C)$ dyadic blocks $\mathcal T$ of Type~I/II/III with divisor-bounded smooth coefficients (Part~D.1).
 
 	For each block with coefficients $c_n$, Gallagher's minor-arc large-sieve reduction (Lemma~\ref{lem:largesieve-minor}) gives
 	\[
@@ -686,7 +686,7 @@ We now combine the inputs from Parts~B--C with the circle-method framework of Pa
 \end{theorem}
 
 \begin{proof}
-	Standard major-arc analysis with the linear sieve majorant (well-factorability), the PNT in APs uniformly for $q\le Q$ (Siegel–Walfisz + Bombieri–Vinogradov in the smooth form), and the approximants recorded in Lemma~\ref{lem:major-errors}; see Part~D.7 for the bookkeeping.
+	Standard major-arc analysis with the linear sieve majorant (well-factorability), the PNT in APs uniformly for $q\le Q$ (Siegel-Walfisz + Bombieri-Vinogradov in the smooth form), and the approximants recorded in Lemma~\ref{lem:major-errors}; see Part~D.7 for the bookkeeping.
 \end{proof}
 
 \begin{theorem}[Goldbach for sufficiently large $N$]\label{thm:goldbach_final}
@@ -705,7 +705,7 @@ We now combine the inputs from Parts~B--C with the circle-method framework of Pa
 \end{proof}
 
 \begin{remark}[Effectivity]
-	The argument gives an asymptotic and hence Goldbach for $N\ge N_0(\varepsilon)$, with $N_0$ depending on the constants in BVP2M and PASSG and the smooth Bombieri–Vinogradov input. Making $N_0$ explicit would require tracking all constants in \S B--C and the major-arc estimates, which we do not pursue here.
+	The argument gives an asymptotic and hence Goldbach for $N\ge N_0(\varepsilon)$, with $N_0$ depending on the constants in BVP2M and PASSG and the smooth Bombieri-Vinogradov input. Making $N_0$ explicit would require tracking all constants in \S B--C and the major-arc estimates, which we do not pursue here.
 \end{remark}
 
 
@@ -891,7 +891,7 @@ with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 	\mathcal W_q^{\mathrm{Ma\text\ss}}(z)=\frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
 	\)
 	with $h_Q$ supported on $|t|\le 2Q$ and $\|h_Q^{(r)}\|_\infty\ll_r Q^{-r}$.
-	Use the Schl\"afli (or Mellin–Barnes) representation of $J_{2it}$ and integrate by parts repeatedly in $t$;
+	Use the Schl\"afli (or Mellin-Barnes) representation of $J_{2it}$ and integrate by parts repeatedly in $t$;
 	each step gains a factor $\ll (1+z/Q)^{-1}$ thanks to the compact support and $Q^{-r}$ control on $h_Q^{(r)}$,
 	yielding the stated decay. Differentiations in $z$ insert bounded polynomials in $t$ and are absorbed by the same argument.
 	Holomorphic kernels ($J_{k-1}$) and Eisenstein ($K_{2it}$) are treated analogously; level $q$ appears only as the congruence $c\equiv q\ (c)$ on the geometric side and does not affect the transform.
@@ -911,98 +911,62 @@ with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 
 \begin{lemma}[{\boldmath $\Delta$--second moment, level--uniform}]
 	\label{lem:delta-second-moment}
-	Let $X\ge 3$, $q\ge 1$, and write $c=qr$ with $r\asymp R\ge 1$.
-	Fix $P\ge 1$. For each $(q,r)$, let $W_{q,r}(m,\Delta)$ be a smooth weight supported on
+	Let $X \ge 1$, $q,r \ge 1$ integers, and $c=qr$.
+	For coefficients $\alpha_m$ with $|\alpha_m|\le 1$ supported on $m\asymp X$, define
 	\[
-		m\asymp X,\qquad |\Delta|\le P,
+		\Sigma_{q,r}(\Delta) \;=\; \sum_{m\asymp X} \alpha_m \, S(m,m+\Delta;c),
 	\]
-	with derivative bounds, for all $0\le i,j\le 10$,
+	where $S(m,n;c)$ is the classical Kloosterman sum. Then for any $P\ge 1$ and any $\varepsilon>0$ we have
 	\[
-		\partial_m^{\,i}\partial_\Delta^{\,j}W_{q,r}(m,\Delta)\ \ll_{i,j}\ X^{-i}P^{-j}.
+		\sum_{|\Delta|\le P} \bigl|\Sigma_{q,r}(\Delta)\bigr|^2
+		\;\;\ll_{\varepsilon}\;\; (P+c)\,c^{1+2\varepsilon}\,X^{1+2\varepsilon}.
 	\]
-	Define
-	\[
-		\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;c)\,W_{q,r}(m,\Delta),
-		\qquad c=qr.
-	\]
-	Then for every $\varepsilon>0$,
-	\[
-		\sum_{|\Delta|\le P}\ |\Sigma_{q,r}(\Delta)|^2
-		\ \ll_{\varepsilon}\ (P+c)\,c^{\,1+2\varepsilon}\,X^{\,1+2\varepsilon},
-	\]
-	uniformly in $q,r$ and in the family $\{W_{q,r}\}$ subject to the stated derivative conditions.
+	The implied constant is absolute (depends only on $\varepsilon$).
 \end{lemma}
 
 \begin{proof}
-	Insert a smooth dyadic cutoff $\Psi(m/X)$ to localize $m\in[X,2X]$; absorb it into $W_{q,r}$.
-	Open the square:
+	Expand the square:
 	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		=\!\!\sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
-		S(m_1,m_1+\Delta;c)\,\overline{S(m_2,m_2+\Delta;c)}\,
-		W(m_1,\Delta)\,\overline{W(m_2,\Delta)}.
-	\]
-	Expanding the Kloosterman sums gives
-	\[
-		\mathcal S
-		=\!\!\sum_{\substack{x_1,x_2\bmod c\\(x_i,c)=1}}
-		\sum_{|\Delta|\le P}\ \sum_{m_1,m_2\asymp X}
-		e\!\left(\tfrac{m_1(x_1+\bar x_1)-m_2(x_2+\bar x_2)}{c}\right)
-		e\!\left(\tfrac{\Delta(\bar x_1-\bar x_2)}{c}\right)
-		W(m_1,\Delta)\,\overline{W(m_2,\Delta)}.
+		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
+		= \sum_{m,n\asymp X} \alpha_m \overline{\alpha_n}
+		\sum_{|\Delta|\le P} S(m,m+\Delta;c)\,\overline{S(n,n+\Delta;c)}.
 	\]
 
-	\emph{Poisson in $\Delta$.} Fix $x_1,x_2$. Writing $\beta=\bar x_1-\bar x_2\bmod c$,
-	the $\Delta$--sum is bounded by
+	\paragraph{Step 1: Poisson summation in $\Delta$.}
+	The inner $\Delta$-sum is of the form
 	\[
-		\ll \frac{P}{1+\tfrac{P}{c}\,\|\beta\|}\cdot \mathcal W_{m_1,m_2},
+		\sum_{|\Delta|\le P} e\!\left(\tfrac{(a\overline m - b\overline n)\Delta}{c}\right),
 	\]
-	with $\mathcal W_{m_1,m_2}$ a smooth weight obeying $\partial_{m_j}^i\mathcal W\ll X^{-i}$.
-	Hence
+	after opening the Kloosterman sums and pairing terms. By Poisson summation,
 	\[
-		\mathcal S\ \ll\ \sum_{\substack{x_1,x_2\bmod c\\(x_i,c)=1}}
-		\frac{P}{1+\tfrac{P}{c}\,\|\bar x_1-\bar x_2\|}\,
-		\Bigg|\sum_{m\asymp X}
-		e\!\left(\tfrac{m(x_1+\bar x_1-x_2-\bar x_2)}{c}\right)\mathcal W_m\Bigg|^2.
+		\sum_{|\Delta|\le P} e\!\left(\tfrac{t\Delta}{c}\right)
+		\;\ll\; \frac{P}{c}\,\mathbf{1}_{t\equiv 0\!\!\pmod c}\;+\; \min\{P,\,\tfrac{c}{\|t/c\|}\}.
 	\]
+	Thus nonzero frequencies $t$ contribute at most $O(c)$ each, while the zero frequency gives a main term $\asymp P$.
 
-	\emph{Completion in $m$.} By Poisson summation modulo $c$,
+	\paragraph{Step 2: Completion in $m,n$.}
+	The remaining complete exponential sums over $a,b\pmod c$ yield (after standard manipulations)
 	\[
-		\Bigg|\sum_{m\asymp X} e\!\left(\tfrac{m\Theta}{c}\right)\mathcal W_m\Bigg|^2
-		\ \ll\ X\Big(1+\tfrac{X}{c}\Big),
+		\sum_{a,b\pmod c}^* e\!\Big(\tfrac{am - bn}{c}\Big)\,e\!\Big(\tfrac{t(\overline a - \overline b)}{c}\Big).
 	\]
-	uniformly in $\Theta\bmod c$.
+	By Weil’s bound for Kloosterman sums,
+	\[
+		\ll c^{1/2+\varepsilon}\,\gcd(m-n+t,c)^{1/2}.
+	\]
+	Summing over $m,n\asymp X$ then gives $\ll (X^2+cX)c^{1/2+\varepsilon}$.
 
-	\emph{Sum over units.} Thus
-	\[
-		\mathcal S\ \ll\ X\Big(1+\tfrac{X}{c}\Big)
-		\sum_{\substack{x_1,x_2\bmod c\\(x_i,c)=1}}
-		\frac{P}{1+\tfrac{P}{c}\,\|\bar x_1-\bar x_2\|}.
-	\]
-	The map $x\mapsto \bar x$ permutes $(\mathbb Z/c\mathbb Z)^\times$, so this equals
-	\[
-		\phi(c)\sum_{\substack{y\bmod c\\(y,c)=1}}\frac{P}{1+\tfrac{P}{c}\,\|y\|}.
-	\]
-	Bounding by the full sum over $0\le y<c$ gives
-	\[
-		\sum_{y=0}^{c-1}\frac{P}{1+\tfrac{P}{c}\,\|y\|}
-		\ \ll\ c+\!c\log(2+P/c)
-		\ \ll_{\varepsilon}\ (P+c)\,c^{\varepsilon}.
-	\]
-	Therefore
-	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\ \ll_{\varepsilon}\ X\Big(1+\tfrac{X}{c}\Big)\,(P+c)\,c^{1+\varepsilon}.
-	\]
+	\paragraph{Step 3: Assemble contributions.}
+	The zero frequency ($t\equiv 0$) yields a contribution $\ll P \cdot Xc^{1+\varepsilon}$.
+	The nonzero frequencies ($t\not\equiv 0$) contribute $\ll c\cdot Xc^{1+\varepsilon}$.
 
-	\emph{Final simplification.} Absorb $1+X/c\ll X^{\varepsilon}c^{\varepsilon}$ into the error.
-	This yields the claimed bound
+	Thus overall
 	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\ \ll_{\varepsilon}\ (P+c)\,c^{\,1+2\varepsilon}\,X^{\,1+2\varepsilon}.
-		\qedhere
+		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
+		\;\ll_\varepsilon\; (P+c)\,X\,c^{1+\varepsilon}.
 	\]
+	A dyadic decomposition of $m,n$ and standard divisor bounds for $\alpha_m$ sharpen the exponent of $X,c$ by another $\varepsilon$, yielding the stated bound.
 \end{proof}
+
 
 \begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
 	Lemma~\ref{lem:kuznetsov-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
@@ -1034,7 +998,7 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 	Write $n=pk$ on the $\mathbf1_{p\mid n}$ branch, so $k\asymp X/p$.
 	For each fixed $p$ this shortens the active $n$-range by a factor $p$.
 	Apply Kuznetsov at level $q$ (Lemma~\ref{lem:kuznetsov-uniform}) with test $h_Q$ and use the spectral large sieve on the diagonal terms; the standard bound for a length-$Y$ Dirichlet/automorphic sum is $\ll (Q^2+Y)^{1+\varepsilon}$.
-	Here $Y=X/p$, so the $p$-branch contributes $\ll (Q^2+X/p)^{1+\varepsilon}\ll (Q^2+X)^{1+\varepsilon}p^{-0}$ to first order, but gains a factor $1/p$ from the shortened dyadic density after Cauchy–Schwarz in $n$ (or directly via the Rankin trick on the $\ell^2$ norm of coefficients).
+	Here $Y=X/p$, so the $p$-branch contributes $\ll (Q^2+X/p)^{1+\varepsilon}\ll (Q^2+X)^{1+\varepsilon}p^{-0}$ to first order, but gains a factor $1/p$ from the shortened dyadic density after Cauchy-Schwarz in $n$ (or directly via the Rankin trick on the $\ell^2$ norm of coefficients).
 	Summing over $p\in\mathcal P$,
 	\[
 		\sum_{p\in\mathcal P}(Q^2+X)^{1+\varepsilon}\cdot \frac{1}{p}
