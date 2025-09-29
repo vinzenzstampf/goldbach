@@ -53,9 +53,9 @@
 \makeatother
 
 % Number sections as A.1, A.2, ... and subsections as A.1.1, etc.
-\renewcommand{\thesection}{\thepart.\arabic{section}}
-\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
+% \renewcommand{\thesection}{\thepart.\arabic{section}}
+% \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+% \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 \setcounter{secnumdepth}{3}
 % Reset section numbering at each new Part
 \makeatletter
@@ -116,8 +116,6 @@
 \end{tabular}
 
 \part{Framework}
-
-\section{Assumptions \& conditional result (at a glance)}
 
 This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived on the minor-arc $L^2$ estimate \eqref{eq:A1} and the analytic inputs explicitly stated in Parts B-D. In particular:
 
@@ -268,18 +266,6 @@ We record the minor-arc target:
 
 	The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in \eqref{eq:A1}. On the major arcs, standard major-arc analysis (Vaughan's identity or the explicit formula combined with (B2)-(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
 \end{proof}
-
-\subsection{What remains standard/checklist for \textbeta}
-
-\begin{itemize}
-	\item \textbf{Choice of $\beta$:} take the Selberg upper-bound sieve weight at level $D=N^{1/2-\varepsilon}$ (or a GPY-type almost-prime majorant) so that (B1)-(B4) hold.
-	\item \textbf{Major-arc evaluation for $B$:} routine with (B2)-(B3), producing $\mathfrak S(N)N/\log^2 N$.
-	\item \textbf{Minor-arc task:} prove the $L^2$ estimate \eqref{eq:A1}. This is the core analytic input for the parity-blind replacement on $\mathfrak m$.
-\end{itemize}
-
-
-\subsection{Status (conditional to A.1)}
-With the above definitions and the reduction, Part A is complete \emph{conditional} on establishing the minor-arc bound \eqref{eq:A1}. The sieve properties (B1)-(B4) are standard for linear/Rosser-Iwaniec weights; the genuinely new input needed is \eqref{eq:A1}, which is the target of Parts B-D.
 
 \part{Type I / II Analysis}
 
@@ -1114,11 +1100,9 @@ Everything here is standard Hardy-Littlewood major-arc analysis.  What remains (
 	For “all even $N$”, one would need an explicit finite verification up to some $N_0$, since the asymptotic guarantees positivity only beyond $N_0$. Determining such an $N_0$ requires effective constants in the major-arc and minor-arc bounds.
 \end{remark}
 
-\appendix
-\renewcommand{\thesection}{Appendix~\Roman{section}}
-\section{Technical Lemmas and Parameters}
+\part{Appendix -- Technical Lemmas and Parameters}
 
-\subsection{Minor--arc large sieve reduction}
+\section{Minor--arc large sieve reduction}
 
 We record the precise form of the inequality used in Part~D.6.
 
@@ -1148,7 +1132,7 @@ We record the precise form of the inequality used in Part~D.6.
 	for each interval $I\subset[0,1)$. Applying this to each complementary arc of length $\gg (qQ)^{-1}$ gives the stated bound.
 \end{proof}
 
-\subsection{Sieve weight \textbeta\ and properties}
+\section{Sieve weight \textbeta\ and properties}
 
 Fix parameters
 \[
@@ -1180,7 +1164,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\end{enumerate}
 \end{lemma}
 
-\subsection{Major--arc uniform error}
+\section{Major--arc uniform error}
 
 \begin{lemma}[Major--arc approximants]\label{lem:major-errors}
 	Let $\alpha=a/q+\beta$ with $q\le Q$, $|\beta|\le Q/(qN)$. Then for any $A>0$,
@@ -1197,7 +1181,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
 
-\subsection{Auxiliary analytic inputs used in Part B}
+\section{Auxiliary analytic inputs used in Part B}
 
 \begin{lemma}[Smooth Hal\'asz with divisor weights]\label{lem:halasz-smooth}
 	Let $f$ be a completely multiplicative function with $|f|\le 1$. For any fixed $k\in\mathbb N$ and $b_\ell\ll \tau_k(\ell)$ supported on $\ell\asymp L$ with a smooth weight $\psi(\ell/L)$, we have for any $C\ge 1$,
@@ -1223,7 +1207,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
 \end{lemma}
 
-\subsection{Deterministic balanced signs for the amplifier}
+\section{Deterministic balanced signs for the amplifier}
 
 \begin{lemma}[Balanced signs]\label{lem:balanced-signs}
 	Let $\mathcal P=\{p\in[P,2P]: p\text{ prime}\}$. There exists a deterministic choice of signs $\{\varepsilon_p\}_{p\in\mathcal P}\subset\{\pm 1\}$ with $\sum_{p\in\mathcal P}\varepsilon_p=0$. Moreover, for every integer $\Delta$,
@@ -1239,7 +1223,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 \bigskip
 
-\subsection{Kuznetsov at level \textit{q} with level-uniform kernel bounds}
+\section{Kuznetsov at level \textit{q} with level-uniform kernel bounds}
 
 We fix normalizations so that the geometric side always has the factor
 $\sum_{c\equiv 0\ (q)} c^{-1} S(m,n;c)\,\mathcal W^{(*)}_{q}\!\big(4\pi\sqrt{mn}/c\big)$,
@@ -1287,7 +1271,7 @@ with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 \end{corollary}
 
 
-\subsection{\textbf\textDelta--second moment, level--uniform}
+\section{\textbf\textDelta--second moment, level--uniform}
 
 \begin{lemma}[{\boldmath $\Delta$--second moment, level--uniform}]
 	\label{lem:delta-second-moment-fullyrigid}
@@ -1388,7 +1372,7 @@ with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 	Lemma~\ref{lem:kuznetsov-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment-fullyrigid} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
 \end{remark}
 
-\subsection{Hecke \textit p \textbar  \textit n tails are negligible}\label{sec:hecke-tails}
+\section{Hecke \textit p \textbar  \textit n tails are negligible}\label{sec:hecke-tails}
 
 We isolate the ``shorter-support'' branches created by the Hecke relation inside the amplified second moment.
 
@@ -1429,7 +1413,7 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
 \end{remark}
 
-\subsection{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
+\section{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
 
 \begin{lemma}[Uniformity across spectral pieces]\label{lem:oldforms-eis-uniform}
 	In the Kuznetsov formula on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$ as in Lemma~\ref{lem:kuznetsov-uniform},
@@ -1447,7 +1431,7 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 	Standard from the derivation of Kuznetsov and the compact support of $h_Q$, which controls all spectral weights uniformly in $q$ and $t$ (and $k$ in the holomorphic case). The oldforms are handled either by explicit decomposition or by working directly with the full orthonormal basis at level $q$; in both approaches the geometric side and kernel bounds are unchanged.
 \end{proof}
 
-\subsection{Admissible parameter tuple and verification}
+\section{Admissible parameter tuple and verification}
 
 For clarity we record the global parameter choices:
 \begin{itemize}
