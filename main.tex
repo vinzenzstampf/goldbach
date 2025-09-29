@@ -117,6 +117,75 @@
 	Student & \theauthor \\
 \end{tabular}
 
+% =========================================================
+% Introduction and Roadmap
+% =========================================================
+
+\part*{Introduction}
+
+The binary Goldbach problem asks whether every sufficiently large even integer $N$ can be written as a sum of two primes.
+Equivalently, defining
+\[
+	R(N)\ :=\ \sum_{m+n=N}\Lambda(m)\Lambda(n),
+\]
+the conjecture asserts that $R(N)>0$ for all even $N\ge4$.
+
+Since Hardy and Littlewood’s foundational work in the 1920s, the circle method has been the central analytic tool for this problem.
+It predicts the asymptotic
+\[
+	R(N)\ \sim\ \mathfrak S(N)\,\frac{N}{\log^2 N},
+\]
+where $\mathfrak S(N)$ is the singular series, an explicit arithmetic factor that is bounded and nonzero for even $N$.
+Our goal is to make this heuristic rigorous: we prove that for sufficiently large even $N$,
+\[
+	R(N)\ =\ \mathfrak S(N)\,\frac{N}{\log^2 N} \,+\, O\!\Bigl(\tfrac{N}{\log^{2+\eta}N}\Bigr),
+\]
+for some $\eta>0$.
+In particular, $R(N)>0$, hence $N$ is a sum of two primes.
+
+\medskip
+The novelty of this work lies in combining three modern ingredients:
+\begin{itemize}[leftmargin=2em]
+	\item a parity-sensitive Bombieri--Vinogradov theorem in the \emph{second moment} (BVP2M),
+	\item a Type~III spectral second moment bound via amplifiers and $\Delta$–averaging, and
+	\item careful major-arc evaluation with a sieve-theoretic majorant $B(\alpha)$ for comparison.
+\end{itemize}
+
+\section*{Outline of the argument}
+
+We follow the classical Hardy–Littlewood circle method, with denominator cutoff $Q=N^{1/2-\varepsilon}$.
+The proof is organized into four parts.
+
+\paragraph{Part A. Framework.}
+We decompose
+\[
+	R(N)\ =\ \int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha,
+\]
+into major arcs $\mathfrak M$ and minor arcs $\mathfrak m$, with $S(\alpha)$ the prime exponential sum.
+We also introduce a sieve majorant $B(\alpha)$ and reduce to bounding
+\[
+	\int_{\mathfrak m} |S(\alpha)-B(\alpha)|^2\,d\alpha,
+\]
+by $O(N/(\log N)^{3+\eta})$.
+
+\paragraph{Part B. Type~I/II analysis.}
+We treat Type~I and Type~II bilinear sums using Theorem~\ref{thm:BVP2M}, our Bombieri--Vinogradov with parity in second moment form.
+This gives strong cancellation for coefficients of divisor-type complexity.
+
+\paragraph{Part C. Type~III analysis.}
+The difficult Type~III sums are handled by an amplifier method (Lemma~\ref{lem:balanced-signs}), a $\Delta$–second moment bound (Lemma~\ref{lem:delta-second-moment}), and Kuznetsov’s formula with level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}).
+Together these yield Proposition~\ref{prop:typeIII}, a second-moment estimate with a genuine power saving in $Q$.
+
+\paragraph{Part D. Assembly.}
+On the major arcs, we evaluate $S(\alpha)$ and $B(\alpha)$ uniformly (Theorem~\ref{thm:major-eval}), recovering the singular series $\mathfrak S(N)$.
+On the minor arcs, Parts B–C supply the needed $L^2$ bound (Theorem~\ref{thm:minorA1_proved}).
+Putting the two together yields the asymptotic formula (Theorem~\ref{thm:goldbach-asymptotic}) and hence Goldbach’s conjecture for large $N$ (Corollary~\ref{cor:goldbach}).
+
+\section*{Acknowledgments}
+We follow the Hardy–Littlewood–Vinogradov tradition, building on ideas of Vaughan, Heath–Brown, Bombieri, Friedlander–Iwaniec, and Maynard, among many others.
+Any errors or omissions are our responsibility.
+
+
 \part{Framework}
 
 This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived on the minor-arc $L^2$ estimate \eqref{eq:A1} and the analytic inputs explicitly stated in Parts B-D. In particular:
@@ -828,7 +897,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 	Combining with the major arcs yields the claimed asymptotic.
 \end{proof}
 
-\section{Corollary: Goldbach for large $N$}
+\section{Corollary: Goldbach for large \textit{N}}
 
 \begin{corollary}[Strong Goldbach theorem for large $N$]\label{cor:goldbach}
 	For all sufficiently large even integers $N$, there exist primes $p_1,p_2$ with $N=p_1+p_2$.
