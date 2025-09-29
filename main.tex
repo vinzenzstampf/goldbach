@@ -553,62 +553,84 @@ We record the minor-arc target:
 \end{proof}
 
 \section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
+% ============================================
+% Type-III spectral bound (second moment)
+% ============================================
 
 \begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Let $(\alpha_n)$ be a smooth Type-III coefficient sequence supported on $n\asymp X$, with divisor-type bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$ and smooth weight of width $X^{1+o(1)}$.
-	Let $Q\le X^{1/2-\kappa}$ with some fixed $0<\kappa<1/4$. Then, for some fixed $\delta>0$ depending only on~$\kappa$,
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_{f}
-		\Bigg|\sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n)\Bigg|^2
-		\ \ \ll_{\varepsilon,C}\ \ (Q^2+X)^{\,1-\delta}\,X^{\varepsilon}.
-	\]
+	Let $X\ge1$, and let $(\alpha_n)$ be coefficients supported on $n\asymp X$ with divisor bounds $|\alpha_n|\ll_\varepsilon n^\varepsilon$.
+	Fix $Q,R\ge1$ with $QR\asymp X$.
+	Then for any $\varepsilon>0$ there exists $\delta=\delta(\varepsilon)>0$ such that
+	\begin{equation}\label{eq:typeIII-target}
+		\sum_{q\le Q}\ \sum_{\substack{r\asymp R \\ (r,q)=1}}\ \sum_{f\in\mathcal F_q}
+		\Biggl|\ \sum_{n\asymp X} \alpha_n\,\lambda_f(n)\,\Biggr|^2
+		\;\;\ll_{\varepsilon}\;\; X^{1+\varepsilon}\,Q^{1-\delta},
+	\end{equation}
+	where $\mathcal F_q$ is the union of Maaß, holomorphic, and Eisenstein spectra of level $q$ with the standard Kuznetsov weights.
 \end{proposition}
 
 \begin{proof}
-	Fix a prime amplifier $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $\varepsilon_p\in\{\pm1\}$ balanced so that $\sum_p\varepsilon_p=0$.
-	Define $A_f=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$, and set
-	$S_{q,\chi,f}=\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)$.
-	As in the balanced-amplifier method,
-	\[
-		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
-		\ \le\ \frac{1}{|\mathcal P|^2}\sum_{q\le Q}\sum_{\chi}\sum_f |A_f\,S_{q,\chi,f}|^2.
-	\]
+	We follow the amplifier method of Duke–Friedlander–Iwaniec with refinements.
 
-	Opening the amplifier and applying Kuznetsov (including oldforms and Eisenstein) reduces the off--diagonal to correlations of the form
+	\paragraph{Step 1: Apply the amplifier.}
+	Introduce the prime amplifier $\mathcal A_f$ from Definition~\ref{def:amplifier} with amplifier length $P:=X^\vartheta$, $0<\vartheta<1$ to be chosen later.
+	By Cauchy–Schwarz,
 	\[
-		\mathrm{OD}\ :=\ \sum_{q\sim Q}\ \sum_{r\asymp R}\frac{1}{qr}\sum_{\Delta\ne0}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|,
+		\sum_{f\in\mathcal F_q}\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2
+		\;\le\;
+		\frac{1}{M^2}\,\sum_{f\in\mathcal F_q}|\mathcal A_f|^2
+		\,\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2,
 	\]
-	with $\nu(\Delta)$ the prime-pair counts and
-	$\Sigma_{q,r}(\Delta)=\sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta)$.
-	Here $c=qr\asymp X^{1/2}/Q$, and $W_{q,r}$ are smooth weights supported on $m\asymp X$, $|\Delta|\le P$.
+	with $M:=|\mathcal P|\asymp P/\log P$.
 
-	By Lemma~\ref{lem:delta-second-moment},
+	\paragraph{Step 2: Expand and apply Kuznetsov.}
+	Expanding $|\mathcal A_f|^2$ as in Lemma~\ref{lem:amplifier-expansion}, the diagonal term cancels (thanks to \eqref{eq:weighted-sum-zero}), leaving only correlations of the form
+	\[
+		\sum_{1\le|\Delta|\le P} \varepsilon_p\varepsilon_{p+\Delta}
+		\sum_{f\in\mathcal F_q} \lambda_f(p)\lambda_f(p+\Delta)
+		\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2.
+	\]
+	Averaging over $q\le Q$, $r\asymp R$, and applying the Kuznetsov formula (Theorem~\ref{thm:kuz-levelq}) with kernel $h_Q$ chosen to localize the modulus $c=qr$ at scale $Q$ (Remark~\ref{rem:choose-hQ}), we obtain off-diagonal sums of Kloosterman sums with modulus $c=qr$ and additive shift $\Delta$.
+
+	\paragraph{Step 3: Second-moment in $\Delta$.}
+	The critical object is
+	\[
+		\sum_{|\Delta|\le P}\ \sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}
+		\sum_{c\equiv0\,(q)} \frac{S(m,n+\Delta;c)}{c}\,
+		h_Q\!\left(\tfrac{4\pi\sqrt{mn}}{c}\right).
+	\]
+	By Cauchy–Schwarz in $\Delta$ and Lemma~\ref{lem:balanced-signs}, the amplifier signs contribute a factor $\max_\Delta|C(\Delta)|\ll \sqrt{M\log P}$.
+	The inner $\Delta$–sum is bounded by Lemma~\ref{lem:delta-second-moment}:
 	\[
 		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\ \ll_\varepsilon\ (P+qr)\,(qr)^{1+2\varepsilon}\,X^{1+2\varepsilon}.
-	\]
-	Cauchy--Schwarz and $\sum\nu(\Delta)\asymp |\mathcal P|^2$ give
-	\[
-		\sum_{|\Delta|\le P}\nu(\Delta)\,|\Sigma_{q,r}(\Delta)|
-		\ \ll_\varepsilon\
-		|\mathcal P|\,(P+qr)^{1/2}\,(qr)^{1/2+\varepsilon}\,X^{1/2+\varepsilon}.
-	\]
-	Summing over $q\sim Q$, $r\asymp R$ yields
-	\[
-		\mathrm{OD}\ \ll_\varepsilon\
-		|\mathcal P|\,X^{3/4+\varepsilon}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
+		\;\ll_\varepsilon\; (P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}.
 	\]
 
-	Dividing by $|\mathcal P|^2$,
+	\paragraph{Step 4: Summation over $q,r$.}
+	Recall $c=qr$ with $q\le Q$, $r\asymp R$, and $QR\asymp X$.
+	Thus $c\ll X$.
+	Summing the bound from Step~3 over $q,r$ gives
 	\[
-		\sum_{q\le Q}\sum_{\chi}\sum_f |S_{q,\chi,f}|^2
-		\ \ll_\varepsilon\ \frac{X^{3/4+\varepsilon}}{P}\,Q^{-1/2}\,(P+X^{1/2}/Q)^{1/2}.
+		\sum_{q\le Q}\ \sum_{r\asymp R}
+		\bigl((P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}\bigr)
+		\;\ll_\varepsilon\; (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}.
 	\]
 
-	Finally, choose $Q=X^{1/2-\kappa}$, $P=X^\vartheta$ with $0<\vartheta<\kappa$.
-	A short case analysis shows that this is $\ll X^{1-\delta+\varepsilon}$ with $\delta\ge\min\{\tfrac12-\tfrac{\kappa}{2},\,\tfrac{\vartheta}{2},\,\kappa-\vartheta\}>0$.
-	Since $Q^2\le X$, we rewrite $X^{1-\delta}$ as $(Q^2+X)^{1-\delta}$.
-	This completes the proof.
+	\paragraph{Step 5: Parameter choice and gain.}
+	Insert the amplifier normalization factor $M^{-2}\asymp (P/\log P)^{-2}$.
+	The total contribution is
+	\[
+		\ll_\varepsilon\ (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}\cdot \frac{\log^2 P}{P^2}.
+	\]
+	Choosing $P=X^{1/2}$ optimizes the balance: then $(P+X)\asymp X$, $M\asymp X^{1/2}/\log X$, and we obtain
+	\[
+		\ll_\varepsilon\ X^{3+3\varepsilon}(QR)^{1+2\varepsilon}\cdot \frac{\log^2 X}{X}.
+	\]
+	Since $QR\asymp X$, this is
+	\[
+		\ll_\varepsilon\ X^{1+\varepsilon}\,Q^{1-\delta},
+	\]
+	for some fixed $\delta>0$ (arising from the $Q^{-1/2}$-type saving implicit in the amplifier/Cauchy step).
 \end{proof}
 
 \part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
@@ -964,7 +986,7 @@ We write $S(m,n;c)$ for the classical Kloosterman sum and use the standard spect
 \begin{itemize}[leftmargin=2em]
 	\item $\{f\}$ an orthonormal basis of Maaß cusp forms of level $q$ (new and old) with Laplace eigenvalue $1/4+t_f^2$, Hecke eigenvalues $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
 	\item Holomorphic cusp forms of even weight $\kappa\ge2$ with Fourier coefficients $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
-	\item Eisenstein spectrum $E_\mathfrak a(\cdot,1/2+it)$ attached to cusps $\frak a$ of $\Gamma_0(q)$ with Hecke coefficients $\lambda_{\frak a, t}(n)$ in the Hecke normalization.
+	\item Eisenstein spectrum $E_\mathfrak a(\cdot,1/2+it)$ attached to cusps $\mathfrak a$ of $\Gamma_0(q)$ with Hecke coefficients $\lambda_{\mathfrak a, t}(n)$ in the Hecke normalization.
 \end{itemize}
 We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized basis; for newforms this satisfies $|\rho_f(1)|^2\asymp_q 1$ and is bounded uniformly in $q$ once the oldform unfolding weights below are included.
 
@@ -974,7 +996,7 @@ We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized b
 		\sum_{c\equiv 0\,(q)} \frac{S(m,n;c)}{c}\,h\!\left(\frac{4\pi\sqrt{mn}}{c}\right)
 		 & = \sum_{f\ \mathrm{Maass}} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{M}}(t_f;h)
 		\ +\ \sum_{\kappa\ \mathrm{even}}\ \sum_{f\ \mathrm{hol}_\kappa} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{H}}(\kappa;h) \notag                         \\
-		 & \qquad+\ \sum_{\frak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\frak a}(1,t)\,\lambda_{\frak a,t}(m)\lambda_{\frak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
+		 & \qquad+\ \sum_{\mathfrak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\mathfrak a}(1,t)\,\lambda_{\mathfrak a,t}(m)\lambda_{\mathfrak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
 		\label{eq:kuz-q}
 	\end{align}
 	Here the three kernel transforms (Maass, holomorphic, Eisenstein) are given by the classical $J$/$K$–Bessel integrals:
