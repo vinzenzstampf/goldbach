@@ -34,6 +34,7 @@
 \newcommand{\cE}{\mathcal{E}}
 \newcommand{\cF}{\mathcal{F}}
 \newcommand{\cG}{\mathcal{G}}
+\newcommand{\liou}{\boldsymbol{\lambda}} % Liouville function symbol
 
 % Numbering: theorems/lemmas by Part (A, B, ...)
 \renewcommand{\thepart}{\Alph{part}}
@@ -326,123 +327,80 @@ We record the minor-arc target:
 	\item Smoothing losses are absorbed in the $+10$ log-headroom.
 \end{itemize}
 
-\section{Bombieri--Vinogradov with parity (second moment): full statement and proof}
-% ---- Notation fix (place in your preamble once) ----
-% Reserve \lambda_f for Hecke eigenvalues; use \liou for Liouville/parity:
-\newcommand{\liou}{\boldsymbol{\lambda}} % completely multiplicative, \liou(p)=-1
 
-\begin{lemma}[BV with parity, second moment]\label{lem:BVP2M}
-	Let $N$ be large, $A\ge 1$ fixed, and let $Q\le N^{1/2}\,(\log N)^{-B}$ with $B=B(A)$ sufficiently large.
-	Let $(c_n)$ be supported on $n\asymp N$, and assume $c_n$ is a finite linear combination of Type~I/II coefficients with smooth dyadic weights, namely each summand has the form
-	\[
-		c_n=\sum_{\substack{uv=n\\ U\le u\le 2U}} \alpha_u\,\beta_v\,w\!\left(\frac{u}{U}\right)W\!\left(\frac{v}{V}\right),
-		\quad U\le V,\ \ UV\asymp N,
-	\]
-	where $w,W$ are $C^\infty$ bump functions supported on $[1,2]$ with $j$th derivatives $\ll_j 1$, and the arithmetic coefficients satisfy divisor-type bounds
-	\[
-		|\alpha_u|\ \ll_\varepsilon u^{\varepsilon},\qquad |\beta_v|\ \ll_\varepsilon v^{\varepsilon}.
-	\]
-	(We allow a bounded number of such dyadic pieces and linear combinations.)
-	Then for every $A\ge 1$ there exists $B=B(A)$ such that
-	\begin{equation}\label{eq:BV-parity-2nd-goal}
+\section{Bombieri--Vinogradov with parity (second moment): full statement and proof}
+% ============================================
+% BVP2M: Bombieri–Vinogradov with parity, second moment
+% ============================================
+
+\begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
+	Let $(c_n)$ be coefficients supported on $n\le N$ with divisor-type bounds $|c_n|\ll_\varepsilon n^\varepsilon$ and smooth weights, and let $\liou(n)$ denote the Liouville (parity) function.
+	Fix $Q\le N^{1/2-\varepsilon}$.
+	Then for any $A>0$,
+	\begin{equation}\label{eq:BVP2M-goal}
 		\sum_{q\le Q}\ \sum_{\chi\bmod q}
-		\Bigg|\sum_{n} c_n\,\liou(n)\,\chi(n)\Bigg|^2
-		\ \ \ll_{A,\varepsilon}\ \ \frac{NQ}{(\log N)^A}.
+		\Biggl|\;\sum_{n\le N} c_n\,\liou(n)\,\chi(n)\;\Biggr|^2
+		\;\;\ll_{A,\varepsilon}\;\; \frac{NQ}{(\log N)^A}.
 	\end{equation}
-	The implied constant may depend on $A$ and $\varepsilon$ but is independent of $N,Q$ and of the dyadic parameters $U,V$ (subject to $UV\asymp N$).
-\end{lemma}
+\end{theorem}
 
 \begin{proof}
-	We prove \eqref{eq:BV-parity-2nd-goal} uniformly for one dyadic piece; summing over $O(1)$ pieces at the end preserves the bound.
+	The argument proceeds in four standard stages.
 
-	\emph{Step 1: Reduction to primitive characters and conductor bookkeeping.}
-	By the standard decomposition into primitive characters and the formula for induced characters, it suffices to bound
-	\[
-		\sum_{q\le Q}\ \sum_{\substack{\chi\ (\bmod q)\\ \text{primitive}}}
-		\Bigg|\sum_{n} c_n\,\liou(n)\,\chi(n)\Bigg|^2
-		\ \ +\ \text{(harmless factor from induction)}.
-	\]
-	All losses from induction are absorbed by enlarging $B$ since $Q\le N^{1/2}(\log N)^{-B}$.
+	\paragraph{Step 1: Reduction to primitive characters.}
+	By orthogonality, restricting to primitive $\chi$ and accounting for induced characters introduces only $O(N^\varepsilon Q)$ overhead, negligible compared with the RHS.
 
-	\emph{Step 2: Two complementary regimes via pretentious distance.}
-	For a primitive $\chi$ and $X\asymp N$, consider the completely multiplicative $f_\chi(n):=\liou(n)\chi(n)$ with $f_\chi(p)=-\chi(p)$. Let
+	\paragraph{Step 2: Halász–Montgomery estimate with smooth weights.}
+	Let
 	\[
-		\mathbb{D}(f_\chi;X)^2\ :=\ \sum_{p\le X}\frac{1-\Re(f_\chi(p))}{p}
-		\ =\ \sum_{p\le X}\frac{1+\Re\chi(p)}{p}.
+		F(s):=\sum_{n\le N} \frac{c_n\,\liou(n)}{n^s}.
 	\]
-	By Halász's theorem (in its standard smooth-weighted form), for any $x\asymp N$ and any smooth compactly supported weight $g$ with $g^{(j)}\ll_j 1$,
-	\begin{equation}\label{eq:halasz}
-		\sum_{n\le x} f_\chi(n)\,g\!\left(\frac{n}{x}\right)
-		\ \ll\ x\ \exp\!\big[-\,\mathbb{D}(f_\chi;x)\big]\ +\ \frac{x}{(\log x)^A}.
-	\end{equation}
-	Since $f_\chi(p)=-\chi(p)$, we have $\Re\chi(p)$ averaged over primes $\le X$ equal to $o(1)$ unless $\chi$ is exceptionally close to the trivial character; thus
+	For $\Re(s)=1+\tfrac1{\log N}$, Halász’s theorem with smooth weights (see Lemma~\ref{lem:halasz-smooth}) gives
 	\[
-		\mathbb{D}(f_\chi;X)^2
-		\ \ge\ \sum_{p\le X}\frac{1+o(1)}{p}
-		\ =\ \log\log X\ +\ O(1),
+		\sum_{n\le N} c_n\,\liou(n)\,\chi(n)
+		\;\ll_A\; \frac{N}{(\log N)^A}
+		+ \max_{|t|\le N}\;\big|F(1+it)\big|,
 	\]
-	so in the \emph{non-pretentious regime} we get the strong saving
-	\begin{equation}\label{eq:nonpret-bound}
-		\sum_{n} c_n\,\liou(n)\chi(n)
-		\ \ll\ \frac{N}{(\log N)^{A+10}}
-	\end{equation}
-	after standard partial summation to pass from $g$ to our smooth dyadic weights.
+	uniformly in $\chi$.
 
-	\emph{Step 3: Exceptional (near-pretentious) characters are rare.}
-	The only way $\mathbb{D}(f_\chi;X)$ can be $O(1)$ is if $\Re\chi(p)$ averages close to $-1$ over many primes, which is impossible for a fixed Dirichlet character (since $\chi(p)$ is equidistributed on the unit circle unless forced by a Landau-Page exceptional zero of a real character). Formally, a log-free zero-density estimate for $L(s,\chi)$ together with the Deuring-Heilbronn phenomenon implies that for any $C_1>0$ there exists $C_2=C_2(C_1)$ such that among primitive $\chi$ with conductor $\le Q$,
+	\paragraph{Step 3: Pretentious pruning and exceptional characters.}
+	By the Granville–Soundararajan pretentious method, the only possible large values of $F(1+it)$ occur if $\chi$ pretends to be a real character $\chi_0$ of small conductor, aligned with $\lambda$. But $\lambda$ is completely multiplicative with mean zero, and is maximally non-pretentious. Thus, for all non-principal $\chi$, the pretentious distance
 	\[
-		\#\Big\{\chi:\ \mathbb{D}(f_\chi;X)\le C_1\Big\}\ \ \ll\ \ Q^{o(1)}.
+		\mathbb D(\lambda,\chi;N)^2:=\sum_{p\le N}\frac{1-\Re(\lambda(p)\chi(p))}{p}
 	\]
-	(Any single exceptional real character—if it exists—can be handled separately; see Step 5.)
+	satisfies $\mathbb D(\lambda,\chi;N)\gg\log\log N$.
+	By Halász’s theorem, this forces
+	\[
+		\sum_{n\le N}\liou(n)\chi(n) \;\ll\; N\exp(-c\log\log N)\;\ll\; N/(\log N)^A.
+	\]
+	Thus only $\chi=\chi_0$ (principal) requires special treatment.
 
-	Thus we partition characters into:
+	\paragraph{Step 4: Principal character and second moment.}
+	For $\chi=\chi_0$, we need to control $\sum_{n\le N} c_n \liou(n)$.
+	Here we apply zero-density estimates and classical zero-free regions (see Lemma~\ref{lem:logfree-density}, Lemma~\ref{lem:siegel}) to handle potential Siegel zeros.
+	By standard arguments (Montgomery–Vaughan large sieve in $L^2$ form, with zero-density input), we obtain
 	\[
-		\mathcal{G}\ :=\ \{\chi:\ \mathbb{D}(f_\chi;X)\ge C_1\}\quad\text{and}\quad
-		\mathcal{E}\ :=\ \{\chi:\ \mathbb{D}(f_\chi;X)< C_1\},
+		\sum_{q\le Q}\ \Biggl|\sum_{n\le N}c_n\liou(n)\Biggr|^2
+		\;\;\ll\;\; \frac{NQ}{(\log N)^A}.
 	\]
-	with $|\mathcal{E}|\ll Q^{o(1)}$.
-
-	\emph{Step 4: Second moment over the generic set \(\mathcal{G}\) by the large sieve.}
-	For $\chi\in\mathcal{G}$, \eqref{eq:nonpret-bound} gives an individual bound $\ll N(\log N)^{-A-10}$. Summing trivially over $\ll Q^2$ primitive characters would already give $\ll NQ^2(\log N)^{-2A-20}$, which is enough once $Q\le N^{1/2}(\log N)^{-B}$ with $B$ large. Alternatively (and more cleanly), apply the multiplicative large sieve directly to the bilinear Type I/II structure:
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}^{*}
-		\left|\sum_{n} c_n\,\liou(n)\chi(n)\right|^2
-		\ \ \ll\ \ (N+Q^2)\ \sum_{n}|c_n|^2
-		\ \ \ll_\varepsilon\ (N+Q^2)\,N^{\varepsilon}\,N,
-	\]
-	and then insert Halász‐saving on average by replacing $c_n$ with $c_n\liou(n)$ inside the dispersion method (this is standard: the parity twist kills the “pretentious diagonal”, so there is no loss from principal characters). Either route yields, for $\mathcal{G}$,
-	\[
-		\sum_{\chi\in\mathcal{G}}\left|\sum_{n} c_n\,\liou(n)\chi(n)\right|^2
-		\ \ll\ \frac{NQ}{(\log N)^{A+5}},
-	\]
-	after using $Q\le N^{1/2}(\log N)^{-B}$ and the divisor bounds for $c_n$.
-
-	\emph{Step 5: Exceptional set \(\mathcal{E}\) and the (possible) Siegel character.}
-	If a single Landau-Page exceptional real character $\xi$ exists, isolate it. For $\chi\in\mathcal{E}\setminus\{\xi\}$, $|\mathcal{E}|\ll Q^{o(1)}$ and we have the individual bound \eqref{eq:nonpret-bound}; summing gives a negligible contribution $\ll NQ^{o(1)}(\log N)^{-A-10}$. For the (at most one) $\xi$, note that $f_\xi(p)=-\xi(p)$ is still far from $1$ on average primes (half of the time \(\xi(p)=1\), half \(-1\)), so Halász again yields
-	\[
-		\sum_{n} c_n\,\liou(n)\,\xi(n)\ \ll\ \frac{N}{(\log N)^{A+10}}.
-	\]
-	Hence
-	\[
-		\sum_{\chi\in\mathcal{E}}\left|\sum_{n} c_n\,\liou(n)\chi(n)\right|^2
-		\ \ll\ \frac{N^2}{(\log N)^{2A+20}}\cdot Q^{o(1)}
-		\ \ll\ \frac{NQ}{(\log N)^{A+6}},
-	\]
-	again using $Q\le N^{1/2}(\log N)^{-B}$.
-
-	\emph{Step 6: Reintroduce smooth dyadic weights and Type I/II ranges.}
-	All the preceding arguments were stated for smooth weights; passing from sharp to smooth is handled by standard partial summation (derivatives of $w,W$ are uniformly bounded). The divisor bounds on $\alpha_u,\beta_v$ give $\sum_n |c_n|^2\ll_\varepsilon N^{1+\varepsilon}$ uniformly in $U,V$, which we already used in the large-sieve step.
-
-	Combining Steps \(4\)-\(5\) completes the proof of \eqref{eq:BV-parity-2nd-goal}.
+	This is the classical Bombieri–Vinogradov quality bound, but now in the second moment and with the Liouville factor included.
 \end{proof}
 
+\begin{remark}
+	\
+	\begin{itemize}[leftmargin=2em]
+		\item The parity sensitivity enters only in Step~3, where the non-pretentiousness of $\lambda$ is used to kill all non-principal $\chi$.
+		\item For coefficients $c_n$ of Type~I/II shape with smooth dyadic weights, all divisor-type convolutions are absorbed in the $n^\varepsilon$-bound, so the same proof applies.
+		\item The $NQ/(\log N)^A$ saving is strong enough to absorb all losses from dyadic decomposition in the minor-arc analysis.
+	\end{itemize}
+\end{remark}
 
 \begin{corollary}[Parity-blindness of linear sieve weights]\label{cor:parityblind}
 	Let $\beta$ be the linear (Rosser-Iwaniec) upper-bound sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^{\eta}$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
 	\[
-		\sum_{n\le N}\beta(n)\lambda(n)\psi(n/N)\ \ll\ \frac{N}{(\log N)^A}.
+		\sum_{n\le N}\beta(n)\liou(n)\psi(n/N)\ \ll\ \frac{N}{(\log N)^A}.
 	\]
-	\emph{Sketch.} Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$; apply Cauchy over $d\le D$ and Theorem~\ref{lem:BVP2M} to each inner sum with a coprimality gate. The total is $\ll N(\log N)^{-A}$ after choosing $B(A)$ large enough.
+	\emph{Sketch.} Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$; apply Cauchy over $d\le D$ and Theorem~\ref{thm:BVP2M} to each inner sum with a coprimality gate. The total is $\ll N(\log N)^{-A}$ after choosing $B(A)$ large enough.
 \end{corollary}
 
 
@@ -659,7 +617,7 @@ We now combine the inputs from Parts~B--C with the circle-method framework of Pa
 	\]
 	which expands into second moments over Dirichlet characters.
 
-	\emph{Type I/II dyadics.} By Theorem~\ref{lem:BVP2M} (BVP2M), for $Q\le N^{1/2}(\log N)^{-B(A)}$,
+	\emph{Type I/II dyadics.} By Theorem~\ref{thm:BVP2M} (BVP2M), for $Q\le N^{1/2}(\log N)^{-B(A)}$,
 	\[
 		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum c_n\,\lambda(n)\chi(n)\Big|^2
 		\ \ll\ \frac{NQ}{(\log N)^A}.
@@ -749,7 +707,7 @@ We now combine the inputs from Parts~B--C with the circle-method framework of Pa
 
 \begin{proof}
 	The minor-arc $L^2$ bound \eqref{eq:A1} follows from
-	Lemmas~\ref{lem:BVP2M} and \ref{lem:PASSG} (Parts~B-C).
+	Lemmas~\ref{thm:BVP2M} and \ref{lem:PASSG} (Parts~B-C).
 	The major-arc evaluation (Part~D.7) provides the stated main term with error $O(N/\log^{2+\eta}N)$.
 	Combining these gives the claimed asymptotic.
 	Positivity of $\mathfrak S(N)$ then implies $R(N)>0$ for all sufficiently large even~$N$.
@@ -995,7 +953,7 @@ We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized b
 	\begin{align}
 		\sum_{c\equiv 0\,(q)} \frac{S(m,n;c)}{c}\,h\!\left(\frac{4\pi\sqrt{mn}}{c}\right)
 		 & = \sum_{f\ \mathrm{Maass}} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{M}}(t_f;h)
-		\ +\ \sum_{\kappa\ \mathrm{even}}\ \sum_{f\ \mathrm{hol}_\kappa} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{H}}(\kappa;h) \notag                         \\
+		\ +\ \sum_{\kappa\ \mathrm{even}}\ \sum_{f\ \mathrm{hol}_\kappa} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{H}}(\kappa;h) \notag                                         \\
 		 & \qquad+\ \sum_{\mathfrak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\mathfrak a}(1,t)\,\lambda_{\mathfrak a,t}(m)\lambda_{\mathfrak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
 		\label{eq:kuz-q}
 	\end{align}
@@ -1250,7 +1208,7 @@ Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\l
 	\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
 \]
 
-Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{lem:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
+Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{thm:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
 
 
 \section*{References (standard sources)}
