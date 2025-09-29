@@ -121,7 +121,7 @@
 % Introduction and Roadmap
 % =========================================================
 
-\part*{Introduction}
+\part{Introduction \& Framework}
 
 The binary Goldbach problem asks whether every sufficiently large even integer $N$ can be written as a sum of two primes.
 Equivalently, defining
@@ -130,7 +130,7 @@ Equivalently, defining
 \]
 the conjecture asserts that $R(N)>0$ for all even $N\ge4$.
 
-Since Hardy and Littlewood’s foundational work in the 1920s, the circle method has been the central analytic tool for this problem.
+Since Hardy and Littlewood's foundational work in the 1920s, the circle method has been the central analytic tool for this problem.
 It predicts the asymptotic
 \[
 	R(N)\ \sim\ \mathfrak S(N)\,\frac{N}{\log^2 N},
@@ -173,30 +173,17 @@ We treat Type~I and Type~II bilinear sums using Theorem~\ref{thm:BVP2M}, our Bom
 This gives strong cancellation for coefficients of divisor-type complexity.
 
 \paragraph{Part C. Type~III analysis.}
-The difficult Type~III sums are handled by an amplifier method (Lemma~\ref{lem:balanced-signs}), a $\Delta$–second moment bound (Lemma~\ref{lem:delta-second-moment}), and Kuznetsov’s formula with level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}).
+The difficult Type~III sums are handled by an amplifier method (Lemma~\ref{lem:balanced-signs}), a $\Delta$–second moment bound (Lemma~\ref{lem:delta-second-moment}), and Kuznetsov's formula with level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}).
 Together these yield Proposition~\ref{prop:typeIII}, a second-moment estimate with a genuine power saving in $Q$.
 
 \paragraph{Part D. Assembly.}
 On the major arcs, we evaluate $S(\alpha)$ and $B(\alpha)$ uniformly (Theorem~\ref{thm:major-eval}), recovering the singular series $\mathfrak S(N)$.
 On the minor arcs, Parts B–C supply the needed $L^2$ bound (Theorem~\ref{thm:minorA1_proved}).
-Putting the two together yields the asymptotic formula (Theorem~\ref{thm:goldbach-asymptotic}) and hence Goldbach’s conjecture for large $N$ (Corollary~\ref{cor:goldbach}).
+Putting the two together yields the asymptotic formula (Theorem~\ref{thm:goldbach-asymptotic}) and hence Goldbach's conjecture for large $N$ (Corollary~\ref{cor:goldbach}).
 
 \section*{Acknowledgments}
 We follow the Hardy–Littlewood–Vinogradov tradition, building on ideas of Vaughan, Heath–Brown, Bombieri, Friedlander–Iwaniec, and Maynard, among many others.
 Any errors or omissions are our responsibility.
-
-
-\part{Framework}
-
-This manuscript lays out a circle-method framework aimed at binary Goldbach. The final asymptotic is derived on the minor-arc $L^2$ estimate \eqref{eq:A1} and the analytic inputs explicitly stated in Parts B-D. In particular:
-
-\begin{itemize}
-	\item Establishing \eqref{eq:A1} is the central new task; Parts B-D provide a proposed route via Type I/II/III analyses.
-	\item Major-arc expansions for $S$ and for the sieve majorant $B$ are used with uniformity standard in the literature; precise statements are recorded in §7 with hypotheses.
-	\item The final positivity conclusion for $R(N)$ is conditional on \eqref{eq:A1} and the stated major-arc bounds.
-\end{itemize}
-
-A succinct punch-list of outstanding items appears in Appendix~B.
 
 \section{Circle-Method Decomposition}
 
@@ -424,7 +411,7 @@ We record the minor-arc target:
 	\[
 		F(s):=\sum_{n\le N} \frac{c_n\,\liou(n)}{n^s}.
 	\]
-	For $\Re(s)=1+\tfrac1{\log N}$, Halász’s theorem with smooth weights (see Lemma~\ref{lem:halasz-smooth}) gives
+	For $\Re(s)=1+\tfrac1{\log N}$, Halász's theorem with smooth weights (see Lemma~\ref{lem:halasz-smooth}) gives
 	\[
 		\sum_{n\le N} c_n\,\liou(n)\,\chi(n)
 		\;\ll_A\; \frac{N}{(\log N)^A}
@@ -438,7 +425,7 @@ We record the minor-arc target:
 		\mathbb D(\lambda,\chi;N)^2:=\sum_{p\le N}\frac{1-\Re(\lambda(p)\chi(p))}{p}
 	\]
 	satisfies $\mathbb D(\lambda,\chi;N)\gg\log\log N$.
-	By Halász’s theorem, this forces
+	By Halász's theorem, this forces
 	\[
 		\sum_{n\le N}\liou(n)\chi(n) \;\ll\; N\exp(-c\log\log N)\;\ll\; N/(\log N)^A.
 	\]
@@ -1424,14 +1411,6 @@ Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\l
 
 Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{thm:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
 
-
-\section*{References (standard sources)}
-H. Montgomery and R. Vaughan, Multiplicative Number Theory I. Classical Theory, Cambridge Univ. Press.
-H. Davenport, Multiplicative Number Theory, 3rd ed., Springer.
-J.-M. Deshouillers and H. Iwaniec, Kloosterman sums and Fourier coefficients of cusp forms, Ann. Inst. Fourier (1982).
-A. Granville and K. Soundararajan, Pretentious multiplicative functions and analytic number theory (various papers/notes).
-A. Harper, Bounds for multiplicative functions in short intervals.
-N. Alon and J. Spencer, The Probabilistic Method (for conditional expectations derandomization).
 
 \bibliographystyle{plain}  % or abbrv, alpha, etc.
 \bibliography{references}
