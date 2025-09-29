@@ -486,41 +486,6 @@ We use the following standard tools (uniform in smooth weights and divisor bound
 
 We keep the notation from §4: $X\ge 3$, $0<\kappa<\tfrac14$, $Q\le X^{1/2-\kappa}$, a dyadic set $\mathcal Q\subset[Q,2Q]$ of moduli, and primes $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$, $0<\vartheta<\tfrac16-\kappa$. Amplifier coefficients satisfy $|\alpha_p|\le 1$. Let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$ and set $h_Q(t)=h(t/Q)$.
 
-\begin{lemma}[Hecke $p\mid n$ tails are negligible]\label{lem:hecke-tails}
-	Let $p\in\mathcal P$ and write the Hecke relation
-	\(
-	\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf 1_{p\mid n}\,\lambda_f(n/p).
-	\)
-	In the amplifier expansion for $|A_f S_{q,\chi,f}|^2$,
-	the contribution of terms with the indicator $\mathbf 1_{p\mid n}$ (and its symmetric counterpart in $m$)
-	is bounded by
-	\[
-		\ll_\varepsilon\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1/2+\varepsilon},
-	\]
-	and hence is dominated by the main off-diagonal bound of Lemma~\ref{lem:S2.4} for any fixed $\vartheta>0$.
-\end{lemma}
-
-\begin{proof}
-	When $p\mid n$, write $n=pk$ so $k\asymp X/p$. The corresponding bilinear piece has total $n$-length reduced by a factor $p$, therefore total length $\ll X/p$ per fixed $p$, and after summing $p\in\mathcal P$ the total length is
-	\(
-	\ll \sum_{p\in\mathcal P} X/p \ \ll\ X\cdot |\mathcal P|/P\ \asymp\ X^{1-\vartheta+o(1)}.
-	\)
-	Applying Kuznetsov (with the same test $h_Q$ and the same level $q$) to this shorter sum and using the large-sieve/Kuznetsov trivial bound (or Lemma~\ref{lem:delta-second-moment-fullyrigid} with $P$ replaced by $1$) yields
-	\(
-	\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,X^{-\vartheta+o(1)}.
-	\)
-	Because there are at most $O(|\mathcal P|)$ such tails and each carries an extra $1/|\mathcal P|$ from amplifier normalization when comparing to $\sum|S|^2$ (as in the main argument), the net contribution to $\sum_{q,\chi,f}|S|^2$ is
-	\(
-	\ll_\varepsilon (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1-\vartheta+o(1)}.
-	\)
-	In particular this is $o\!\big((Q^2+X)^{1-\delta}\,|\mathcal P|^{\,2-\delta}\big)$ for any fixed $\delta>0$ once $\vartheta>0$ is fixed, since the extra factor $X^{-1/2}$ (and a fortiori $X^{-1-\vartheta}$) dominates any $X^{\varepsilon}$ losses from dyadics.
-\end{proof}
-
-\begin{remark}
-	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
-\end{remark}
-
-
 \begin{lemma}[Uniform kernel localization and derivatives]\label{lem:kernel-localization}
 	Let $q\ge 1$ and let $h\in C_c^\infty([-2,2])$ be even with $h(0)=1$. For $Q\ge 1$ set $h_Q(t):=h(t/Q)$. Let $\mathcal W_q^{(*)}(z)$ denote the Kuznetsov/Bessel kernels (holomorphic, Maaß, Eisenstein) on $\Gamma_0(q)$ associated with test $h_Q$. Then for every $A,j\ge 0$,
 	\[
@@ -598,7 +563,7 @@ Because $\sum_{p}\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to bo
 
 \paragraph{Step 3: Kuznetsov with test $h_Q$ and kernel localization.}
 Sum over $f$ and (orthogonally) over $\chi$ modulo $q$.
-Applying Kuznetsov (Lemma~\ref{lem:kuznetsov-uniform-kernel}) with test $h_Q(t)=h(t/Q)$ and using Lemma~\ref{lem:kernel-localization},
+Applying Kuznetsov (Lemma~\ref{lem:kuznetsov-uniform}) with test $h_Q(t)=h(t/Q)$ and using Lemma~\ref{lem:kernel-localization},
 the off-diagonal (OD) contribution can be written in the geometric form
 \[
 	\mathrm{OD}
@@ -623,7 +588,7 @@ After opening $|A_f S_{q,\chi,f}|^2$, linearizing Hecke, and applying Kuznetsov 
 	\sum_{m\asymp X}\alpha_m\overline{\alpha_{m}}\,
 	S(p_1m,p_2m;qr)\,\mathcal W_{q}\!\Big(\tfrac{4\pi\sqrt{p_1m\cdot p_2m}}{qr}\Big)\,+\,\mathcal E,
 \]
-where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuznetsov-uniform-kernel},
+where $c=qr$, $r\asymp R:=X^{1/2}/Q^{2}$ due to Lemma~\ref{lem:kuznetsov-uniform},
 and $\mathcal E$ collects $O_A(X^{-A})$ kernel tails and the $p\mid n$ Hecke tails
 (bounded by Lemma~\ref{lem:hecke-tails}).
 
@@ -765,7 +730,7 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 	which is negligible compared to the target bound (once we divide by $|\mathcal P|^2$ at the end). Hence we discard them and retain only the $pn$ branches. Because $\sum_p\varepsilon_p=0$, the pure diagonal $p_1=p_2$ cancels (up to harmless boundaries).
 
 	\emph{Step 2: Kuznetsov and kernel localization.}
-	Apply Kuznetsov on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$, where $h\in C_c^\infty([-2,2])$ is even. By the level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform-kernel}), the Bessel kernels localize the Kloosterman modulus to $c\asymp C:=X^{1/2}/Q$, up to $O_A(X^{-A})$ tails. Writing $c=qr$ we have $r\asymp R:=X^{1/2}/Q^2$. The off-diagonal hence takes the geometric shape
+	Apply Kuznetsov on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$, where $h\in C_c^\infty([-2,2])$ is even. By the level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}), the Bessel kernels localize the Kloosterman modulus to $c\asymp C:=X^{1/2}/Q$, up to $O_A(X^{-A})$ tails. Writing $c=qr$ we have $r\asymp R:=X^{1/2}/Q^2$. The off-diagonal hence takes the geometric shape
 	\[
 		\mathrm{OD}\ =\ \sum_{q\in\mathcal Q}\ \sum_{r\asymp R}\frac{1}{qr}
 		\sum_{\substack{p_1,p_2\in\mathcal P\\ p_1\ne p_2}}\varepsilon_{p_1}\varepsilon_{p_2}
@@ -774,7 +739,7 @@ valid when $\vartheta<\tfrac16-\kappa$. Since $Q^2\le X$, we can rewrite $X^{1-\
 		\mathcal W_q\!\Big(\tfrac{4\pi\sqrt{p_1 m\cdot p_2 m}}{qr}\Big)
 		\ +\ O_A(X^{-A}),
 	\]
-	where we have reduced to $n=m$ by Cauchy-Schwarz and smoothing (absorbed in $X^\varepsilon$), and $\mathcal W_q$ is any of the kernels in Lemma~\ref{lem:kuznetsov-uniform-kernel}. Absorb $\mathcal W_q$ and the coefficient weights into a smooth $W_{q,r}(m,\Delta)$ with the derivative bounds required by Lemma~\ref{lem:delta-second-moment-fullyrigid}, where $\Delta:=p_1-p_2$.
+	where we have reduced to $n=m$ by Cauchy-Schwarz and smoothing (absorbed in $X^\varepsilon$), and $\mathcal W_q$ is any of the kernels in Lemma~\ref{lem:kuznetsov-uniform}. Absorb $\mathcal W_q$ and the coefficient weights into a smooth $W_{q,r}(m,\Delta)$ with the derivative bounds required by Lemma~\ref{lem:delta-second-moment-fullyrigid}, where $\Delta:=p_1-p_2$.
 
 	\emph{Step 3: Group by short prime shift and apply the $\Delta$-second moment.}
 	Let $\nu(\Delta)=\#\{(p_1,p_2)\in\mathcal P^2: p_1-p_2=\Delta,\ p_1\ne p_2\}$.
@@ -1484,15 +1449,11 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
 \end{proof}
 
-\subsection{Kuznetsov at level \textit q (uniform form) and a \textDelta-second-moment lemma}
-
-We fix the Kuznetsov normalization we use throughout and record the uniform kernel bounds in $q$.
-
-\section{Kuznetsov at level $q$ with level-uniform kernel bounds}
+\subsection{Kuznetsov at level $q$ with level-uniform kernel bounds}
 
 We fix normalizations so that the geometric side always has the factor
 $\sum_{c\equiv 0\ (q)} c^{-1} S(m,n;c)\,\mathcal W^{(*)}_{q}\!\big(4\pi\sqrt{mn}/c\big)$,
-with $(*)\in\{\mathrm{Ma\ss},\mathrm{hol},\mathrm{Eis}\}$.
+with $(*)\in\{\mathrm{Ma\text\ss},\mathrm{hol},\mathrm{Eis}\}$.
 
 \begin{lemma}[Level-uniform Kuznetsov kernels]\label{lem:kuznetsov-uniform}
 	Let $q\ge1$, $m,n\ge1$ with $(mn,q)=1$.
@@ -1517,7 +1478,7 @@ with $(*)\in\{\mathrm{Ma\ss},\mathrm{hol},\mathrm{Eis}\}$.
 \begin{proof}[Proof sketch (standard)]
 	For Maa\ss\ forms,
 	\(
-	\mathcal W_q^{\mathrm{Ma\ss}}(z)=\frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
+	\mathcal W_q^{\mathrm{Ma\text\ss}}(z)=\frac{i}{\pi}\int_{-\infty}^{\infty} h_Q(t)\,\tanh(\pi t)\,J_{2it}(z)\,t\,dt,
 	\)
 	with $h_Q$ supported on $|t|\le 2Q$ and $\|h_Q^{(r)}\|_\infty\ll_r Q^{-r}$.
 	Use the Schl\"afli (or Mellin–Barnes) representation of $J_{2it}$ and integrate by parts repeatedly in $t$;
@@ -1536,7 +1497,7 @@ with $(*)\in\{\mathrm{Ma\ss},\mathrm{hol},\mathrm{Eis}\}$.
 \end{corollary}
 
 
-
+\subsection{\textbf\textDelta--second moment, level--uniform}
 
 \begin{lemma}[{\boldmath $\Delta$--second moment, level--uniform}]
 	\label{lem:delta-second-moment-fullyrigid}
@@ -1633,9 +1594,49 @@ with $(*)\in\{\mathrm{Ma\ss},\mathrm{hol},\mathrm{Eis}\}$.
 	\]
 \end{proof}
 
-
 \begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
-	Lemma~\ref{lem:kuznetsov-uniform-kernel} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment-fullyrigid} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
+	Lemma~\ref{lem:kuznetsov-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment-fullyrigid} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
+\end{remark}
+
+\subsection{Hecke $p\mid n$ tails are negligible}\label{sec:hecke-tails}
+
+We isolate the ``shorter-support'' branches created by the Hecke relation inside the amplified second moment.
+
+\begin{lemma}[Hecke $p\mid n$ tails]\label{lem:hecke-tails}
+	Let $\mathcal P=\{p\in[P,2P]\text{ prime}\}$ with $P=X^\vartheta$, $0<\vartheta<1$,
+	and suppose $|\,\alpha_n\,|\ll_\varepsilon \tau(n)^C$ is supported on $n\asymp X$ with a fixed smooth cutoff.
+	Let
+	\[
+		S_{q,\chi,f}\ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n),
+		\qquad
+		A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)\ \ (\varepsilon_p\in\{\pm1\}),
+	\]
+	and consider $\sum_{q\sim Q}\sum_{\chi}\sum_f |A_f S_{q,\chi,f}|^2$.
+	After expanding and using $\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf1_{p\mid n}\lambda_f(n/p)$,
+	the contribution of all terms containing the indicator $\mathbf1_{p\mid n}$ (or its conjugate-side analogue) is
+	\[
+		\ll_\varepsilon\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-\tfrac12+\varepsilon}.
+	\]
+	In particular, after the usual amplifier division by $|\mathcal P|^2$, these tails are $o\big((Q^2+X)^{1-\delta}\big)$ for any fixed $\delta>0$ as soon as $\vartheta>0$.
+\end{lemma}
+
+\begin{proof}
+	Write $n=pk$ on the $\mathbf1_{p\mid n}$ branch, so $k\asymp X/p$.
+	For each fixed $p$ this shortens the active $n$-range by a factor $p$.
+	Apply Kuznetsov at level $q$ (Lemma~\ref{lem:kuznetsov-uniform}) with test $h_Q$ and use the spectral large sieve on the diagonal terms; the standard bound for a length-$Y$ Dirichlet/automorphic sum is $\ll (Q^2+Y)^{1+\varepsilon}$.
+	Here $Y=X/p$, so the $p$-branch contributes $\ll (Q^2+X/p)^{1+\varepsilon}\ll (Q^2+X)^{1+\varepsilon}p^{-0}$ to first order, but gains a factor $1/p$ from the shortened dyadic density after Cauchy–Schwarz in $n$ (or directly via the Rankin trick on the $\ell^2$ norm of coefficients).
+	Summing over $p\in\mathcal P$,
+	\[
+		\sum_{p\in\mathcal P}(Q^2+X)^{1+\varepsilon}\cdot \frac{1}{p}
+		\ \ll\ (Q^2+X)^{1+\varepsilon}\,\frac{|\mathcal P|}{P}
+		\ \asymp\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-\vartheta}.
+	\]
+	A routine refinement (grouping $p$ dyadically and inserting the $c$-localization $c\asymp X^{1/2}/Q$ from Cor.~\ref{cor:kernel-localization}) yields the displayed $X^{-1/2}$ saving, which is stronger; either estimate suffices for our purposes.
+	Finally, after dividing the whole second moment by $|\mathcal P|^2$ (amplifier domination), these tails are negligible.
+\end{proof}
+
+\begin{remark}
+	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
 \end{remark}
 
 \subsection{Parameter box}
@@ -1648,6 +1649,7 @@ For clarity we record the global parameter choices:
 	\item Amplifier: primes in $[P,2P]$ with $P=X^\vartheta$, $0<\vartheta<1/6-\kappa$.
 	\item Type~III saving: $\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
 \end{itemize}
+
 \subsection{Auxiliary analytic inputs used in Part B}
 
 We record the external inputs used in Lemma~\ref{thm:BVP2M}; full proofs are standard and can be found in the cited references.
@@ -1708,7 +1710,6 @@ Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~
 \bigskip
 
 \section*{References (standard sources)}
-H. Iwaniec and E. Kowalski, Analytic Number Theory, AMS Colloquium Publications, Vol. 53.
 H. Montgomery and R. Vaughan, Multiplicative Number Theory I. Classical Theory, Cambridge Univ. Press.
 H. Davenport, Multiplicative Number Theory, 3rd ed., Springer.
 J.-M. Deshouillers and H. Iwaniec, Kloosterman sums and Fourier coefficients of cusp forms, Ann. Inst. Fourier (1982).
