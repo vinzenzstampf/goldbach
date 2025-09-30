@@ -12,7 +12,7 @@
 \contentsline {paragraph}{Remarks.}{6}{section*.8}%
 \contentsline {section}{\numberline {2}BV with parity, second moment}{6}{section.2.2}%
 \contentsline {part}{C\hspace {1em}Type III Analysis}{7}{part.3}%
-\contentsline {section}{\numberline {1}PASSG (Prime-averaged short-shift gain — full proof)}{8}{section.3.1}%
+\contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{8}{section.3.1}%
 \contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{9}{section.3.2}%
 \contentsline {paragraph}{Step 1: Apply the amplifier.}{9}{section*.11}%
 \contentsline {paragraph}{Step 2: Expand and apply Kuznetsov.}{9}{section*.12}%

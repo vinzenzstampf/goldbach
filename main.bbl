@@ -1,5 +1,27 @@
 \begin{thebibliography}{1}
 
+\bibitem{BH10}
+Valentin Blomer and Gergely Harcos.
+\newblock A hybrid asymptotic formula for the second moment of rankin--selberg
+  $l$-functions.
+\newblock {\em Proceedings of the London Mathematical Society}, 100:193--228,
+  2010.
+
+\bibitem{DI82}
+Jean-Marc Deshouillers and Henryk Iwaniec.
+\newblock Kloosterman sums and fourier coefficients of cusp forms.
+\newblock {\em Inventiones mathematicae}, 70:219--288, 1982.
+
+\bibitem{DI83}
+Jean-Marc Deshouillers and Henryk Iwaniec.
+\newblock Power mean values of the riemann zeta-function. ii.
+\newblock {\em Acta Arithmetica}, 43:305--312, 1983.
+
+\bibitem{DFI93}
+William Duke, John~B. Friedlander, and Henryk Iwaniec.
+\newblock Bounds for automorphic $l$-functions.
+\newblock {\em Inventiones mathematicae}, 112:1--8, 1993.
+
 \bibitem{IK}
 Henryk Iwaniec and Emmanuel Kowalski.
 \newblock {\em Analytic Number Theory}, volume~53 of {\em American Mathematical

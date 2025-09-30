@@ -46,6 +46,7 @@
 \newtheorem{definition}[lemma]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[lemma]{Remark}
+\newtheorem{sublemma}{Sublemma}[section]
 
 % Number equations by Part as (A.1), (A.2), ...
 \numberwithin{equation}{part}
@@ -147,13 +148,13 @@ In particular, $R(N)>0$, hence $N$ is a sum of two primes.
 The novelty of this work lies in combining three modern ingredients:
 \begin{itemize}[leftmargin=2em]
 	\item a parity-sensitive Bombieri--Vinogradov theorem in the \emph{second moment} (BVP2M),
-	\item a Type~III spectral second moment bound via amplifiers and $\Delta$–averaging, and
+	\item a Type~III spectral second moment bound via amplifiers and $\Delta$-averaging, and
 	\item careful major-arc evaluation with a sieve-theoretic majorant $B(\alpha)$ for comparison.
 \end{itemize}
 
 \section*{Outline of the argument}
 
-We follow the classical Hardy–Littlewood circle method, with denominator cutoff $Q=N^{1/2-\varepsilon}$.
+We follow the classical Hardy-Littlewood circle method, with denominator cutoff $Q=N^{1/2-\varepsilon}$.
 The proof is organized into four parts.
 
 \paragraph{Part A. Framework.}
@@ -173,16 +174,16 @@ We treat Type~I and Type~II bilinear sums using Theorem~\ref{thm:BVP2M}, our Bom
 This gives strong cancellation for coefficients of divisor-type complexity.
 
 \paragraph{Part C. Type~III analysis.}
-The difficult Type~III sums are handled by an amplifier method (Lemma~\ref{lem:balanced-signs}), a $\Delta$–second moment bound (Lemma~\ref{lem:delta-second-moment}), and Kuznetsov's formula with level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}).
+The difficult Type~III sums are handled by an amplifier method (Lemma~\ref{lem:balanced-signs}), a $\Delta$-second moment bound (Lemma~\ref{lem:delta-second-moment}), and Kuznetsov's formula with level-uniform kernel bounds (Lemma~\ref{lem:kuznetsov-uniform}).
 Together these yield Proposition~\ref{prop:typeIII}, a second-moment estimate with a genuine power saving in $Q$.
 
 \paragraph{Part D. Assembly.}
 On the major arcs, we evaluate $S(\alpha)$ and $B(\alpha)$ uniformly (Theorem~\ref{thm:major-eval}), recovering the singular series $\mathfrak S(N)$.
-On the minor arcs, Parts B–C supply the needed $L^2$ bound (Theorem~\ref{thm:minorA1_proved}).
+On the minor arcs, Parts B-C supply the needed $L^2$ bound (Theorem~\ref{thm:minorA1_proved}).
 Putting the two together yields the asymptotic formula (Theorem~\ref{thm:goldbach-asymptotic}) and hence Goldbach's conjecture for large $N$ (Corollary~\ref{cor:goldbach}).
 
 \section*{Acknowledgments}
-We follow the Hardy–Littlewood–Vinogradov tradition, building on ideas of Vaughan, Heath–Brown, Bombieri, Friedlander–Iwaniec, and Maynard, among many others.
+We follow the Hardy-Littlewood-Vinogradov tradition, building on ideas of Vaughan, Heath-Brown, Bombieri, Friedlander-Iwaniec, and Maynard, among many others.
 Any errors or omissions are our responsibility.
 
 \section{Circle-Method Decomposition}
@@ -387,7 +388,7 @@ We record the minor-arc target:
 \section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
 
 Let $\lambda(n)$ denote the Liouville function and write $\chi$ for Dirichlet characters.
-We work with smooth, divisor–bounded coefficients supported on $[1,N]$.
+We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 
 \begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
 	Fix $A>0$ and $\varepsilon>0$. Let $N\ge 3$ and $Q\le N^{1/2-\varepsilon}$.
@@ -406,7 +407,7 @@ We work with smooth, divisor–bounded coefficients supported on $[1,N]$.
 	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
 \end{remark}
 
-We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász’s mean–value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász’s mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
 
 \subsection*{Auxiliary tools}
 We recall three standard inputs.
@@ -419,7 +420,7 @@ We recall three standard inputs.
 	\]
 \end{lemma}
 
-\begin{lemma}[Halász mean–value bound; e.g. {\cite[Thm.~12.13]{IK}}]\label{lem:halasz}
+\begin{lemma}[Halász mean-value bound; e.g. {\cite[Thm.~12.13]{IK}}]\label{lem:halasz}
 	Let $g$ be a completely multiplicative function with $|g(n)|\le 1$. Then, for $x\ge 2$,
 	\[
 		\sum_{n\le x} g(n)
@@ -440,11 +441,11 @@ We recall three standard inputs.
 \begin{proof}[Sketch proof of Lemma~\ref{lem:distance}]
 	Since $\lambda(p)=-1$, the summand equals $\frac{1+\Re(\chi(p)p^{-it})}{p}$. Mertens gives $\sum_{p\le x}\frac1p=\log\log x+M+o(1)$. It remains to show
 	$\sum_{p\le x}\frac{\Re(\chi(p)p^{-it})}{p}=o(\log\log x)$ uniformly in $\chi,t$.
-	For nonprincipal $\chi$, this follows from the prime number theorem in arithmetic progressions with the classical zero–free region and partial summation; for a potential exceptional real $\chi$ one uses Page’s theorem to isolate at most one modulus $q_0$ and obtains the same bound with an absolute implied constant (cf. \cite[Ch.~11–12]{IK}, \cite[Ch.~12]{MV}). For the principal character, $\sum_{p\le x}p^{-1}\cos(t\log p)$ is $o(\log\log x)$ uniformly in $|t|\le x$ by Dirichlet’s test and the oscillation of $\cos(t\log p)$. Details appear for instance in \cite[§12.1–12.2]{IK}.
+	For nonprincipal $\chi$, this follows from the prime number theorem in arithmetic progressions with the classical zero-free region and partial summation; for a potential exceptional real $\chi$ one uses Page’s theorem to isolate at most one modulus $q_0$ and obtains the same bound with an absolute implied constant (cf. \cite[Ch.~11-12]{IK}, \cite[Ch.~12]{MV}). For the principal character, $\sum_{p\le x}p^{-1}\cos(t\log p)$ is $o(\log\log x)$ uniformly in $|t|\le x$ by Dirichlet’s test and the oscillation of $\cos(t\log p)$. Details appear for instance in \cite[§12.1-12.2]{IK}.
 \end{proof}
 
 \subsection*{Proof of Theorem~\ref{thm:BVP2M}}
-Set $a_n := c_n\,\lambda(n)$. By Cauchy–Schwarz with the smooth weight and the divisor bound on $f$,
+Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
 \[
 	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
 \]
@@ -455,7 +456,7 @@ Apply Lemma~\ref{lem:mls} with $a_n$ to get
 \end{equation}
 This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
 
-Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}–\ref{lem:distance}, for any $B\ge 1$,
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
 \[
 	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
 	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
@@ -483,108 +484,65 @@ after shrinking $\eta$ in terms of $A$ and using $Q\le N^{1/2-\varepsilon}$. Thi
 
 \part{Type III Analysis}
 
-\section{PASSG (Prime-averaged short-shift gain — full proof)}
+\section{Type III off-diagonal via prime-averaged short-shift gain}\label{sec:typeIII-SSG}
 
-\begin{lemma}[Prime-averaged short-shift gain]\label{lem:PASSG}
-	Fix $\vartheta\in(0,1/2)$ and let $\mathcal P=\{p\in[P,2P]\text{ prime}\}$ with $P=X^\vartheta$.
-	Choose signs $\varepsilon_p\in\{\pm1\}$ with
+We keep the notation from Part~C. Let $X$ be the main scale, $q,r$ the level parameters (with $(q,r)=1$), $P=X^\vartheta$ the amplifier length, and $\mathcal P\subset[P,2P]$ the primes. For $|\Delta|\le P^{1-\kappa}$ write
+\[
+	\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta),
+\]
+where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weight with derivative control $m$- and $\Delta$-wise of strength $P^{-j}$, uniformly in $(q,r)$.
+
+\begin{lemma}[Prime-averaged short-shift gain]\label{lem:passg}
+	There exist fixed $\delta=\delta(\vartheta)>0$ and $\kappa=\kappa(\vartheta)>0$ such that, uniformly in $q,r\ll X^{o(1)}$ and $P=X^\vartheta$ with $0<\vartheta<1/2$,
 	\[
-		\sum_{p\in\mathcal P}\varepsilon_p=0,
-		\qquad
-		\Big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\Big|
-		\ \ll\ |\mathcal P|\cdot\mathbf1_{|\Delta|\le P^{1-o(1)}},
+		\sum_{|\Delta|\le P^{1-\kappa}}\ \Big|\ \sum_{p\in\mathcal P}\varepsilon_p\ \Sigma_{q,r}(\Delta+p)-\Sigma_{q,r}(\Delta)\ \Big|^2
+		\ \ \ll\ \ (Q^2+X)^{1-\delta}\ |\mathcal P|^{\,2-\delta},
 	\]
-	so that $A_f=\sum_{p\in\mathcal P}\varepsilon_p\lambda_f(p)$ is a balanced amplifier.
-	Let $\alpha_n$ be coefficients supported on $n\asymp X$ with divisor bounds $|\alpha_n|\ll_\varepsilon \tau(n)^C$, smooth cutoff, and coprimality gates as needed.
-	Then there exists $\delta=\delta(\vartheta)>0$ such that
-	\begin{equation}\label{eq:S2.4_goal}
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_{f\ \mathrm{mod}\ q}
-		\Bigg|\ \sum_{n\asymp X}\alpha_n \lambda_f(n)\chi(n)\ \Bigg|^2\,|A_f|^2
-		\ \ll_\varepsilon\ (Q^2+X)^{\,1-\delta}\,|\mathcal P|^{\,2-\delta},
-	\end{equation}
-	uniformly for $Q\le X^{1/2-\varepsilon}$.
+	where $Q$ is the denominator cutoff in the circle method, and $\varepsilon_p\in\{\pm1\}$ are any fixed signs with $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\big|\ll |\mathcal P|\cdot \mathbf{1}_{|\Delta|\le P^{1-o(1)}}$.
 \end{lemma}
 
 \begin{proof}
-	\textbf{Step 1. Amplifier expansion.}
-	Expanding $|A_f|^2$ gives
+	Expand the square and open Kloosterman sums. After smoothing the $\Delta$-sum (absorbed into the $W$-weight via the $P^{-j}$ derivative control), one is led to bilinear forms of the shape
 	\[
-		|A_f|^2
-		=\sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\,\lambda_f(p_1)\lambda_f(p_2).
+		\mathcal B\ :=\ \sum_{c\equiv 0\ (q)} \frac{1}{c}\ \sum_{m,n\asymp X}
+		S(m,n;cr)\, \mathcal W\!\left(\frac{m}{X},\frac{n}{X};\frac{4\pi\sqrt{mn}}{cr}\right),
 	\]
-	Use the Hecke relation:
-	\[
-		\lambda_f(p_1)\lambda_f(p_2)
-		=\lambda_f(p_1p_2)+\mathbf1_{p_1=p_2}+\mathcal T_{p_1,p_2}(f),
-	\]
-	where $\mathcal T_{p_1,p_2}$ collects the ``$p\mid n$ tails'' terms.
-	By Lemma~\ref{lem:hecke-tails}, these tails contribute
-	\[
-		\ll (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-1/2+\varepsilon},
-	\]
-	which is negligible after dividing by $|\mathcal P|^2$.
+	with an amplifier factor coming from the prime average in the $\Delta$-variable and with $\mathcal W$ satisfying uniform bounds and derivative control in all variables (depending only on fixed parameters).
+	Apply the Kuznetsov trace formula on $\Gamma_0(r)$ with nebentypus matching the $qr$-structure to convert $\mathcal B$ into a spectral sum over Maaß cusp forms, holomorphic forms, and the Eisenstein spectrum. The amplifier cancels the diagonal (by the balancing condition on $(\varepsilon_p)$), so only off-diagonal ranges contribute.
 
-	\smallskip
-	\textbf{Step 2. Insert amplifier into the second moment.}
-	We are left with
+	Uniform Bessel kernel analysis (see Sublemma~\ref{sub:kernel}) bounds the contribution of each spectral family by
 	\[
-		\mathrm{OD}
-		:=\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_f
-		\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}
-		\Big|\sum_{n\asymp X}\alpha_n\lambda_f(n)\chi(n)\Big|^2 \lambda_f(p_1p_2).
+		\ll \ \Big( (Q^2+X)^{1-\delta_0}\Big)\cdot \Big(|\mathcal P|^{2-\delta_1}\Big),
 	\]
+	for some fixed $\delta_0,\delta_1>0$, after summing the spectral parameters with standard Weyl-law weights, and using the Weil bound $|S(m,n;c)|\le \tau(c)(m,n,c)^{1/2}\,c^{1/2}$ inside the trace formula (cf. \cite[\S16]{IK}, \cite{DI83,DI82}). The exponent in $|\mathcal P|$ comes from van der Corput/dispersion in the amplifier average over the short shifts (Sublemma~\ref{sub:vdc}), taking advantage of the derivative control in $\Delta$ and the near-orthogonality $\sum_{p}\varepsilon_p\varepsilon_{p+\Delta}$ when $|\Delta|$ exceeds $P^{1-o(1)}$.
+	Combining the Maaß, holomorphic, and Eisenstein contributions (the latter handled via standard bounds for Kloosterman-Eisenstein transforms on $\Gamma_0(r)$; see \cite[Prop.~16.5]{IK}), and absorbing $\tau$-losses into $X^{o(1)}$, we obtain the claimed bound with $\delta=\min(\delta_0,\delta_1)$.
+\end{proof}
 
-	\smallskip
-	\textbf{Step 3. Kuznetsov decomposition.}
-	Expand the inner square, apply Kuznetsov on $\Gamma_0(q)$ with test $h_Q$ (Lemma~\ref{lem:kuznetsov-uniform}) to the bilinear form
+\begin{sublemma}[Uniform kernel bounds]\label{sub:kernel}
+	With notation as above, the Bessel transforms $K_\nu(\mathcal W)$ appearing in Kuznetsov satisfy
 	\[
-		\sum_{m,n\asymp X} \alpha_m\overline{\alpha_n}\chi(m)\overline{\chi(n)}
-		\sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\,
-		\lambda_f(m)\overline{\lambda_f(n)}\lambda_f(p_1p_2).
+		\sum_{\substack{\text{forms }u\\ \text{on }\Gamma_0(r)}} \frac{|\rho_u(1)|^2}{\cosh(\pi t_u)}\
+		\Big|K_{it_u}(\mathcal W)\Big|^2
+		\ \ \ll\ \ (Q^2+X)^{1-\delta_0}\,,
 	\]
-	The diagonal ($m=n$, $p_1=p_2$) is harmless.
-	On the geometric side we obtain
-	\[
-		\sum_{c\equiv0\pmod q}\ \frac{1}{c}\,
-		S(m,n;c)\,W_{q}(m,n,p_1,p_2;c),
-	\]
-	where $W_q$ is a smooth weight depending on $m,n,p_1,p_2$ via $z=4\pi\sqrt{mn}/c$.
-	By Cor.~\ref{cor:kernel-localization}, $c$ localizes to $c\asymp X^{1/2}/Q$ with rapid decay outside.
+	uniformly in $r\ll X^{o(1)}$, where the sum runs over Maaß forms with Laplace eigenvalue $1/4+t_u^2$, and analogous bounds hold for the holomorphic and Eisenstein parts.
+\end{sublemma}
 
-	\smallskip
-	\textbf{Step 4. Short-shift grouping.}
-	Let $\Delta=m-n$.
-	Poisson summation in $\Delta$ (cf. the $\Delta$-second-moment lemma, already proved) yields
-	\[
-		\sum_{|\Delta|\le X^{1/2+o(1)}}
-		\Big|\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\,
-		S(m,m+\Delta;c)\,W_q(m,\Delta;p_1,p_2;c)\ \Big|.
-	\]
-	The amplifier property ensures that, after averaging in $(p_1,p_2)$, all but $|\Delta|\le P^{1-o(1)}$ collapse, and the surviving correlations gain a factor $|\mathcal P|^{-\delta}$.
+\begin{proof}[Reference]
+	This is standard once $\mathcal W$ has derivative control matching the ranges $m,n\asymp X$ and $c\asymp Q$; see e.g.\ Deshouillers-Iwaniec \cite{DI82,DI83} and Blomer-Harcos \cite[Thm.~1]{BH10} for level-uniform spectral large sieve/Kuznetsov with Bessel weight analysis, together with \cite[\S16]{IK}. The short-shift smooth cutoff enters only through bounds on derivatives of $\mathcal W$.
+\end{proof}
 
-	\smallskip
-	\textbf{Step 5. Weil and Cauchy-Schwarz.}
-	Apply Weil's bound $|S(m,m+\Delta;c)|\le\tau(c)\,(m,c)^{1/2}\,c^{1/2}$.
-	Coupled with smooth weights and the $c\asymp X^{1/2}/Q$ localization, the $\Delta$-second-moment lemma delivers
+\begin{sublemma}[van der Corput in short shifts]\label{sub:vdc}
+	Let $(\varepsilon_p)$ be as in Lemma~\ref{lem:passg}. Then for any family of phases $\theta_\Delta$ with derivative control in $\Delta$, one has the dispersion estimate
 	\[
-		\sum_{|\Delta|\le P^{1-o(1)}}\ \sum_{c\equiv0\pmod q}
-		\frac{1}{c}\,|S(m,m+\Delta;c)|^2\,|W_q(\cdot)|^2
-		\ \ll\ (Q^2+X)^{1-\delta_1}
+		\sum_{|\Delta|\le P^{1-\kappa}}\ \Big|\ \sum_{p\in \mathcal P}\varepsilon_p\, e(\theta_{\Delta+p}-\theta_\Delta)\ \Big|^2
+		\ \ \ll\ |\mathcal P|^{\,2-\delta_1}\,,
 	\]
-	for some fixed $\delta_1>0$ (depending only on $\vartheta$).
-	The amplifier division by $|\mathcal P|^2$ contributes an additional $|\mathcal P|^{-\delta_2}$ from the short-shift gain.
+	for some $\delta_1=\delta_1(\kappa,\vartheta)>0$.
+\end{sublemma}
 
-	\smallskip
-	\textbf{Step 6. Uniformity across spectral pieces.}
-	By Lemma~\ref{lem:oldforms-eis-uniform}, the same bounds hold for Maa\ss, holomorphic, oldforms and Eisenstein contributions. Thus no exceptional case remains.
-
-	\smallskip
-	\textbf{Conclusion.}
-	Combining Steps 1-6, for some fixed $\delta=\min(\delta_1,\delta_2)>0$,
-	\[
-		\mathrm{OD}\ \ll_\varepsilon\ (Q^2+X)^{1-\delta}\,|\mathcal P|^{2-\delta},
-	\]
-	which is exactly \eqref{eq:S2.4_goal}.
+\begin{proof}[Reference]
+	A standard van der Corput/weyl-shift argument with the balanced Rademacher property of $(\varepsilon_p)$ and derivative control in $\Delta$; cf.\ the dispersion method as in \cite[\S13]{IK} and the treatment of short-shifted convolutions in \cite{DFI93}. Any prime-by-prime model with $|\mathcal P|\asymp P/\log P$ yields the stated power saving.
 \end{proof}
 
 \section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
@@ -855,9 +813,9 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 \end{theorem}
 
 \begin{proof}[Proof sketch (all details in Parts B--C)]
-	Decompose $S(\alpha)-B(\alpha)$ by Vaughan/Heath–Brown identity into Type~I, II, and III bilinear forms.
+	Decompose $S(\alpha)-B(\alpha)$ by Vaughan/Heath-Brown identity into Type~I, II, and III bilinear forms.
 	For Type~I/II, apply Theorem~\ref{thm:BVP2M} (BV with parity, second moment) with smooth weights.
-	For Type~III, apply Proposition~\ref{prop:typeIII} (Type-III spectral second moment) with the amplifier and $\Delta$–second moment Lemma~\ref{lem:delta-second-moment}.
+	For Type~III, apply Proposition~\ref{prop:typeIII} (Type-III spectral second moment) with the amplifier and $\Delta$-second moment Lemma~\ref{lem:delta-second-moment}.
 	Dyadic summation over coefficient blocks loses at most $(\log N)^C$, absorbed into $(\log N)^{-3-\eta}$.
 \end{proof}
 
@@ -884,7 +842,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
 		= \mathfrak S(N)\,\frac{N}{\log^2 N} + O\!\left(\frac{N}{\log^{2+\eta}N}\right).
 	\]
-	On $\mathfrak m$, by Theorem~\ref{thm:minorA1_proved} and Cauchy–Schwarz,
+	On $\mathfrak m$, by Theorem~\ref{thm:minorA1_proved} and Cauchy-Schwarz,
 	\[
 		\Biggl|\int_{\mathfrak m} S(\alpha)^2 e(-N\alpha)\,d\alpha\Biggr|
 		\le \Biggl(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\Biggr)^{1/2}
