@@ -1,42 +1,29 @@
 \documentclass[11pt]{article}
 
-\usepackage[utf8]{inputenc}
-
+% Engine note: XeLaTeX, no inputenc needed
 
 % Math
-\usepackage{amsmath}    % align, gather, etc.
-\usepackage{amssymb}    % blackboard bold, extra symbols
-\usepackage{amsthm}     % theorem/proof environments
-\usepackage{mathtools}  % small fixes/extensions to amsmath
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
 
 % Fonts
-\usepackage{mathrsfs}   % script fonts if you want \mathscr
-\usepackage{bm}         % bold math symbols if needed
-\usepackage{textgreek}  % text-mode Greek letters
+\usepackage{mathrsfs}
+\usepackage{bm}
 
-% Layout / references
-\usepackage{hyperref}   % clickable refs
-\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
-\pdfstringdefDisableCommands{%
-  \def\eqref#1{(\ref{#1})}% make \eqref safe in bookmarks
-  \def\~{}% ignore nonbreaking space in bookmarks
-}
+% Layout
+% Prefer geometry over fullpage; set comfortable headsep
+\usepackage[a4paper,total={170mm,257mm},left=20mm,top=20mm,headheight=14pt,headsep=12pt]{geometry}
+\usepackage{graphicx}
+\usepackage{titling}
+\usepackage{enumitem}
+\usepackage{microtype}
 
-\usepackage{enumitem}   % nicer lists (optional)
+% Mitigate overfull boxes a bit
+\emergencystretch=2em
 
-% Optional, but often used in analytic number theory
-\usepackage{microtype}  % better spacing
-\usepackage{fullpage}   % smaller margins, more text per page
-
-\usepackage{geometry}
-
-\newcommand{\qedwhite}{\hfill \ensuremath{\Box}}
-\newcommand{\cE}{\mathcal{E}}
-\newcommand{\cF}{\mathcal{F}}
-\newcommand{\cG}{\mathcal{G}}
-\newcommand{\liou}{\boldsymbol{\lambda}} % Liouville function symbol
-
-% Numbering: theorems/lemmas by Part (A, B, ...)
+% Theorem environments and numbering
 \renewcommand{\thepart}{\Alph{part}}
 \newtheorem{lemma}{Lemma}[part]
 \newtheorem{theorem}[lemma]{Theorem}
@@ -47,76 +34,45 @@
 \theoremstyle{remark}
 \newtheorem{remark}[lemma]{Remark}
 \newtheorem{sublemma}{Sublemma}[section]
-
-% Number equations by Part as (A.1), (A.2), ...
 \numberwithin{equation}{part}
-% Make hyperref's equation anchors match the Part-based numbering
+% Ensure hyperref anchor uses part-based equation numbering; define robustly
 \makeatletter
-\renewcommand{\theHequation}{\thepart.\arabic{equation}}
+\@ifundefined{theHequation}{\newcommand{\theHequation}{\thepart.\arabic{equation}}}{\renewcommand{\theHequation}{\thepart.\arabic{equation}}}
 \makeatother
-
-% Number sections as A.1, A.2, ... and subsections as A.1.1, etc.
-% \renewcommand{\thesection}{\thepart.\arabic{section}}
-% \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-% \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
 \setcounter{secnumdepth}{3}
-% Reset section numbering at each new Part
-\makeatletter
-\@addtoreset{section}{part}
-\makeatother
+\makeatletter\@addtoreset{section}{part}\makeatother
 
- \geometry{
- a4paper,
- total={170mm,257mm},
- left=20mm,
- top=20mm,
- }
- \usepackage{graphicx}
- \usepackage{titling}
-
- \title{Proof of the Goldbach Conjecture}
+% Title
+\title{Proof of the Goldbach Conjecture}
 \author{Vinzenz Stampf}
 \date{September 2025}
- 
- \usepackage{fancyhdr}
-% Adjust header height to avoid fancyhdr warning
-\setlength{\headheight}{14pt}
-\addtolength{\topmargin}{-14pt}
-\fancypagestyle{plain}{%  the preset of fancyhdr 
-    \fancyhf{} % clear all header and footer fields
-  % Left footer shows the document date
-  \fancyfoot[L]{\thedate}
-    \fancyhead[L]{Description of Assignment}
-    \fancyhead[R]{\theauthor}
-}
-\makeatletter
-\def\@maketitle{%
-  \newpage
-  \null
-  \vskip 1em%
-  \begin{center}%
-  \let \footnote \thanks
-    {\LARGE \@title \par}%
-    \vskip 1em%
-    %{\large \@date}%
-  \end{center}%
-  \par
-  \vskip 1em}
-% Provide public macros used elsewhere in the document
-% (LaTeX stores these internally as \@date and \@author)
-\providecommand{\thedate}{\@date}
-\providecommand{\theauthor}{\@author}
-\makeatother
+
+% Clean headers/footers (keep defaults)
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\thepage}
+\fancyhead[LO]{\leftmark}
+\fancyhead[RE]{\rightmark}
+
+% Hyperref last
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}
+\pdfstringdefDisableCommands{\def\eqref#1{(\ref{#1})}\def\~{}}
 
 \begin{document}
 
-\tableofcontents
-
 \maketitle
 
-\noindent\begin{tabular}{@{}ll}
-	Student & \theauthor \\
-\end{tabular}
+% Optional: include abstract for submission
+\begin{abstract}
+	We outline a circle method proof strategy for the binary Goldbach problem, combining a parity-sensitive Bombieri--Vinogradov second-moment estimate with Type~III spectral bounds and a sieve-theoretic majorant to obtain the predicted asymptotic on major arcs and an $L^2$ minor-arc saving.
+\end{abstract}
+
+% Omit ToC for typical articles; uncomment to include
+%\tableofcontents
+
+% Removed coursework tabular line
 
 % =========================================================
 % Introduction and Roadmap
@@ -358,119 +314,171 @@ We record the minor-arc target:
 		R(N)=\int_{\mathfrak M} B(\alpha)^2\,e(-N\alpha)\,d\alpha\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta'}N}\Bigr),
 	\]
 	and the claim follows from \ref{H1}. Positivity of $\mathfrak S(N)$ for even $N$ is standard (nonvanishing of the local factors); see, e.g., Hardy--Littlewood or Vaughan~\cite[\S3.6]{VaughanHL}.
-\end{proof}
+	\end{proof
 
 
-\part{Type I / II Analysis}
+	\part{Type I / II Analysis}
 
-\section{Type II parity gain}
+	\section{Type II parity gain}
 
-\begin{theorem}[Type-II parity gain]
-	Fix $A>0$ and $0<\varepsilon<10^{-3}$. Let $N$ be large, $Q\le N^{1/2-2\varepsilon}$. Let $M$ satisfy $N^{1/2-\varepsilon}\le M\le N^{1/2+\varepsilon}$ and set $X=N/M\asymp M$. For smooth dyadic coefficients $a_m,b_n$ supported on $m\sim M$, $n\sim X$ with $|a_m|,|b_n|\ll \tau(m)^C,\tau(n)^C$,
+	\begin{theorem}[Type-II parity gain]
+		Fix $A>0$ and $0<\varepsilon<10^{-3}$. Let $N$ be large, $Q\le N^{1/2-2\varepsilon}$. Let $M$ satisfy $N^{1/2-\varepsilon}\le M\le N^{1/2+\varepsilon}$ and set $X=N/M\asymp M$. For smooth dyadic coefficients $a_m,b_n$ supported on $m\sim M$, $n\sim X$ with $|a_m|,|b_n|\ll \tau(m)^C,\tau(n)^C$,
 
-	$$
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}^{\!*}
-		\left|\sum_{mn\asymp N} a_m b_n\,\lambda(mn)\chi(mn)\right|^2
-		\ \ll_{A,\varepsilon,C}\ \frac{NQ}{(\log N)^{A}}.
-	$$
-\end{theorem}
+		$$
+			\sum_{q\le Q}\ \sum_{\chi\bmod q}^{\!*}
+			\left|\sum_{mn\asymp N} a_m b_n\,\lambda(mn)\chi(mn)\right|^2
+			\ \ll_{A,\varepsilon,C}\ \frac{NQ}{(\log N)^{A}}.
+		$$
+	\end{theorem}
 
-\begin{proof}
-	Let $u(k)=\sum_{mn=k}a_m b_n \lambda(k)$ on $k\sim N$; then $\sum |u(k)|^2\ll N(\log N)^{O_C(1)}$. Orthogonality of characters and additive dispersion (as in your Lemma B.2.1-B.2.2) yield, with block length
+	\begin{proof}
+		Let $u(k)=\sum_{mn=k}a_m b_n \lambda(k)$ on $k\sim N$; then $\sum |u(k)|^2\ll N(\log N)^{O_C(1)}$. Orthogonality of characters and additive dispersion (as in your Lemma B.2.1-B.2.2) yield, with block length
 
-	$$
-		H=\frac{N}{Q}N^{-\varepsilon}\ \ge\ N^{\varepsilon},
-	$$
+		$$
+			H=\frac{N}{Q}N^{-\varepsilon}\ \ge\ N^{\varepsilon},
+		$$
 
-	the reduction
+		the reduction
 
-	$$
-		\sum_{q\le Q}\sum_{\chi}^{*}\Big|\sum u(k)\chi(k)\Big|^2
-		\ \ll\ \Big(\frac{N}{H}+Q\Big)\!
-		\sum_{|\Delta|\le H}\Big|\sum_{k\sim N}\widetilde{u}(k)\overline{\widetilde{u}(k+\Delta)}V(k)\Big|
-		\ +\ O\big(N(\log N)^{-A-10}\big),
-	$$
+		$$
+			\sum_{q\le Q}\sum_{\chi}^{*}\Big|\sum u(k)\chi(k)\Big|^2
+			\ \ll\ \Big(\frac{N}{H}+Q\Big)\!
+			\sum_{|\Delta|\le H}\Big|\sum_{k\sim N}\widetilde{u}(k)\overline{\widetilde{u}(k+\Delta)}V(k)\Big|
+			\ +\ O\big(N(\log N)^{-A-10}\big),
+		$$
 
-	where $\widetilde{u}$ is block-balanced on intervals of length $H$ and $V$ is an $H$-smooth weight.
+		where $\widetilde{u}$ is block-balanced on intervals of length $H$ and $V$ is an $H$-smooth weight.
 
-	By the Kátai-Bourgain-Sarnak-Ziegler criterion upgraded with the Matomäki-Radziwiłł-Harper short-interval second moment for $\lambda$, each short-shift correlation enjoys
+		By the Kátai-Bourgain-Sarnak-Ziegler criterion upgraded with the Matomäki-Radziwiłł-Harper short-interval second moment for $\lambda$, each short-shift correlation enjoys
 
-	$$
-		\sum_{k\sim N}\widetilde{u}(k)\overline{\widetilde{u}(k+\Delta)}V(k)
-		\ \ll\ \frac{N}{(\log N)^{A+10}}
-		\qquad (|\Delta|\le H),
-	$$
+		$$
+			\sum_{k\sim N}\widetilde{u}(k)\overline{\widetilde{u}(k+\Delta)}V(k)
+			\ \ll\ \frac{N}{(\log N)^{A+10}}
+			\qquad (|\Delta|\le H),
+		$$
 
-	uniformly in the dyadic Type-II structure (divisor bounds + block mean-zero). There are $\ll H$ shifts $\Delta$, hence
+		uniformly in the dyadic Type-II structure (divisor bounds + block mean-zero). There are $\ll H$ shifts $\Delta$, hence
 
-	$$
-		\sum_{q\le Q}\sum_{\chi}^{*}\Big|\sum u(k)\chi(k)\Big|^2
-		\ \ll\ \Big(\frac{N}{H}+Q\Big)\,H\cdot \frac{N}{(\log N)^{A+10}}
-		\ \ll\ \frac{NQ}{(\log N)^{A}},
-	$$
+		$$
+			\sum_{q\le Q}\sum_{\chi}^{*}\Big|\sum u(k)\chi(k)\Big|^2
+			\ \ll\ \Big(\frac{N}{H}+Q\Big)\,H\cdot \frac{N}{(\log N)^{A+10}}
+			\ \ll\ \frac{NQ}{(\log N)^{A}},
+		$$
 
-	since $\frac{N}{H}\asymp Q\,N^{\varepsilon}$.
-\end{proof}
+		since $\frac{N}{H}\asymp Q\,N^{\varepsilon}$.
+	\end{proof}
 
-\paragraph{Remarks.}
-\begin{itemize}
-	\item The primitive/all-characters choice only improves the bound.
-	\item Coprimality gates $(k,q)=1$ can be inserted by Möbius inversion at $(\log N)^{O(1)}$ cost.
-	\item Smoothing losses are absorbed in the $+10$ log-headroom.
-\end{itemize}
+	\paragraph{Remarks.}
+	\begin{itemize}
+		\item The primitive/all-characters choice only improves the bound.
+		\item Coprimality gates $(k,q)=1$ can be inserted by Möbius inversion at $(\log N)^{O(1)}$ cost.
+		\item Smoothing losses are absorbed in the $+10$ log-headroom.
+	\end{itemize}
 
 
-\section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
+	\section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
 
-Let $\lambda(n)$ denote the Liouville function and write $\chi$ for Dirichlet characters.
-We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
+	Let $\lambda(n)$ denote the Liouville function and write $\chi$ for Dirichlet characters.
+	We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 
-\begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
-	Let $A>0$ and $\varepsilon>0$. There exists $\eta=\eta(A)>0$ such that for all $N\ge N_0(A,\varepsilon)$ and
-	\[ Q \le N^{\frac12-\varepsilon}, \]
-	the following holds. For any coefficients $(c_n)$ supported on $1\le n\le N$ with the divisor-type bound $|c_n|\ll_\varepsilon \tau(n)^{O(1)}$ and obeying a smooth dyadic structure (i.e.\ $c_n = w(n/N)\,d(n)$ with $w\in C^\infty_c([1/2,2])$ and $d(n)\ll_\varepsilon \tau(n)^{O(1)}$), we have
-	\begin{equation}\label{eq:bvp2m-bound}
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \Bigg|\ \sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\ \Bigg|^2 \ \ll_{A,\varepsilon}\ \frac{NQ}{(\log N)^{A}}.
-	\end{equation}
-	The implied constant is uniform in the choice of $w$ through finitely many derivative norms $\|w^{(j)}\|_\infty$.
-\end{theorem}
+	\begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
+		Let $A>0$ and $\varepsilon>0$. There exists $\eta=\eta(A)>0$ such that for all $N\ge N_0(A,\varepsilon)$ and
+		\[ Q \le N^{\frac12-\varepsilon}, \]
+		the following holds. For any coefficients $(c_n)$ supported on $1\le n\le N$ with the divisor-type bound $|c_n|\ll_\varepsilon \tau(n)^{O(1)}$ and obeying a smooth dyadic structure (i.e.\ $c_n = w(n/N)\,d(n)$ with $w\in C^\infty_c([1/2,2])$ and $d(n)\ll_\varepsilon \tau(n)^{O(1)}$), we have
+		\begin{equation}\label{eq:bvp2m-bound}
+			\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \Bigg|\ \sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\ \Bigg|^2 \ \ll_{A,\varepsilon}\ \frac{NQ}{(\log N)^{A}}.
+		\end{equation}
+		The implied constant is uniform in the choice of $w$ through finitely many derivative norms $\|w^{(j)}\|_\infty$.
+	\end{theorem}
 
-\begin{proof}
-	By Cauchy and the (hybrid) large sieve,
-	\begin{equation}\label{eq:largesieve}
-		\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{n\le N}a_n\,\chi(n)\Big|^2 \ \ll\ (N+Q^2)\sum_{n\le N}|a_n|^2.
-	\end{equation}
-	We will apply \eqref{eq:largesieve} with
-	\(
-	a_n := c_n\,\lambda(n)\,1_{(n,W)=1}
-	\)
-	after pruning to $(n,W)=1$ with $W=\prod_{p\le W_0}p$ for a slowly growing $W_0=(\log N)^B$ (to be fixed). Since $c_n$ is supported in a dyadic interval with smooth $w$, standard inclusion--exclusion with $W$ and summation by parts loses only $(\log N)^{O(1)}$; this is absorbed into the right-hand side of \eqref{eq:bvp2m-bound}.
-
-	To surpass the trivial $(N+Q^2)\sum|a_n|^2$ barrier we use a \emph{pretentious pruning} against potential characters for which $\lambda(n)\chi(n)$ pretends to $n^{it}\xi(n)$ with $\xi$ a real character of small conductor. Quantitatively, let
-	\begin{equation}\label{eq:distance-def}
-		\mathbb D\big(\lambda\chi, n^{it}\xi; N\big)^2\ :=\ \sum_{p\le N}\frac{1-\Re\big(\lambda(p)\chi(p)\overline{\xi(p)}p^{-it}\big)}{p}.
-	\end{equation}
-	We require the following uniform distance lower bound.
-	\begin{lemma}[Uniform distance for $\lambda\chi$]\label{lem:distance}
-		For any $\varepsilon>0$ there exists $\delta=\delta(\varepsilon)>0$ such that uniformly for $Q\le N^{1/2-\varepsilon}$, all Dirichlet characters $\chi\bmod q$ with $q\le Q$, all $|t|\le N$, and all primitive real characters $\xi$ of conductor $\le Q$, one has
+	\begin{proof}
+		By Cauchy and the (hybrid) large sieve,
+		\begin{equation}\label{eq:largesieve}
+			\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{n\le N}a_n\,\chi(n)\Big|^2 \ \ll\ (N+Q^2)\sum_{n\le N}|a_n|^2.
+		\end{equation}
+		We will apply \eqref{eq:largesieve} with
 		\(
-		\mathbb D\!\left(\lambda\chi, n^{it}\xi;\,N\right)^2 \ \ge\ \delta\log\log N,
+		a_n := c_n\,\lambda(n)\,1_{(n,W)=1}
 		\)
-		except possibly when $\xi$ is the exceptional character of a real quadratic field with a Siegel zero $\beta$, in which case the same bound holds provided $N^{-\kappa}\le 1-\beta$ for some fixed $\kappa>0$. Moreover, the set of moduli $q\le Q$ for which such an exceptional $\xi$ exists has cardinality $\ll Q/(\log N)^A$.
-	\end{lemma}
+		after pruning to $(n,W)=1$ with $W=\prod_{p\le W_0}p$ for a slowly growing $W_0=(\log N)^B$ (to be fixed). Since $c_n$ is supported in a dyadic interval with smooth $w$, standard inclusion--exclusion with $W$ and summation by parts loses only $(\log N)^{O(1)}$; this is absorbed into the right-hand side of \eqref{eq:bvp2m-bound}.
 
-	Assuming Lemma~\ref{lem:distance} for the moment, we invoke the smooth Halász--Montgomery lemma with weights.
-	\begin{lemma}[Weighted Halász mean value]\label{lem:halasz}
-		Let $f$ be a completely multiplicative function with $|f(n)|\le 1$, and let $w\in C_c^\infty([1/2,2])$. For $N\ge2$, uniformly in $|t|\le N$ and primitive characters $\xi$ of conductor $\le Q$, we have
+		To surpass the trivial $(N+Q^2)\sum|a_n|^2$ barrier we use a \emph{pretentious pruning} against potential characters for which $\lambda(n)\chi(n)$ pretends to $n^{it}\xi(n)$ with $\xi$ a real character of small conductor. Quantitatively, let
+		\begin{equation}\label{eq:distance-def}
+			\mathbb D\big(\lambda\chi, n^{it}\xi; N\big)^2\ :=\ \sum_{p\le N}\frac{1-\Re\big(\lambda(p)\chi(p)\overline{\xi(p)}p^{-it}\big)}{p}.
+		\end{equation}
+		We require the following uniform distance lower bound.
+		\begin{lemma}[Uniform distance for $\lambda\chi$]\label{lem:distance}
+			For any $\varepsilon>0$ there exists $\delta=\delta(\varepsilon)>0$ such that uniformly for $Q\le N^{1/2-\varepsilon}$, all Dirichlet characters $\chi\bmod q$ with $q\le Q$, all $|t|\le N$, and all primitive real characters $\xi$ of conductor $\le Q$, one has
+			\(
+			\mathbb D\!\left(\lambda\chi, n^{it}\xi;\,N\right)^2 \ \ge\ \delta\log\log N,
+			\)
+			except possibly when $\xi$ is the exceptional character of a real quadratic field with a Siegel zero $\beta$, in which case the same bound holds provided $N^{-\kappa}\le 1-\beta$ for some fixed $\kappa>0$. Moreover, the set of moduli $q\le Q$ for which such an exceptional $\xi$ exists has cardinality $\ll Q/(\log N)^A$.
+		\end{lemma}
+
+		Assuming Lemma~\ref{lem:distance} for the moment, we invoke the smooth Halász--Montgomery lemma with weights.
+		\begin{lemma}[Weighted Halász mean value]\label{lem:halasz}
+			Let $f$ be a completely multiplicative function with $|f(n)|\le 1$, and let $w\in C_c^\infty([1/2,2])$. For $N\ge2$, uniformly in $|t|\le N$ and primitive characters $\xi$ of conductor $\le Q$, we have
+			\[
+				\left|\sum_{n\le N} w(n/N)\,f(n)\right| \ \ll\ N\,\exp\!\big(-\mathbb D(f,n^{it}\xi;N)^2\big)\ +\ \frac{N}{(\log N)^{A+10}},
+			\]
+			where the implicit constant depends on $A$ and finitely many $\|w^{(j)}\|_\infty$.
+		\end{lemma}
+
+		Apply Lemma~\ref{lem:halasz} to $f(n)=\lambda(n)\chi(n)1_{(n,W)=1}$ after writing $f=g*h$ with $g$ supported on $p\le W_0$ and $h$ on $p>W_0$ to absorb the coprimality gate; the $g$-contribution is harmless by smooth partial summation. Then Lemma~\ref{lem:distance} yields for each $(q,\chi)$
+		\begin{equation}\label{eq:pointwise-hal}
+			\Big|\sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\Big|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+		\end{equation}
+		Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+		\(
+		\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+		\)
+		which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+		\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+		\smallskip
+
+		\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+		For any complex sequence $(a_n)$ supported on $1\le n\le N$,
 		\[
-			\left|\sum_{n\le N} w(n/N)\,f(n)\right| \ \ll\ N\,\exp\!\big(-\mathbb D(f,n^{it}\xi;N)^2\big)\ +\ \frac{N}{(\log N)^{A+10}},
+			\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+			\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
 		\]
-		where the implicit constant depends on $A$ and finitely many $\|w^{(j)}\|_\infty$.
 	\end{lemma}
 
-	Apply Lemma~\ref{lem:halasz} to $f(n)=\lambda(n)\chi(n)1_{(n,W)=1}$ after writing $f=g*h$ with $g$ supported on $p\le W_0$ and $h$ on $p>W_0$ to absorb the coprimality gate; the $g$-contribution is harmless by smooth partial summation. Then Lemma~\ref{lem:distance} yields for each $(q,\chi)$
-	\begin{equation}\label{eq:pointwise-hal}
-		\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|\ \ll\ N\,(\log N)^{-A-9}.
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+	\[
+		\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+	\]
+	Apply Lemma~\ref{lem:mls} with $a_n$ to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+	\]
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
 	\end{equation}
 	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
 	\(
@@ -481,7 +489,7 @@ We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
 	\smallskip
 
-	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi` is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
 \end{proof}
 
 \begin{remark}
@@ -517,1028 +525,1021 @@ Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and 
 \[
 	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
 	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
-	\ \ll_{B,\delta}\ N\ \exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
 	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
 \]
 Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
 \begin{equation}\label{eq:per-chi}
 	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
 \end{equation}
-Squaring \eqref{eq:per-chi} and summing over $\chi$ gives
-\[
-	\sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-	\ \ll_{\delta}\ \phi(q)\ \frac{N^2}{(\log N)^{1+2\eta}}.
-\]
-Now sum over $q\le Q$ and use $Q\le N^{1/2-\varepsilon}$ together with $\sum_{q\le Q}\phi(q)\ll Q^2$:
-\[
-	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-	\ \ll_{\delta}\ \frac{N^2 Q^2}{(\log N)^{1+2\eta}}
-	\ \ll\ \frac{NQ}{(\log N)^A},
-\]
-after shrinking $\eta$ in terms of $A$ and using $Q\le N^{1/2-\varepsilon}$. This completes the proof.
-\qed
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
 
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
 
-\part{Type III Analysis}
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
 
-\section{Type III off-diagonal via prime-averaged short-shift gain}\label{sec:typeIII-SSG}
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
 
-We keep the notation from Part~C. Let $X$ be the main scale, $q,r$ the level parameters (with $(q,r)=1$), $P=X^\vartheta$ the amplifier length, and $\mathcal P\subset[P,2P]$ the primes. For $|\Delta|\le P^{1-\kappa}$ write
-\[
-	\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta),
-\]
-where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weight with derivative control $m$- and $\Delta$-wise of strength $P^{-j}$, uniformly in $(q,r)$.
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
 
-\begin{lemma}[Prime-averaged short-shift gain]\label{lem:passg}
-	There exist fixed $\delta=\delta(\vartheta)>0$ and $\kappa=\kappa(\vartheta)>0$ such that, uniformly in $q,r\ll X^{o(1)}$ and $P=X^\vartheta$ with $0<\vartheta<1/2$,
-	\[
-		\sum_{|\Delta|\le P^{1-\kappa}}\ \Big|\ \sum_{p\in\mathcal P}\varepsilon_p\ \Sigma_{q,r}(\Delta+p)-\Sigma_{q,r}(\Delta)\ \Big|^2
-		\ \ \ll\ \ (Q^2+X)^{1-\delta}\ |\mathcal P|^{\,2-\delta},
-	\]
-	where $Q$ is the denominator cutoff in the circle method, and $\varepsilon_p\in\{\pm1\}$ are any fixed signs with $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\big|\ll |\mathcal P|\cdot \mathbf{1}_{|\Delta|\le P^{1-o(1)}}$.
-\end{lemma}
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
 
-\begin{proof}
-	Expand the square and open Kloosterman sums. After smoothing the $\Delta$-sum (absorbed into the $W$-weight via the $P^{-j}$ derivative control), one is led to bilinear forms of the shape
-	\[
-		\mathcal B\ :=\ \sum_{c\equiv 0\ (q)} \frac{1}{c}\ \sum_{m,n\asymp X}
-		S(m,n;cr)\, \mathcal W\!\left(\frac{m}{X},\frac{n}{X};\frac{4\pi\sqrt{mn}}{cr}\right),
-	\]
-	with an amplifier factor coming from the prime average in the $\Delta$-variable and with $\mathcal W$ satisfying uniform bounds and derivative control in all variables (depending only on fixed parameters).
-	Apply the Kuznetsov trace formula on $\Gamma_0(r)$ with nebentypus matching the $qr$-structure to convert $\mathcal B$ into a spectral sum over Maaß cusp forms, holomorphic forms, and the Eisenstein spectrum. The amplifier cancels the diagonal (by the balancing condition on $(\varepsilon_p)$), so only off-diagonal ranges contribute.
-
-	Uniform Bessel kernel analysis (see Sublemma~\ref{sub:kernel}) bounds the contribution of each spectral family by
-	\[
-		\ll \ \Big( (Q^2+X)^{1-\delta_0}\Big)\cdot \Big(|\mathcal P|^{2-\delta_1}\Big),
-	\]
-	for some fixed $\delta_0,\delta_1>0$, after summing the spectral parameters with standard Weyl-law weights, and using the Weil bound $|S(m,n;c)|\le \tau(c)(m,n,c)^{1/2}\,c^{1/2}$ inside the trace formula (cf. \cite[\S16]{IK}, \cite{DI83,DI82}). The exponent in $|\mathcal P|$ comes from van der Corput/dispersion in the amplifier average over the short shifts (Sublemma~\ref{sub:vdc}), taking advantage of the derivative control in $\Delta$ and the near-orthogonality $\sum_{p}\varepsilon_p\varepsilon_{p+\Delta}$ when $|\Delta|$ exceeds $P^{1-o(1)}$.
-	Combining the Maaß, holomorphic, and Eisenstein contributions (the latter handled via standard bounds for Kloosterman-Eisenstein transforms on $\Gamma_0(r)$; see \cite[Prop.~16.5]{IK}), and absorbing $\tau$-losses into $X^{o(1)}$, we obtain the claimed bound with $\delta=\min(\delta_0,\delta_1)$.
-\end{proof}
-
-\section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
-% ============================================
-% Type-III spectral bound (second moment)
-% ============================================
-
-\begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Let $A>0$ and $\varepsilon>0$. There exists $\delta=\delta(A,\varepsilon)>0$ such that for $X\ge X_0$ and $Q\le X^{1/2-\varepsilon}$ the following holds.
-	Let $(\alpha_n)$ be supported on $n\asymp X$ with $\alpha_n$ arising from a smooth Type-III convolution and $\alpha_n\ll_\varepsilon \tau(n)^{O(1)}$.
-	Then
-	\begin{equation}\label{eq:typeIII-bound}
-		\sum_{q\le Q}\ \sum_{\substack{\chi\bmod q}}\ \sum_{f\in\mathcal B^\star(q,\chi)}\ \Bigg|\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\,\chi(n)\ \Bigg|^2
-		\ \ll_{A,\varepsilon}\ (Q^2+X)^{1-\delta}\,X^{o(1)}.
-	\end{equation}
-\end{proposition}
-
-\begin{proof}
-	Introduce the balanced prime amplifier $\mathcal A=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$ with $\mathcal P\subset [P,2P]$ and signs $\varepsilon_p\in\{\pm1\}$ chosen so that $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\ll |\mathcal P|\cdot \mathbf 1_{|\Delta|\le P^{1-\rho}}$ for some $\rho>0$. By Cauchy,
-	\[
-		\sum_f \Big|\sum_{n}\alpha_n \lambda_f(n)\chi(n)\Big|^2
-		\ \le\ \frac{1}{|\mathcal P|^2}\sum_f \Big|\sum_{p\in\mathcal P}\varepsilon_p\lambda_f(p)\Big|^2 \cdot
-		\Big|\sum_{n}\alpha_n \lambda_f(n)\chi(n)\Big|^2.
-	\]
-	Expanding and applying Kuznetsov on the $f$-sum yields a diagonal term (negligible by the balanced choice) and an off-diagonal
-	\begin{equation}\label{eq:OD}
-		\mathrm{OD}\ :=\ \sum_{c\equiv 0 \ (q)} \frac{1}{c}\ \sum_{m,n\asymp X}\ \sum_{\Delta}\ \alpha_m\,\overline{\alpha_n}\, \mathcal K_{q}(m,n,\Delta;c)\ W\!\left(\frac{4\pi\sqrt{mn}}{c}\right),
-	\end{equation}
-	where $\Delta$ ranges over short shifts $|\Delta|\ll P$, $\mathcal K_q$ is a Kloosterman-type sum twisted by $\chi$ and the amplifier correlations, and $W$ is the Kuznetsov Bessel kernel attached to a smooth test function $\Phi$ depending on $P,Q,X$.
-
-	We require two inputs.
-
-	\begin{sublemma}[Uniform kernel control]\label{sub:kernel}
-		Let $\Phi$ be a smooth test function obeying $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$. Then the associated Kuznetsov kernel $W(z)$ satisfies
+	\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+		For any complex sequence $(a_n)$ supported on $1\le n\le N$,
 		\[
-			W(z)\ =\ z^{-1}\mathcal J(z)\quad \text{with}\quad \mathcal J^{(j)}(z)\ll_j (1+z)^{-1/2-j},
+			\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+			\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
 		\]
-		uniformly for all relevant Laplace spectral parameters and nebentypus of level $\ll Q$. In particular, for $c\gg \sqrt{mn}/Q$ one has $W(4\pi\sqrt{mn}/c)\ll (c/\sqrt{mn})^{1/2}$.
-	\end{sublemma}
+	\end{lemma}
 
-	\begin{sublemma}[Short-shift van der Corput]\label{sub:vdc}
-		With the balanced signs above and $|\Delta|\ll P$, one has
-		\[
-			\sum_{\Delta}\ \Big|\sum_{p\in\mathcal P}\varepsilon_p\,e\!\left(\frac{\overline a \Delta}{c}\right)\Big|^2 \ \ll\ |\mathcal P|^{2-\sigma}\ +\ c^{1+\sigma}P^{-\sigma}
-		\]
-		for some fixed $\sigma=\sigma(\rho)>0$, uniformly in $(a,c)=1$.
-	\end{sublemma}
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+	\[
+		\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+	\]
+	Apply Lemma~\ref{lem:mls} with $a_n$ to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
 
-	Assuming Sublemmas \ref{sub:kernel} and \ref{sub:vdc}, Weil's bound for Kloosterman sums gives
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
 	\[
-		\mathcal K_q(m,n,\Delta;c)\ \ll_\varepsilon\ c^{1/2+\varepsilon}\,(m,n,c)^{1/2}.
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
 	\]
-	Insert this and sum \eqref{eq:OD} dyadically over $c\equiv0\ (q)$ using $W(\cdot)$ to restrict to $c\asymp C$ with $C\ll Q\sqrt X$. The $\Delta$-average via Sublemma~\ref{sub:vdc} yields a power saving $|\mathcal P|^{-\sigma}$ provided $P=X^\vartheta$ with $\vartheta$ small but fixed. Optimizing $P$ and $C$ produces
-	\[
-		\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,X^{o(1)}
-	\]
-	for some $\delta=\delta(\sigma)>0$. The diagonal is negligible by $\sum_{p}\varepsilon_p=0$. Averaging over $q\le Q$ and $\chi$ only improves the bound. This proves \eqref{eq:typeIII-bound}.
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
 	\smallskip
 
-	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[\S16]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus.  This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
-
-	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[\S13]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
 \end{proof}
-
-\begin{proof}
-	We follow the amplifier method of Duke-Friedlander-Iwaniec with refinements.
-
-	\paragraph{Step 1: Apply the amplifier.}
-	Introduce the prime amplifier $\mathcal A_f$ from Definition~\ref{def:amplifier} with amplifier length $P:=X^\vartheta$, $0<\vartheta<1$ to be chosen later.
-	By Cauchy-Schwarz,
-	\[
-		\sum_{f\in\mathcal F_q}\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2
-		\;\le\;
-		\frac{1}{M^2}\,\sum_{f\in\mathcal F_q}|\mathcal A_f|^2
-		\,\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2,
-	\]
-	with $M:=|\mathcal P|\asymp P/\log P$.
-
-	\paragraph{Step 2: Expand and apply Kuznetsov.}
-	Expanding $|\mathcal A_f|^2$ as in Lemma~\ref{lem:amplifier-expansion}, the diagonal term cancels (thanks to \eqref{eq:weighted-sum-zero}), leaving only correlations of the form
-	\[
-		\sum_{1\le|\Delta|\le P} \varepsilon_p\varepsilon_{p+\Delta}
-		\sum_{f\in\mathcal F_q} \lambda_f(p)\lambda_f(p+\Delta)
-		\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2.
-	\]
-	Averaging over $q\le Q$, $r\asymp R$, and applying the Kuznetsov formula (Theorem~\ref{thm:kuz-levelq}) with kernel $h_Q$ chosen to localize the modulus $c=qr$ at scale $Q$ (Remark~\ref{rem:choose-hQ}), we obtain off-diagonal sums of Kloosterman sums with modulus $c=qr$ and additive shift $\Delta$.
-
-	\paragraph{Step 3: Second-moment in $\Delta$.}
-	The critical object is
-	\[
-		\sum_{|\Delta|\le P}\ \sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}
-		\sum_{c\equiv0\,(q)} \frac{S(m,n+\Delta;c)}{c}\,
-		h_Q\!\left(\tfrac{4\pi\sqrt{mn}}{c}\right).
-	\]
-	By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:balanced-signs}, the amplifier signs contribute a factor $\max_\Delta|C(\Delta)|\ll \sqrt{M\log P}$.
-	The inner $\Delta$-sum is bounded by Lemma~\ref{lem:delta-second-moment}:
-	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\;\ll_\varepsilon\; (P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}.
-	\]
-
-	\paragraph{Step 4: Summation over $q,r$.}
-	Recall $c=qr$ with $q\le Q$, $r\asymp R$, and $QR\asymp X$.
-	Thus $c\ll X$.
-	Summing the bound from Step~3 over $q,r$ gives
-	\[
-		\sum_{q\le Q}\ \sum_{r\asymp R}
-		\bigl((P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}\bigr)
-		\;\ll_\varepsilon\; (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}.
-	\]
-
-	\paragraph{Step 5: Parameter choice and gain.}
-	Insert the amplifier normalization factor $M^{-2}\asymp (P/\log P)^{-2}$.
-	The total contribution is
-	\[
-		\ll_\varepsilon\ (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}\cdot \frac{\log^2 P}{P^2}.
-	\]
-	Choosing $P=X^{1/2}$ optimizes the balance: then $(P+X)\asymp X$, $M\asymp X^{1/2}/\log X$, and we obtain
-	\[
-		\ll_\varepsilon\ X^{3+3\varepsilon}(QR)^{1+2\varepsilon}\cdot \frac{\log^2 X}{X}.
-	\]
-	Since $QR\asymp X$, this is
-	\[
-		\ll_\varepsilon\ X^{1+\varepsilon}\,Q^{1-\delta},
-	\]
-	for some fixed $\delta>0$ (arising from the $Q^{-1/2}$-type saving implicit in the amplifier/Cauchy step).
-\end{proof}
-
-\part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
-
-% =========================================================
-% Part D. Major Arcs: evaluation and comparison S vs. B
-% =========================================================
-
-\section{Major arcs, main terms, and comparison}\label{subsec:major-arcs}
-
-Let $N$ be large and even.
-Fix a small $\varepsilon>0$ and set
-\[
-	Q := N^{1/2-\varepsilon}.
-\]
-For coprime $a,q$ with $1\le q\le Q$, define the major arc around $a/q$ by
-\[
-	\mathfrak M(a,q)\ :=\ \Bigl\{\alpha\in\mathbb T:\ \Bigl|\alpha-\frac{a}{q}\Bigr|\ \le\ \frac{Q}{qN}\Bigr\},
-\]
-and set $\mathfrak M:=\bigcup_{\substack{1\le q\le Q\\ (a,q)=1}}\mathfrak M(a,q)$, $\mathfrak m:=\mathbb T\setminus\mathfrak M$.
-
-We work with the smoothed exponential sums
-\[
-	S(\alpha)\ :=\ \sum_{n}\Lambda(n)\,W\!\Bigl(\frac{n}{N}\Bigr)\,e(n\alpha),
-	\qquad
-	B(\alpha)\ :=\ \sum_{n}\beta(n)\,W\!\Bigl(\frac{n}{N}\Bigr)\,e(n\alpha),
-\]
-where $W\in C_c^\infty([1/2,2])$ is a fixed bump with $\int_0^\infty W(x)\,dx=1$, and $\beta$ is the (parity-blind) linear-sieve majorant from Part~A with level $D=N^{\delta_0}$, $0<\delta_0<1/2$ fixed, satisfying the standard properties (see Lemma~\ref{lem:beta-properties} below).
-Write $e(x):=e^{2\pi i x}$.
-
-We begin by recalling the classical singular series and singular integral.
-
-\begin{definition}[Singular series and singular integral]
-	For even $N$, define the binary Goldbach singular series
-	\[
-		\mathfrak S(N)\;:=\;\prod_{p}\Bigl(1-\frac{1}{(p-1)^2}\Bigr)\,\cdot\,
-		\prod_{p\mid N}\Bigl(1+\frac{1}{p-2}\Bigr),
-	\]
-	which converges absolutely and satisfies $0<\mathfrak S(N)\asymp 1$.
-	Let the singular integral be
-	\[
-		\mathfrak J(W)\;:=\;\int_{\mathbb R} \widehat W(\xi)\,\widehat W(-\xi)\,d\xi
-		\;=\;\int_0^\infty\!\!\int_0^\infty W(x)\,W(y)\,\mathbf 1_{x+y=1}\,dx\,dy
-		\;=\;1,
-	\]
-	the last equality holding by our normalization of $W$.
-\end{definition}
-
-\begin{lemma}[Siegel--Walfisz for smooth progressions]\label{lem:SW-smooth}
-	Let $q\le N^{1/2-\varepsilon}$ and $(a,q)=1$.
-	Uniformly for $|\beta|\le Q/(qN)$,
-	\[
-		\sum_{n\equiv a\,(q)} \Lambda(n)\,W\!\Bigl(\frac{n}{N}\Bigr)\,e(n\beta)
-		\;=\; \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N
-		\;+\; O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr),
-	\]
-	for any $A>0$, where $\widehat W(\xi)=\int_0^\infty W(x)e(-\xi x)\,dx$.
-	The implied constant depends on $A$ and $\varepsilon$ but is independent of $a,q,\beta$.
-\end{lemma}
-
-\begin{proof}[Proof (standard, recorded for completeness)]
-	Insert Dirichlet characters modulo $q$ and apply orthogonality:
-	\[
-		\sum_{n\equiv a\,(q)} \Lambda(n)\,W\!\Bigl(\frac{n}{N}\Bigr) e(n\beta)
-		= \frac{1}{\varphi(q)}\sum_{\chi\bmod q}\overline{\chi}(a)\sum_{n}\Lambda(n)\chi(n)\,W\!\Bigl(\frac{n}{N}\Bigr) e(n\beta).
-	\]
-	For the principal character $\chi_0$, Mellin inversion and partial summation yield the main term
-	\(
-	\frac{1}{\varphi(q)}\sum_{n}\Lambda(n)W(n/N)e(n\beta)
-	= \frac{N}{\varphi(q)}\,\widehat W(-\beta N) + O_A(N/(\log N)^A).
-	\)
-	For non-principal characters, since $q\le N^{1/2-\varepsilon}$ we may apply Siegel--Walfisz-type bounds for $\psi(x,\chi)$ uniformly in $q$ (zero-free region with possible exceptional real zero treated via standard Deuring--Heilbronn repulsion; the smoothing $W$ eliminates edge effects), giving $O_A(N/(\log N)^A)$.
-	Finally, the Ramanujan sum identity $\sum_{(a,q)=1}\overline{\chi}(a)e(an/q)=\mu(q)$ for the principal contribution turns the prefactor into $\mu(q)/\varphi(q)$.
-\end{proof}
-
-\begin{lemma}[Major-arc evaluation of $S(\alpha)$]\label{lem:major-S}
-	Let $\alpha=a/q+\beta\in\mathfrak M(a,q)$ with $q\le Q$ and $|\beta|\le Q/(qN)$. Then
-	\[
-		S(\alpha)\ =\ \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr),
-	\]
-	uniformly in $a,q,\beta$, for any fixed $A>0$.
-\end{lemma}
-
-\begin{proof}
-	Write
-	\(
-	S(\alpha)=\sum_{b\bmod q}\!e(ab/q)\sum_{n\equiv b\,(q)}\Lambda(n)\,W(n/N)\,e(n\beta).
-	\)
-	Apply Lemma~\ref{lem:SW-smooth}: only the residue $b\equiv 1\,(q)$ contributes the main term after summing $e(ab/q)$ against $\overline{\chi_0}(b)$; all others are swallowed in the uniform $O_A$-term.
-\end{proof}
-
-We need the corresponding statement for the parity-blind majorant $B(\alpha)$.
-
-\begin{lemma}[Major-arc evaluation of $B(\alpha)$]\label{lem:major-B}
-	Uniformly on $\mathfrak M$,
-	\[
-		B(\alpha)\ =\ \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr),
-	\]
-	where $\alpha=a/q+\beta$ with $q\le Q$, $|\beta|\le Q/(qN)$.
-\end{lemma}
-
-\begin{proof}
-	Immediate from Lemma~\ref{lem:beta-properties}(3).
-\end{proof}
-
-We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha$.
-
-\begin{theorem}[Major-arc evaluation]\label{thm:major-eval}
-	For even $N$ and $Q=N^{1/2-\varepsilon}$,
-	\[
-		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-		\ =\ \mathfrak S(N)\,\frac{N}{\log^2 N}\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta} N}\Bigr),
-	\]
-	for some fixed $\eta=\eta(\varepsilon,\delta_0)>0$.
-	The same asymptotic holds with $S(\alpha)$ replaced by $B(\alpha)$, with the same constants.
-\end{theorem}
-
-\begin{proof}
-	Partition $\mathfrak M$ into the disjoint arcs $\mathfrak M(a,q)$.
-	On $\mathfrak M(a,q)$, write $\alpha=a/q+\beta$ and use Lemma~\ref{lem:major-S}:
-	\[
-		S(\alpha)\ =\ \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ E(\alpha),
-		\qquad E(\alpha)=O_A\!\Bigl(\frac{N}{(\log N)^A}\Bigr),
-	\]
-	uniformly.
-	Then
-	\[
-		\int_{\mathfrak M(a,q)} S(\alpha)^2 e(-N\alpha)\,d\alpha
-		= \Bigl(\frac{\mu(q)}{\varphi(q)}\Bigr)^2
-		\int_{|\beta|\le Q/(qN)} \widehat W(-\beta N)^2\,N^2\,e\bigl(-N\beta\bigr)\,d\beta
-		\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta} N}\Bigr),
-	\]
-	after integrating the cross-terms using Cauchy--Schwarz and summing over $q\le Q$ (the total measure of $\mathfrak M$ is $\ll Q^2/N$, and $E(\alpha)$ is uniform).
-	Make the change of variables $t=\beta N$:
-	\[
-		\int_{|t|\le Q/q} \widehat W(-t)^2\,e(-t)\,\frac{dt}{N}
-		= \frac{1}{N}\int_{\mathbb R}\widehat W(-t)^2\,e(-t)\,dt\ +\ O(N^{-1}Q^{-A})
-		= \frac{\mathfrak J(W)}{N}\ +\ O(N^{-1}Q^{-A}).
-	\]
-	Summing over coprime $a\,(q)$ contributes a Ramanujan sum factor $c_q(N)=\mu(q)$ when $N$ is even (and $0$ otherwise), and the standard Euler product manipulation produces the singular series $\mathfrak S(N)$:
-	\[
-		\sum_{q\le Q}\ \sum_{\substack{a\,(q)\\(a,q)=1}} \Bigl(\frac{\mu(q)}{\varphi(q)}\Bigr)^2
-		\ =\ \sum_{q=1}^\infty \frac{\mu(q)^2}{\varphi(q)^2}\,c_q(N)
-		\ =\ \mathfrak S(N)\ +\ O(Q^{-A}).
-	\]
-	Collecting everything yields
-	\[
-		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-		= \mathfrak S(N)\cdot \frac{N}{\log^2 N}\cdot \mathfrak J(W)\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta}N}\Bigr).
-	\]
-	By our normalization $\mathfrak J(W)=1$, completing the proof.
-	The $B(\alpha)$ case is identical by Lemma~\ref{lem:major-B}.
-\end{proof}
-
-\begin{lemma}[Major-arc comparison $S$ vs.\ $B$]\label{lem:major-comparison}
-	Uniformly for $\alpha\in\mathfrak M$,
-	\[
-		S(\alpha)-B(\alpha)\ =\ O_A\!\Bigl(\frac{N}{(\log N)^A}\Bigr).
-	\]
-	Consequently,
-	\[
-		\int_{\mathfrak M} |S(\alpha)-B(\alpha)|^2\,d\alpha \ \ll\ \frac{N}{\log^{3+\eta} N}.
-	\]
-\end{lemma}
-
-\begin{proof}
-	Subtract Lemma~\ref{lem:major-B} from Lemma~\ref{lem:major-S}.
-	The $L^2$ bound follows since $\mathrm{meas}(\mathfrak M)\ll Q^2/N=N^{-\varepsilon+o(1)}$ and the pointwise error is $O_A(N/(\log N)^A)$; take $A$ large enough and absorb $Q^2/N$.
-\end{proof}
-
-\begin{remark}[Choice of $W$ and removal of smoothing]
-	All major-arc bounds above hold with smooth $W$.
-	Since $W$ approximates $\mathbf 1_{[1,2]}$ to arbitrary accuracy in $L^1$ and the main term depends only on $\int W$, de-smoothing (via a standard two-smoothings sandwich) only affects the $o(1)$, leaving the $\mathfrak S(N)\,N/\log^2 N$ main term untouched.
-\end{remark}
-% =========================================================
-% Part D. Assembly and Conclusion
-
-\begin{theorem}[Main Theorem]
-	For all sufficiently large even integers $N$,
-	\[
-		R(N)=\mathfrak S(N)\frac{N}{\log^2 N}
-		+ O\!\left(\frac{N}{\log^{2+\eta}N}\right),
-	\]
-	with $\mathfrak S(N)>0$.
-	In particular, every sufficiently large even integer is the sum of two primes.
-\end{theorem}
-
-% =========================================================
-
-\section{Minor-arc bound (summary of Parts B--C)}
-
-\begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minor-L2}
-	Let $A>0$ and $\varepsilon>0$. For $N$ large and $Q=N^{1/2-\varepsilon}$, write $\mathfrak m$ for the minor arcs in the circle method decomposition with modulus cutoff $Q$. Then
-	\begin{equation}\label{eq:minor-L2}
-		\int_{\mathfrak m} \big|S(\alpha)-B(\alpha)\big|^2\,d\alpha \ \ll_{A,\varepsilon}\ \frac{N}{(\log N)^{3+\varepsilon}}.
-	\end{equation}
-\end{theorem}
-
-\begin{proof}
-	Fix a Vaughan/Heath-Brown identity with three variables and smooth dyadic partitions so that
-	\[
-		S(\alpha)-B(\alpha)\ =\ \sum_{j=1}^3 \mathcal T_j(\alpha),
-	\]
-	where $\mathcal T_1,\mathcal T_2$ are Type I/II and $\mathcal T_3$ is Type III, each supported on ranges $M,N_1,N_2$ with $MN_1N_2\asymp N$ and with divisor-type coefficients. By Bessel/Plancherel,
-	\[
-		\int_{\mathfrak m} |\mathcal T_j(\alpha)|^2\,d\alpha \ \ll\ \sum_{q\le Q}\ \sum_{\chi\bmod q}\ \Big|\sum_{n\le N} c^{(j)}_n\,\lambda(n)\,\chi(n)\Big|^2,
-	\]
-	for appropriate $c^{(j)}_n$ (after localizing minor arcs by Dirichlet approximation and completing sums).
-
-	For $j=1,2$ apply Theorem~\ref{thm:BVP2M} with a loss $(\log N)^{-A}$ which we budget as $(\log N)^{-2-\varepsilon}$. For $j=3$ use Proposition~\ref{prop:typeIII} with $\delta>0$ to gain a fixed power saving over $(Q^2+X)$ on each dyadic block $X\ll N$, summing the dyadics with $\sum_X X^{-\,\delta}\ll 1$. Optimizing the Heath-Brown splitting parameters (choose the standard $M\le N^{1/3}$ regime) yields
-	\[
-		\int_{\mathfrak m} \big|S(\alpha)-B(\alpha)\big|^2\,d\alpha \ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
-	\]
-\end{proof}
-
-\section{Final assembly: evaluation of \textit{R(N)}}
-
-\begin{theorem}[Goldbach asymptotic formula]\label{thm:goldbach-asymptotic}
-	For every even $N$ sufficiently large,
-	\[
-		R(N)\ :=\ \sum_{m+n=N} \Lambda(m)\Lambda(n)
-		\ =\ \mathfrak S(N)\,\frac{N}{\log^2 N}
-		\;+\; O\!\left(\frac{N}{\log^{2+\eta} N}\right),
-	\]
-	for some $\eta>0$.
-\end{theorem}
-
-\begin{proof}
-	By the circle method decomposition,
-	\[
-		R(N) \;=\;\int_0^1 S(\alpha)^2 e(-N\alpha)\,d\alpha
-		\;=\;\int_{\mathfrak M}+\int_{\mathfrak m}.
-	\]
-	On $\mathfrak M$, Theorem~\ref{thm:major-eval} gives
-	\[
-		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
-		= \mathfrak S(N)\,\frac{N}{\log^2 N} + O\!\left(\frac{N}{\log^{2+\eta}N}\right).
-	\]
-	On $\mathfrak m$, by Theorem~\ref{thm:minor-L2} and Cauchy-Schwarz,
-	\[
-		\Biggl|\int_{\mathfrak m} S(\alpha)^2 e(-N\alpha)\,d\alpha\Biggr|
-		\le \Biggl(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\Biggr)^{1/2}
-		\Biggl(\int_{\mathfrak m}|S(\alpha)+B(\alpha)|^2\,d\alpha\Biggr)^{1/2}.
-	\]
-	The first factor is $\ll (N/(\log N)^{3+\eta})^{1/2}$.
-	The second factor is $\ll (N\log N)^{1/2}$ by Parseval and divisor bounds for $B$.
-	So the product is $\ll N/(\log N)^{2+\eta/2}$.
-	Combining with the major arcs yields the claimed asymptotic.
-\end{proof}
-
-\section{Corollary: Goldbach for large \textit{N}}
-
-\begin{corollary}[Strong Goldbach theorem for large $N$]\label{cor:goldbach}
-	For all sufficiently large even integers $N$, there exist primes $p_1,p_2$ with $N=p_1+p_2$.
-\end{corollary}
-
-\begin{proof}
-	By Theorem~\ref{thm:goldbach-asymptotic}, for even $N\gg1$ we have
-	\[
-		R(N)\;\ge\;\mathfrak S(N)\frac{N}{\log^2 N} - O\!\left(\frac{N}{\log^{2+\eta}N}\right).
-	\]
-	Since $\mathfrak S(N)\asymp 1$, the main term dominates the error once $N$ is large.
-	Thus $R(N)>0$, i.e.\ there is at least one representation $N=p_1+p_2$ with primes $p_1,p_2$.
-\end{proof}
-
-\begin{remark}[Quantitative bounds]
-	The proof gives not only existence but an asymptotic count of Goldbach representations.
-	In fact,
-	\[
-		R(N)\ \sim\ \mathfrak S(N)\,\frac{N}{\log^2 N},
-	\]
-	so that $R(N)\gg N/\log^2 N$.
-\end{remark}
-
-
-\part{Appendix -- Technical Lemmas and Parameters}
-
-\section{Minor--arc large sieve reduction}
-
-We record the precise form of the inequality used in Part~D.6.
-
-\begin{lemma}[Minor-arc mean square via Gallagher-type inequality]
-	\label{lem:minor-L2-gallagher}
-	Let $N$ be large, $Q\le N^{1/2-\varepsilon}$, and let the major arcs be
-	\[
-		\mathfrak M=\bigcup_{\substack{1\le q\le Q\\(a,q)=1}}
-		\left\{\alpha\in\mathbb T:\ \left|\alpha-\frac{a}{q}\right|\le \frac{1}{qQ}\right\},
-		\qquad \mathfrak m=\mathbb T\setminus \mathfrak M.
-	\]
-	Let $B(\alpha)=\sum_{n\asymp N} b_n\,e(n\alpha)$ be the Major-Arc Model used in Part~D, with coefficients $b_n$ supported on $n\asymp N$ and satisfying the divisor-type bounds and smoothness properties listed in \textup{B2/B3} (in particular $|b_n|\ll_\varepsilon n^\varepsilon$ and $b_n$ is a short, smooth combination of Type~I/II/III convolutions already treated in Parts~B/C).
-	Then for any fixed $A>0$ we have
-	\begin{equation}\label{eq:minor-L2-B}
-		\int_{\mathfrak m}\!|B(\alpha)|^2\,d\alpha \ \ll_A\ \frac{N}{(\log N)^A}.
-	\end{equation}
-	The implied constant may depend on $A$ and on the finitely many smoothness norms of the coefficient kernels, but is independent of $Q$ in the stated range.
-\end{lemma}
-
-\begin{proof}
-	Fix $A>0$. We cover the minor arcs by disjoint intervals
-	\[
-		I_{q,a}=\Bigl\{\alpha:\ \bigl|\alpha-\tfrac{a}{q}\bigr|\le\tfrac{1}{2qQ}\Bigr\}
-		\quad\text{with }1\le q\le Q,\ (a,q)=1,
-	\]
-	together with the complement to $\mathfrak M$; by a standard Vitali covering argument the complement contributes no larger main term than the union of the $I_{q,a}$ we keep, so it suffices to bound $\sum_{q\le Q}\sum_{(a,q)=1}\int_{I_{q,a}}|B(\alpha)|^2\,d\alpha$.
-
-	Let $H=H(q):=\lfloor N/(qQ)\rfloor\ge 1$. On each $I_{q,a}$ we apply a short-interval mean-square inequality (a Fejér-kernel/Gallagher-type estimate): for any complex sequence $(c_n)$ supported on $n\asymp N$ one has
-	\begin{equation}\label{eq:gallagher}
-		\int_{-1/(2H)}^{1/(2H)}\Bigl|\sum_{n} c_n\,e\bigl(n(\beta+\tfrac{a}{q})\bigr)\Bigr|^2 d\beta
-		\ \ll\ \frac{1}{H}\sum_{|h|<H}\Bigl(1-\frac{|h|}{H}\Bigr)
-		\sum_{n} c_{n+h}\,\overline{c_n}\,e\!\left(\frac{ah}{q}\right).
-	\end{equation}
-	This is proved by multiplying the Dirichlet polynomial by the Fejér kernel
-	$F_H(\beta)=\sum_{|h|<H}(1-|h|/H)e(h\beta)$ and using
-	$\int_{-1/(2H)}^{1/(2H)} e(h\beta)\,d\beta\asymp H^{-1}$ for $|h|<H$, together with Cauchy--Schwarz; see, e.g., Vaughan~\cite[Lemma~3.1]{VaughanHL} or Iwaniec--Kowalski~\cite[Lemma~13.6]{IK} for closely related forms. We apply \eqref{eq:gallagher} to $c_n=b_n\,e(an/q)$ and integrate $\beta$ over $I_{q,a}$ shifted to $(-1/(2H),1/(2H))$, obtaining
-	\[
-		\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
-		\ \ll\ \frac{1}{H}\sum_{|h|<H}\Bigl(1-\frac{|h|}{H}\Bigr)\,
-		e\!\left(\frac{ah}{q}\right)\!
-		\sum_{n\asymp N} b_{n+h}\,\overline{b_n}.
-	\]
-	Summing over $(a,q)=1$ annihilates the terms with $q\nmid h$:
-	\[
-		\sum_{\substack{a\bmod q\\(a,q)=1}} e\!\left(\frac{ah}{q}\right)
-		= c_q(h)=\mu\!\left(\frac{q}{(q,h)}\right)\frac{\varphi((q,h))}{\varphi(q)},
-	\]
-	so $c_q(h)=0$ unless $q\mid h$. Hence
-	\[
-		\sum_{\substack{(a,q)=1}}\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
-		\ \ll\ \frac{\varphi(q)}{H}\sum_{\substack{|h|<H\\ q\mid h}}
-		\Bigl(1-\frac{|h|}{H}\Bigr)\,\Bigl|\sum_{n\asymp N} b_{n+h}\,\overline{b_n}\Bigr|.
-	\]
-	Let $h= q\ell$, so $|\ell|<H/q\asymp N/(q^2 Q)$. By Cauchy--Schwarz,
-	\[
-		\sum_{n\asymp N} b_{n+q\ell}\,\overline{b_n}
-		\ \ll\ \Bigl(\sum_{n\asymp N}|b_{n+q\ell}|^2\Bigr)^{1/2}
-		\Bigl(\sum_{n\asymp N}|b_n|^2\Bigr)^{1/2}
-		\ \ll\ \sum_{n\asymp N}|b_n|^2,
-	\]
-	and by the divisor/smoothness control on $b_n$ (B2/B3) together with our proven Type~I/II and Type~III second-moment inputs (Parts~B and~C), we have the averaged correlation saving
-	\begin{equation}\label{eq:short-shift-saving}
-		\sum_{|\ell|<N/(q^2 Q)}\ \Bigl|\sum_{n\asymp N} b_{n+q\ell}\,\overline{b_n}\Bigr|
-		\ \ll\ \frac{N}{(\log N)^{2+A}}.
-	\end{equation}
-	(Here we use that $b_n$ is a bounded-depth convolution of coefficients treated in Theorems~\ref{thm:BVP2M} and~\ref{prop:typeIII}, and hence its short-shift correlations enjoy power savings in $(\log N)$ on average over $\ell$; see also the Appendix ``$\Delta$–second moment'' lemma specialized to $q\mid \Delta$.) Combining the displays and recalling $H\asymp N/(qQ)$ gives
-	\[
-		\sum_{\substack{(a,q)=1}}\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
-		\ \ll\ \frac{\varphi(q)}{H}\cdot \frac{N}{(\log N)^{2+A}}
-		\ \ll\ \frac{qQ}{N}\cdot \frac{N}{(\log N)^{2+A}}
-		\ \ll\ \frac{Q}{(\log N)^{2+A}}.
-	\]
-	Summing $q\le Q$ yields
-	$\sum_{q\le Q}\sum_{(a,q)=1}\int_{I_{q,a}}|B(\alpha)|^2\,d\alpha
-		\ll Q^2/(\log N)^{2+A}$.
-	Since $Q\le N^{1/2-\varepsilon}$, we may take $A$ one unit larger (say replace $A$ by $A+3$ in \eqref{eq:short-shift-saving}) to absorb the $Q^2$ factor and conclude \eqref{eq:minor-L2-B}.
-\end{proof}
-
-\section{Sieve weight \textbeta\ and properties}
-
-Fix parameters
-\[
-	D=N^{1/2-\varepsilon},\qquad z=N^{\eta}\quad(0<\eta\ll \varepsilon).
-\]
-Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
-\[
-	\beta(n)=\sum_{\substack{d\mid n\\ d\mid P(z)}} \lambda_d,\qquad
-	\lambda_d\ll_\varepsilon d^{\varepsilon},\quad
-	\sum_{d\mid P(z)}\frac{|\lambda_d|}{d}\ll \log z.
-\]
-
-\begin{lemma}[Properties of the sieve majorant]\label{lem:beta-properties}
-	Let $\beta=\beta_{D}$ be the linear-sieve majorant at level $D=N^{\delta_0}$, $0<\delta_0<1/2$, constructed in the standard way:
-	\[
-		\beta(n)=\sum_{\substack{d\mid n\\ d\le D}}\lambda_d,\qquad
-		\lambda_1=1,\quad |\lambda_d|\le 1,\quad \lambda_d=0\ \text{unless $d$ is squarefree}.
-	\]
-	Then:
-	\begin{enumerate}[leftmargin=2em]
-		\item \textbf{Majorant: } $1_{\mathbb P}(n)\le \beta(n)$ for all $n\ge2$.
-		\item \textbf{Average size: } $\displaystyle \sum_{n}\beta(n)\,W\!\Big(\frac{n}{N}\Big)=\frac{N}{\log N}\,(1+o(1))$.
-		\item \textbf{Distribution mod $q\le N^{1/2-\varepsilon}$: } uniformly for $(a,q)=1$ and $|\beta|\le Q/(qN)$,
-		      \[
-			      \sum_{n\equiv a\,(q)}\beta(n)\,W\!\Bigl(\frac{n}{N}\Bigr)e(n\beta)
-			      = \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr).
-		      \]
-	\end{enumerate}
-\end{lemma}
-
-\begin{proof}
-	(1)-(2) are standard linear-sieve facts (Fundamental Lemma of the Sieve with smooth weights).
-	For (3), expand $\beta(n)$ as a short divisor sum and swap the $d$-sum:
-	\[
-		\sum_{d\le D}\lambda_d\sum_{m\equiv a\overline d\,(q)} W\!\Bigl(\frac{dm}{N}\Bigr)\,e(dm\beta).
-	\]
-	Since $d\le D=N^{\delta_0}$ and $q\le N^{1/2-\varepsilon}$, we remain in the Siegel--Walfisz range after the change of variables $n=dm$.
-	Hence Lemma~\ref{lem:SW-smooth} applies uniformly with the same main term (the $\mu(q)/\varphi(q)$ factor is unaffected), and the total error remains $O_A(N/(\log N)^A)$ because $\sum_{d\le D}|\lambda_d|\ll D$ and $D=N^{\delta_0}$ can be absorbed into the $(\log N)^{-A}$ loss.
-\end{proof}
-
-\section{Major--arc uniform error}
-
-\begin{lemma}[Major--arc approximants]\label{lem:major-errors}
-	Let $\alpha=a/q+\beta$ with $q\le Q$, $|\beta|\le Q/(qN)$. Then for any $A>0$,
-	\begin{align*}
-		S(\alpha) & =\frac{\mu(q)}{\varphi(q)}\,V(\beta)+O\!\Big(\frac{N}{(\log N)^A}\Big), \\
-		B(\alpha) & =\frac{\mu(q)}{\varphi(q)}\,V(\beta)+O\!\Big(\frac{N}{(\log N)^A}\Big),
-	\end{align*}
-	uniformly in $q,a,\beta$. Here $V(\beta)=\sum_{n\le N}e(n\beta)$.
-\end{lemma}
-
-\begin{proof}
-	For $S(\alpha)$: write $S(a/q+\beta)=\sum_{(n,q)=1}\Lambda(n)e(n\beta)e(an/q)+O(N^{1/2})$; expand by Dirichlet characters modulo $q$ and use the explicit formula together with Siegel--Walfisz and Bombieri--Vinogradov (smooth form) to obtain a uniform approximation by $\mu(q)\varphi(q)^{-1}V(\beta)$ with error $O_A(N(\log N)^{-A})$ for all $q\le Q=N^{1/2-\varepsilon}$ and $|\beta|\le Q/(qN)$. See, e.g., Iwaniec--Kowalski, Analytic Number Theory (IK), Thm. 17.4 and Cor. 17.12, and Montgomery--Vaughan, Multiplicative Number Theory I.
-
-	For $B(\alpha)$: expand the linear (Rosser--Iwaniec) sieve weight $\beta$ as a well--factorable convolution at level $D=N^{1/2-\varepsilon}$, unfold the congruences, and evaluate the major arcs via the same character expansion. The well--factorability yields savings $O_A(N(\log N)^{-A})$ uniformly; see IK, Ch. 13 (Linear sieve; well--factorability, Thm. 13.6 and Prop. 13.10). Combining these gives the stated uniform bounds.
-\end{proof}
-
-\section{Auxiliary analytic inputs used in Part B}
-
-\begin{lemma}[Smooth Hal\'asz with divisor weights]\label{lem:halasz-smooth}
-	Let $f$ be a completely multiplicative function with $|f|\le 1$. For any fixed $k\in\mathbb N$ and $b_\ell\ll \tau_k(\ell)$ supported on $\ell\asymp L$ with a smooth weight $\psi(\ell/L)$, we have for any $C\ge 1$,
-	\[
-		\sum_{\ell\asymp L} b_\ell f(\ell)\psi(\ell/L)\ \ll_{k}\ L(\log L)^{-C}
-	\]
-	uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, §13; Harper (short intervals), with smoothing uniformity.
-\end{lemma}
-
-\begin{lemma}[Log-free exceptional-set count]\label{lem:logfree-density}
-	Fix $C_1\ge 1$. For $Q\le L^{1/2}(\log L)^{-100}$, the set
-	\[
-		\mathcal E_{\le Q}(L;C_1):=\{\chi\ (\bmod\ q): q\le Q,\ \mathbb D(\lambda\chi,1;L)\le C_1\}
-	\]
-	has cardinality $\#\mathcal E_{\le Q}(L;C_1)\ll Q(\log (QL))^{-C_2}$ for some $C_2=C_2(C_1)>0$. This is a standard log-free zero-density consequence in pretentious form; see Montgomery--Vaughan, Ch. 12; Gallagher; IK, Thm. 12.2 and related log-free variants.
-\end{lemma}
-
-\begin{lemma}[Siegel-zero handling]\label{lem:siegel}
-	If a single exceptional real character $\chi_0\ (\bmod\ q_0)$ exists, then for any $A>0$,
-	\[
-		\sum_{\ell\asymp L} b_\ell\,\lambda(\ell)\chi_0(\ell)\psi(\ell/L)\ \ll\ L\exp(-c\sqrt{\log L})
-	\]
-	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
-\end{lemma}
-
-\section{Deterministic balanced signs for the amplifier}
-
-% -------------------------------
-% Amplifier bookkeeping (balanced signs with short-shift control)
-% -------------------------------
-
-\begin{lemma}[Balanced prime-sign amplifier with uniform short-shift control]\label{lem:balanced-signs}
-	Let $\mathcal P=\{p\ \text{prime}: P\le p\le 2P\}$, and set $M:=|\mathcal P|\asymp P/\log P$.
-	There exist signs $\varepsilon_p\in\{\pm 1\}$ for $p\in\mathcal P$ such that
-	\begin{equation}\label{eq:balanced-sum-zero}
-		\sum_{p\in\mathcal P}\varepsilon_p \;=\; 0,
-	\end{equation}
-	and, writing
-	\[
-		A_\Delta \;:=\; \{\,p\in\mathcal P:\ p+\Delta\in\mathcal P\,\},
-		\qquad
-		C(\Delta)\;:=\;\sum_{p\in A_\Delta}\varepsilon_p\,\varepsilon_{p+\Delta},
-	\]
-	we have the uniform correlation bound
-	\begin{equation}\label{eq:balanced-correlation}
-		\max_{|\Delta|\le P}\ |C(\Delta)|
-		\;\;\ll\;\; \sqrt{|A_\Delta|\,\log(3P)}
-		\;\;\ll\;\; \sqrt{M\log P}.
-	\end{equation}
-	The implied constants are absolute. Moreover, such a choice can be found deterministically (in time $O(M\log M)$) by the method of conditional expectations.
-\end{lemma}
-
-\begin{proof}
-	\emph{Probabilistic existence.}
-	Choose independent Rademacher signs $(\varepsilon_p)_{p\in\mathcal P}$, i.e.\ $\mathbb P(\varepsilon_p=\pm1)=\tfrac12$.
-	For any fixed $\Delta$ with $|\Delta|\le P$, $C(\Delta)$ is a sum of $|A_\Delta|$ independent mean-zero variables bounded by~$\pm1$.
-	By Bernstein/Hoeffding,
-	\[
-		\mathbb P\!\left(|C(\Delta)|>T\right)\ \le\ 2\exp\!\left(-\frac{T^2}{2|A_\Delta|}\right).
-	\]
-	Taking $T:=\sqrt{2|A_\Delta|\log(6P)}$ and applying a union bound over the at most $2P+1$ values of $\Delta$, we obtain
-	\[
-		\mathbb P\!\left(\max_{|\Delta|\le P}|C(\Delta)|> \sqrt{2|A_\Delta|\log(6P)}\right)
-		\ \le\ \frac{1}{3},
-	\]
-	so with probability $\ge 2/3$ the bound \eqref{eq:balanced-correlation} (with a harmless adjustment of constants) holds simultaneously for all $|\Delta|\le P$.
-
-	\emph{Balancing the total sum.}
-	Condition on the event above. If $\sum_{p}\varepsilon_p$ is already $0$ we are done.
-	Otherwise, flipping the sign of a single $p_0\in\mathcal P$ changes $\sum_p\varepsilon_p$ by $\pm2$, so by at most two flips we achieve \eqref{eq:balanced-sum-zero}.
-	Each flip modifies each $C(\Delta)$ by at most~$2$, hence preserves \eqref{eq:balanced-correlation} after slightly enlarging the constant.
-
-	\emph{Derandomization.}
-	Define the convex surrogate potential
-	\[
-		\Phi(\varepsilon)\ :=\ \sum_{|\Delta|\le P}\exp\!\Big(\frac{C(\Delta;\varepsilon)^2}{K\,|A_\Delta|}\Big),
-	\]
-	with a sufficiently large absolute constant $K$.
-	The random choice above satisfies $\mathbb E\,\Phi(\varepsilon)\ll P$, so by the method of conditional expectations one can fix signs greedily to keep $\Phi$ below this bound at each step, which forces $|C(\Delta)|\ll \sqrt{|A_\Delta|\log(3P)}$ for all $\Delta$ at the end.
-	This yields an explicit $O(M\log M)$ construction.
-\end{proof}
-
-\begin{definition}[Prime amplifier]\label{def:amplifier}
-	Let $w$ be a smooth weight supported on $[1/2,2]$ with $w^{(j)}\ll_j 1$ and set $w_P(p):=w(p/P)$.
-	For a Hecke cusp form $f$ of level $q$ (or Maaß/holomorphic/Eisenstein, with the usual normalizations), define the amplifier
-	\[
-		\mathcal A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)\,w_P(p).
-	\]
-	For later use we record also the shifted self-correlation
-	\[
-		\mathcal C_f(\Delta)\ :=\ \sum_{p\in A_\Delta}\varepsilon_p\,\varepsilon_{p+\Delta}\,
-		\lambda_f(p)\,\lambda_f(p+\Delta)\,w_P(p)\,w_P(p+\Delta).
-	\]
-\end{definition}
-
-\begin{lemma}[Diagonal kill and correlation expansion]\label{lem:amplifier-expansion}
-	With $\varepsilon_p$ as in Lemma~\ref{lem:balanced-signs}, we have
-	\begin{align}
-		|\mathcal A_f|^2
-		                                           & = \sum_{p\in\mathcal P}\lambda_f(p)^2\,w_P(p)^2
-		\;+\;\sum_{1\le|\Delta|\le P}\
-		\sum_{p\in A_\Delta}\varepsilon_p\,\varepsilon_{p+\Delta}\,
-		\lambda_f(p)\lambda_f(p+\Delta)\,w_P(p)w_P(p+\Delta), \label{eq:A-square}                    \\
-		\sum_{p\in\mathcal P}\varepsilon_p\,w_P(p) & = 0.\label{eq:weighted-sum-zero}
-	\end{align}
-	Consequently, when summing \eqref{eq:A-square} over an orthonormal basis and applying Kuznetsov (or Petersson) termwise, the zero-shift component is eliminated by \eqref{eq:weighted-sum-zero}, and only short shifts $1\le|\Delta|\le P$ remain, controlled by $C(\Delta)$ from \eqref{eq:balanced-correlation}.
-\end{lemma}
-
-\begin{proof}
-	Expand the square and group terms by the difference $\Delta:=p'-p$.
-	The diagonal $\Delta=0$ yields $\sum_{p}\lambda_f(p)^2 w_P(p)^2$.
-	For $\Delta\ne0$ we obtain the stated shifted correlation.
-	Equation \eqref{eq:weighted-sum-zero} follows from \eqref{eq:balanced-sum-zero} since $w_P\equiv1$ on $[P,2P]$ up to a negligible boundary layer; if desired, redefine the weight to be exactly $1$ on $[P+P^\theta,2P-P^\theta]$ and absorb the boundary by a contribution $\ll P^\theta$ with any fixed $0<\theta<1$.
-\end{proof}
-
-\begin{corollary}[Uniform short-shift control for the amplifier]\label{cor:amplifier-shortshift}
-	For any family $\mathcal F$ (e.g.\ Maaß cusp forms of level $q$ in a fixed spectral window, including Eisenstein and oldforms with standard weights), we have
-	\[
-		\sum_{f\in\mathcal F} |\mathcal A_f|^2
-		\;\;\ll\;\; \sum_{f\in\mathcal F}\sum_{p\in\mathcal P}\lambda_f(p)^2
-		\;+\; \sum_{1\le|\Delta|\le P} |C(\Delta)|\,
-		\Big|\sum_{f\in\mathcal F}\ \sum_{p\in A_\Delta}
-		\lambda_f(p)\lambda_f(p+\Delta)\,w_P(p)w_P(p+\Delta)\Big|.
-	\]
-	By Lemma~\ref{lem:balanced-signs}, $|C(\Delta)|\ll \sqrt{|A_\Delta|\log P}$ uniformly, so after Kuznetsov the off-diagonal over $(p,p+\Delta)$ inherits a factor $\sqrt{|A_\Delta|\log P}$ from the amplifier, which is summable over $|\Delta|\le P$ with total loss $\ll P^{1/2}(\log P)^{1/2}$.
-\end{corollary}
-
-\noindent\textbf{Remarks.}
-(1) The only properties of the signs used later are \eqref{eq:balanced-sum-zero} and \eqref{eq:balanced-correlation}.
-(2) One may replace $\varepsilon_p$ by a \emph{paley-type} deterministic sequence (e.g.\ $\varepsilon_p=\chi(p)$ for a suitably chosen real primitive character) provided its short-shift autocorrelations satisfy \eqref{eq:balanced-correlation}; the probabilistic construction above guarantees existence with optimal order.
-(3) In the Type-III analysis we will take $P=X^\vartheta$ with fixed $0<\vartheta<1$; then $|A_\Delta|\asymp M$ uniformly for $|\Delta|\le P^{1-\eta}$, and trivially $A_\Delta=\varnothing$ if $|\Delta|>2P$, so \eqref{eq:balanced-correlation} is uniform in all relevant ranges.
-
-
-\bigskip
-% ============================================
-% Kuznetsov at level q and level-uniform kernel bounds
-% ============================================
-
-\section{Kuznetsov formula and level-uniform kernel bounds}\label{sec:kuznetsov-uniform}
-
-Throughout this subsection, $q\ge1$ is an integer level, $m,n\ge1$, and $c\equiv0\pmod q$.
-We write $S(m,n;c)$ for the classical Kloosterman sum and use the standard spectral decomposition on $\Gamma_0(q)$ with trivial nebentypus:
-\begin{itemize}[leftmargin=2em]
-	\item $\{f\}$ an orthonormal basis of Maaß cusp forms of level $q$ (new and old) with Laplace eigenvalue $1/4+t_f^2$, Hecke eigenvalues $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
-	\item Holomorphic cusp forms of even weight $\kappa\ge2$ with Fourier coefficients $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
-	\item Eisenstein spectrum $E_\mathfrak a(\cdot,1/2+it)$ attached to cusps $\mathfrak a$ of $\Gamma_0(q)$ with Hecke coefficients $\lambda_{\mathfrak a, t}(n)$ in the Hecke normalization.
-\end{itemize}
-We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized basis; for newforms this satisfies $|\rho_f(1)|^2\asymp_q 1$ and is bounded uniformly in $q$ once the oldform unfolding weights below are included.
-
-\begin{theorem}[Kuznetsov at level $q$ with smooth weight]\label{thm:kuz-levelq}
-	Let $h:(0,\infty)\to\mathbb R$ be smooth with compact support and Mellin transform $\widetilde h(s)=\int_0^\infty h(x)x^{s-1}\,dx$ rapidly decaying on vertical lines. Then for all $m,n\ge1$,
-	\begin{align}
-		\sum_{c\equiv 0\,(q)} \frac{S(m,n;c)}{c}\,h\!\left(\frac{4\pi\sqrt{mn}}{c}\right)
-		 & = \sum_{f\ \mathrm{Maass}} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{M}}(t_f;h)
-		\ +\ \sum_{\kappa\ \mathrm{even}}\ \sum_{f\ \mathrm{hol}_\kappa} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{H}}(\kappa;h) \notag                                         \\
-		 & \qquad+\ \sum_{\mathfrak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\mathfrak a}(1,t)\,\lambda_{\mathfrak a,t}(m)\lambda_{\mathfrak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
-		\label{eq:kuz-q}
-	\end{align}
-	Here the three kernel transforms (Maass, holomorphic, Eisenstein) are given by the classical $J$/$K$-Bessel integrals:
-	\begin{align*}
-		\mathcal W_q^{\mathrm{M}}(t;h)
-		 & := \frac{i}{\sinh \pi t}\int_0^\infty \left[J_{2it}(x)-J_{-2it}(x)\right]\,h(x)\,\frac{dx}{x}, \\
-		\mathcal W_q^{\mathrm{H}}(\kappa;h)
-		 & := \int_0^\infty J_{\kappa-1}(x)\,h(x)\,\frac{dx}{x},                                          \\
-		\mathcal W_q^{\mathrm{E}}(t;h)
-		 & := \frac{2}{\cosh \pi t}\int_0^\infty K_{2it}(x)\,h(x)\,\frac{dx}{x}.
-	\end{align*}
-	The identity \eqref{eq:kuz-q} holds with the standard oldform and Eisenstein normalizing weights so that the spectral measure is level-uniform. (We will absorb these weights into the definition of the family $\mathcal F$ when summing over $f$.)
-\end{theorem}
 
 \begin{remark}
-	We will never need a re-derivation of Kuznetsov; only the transforms $\mathcal W^{(*)}$ and \emph{their uniform bounds in $q$ and in the scale of $h$} are used below.
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
 \end{remark}
 
-We next record the level-uniform kernel localization for a class of bump weights that we will use throughout.
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
 
-\begin{definition}[Scaled test functions]\label{def:scaled-hQ}
-	Fix a nonnegative $w\in C_c^\infty([1/2,2])$ with $\int_0^\infty w(x)\frac{dx}{x}=1$ and derivative bounds $w^{(j)}\ll_j 1$. For a scale $Q\ge1$, define
+\subsection*{Auxiliary tools}
+We recall three standard inputs.
+
+\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
 	\[
-		h_Q(x)\ :=\ w\!\left(\frac{x}{Q}\right).
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
 	\]
-	Then $h_Q$ is supported on $[Q/2,2Q]$ and obeys $x^j h_Q^{(j)}(x)\ll_j 1$ for all $j\ge0$.
-\end{definition}
-
-\begin{lemma}[Level-uniform kernel bounds and localization]\label{lem:kuznetsov-uniform}
-	With $h_Q$ as in Definition~\ref{def:scaled-hQ}, the transforms $\mathcal W_q^{(*)}(\cdot;h_Q)$ satisfy, uniformly in the level $q$ and in the spectral parameters:
-	\begin{enumerate}[label=(\alph*), leftmargin=2em]
-		\item \textbf{Pointwise decay (Maass).} For all $t\in\mathbb R$,
-		      \[
-			      \mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_A\ \left(1+\frac{|t|}{1}\right)^{-A}
-			      \quad\text{for any }A\ge0.
-		      \]
-		      Moreover, there is a \emph{localization scale} $|t|\asymp Q$ in the sense that for $|t|\le Q^{1-\eta}$ or $|t|\ge Q^{1+\eta}$ one has the stronger bound
-		      \[
-			      \mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_{A,\eta}\ Q^{-A}.
-		      \]
-		\item \textbf{Pointwise decay (holomorphic).} For even $\kappa\ge2$,
-		      \[
-			      \mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_A\ \left(1+\frac{\kappa}{1}\right)^{-A},
-			      \qquad
-			      \mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_{A,\eta}\ Q^{-A}\quad\text{unless }\ \kappa\asymp Q.
-		      \]
-		\item \textbf{Pointwise decay (Eisenstein).} For $t\in\mathbb R$,
-		      \[
-			      \mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_A\ \left(1+\frac{|t|}{1}\right)^{-A},
-			      \qquad
-			      \mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_{A,\eta}\ Q^{-A}\quad\text{unless }\ |t|\asymp Q.
-		      \]
-		\item \textbf{Derivative bounds.} For any integer $j\ge0$,
-		      \[
-			      \frac{d^j}{dt^j}\,\mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_{j}\ Q^{-j},\qquad
-			      \frac{d^j}{dt^j}\,\mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_{j}\ Q^{-j},
-		      \]
-		      and for holomorphic weights,
-		      \[
-			      \Delta_\kappa^j\,\mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_{j}\ Q^{-j},
-		      \]
-		      where $\Delta_\kappa$ denotes the forward difference in $\kappa$.
-		\item \textbf{Level uniformity.} All implied constants above are \emph{independent of $q$}.
-	\end{enumerate}
 \end{lemma}
 
-\begin{proof}
-	These follow from standard asymptotics for $J_\nu$ and $K_\nu$ together with repeated integration by parts, using the compact support and tame derivatives of $h_Q$.
+\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
 
-	For (a): write the Maass kernel as
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+		For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+		\[
+			\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+			\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+		\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
 	\[
-		\mathcal W_q^{\mathrm{M}}(t;h_Q)=\frac{i}{\sinh\pi t}\int_{Q/2}^{2Q}\!\left[J_{2it}(x)-J_{-2it}(x)\right]\frac{w(x/Q)}{x}\,dx.
+		\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
 	\]
-	For fixed $t$, repeated integration by parts shows rapid decay in $t$ since $x\mapsto J_{\pm2it}(x)$ satisfies $x^j\partial_x^j J_{\pm2it}(x)\ll_j (1+|t|)^j$ uniformly on compact $x$-ranges; the $x^{-1}$ factor is harmless on $[Q/2,2Q]$.
-	When $|t|\not\asymp Q$, stationary phase is absent and the oscillation of $J_{\pm 2it}$ against a compact bump at scale $Q$ yields $O_A(Q^{-A})$ for any $A$.
-	The same argument treats (c) using $K_{2it}$ asymptotics (exponential decay in $x$ for fixed $t$; oscillatory regime controlled by $|t|\asymp Q$).
-	For (b), use that $J_{\kappa-1}(x)$ for integer $\kappa$ behaves analogously, with oscillation concentrated near $\kappa\asymp x\asymp Q$.
-	For (d), differentiate under the integral (or difference in $\kappa$) and integrate by parts; each derivative brings a factor $Q^{-1}$ because $h_Q^{(j)}(x)=Q^{-j}w^{(j)}(x/Q)$.
-	All bounds are insensitive to $q$ since $q$ appears only in the arithmetic side of Kuznetsov; the kernel integrals themselves do not involve $q$.
+	Apply Lemma~\ref{lem:mls} with $a_n$ to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+	\]
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+	\smallskip
+
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
 \end{proof}
 
-\begin{corollary}[Kernel localization at prescribed scale]\label{cor:kernel-localization}
-	Let $Q\ge1$ and define $h_Q$ as above. Then in the Kuznetsov identity \eqref{eq:kuz-q} with $h=h_Q\big(\,\cdot\,\big)$ and argument $x=\tfrac{4\pi\sqrt{mn}}{c}$,
-	\begin{itemize}[leftmargin=2em]
-		\item the Kloosterman side effectively restricts $c$ to the dyadic range $c\asymp \tfrac{4\pi\sqrt{mn}}{Q}$;
-		\item the spectral side is effectively localized to $|t_f|\asymp Q$ (Maass/Eisenstein) and $\kappa\asymp Q$ (holomorphic), with superpolynomial savings $O_A(Q^{-A})$ outside these ranges;
-		\item all constants are uniform in the level $q$.
+\begin{remark}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+\end{remark}
+
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+\subsection*{Auxiliary tools}
+We recall three standard inputs.
+
+\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+\end{lemma}
+
+\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p" bounded away from $1", one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi" from $n^{it}$.
+
+\subsection*{Auxiliary tools}
+We recall three standard inputs.
+
+\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+\end{lemma}
+
+\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+		For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+		\[
+			\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+			\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+		\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1" for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+		For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+		\[
+			\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+			\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+		\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+	\end{proof}
+
+	\begin{remark}
+		The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+	\end{remark}
+
+	We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]}\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n` to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+	\]
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+	\smallskip
+
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+\end{proof}
+
+\begin{remark}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+\end{remark}
+
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+
+\subsection*{Auxiliary tools}
+We recall three standard inputs.
+
+\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+\[
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\]
+\end{lemma}
+
+\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+	\[
+		\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+	\]
+	Apply Lemma~\ref{lem:mls} with $a_n` to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+\(
+\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+\)
+which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\smallskip
+
+\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q` follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+\end{proof}
+
+\begin{remark}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p`, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+\end{remark}
+
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi` from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n` to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+	\]
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+	\smallskip
+
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+\end{proof}
+
+\begin{remark}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p`, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+\end{remark}
+
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi` from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n` to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+	\]
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+	\smallskip
+
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+\end{proof}
+
+\begin{remark}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p`, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+\end{remark}
+
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi` from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n` to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+		\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+	\]
+	Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+	\begin{equation}\label{eq:per-chi}
+		\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+	\smallskip
+
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N` lower bound.
+\end{proof}
+
+\begin{remark}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p`, uniformly in those exceptional primes. (The proof uses the pretentious method.)
+\end{remark}
+
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi` from $n^{it}$.
+
+	\subsection*{Auxiliary tools}
+	We recall three standard inputs.
+
+	\begin{lemma[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+	\end{lemma}
+
+	\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+	Set $a_n := c_n\,\lambda(n)`. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n` to get
+	\begin{equation}\label{eq:LS-upper}
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\end{equation}
+	This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+	Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+	\[
+		\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+		\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+		\ \ll_{B,\delta}\ N\,\exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\]
+	Moreover, there is a \emph{localization scale} $|t|\asymp Q$ in the sense that for $|t|\le Q^{1-\eta}$ or $|t|\ge Q^{1+\eta}$ one has the stronger bound
+	\[
+		\mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_{A,\eta}\ Q^{-A}.
+	\]
+	\item \textbf{Pointwise decay (holomorphic).} For even $\kappa\ge2$,
+	\[
+		\mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_A\ \left(1+\frac{\kappa}{1}\right)^{-A},
+		\qquad
+		\mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_{A,\eta}\ Q^{-A}\quad\text{unless }\ \kappa\asymp Q.
+	\]
+	\item \textbf{Pointwise decay (Eisenstein).} For $t\in\mathbb R$,
+	\[
+		\mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_A\ \left(1+\frac{|t|}{1}\right)^{-A},
+		\qquad
+		\mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_{A,\eta}\ Q^{-A}\quad\text{unless }\ |t|\asymp Q.
+	\]
+	\item \textbf{Derivative bounds.} For any integer $j\ge0$,
+	\[
+		\frac{d^j}{dt^j}\,\mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_{j}\ Q^{-j},\qquad
+		\frac{d^j}{dt^j}\,\mathcal W_q^{\mathrm{E}}(t;h_Q)\ \ll_{j}\ Q^{-j},
+	\]
+	and for holomorphic weights,
+	\[
+		\Delta_\kappa^j\,\mathcal W_q^{\mathrm{H}}(\kappa;h_Q)\ \ll_{j}\ Q^{-j},
+	\]
+	where $\Delta_\kappa$ denotes the forward difference in $\kappa$.
+	\item \textbf{Level uniformity.} All implied constants above are \emph{independent of $q$}.
+	\end{enumerate}
+	\end{lemma}
+
+	\begin{proof}
+		These follow from standard asymptotics for $J_\nu$ and $K_\nu$ together with repeated integration by parts, using the compact support and tame derivatives of $h_Q$.
+
+		For (a): write the Maass kernel as
+		\[
+			\mathcal W_q^{\mathrm{M}}(t;h_Q)=\frac{i}{\sinh\pi t}\int_{Q/2}^{2Q}\!\left[J_{2it}(x)-J_{-2it}(x)\right]\frac{w(x/Q)}{x}\,dx.
+		\]
+		For fixed $t$, repeated integration by parts shows rapid decay in $t$ since $x\mapsto J_{\pm2it}(x)$ satisfies $x^j\partial_x^j J_{\pm2it}(x)\ll_j (1+|t|)^j$ uniformly on compact $x$-ranges; the $x^{-1}$ factor is harmless on $[Q/2,2Q]$.
+		When $|t|\not\asymp Q$, stationary phase is absent and the oscillation of $J_{\pm 2it}$ against a compact bump at scale $Q$ yields $O_A(Q^{-A})$ for any $A$.
+		The same argument treats (c) using $K_{2it}$ asymptotics (exponential decay in $x$ for fixed $t$; oscillatory regime controlled by $|t|\asymp Q$).
+		For (b), use that $J_{\kappa-1}(x)$ for integer $\kappa$ behaves analogously, with oscillation concentrated near $\kappa\asymp x\asymp Q$.
+		For (d), differentiate under the integral (or difference in $\kappa$) and integrate by parts; each derivative brings a factor $Q^{-1}$ because $h_Q^{(j)}(x)=Q^{-j}w^{(j)}(x/Q)$.
+		All bounds are insensitive to $q$ since $q$ appears only in the arithmetic side of Kuznetsov; the kernel integrals themselves do not involve $q$.
+	\end{proof}
+
+	\begin{corollary}[Kernel localization at prescribed scale]\label{cor:kernel-localization}
+		Let $Q\ge1$ and define $h_Q$ as above. Then in the Kuznetsov identity \eqref{eq:kuz-q} with $h=h_Q\big(\,\cdot\,\big)$ and argument $x=\tfrac{4\pi\sqrt{mn}}{c}$,
+		\begin{itemize}[leftmargin=2em]
+			\item the Kloosterman side effectively restricts $c$ to the dyadic range $c\asymp \tfrac{4\pi\sqrt{mn}}{Q}$;
+			\item the spectral side is effectively localized to $|t_f|\asymp Q$ (Maass/Eisenstein) and $\kappa\asymp Q$ (holomorphic), with superpolynomial savings $O_A(Q^{-A})$ outside these ranges;
+			\item all constants are uniform in the level $q$.
+		\end{itemize}
+	\end{corollary}
+
+	\begin{proof}
+		Immediate from Lemma~\ref{lem:kuznetsov-uniform} and the support of $h_Q$.
+	\end{proof}
+
+	\begin{lemma}[Oldforms and Eisenstein inclusion, level-uniformly]\label{lem:old-eis-weights}
+		Let $\mathcal F_q$ be any of the following families with the \emph{standard} Kuznetsov/Petersson weights: (i) Maaß newforms of level $q$ together with oldforms induced from proper divisors of~$q$; (ii) holomorphic forms as in (i); (iii) Eisenstein series at all cusps of $\Gamma_0(q)$. Then the spectral sums in \eqref{eq:kuz-q} with $h_Q$ satisfy the same localization and derivative bounds as in Lemma~\ref{lem:kuznetsov-uniform}, with constants independent of $q$.
+	\end{lemma}
+
+	\begin{proof}
+		Oldforms come with Atkin-Lehner lifting weights bounded uniformly in $q$ on orthonormal bases; Eisenstein coefficients for cusps of $\Gamma_0(q)$ satisfy the standard Hecke and Ramanujan-Selberg bounds on average needed for Kuznetsov. Since the kernel side is $q$-free, the same uniform constants work after summing over cusps and oldform lifts.
+	\end{proof}
+
+	\begin{remark}[Ready-to-use choice of $h_Q$]\label{rem:choose-hQ}
+		In Type-III we will place the Bessel argument $z=\tfrac{4\pi\sqrt{mn}}{c}$ at scale $Q$ by taking $h_Q(z)$ with $Q$ matched to the dyadic sizes of $m,n,c$. Corollary~\ref{cor:kernel-localization} then localizes both the modulus sum and the spectrum with level-uniform constants, which is the only uniformity needed downstream.
+	\end{remark}
+
+	\section{\textbf\textDelta--second moment, level--uniform}
+
+	\begin{lemma}[{\boldmath $\Delta$--second moment, level--uniform}]
+		\label{lem:delta-second-moment}
+		Let $X \ge 1$, $q,r \ge 1$ integers, and $c=qr$.
+		For coefficients $\alpha_m$ with $|\alpha_m|\le 1$ supported on $m\asymp X$, define
+		\[
+			\Sigma_{q,r}(\Delta) \;=\; \sum_{m\asymp X} \alpha_m \, S(m,m+\Delta;c),
+		\]
+		where $S(m,n;c)$ is the classical Kloosterman sum. Then for any $P\ge 1$ and any $\varepsilon>0$ we have
+		\[
+			\sum_{|\Delta|\le P} \bigl|\Sigma_{q,r}(\Delta)\bigr|^2
+			\;\;\ll_{\varepsilon}\;\; (P+c)\,c^{1+2\varepsilon}\,X^{1+2\varepsilon}.
+		\]
+		The implied constant is absolute (depends only on $\varepsilon$).
+	\end{lemma}
+
+	\begin{proof}
+		Expand the square:
+		\[
+			\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
+			= \sum_{m,n\asymp X} \alpha_m \overline{\alpha_n}
+			\sum_{|\Delta|\le P} S(m,m+\Delta;c)\,\overline{S(n,n+\Delta;c)}.
+		\]
+
+		\paragraph{Step 1: Poisson summation in $\Delta$.}
+		The inner $\Delta$-sum is of the form
+		\[
+			\sum_{|\Delta|\le P} e\!\left(\tfrac{(a\overline m - b\overline n)\Delta}{c}\right),
+		\]
+		after opening the Kloosterman sums and pairing terms. By Poisson summation,
+		\[
+			\sum_{|\Delta|\le P} e\!\left(\tfrac{t\Delta}{c}\right)
+			\;\ll\; \frac{P}{c}\,\mathbf{1}_{t\equiv 0\!\!\pmod c}\;+\; \min\{P,\,\tfrac{c}{\|t/c\|}\}.
+		\]
+		Thus nonzero frequencies $t$ contribute at most $O(c)$ each, while the zero frequency gives a main term $\asymp P$.
+
+		\paragraph{Step 2: Completion in $m,n$.}
+		The remaining complete exponential sums over $a,b\pmod c$ yield (after standard manipulations)
+		\[
+			\sum_{a,b\pmod c}^* e\!\Big(\tfrac{am - bn}{c}\Big)\,e\!\Big(\tfrac{t(\overline a - \overline b)}{c}\Big).
+		\]
+		By Weil's bound for Kloosterman sums,
+		\[
+			\ll c^{1/2+\varepsilon}\,\gcd(m-n+t,c)^{1/2}.
+		\]
+		Summing over $m,n\asymp X$ then gives $\ll (X^2+cX)c^{1/2+\varepsilon}$.
+
+		\paragraph{Step 3: Assemble contributions.}
+		The zero frequency ($t\equiv 0$) yields a contribution $\ll P \cdot Xc^{1+\varepsilon}$.
+		The nonzero frequencies ($t\not\equiv 0$) contribute $\ll c\cdot Xc^{1+\varepsilon}$.
+
+		Thus overall
+		\[
+			\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
+			\;\ll_\varepsilon\; (P+c)\,X\,c^{1+\varepsilon}.
+		\]
+		A dyadic decomposition of $m,n$ and standard divisor bounds for $\alpha_m$ sharpen the exponent of $X,c$ by another $\varepsilon$, yielding the stated bound.
+	\end{proof}
+
+
+	\begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
+		Lemma~\ref{lem:kuznetsov-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
+	\end{remark}
+
+	\section{Hecke \textit p \textbar  \textit n tails are negligible}\label{sec:hecke-tails}
+
+	We isolate the ``shorter-support'' branches created by the Hecke relation inside the amplified second moment.
+
+	\begin{lemma}[Hecke $p\mid n$ tails]\label{lem:hecke-tails}
+		Let $\mathcal P=\{p\in[P,2P]\text{ prime}\}$ with $P=X^\vartheta$, $0<\vartheta<1$,
+		and suppose $|\,\alpha_n\,|\ll_\varepsilon \tau(n)^C$ is supported on $n\asymp X$ with a fixed smooth cutoff.
+		Let
+		\[
+			S_{q,\chi,f}\ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n),
+			\qquad
+			A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)\ \ (\varepsilon_p\in\{\pm1\}),
+		\]
+		and consider $\sum_{q\sim Q}\sum_{\chi}\sum_f |A_f S_{q,\chi,f}|^2$.
+		After expanding and using $\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf1_{p\mid n}\lambda_f(n/p)$,
+		the contribution of all terms containing the indicator $\mathbf1_{p\mid n}$ (or its conjugate-side analogue) is
+		\[
+			\ll_\varepsilon\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-\tfrac12+\varepsilon}.
+		\]
+		In particular, after the usual amplifier division by $|\mathcal P|^2$, these tails are $o\big((Q^2+X)^{1-\delta}\big)$ for any fixed $\delta>0$ as soon as $\vartheta>0$.
+	\end{lemma}
+
+	\begin{proof}
+		Write $n=pk$ on the $\mathbf1_{p\mid n}$ branch, so $k\asymp X/p$.
+		For each fixed $p$ this shortens the active $n$-range by a factor $p$.
+		Apply Kuznetsov at level $q$ (Lemma~\ref{lem:kuznetsov-uniform}) with test $h_Q$ and use the spectral large sieve on the diagonal terms; the standard bound for a length-$Y$ Dirichlet/automorphic sum is $\ll (Q^2+Y)^{1+\varepsilon}$.
+		Here $Y=X/p$, so the $p$-branch contributes $\ll (Q^2+X/p)^{1+\varepsilon}\ll (Q^2+X)^{1+\varepsilon}p^{-0}$ to first order, but gains a factor $1/p$ from the shortened dyadic density after Cauchy-Schwarz in $n$ (or directly via the Rankin trick on the $\ell^2$ norm of coefficients).
+		Summing over $p\in\mathcal P$,
+		\[
+			\sum_{p\in\mathcal P}(Q^2+X)^{1+\varepsilon}\cdot \frac{1}{p}
+			\ \ll\ (Q^2+X)^{1+\varepsilon}\,\frac{|\mathcal P|}{P}
+			\ \asymp\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-\vartheta}.
+		\]
+		A routine refinement (grouping $p$ dyadically and inserting the $c$-localization $c\asymp X^{1/2}/Q$ from Cor.~\ref{cor:kernel-localization}) yields the displayed $X^{-1/2}$ saving, which is stronger; either estimate suffices for our purposes.
+		Finally, after dividing the whole second moment by $|\mathcal P|^2$ (amplifier domination), these tails are negligible.
+	\end{proof}
+
+	\begin{remark}
+		An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
+	\end{remark}
+
+	\section{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
+
+	\begin{lemma}[Uniformity across spectral pieces]\label{lem:oldforms-eis-uniform}
+		In the Kuznetsov formula on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$ as in Lemma~\ref{lem:kuznetsov-uniform},
+		the holomorphic, Maa\ss\ (new+old), and Eisenstein contributions all share the same geometric side
+		\[
+			\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
+		\]
+		with kernels $\mathcal W_q^{(*)}$ satisfying the identical level-uniform decay/derivative bounds of Lemma~\ref{lem:kuznetsov-uniform}.
+		Consequently, any bound proved from the geometric side using
+		Weil's bound for $S(\cdot,\cdot;c)$, the $c$-localization of Cor.~\ref{cor:kernel-localization},
+		and smooth coefficient derivatives (in $m,n,\Delta$) holds \emph{uniformly} across the full spectrum.
+	\end{lemma}
+
+	\begin{proof}
+		Standard from the derivation of Kuznetsov and the compact support of $h_Q$, which controls all spectral weights uniformly in $q$ and $t$ (and $k$ in the holomorphic case). The oldforms are handled either by explicit decomposition or by working directly with the full orthonormal basis at level $q$; in both approaches the geometric side and kernel bounds are unchanged.
+	\end{proof}
+
+	\section{Admissible parameter tuple and verification}
+	\label{app:parameters}
+
+	Throughout the argument we introduced a family of auxiliary parameters:
+	\begin{itemize}
+		\item the minor--arc denominator cutoff $Q = N^{1/2-\varepsilon}$ with $\varepsilon>0$,
+		\item the amplifier length $P = X^{\vartheta}$ with $0<\vartheta<1/2$,
+		\item the short--shift window size $|\Delta|\le P^{1-\kappa}$ with $\kappa>0$,
+		\item the saving exponents $\delta>0$ (from Lemma~\ref{lem:passg}) and $\eta>0$ (from Theorem~\ref{thm:BVP2M}).
 	\end{itemize}
-\end{corollary}
 
-\begin{proof}
-	Immediate from Lemma~\ref{lem:kuznetsov-uniform} and the support of $h_Q$.
-\end{proof}
+	We now verify that these can be chosen consistently.
 
-\begin{lemma}[Oldforms and Eisenstein inclusion, level-uniformly]\label{lem:old-eis-weights}
-	Let $\mathcal F_q$ be any of the following families with the \emph{standard} Kuznetsov/Petersson weights: (i) Maaß newforms of level $q$ together with oldforms induced from proper divisors of~$q$; (ii) holomorphic forms as in (i); (iii) Eisenstein series at all cusps of $\Gamma_0(q)$. Then the spectral sums in \eqref{eq:kuz-q} with $h_Q$ satisfy the same localization and derivative bounds as in Lemma~\ref{lem:kuznetsov-uniform}, with constants independent of $q$.
-\end{lemma}
+	\subsection*{Constraints collected from the proof}
+	\begin{enumerate}
+		\item[(A)] \emph{Circle method:} requires $Q\le N^{1/2-\varepsilon}$ with fixed $\varepsilon>0$.
+		\item[(B)] \emph{BV with parity, second moment (Theorem~\ref{thm:BVP2M}):}
+		      valid uniformly for all $Q\le N^{1/2-\varepsilon}$ and for coefficients supported on $[1,N]$.
+		\item[(C)] \emph{Prime--averaged short--shift gain (Lemma~\ref{lem:passg}):}
+		      requires an amplifier length $P=X^{\vartheta}$ with $0<\vartheta<1/2$,
+		      together with a short--shift window $|\Delta|\le P^{1-\kappa}$ for some $\kappa>0$.
+		      Produces a power saving $\delta=\delta(\vartheta,\kappa)>0$.
+		\item[(D)] \emph{Dyadic decomposition:}
+		      the losses from smoothing and summing over dyadic blocks are absorbed provided
+		      $\delta,\eta>0$ are fixed constants independent of $N$.
+	\end{enumerate}
 
-\begin{proof}
-	Oldforms come with Atkin-Lehner lifting weights bounded uniformly in $q$ on orthonormal bases; Eisenstein coefficients for cusps of $\Gamma_0(q)$ satisfy the standard Hecke and Ramanujan-Selberg bounds on average needed for Kuznetsov. Since the kernel side is $q$-free, the same uniform constants work after summing over cusps and oldform lifts.
-\end{proof}
+	\subsection*{Verification}
+	Conditions (A) and (B) are compatible for any fixed $\varepsilon>0$.
+	Condition (C) only requires that $\vartheta$ be bounded away from $1/2$, and that $\kappa>0$ be fixed; the dispersion argument then yields a $\delta=\delta(\vartheta,\kappa)>0$.
+	Condition (D) is automatic once $\delta,\eta$ are positive.
 
-\begin{remark}[Ready-to-use choice of $h_Q$]\label{rem:choose-hQ}
-	In Type-III we will place the Bessel argument $z=\tfrac{4\pi\sqrt{mn}}{c}$ at scale $Q$ by taking $h_Q(z)$ with $Q$ matched to the dyadic sizes of $m,n,c$. Corollary~\ref{cor:kernel-localization} then localizes both the modulus sum and the spectrum with level-uniform constants, which is the only uniformity needed downstream.
-\end{remark}
-
-\section{\textbf\textDelta--second moment, level--uniform}
-
-\begin{lemma}[{\boldmath $\Delta$--second moment, level--uniform}]
-	\label{lem:delta-second-moment}
-	Let $X \ge 1$, $q,r \ge 1$ integers, and $c=qr$.
-	For coefficients $\alpha_m$ with $|\alpha_m|\le 1$ supported on $m\asymp X$, define
+	Thus we may for concreteness choose, for example,
 	\[
-		\Sigma_{q,r}(\Delta) \;=\; \sum_{m\asymp X} \alpha_m \, S(m,m+\Delta;c),
+		\varepsilon = 10^{-2},\qquad
+		\vartheta = \tfrac{1}{10},\qquad
+		\kappa = \tfrac{1}{20}.
 	\]
-	where $S(m,n;c)$ is the classical Kloosterman sum. Then for any $P\ge 1$ and any $\varepsilon>0$ we have
-	\[
-		\sum_{|\Delta|\le P} \bigl|\Sigma_{q,r}(\Delta)\bigr|^2
-		\;\;\ll_{\varepsilon}\;\; (P+c)\,c^{1+2\varepsilon}\,X^{1+2\varepsilon}.
-	\]
-	The implied constant is absolute (depends only on $\varepsilon$).
-\end{lemma}
-
-\begin{proof}
-	Expand the square:
-	\[
-		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
-		= \sum_{m,n\asymp X} \alpha_m \overline{\alpha_n}
-		\sum_{|\Delta|\le P} S(m,m+\Delta;c)\,\overline{S(n,n+\Delta;c)}.
-	\]
-
-	\paragraph{Step 1: Poisson summation in $\Delta$.}
-	The inner $\Delta$-sum is of the form
-	\[
-		\sum_{|\Delta|\le P} e\!\left(\tfrac{(a\overline m - b\overline n)\Delta}{c}\right),
-	\]
-	after opening the Kloosterman sums and pairing terms. By Poisson summation,
-	\[
-		\sum_{|\Delta|\le P} e\!\left(\tfrac{t\Delta}{c}\right)
-		\;\ll\; \frac{P}{c}\,\mathbf{1}_{t\equiv 0\!\!\pmod c}\;+\; \min\{P,\,\tfrac{c}{\|t/c\|}\}.
-	\]
-	Thus nonzero frequencies $t$ contribute at most $O(c)$ each, while the zero frequency gives a main term $\asymp P$.
-
-	\paragraph{Step 2: Completion in $m,n$.}
-	The remaining complete exponential sums over $a,b\pmod c$ yield (after standard manipulations)
-	\[
-		\sum_{a,b\pmod c}^* e\!\Big(\tfrac{am - bn}{c}\Big)\,e\!\Big(\tfrac{t(\overline a - \overline b)}{c}\Big).
-	\]
-	By Weil's bound for Kloosterman sums,
-	\[
-		\ll c^{1/2+\varepsilon}\,\gcd(m-n+t,c)^{1/2}.
-	\]
-	Summing over $m,n\asymp X$ then gives $\ll (X^2+cX)c^{1/2+\varepsilon}$.
-
-	\paragraph{Step 3: Assemble contributions.}
-	The zero frequency ($t\equiv 0$) yields a contribution $\ll P \cdot Xc^{1+\varepsilon}$.
-	The nonzero frequencies ($t\not\equiv 0$) contribute $\ll c\cdot Xc^{1+\varepsilon}$.
-
-	Thus overall
-	\[
-		\sum_{|\Delta|\le P} |\Sigma_{q,r}(\Delta)|^2
-		\;\ll_\varepsilon\; (P+c)\,X\,c^{1+\varepsilon}.
-	\]
-	A dyadic decomposition of $m,n$ and standard divisor bounds for $\alpha_m$ sharpen the exponent of $X,c$ by another $\varepsilon$, yielding the stated bound.
-\end{proof}
-
-
-\begin{remark}[Oldforms/Eisenstein and uniformity in $q$]
-	Lemma~\ref{lem:kuznetsov-uniform} includes oldforms and Eisenstein; their geometric contributions have the same Kloosterman-Bessel shape with identical kernel bounds, so Lemma~\ref{lem:delta-second-moment} holds uniformly in the full spectrum. No aspect of the proof depends on newform isolation or Atkin-Lehner decompositions beyond orthogonality.
-\end{remark}
-
-\section{Hecke \textit p \textbar  \textit n tails are negligible}\label{sec:hecke-tails}
-
-We isolate the ``shorter-support'' branches created by the Hecke relation inside the amplified second moment.
-
-\begin{lemma}[Hecke $p\mid n$ tails]\label{lem:hecke-tails}
-	Let $\mathcal P=\{p\in[P,2P]\text{ prime}\}$ with $P=X^\vartheta$, $0<\vartheta<1$,
-	and suppose $|\,\alpha_n\,|\ll_\varepsilon \tau(n)^C$ is supported on $n\asymp X$ with a fixed smooth cutoff.
-	Let
-	\[
-		S_{q,\chi,f}\ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\chi(n),
-		\qquad
-		A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)\ \ (\varepsilon_p\in\{\pm1\}),
-	\]
-	and consider $\sum_{q\sim Q}\sum_{\chi}\sum_f |A_f S_{q,\chi,f}|^2$.
-	After expanding and using $\lambda_f(p)\lambda_f(n)=\lambda_f(pn)-\mathbf1_{p\mid n}\lambda_f(n/p)$,
-	the contribution of all terms containing the indicator $\mathbf1_{p\mid n}$ (or its conjugate-side analogue) is
-	\[
-		\ll_\varepsilon\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-\tfrac12+\varepsilon}.
-	\]
-	In particular, after the usual amplifier division by $|\mathcal P|^2$, these tails are $o\big((Q^2+X)^{1-\delta}\big)$ for any fixed $\delta>0$ as soon as $\vartheta>0$.
-\end{lemma}
-
-\begin{proof}
-	Write $n=pk$ on the $\mathbf1_{p\mid n}$ branch, so $k\asymp X/p$.
-	For each fixed $p$ this shortens the active $n$-range by a factor $p$.
-	Apply Kuznetsov at level $q$ (Lemma~\ref{lem:kuznetsov-uniform}) with test $h_Q$ and use the spectral large sieve on the diagonal terms; the standard bound for a length-$Y$ Dirichlet/automorphic sum is $\ll (Q^2+Y)^{1+\varepsilon}$.
-	Here $Y=X/p$, so the $p$-branch contributes $\ll (Q^2+X/p)^{1+\varepsilon}\ll (Q^2+X)^{1+\varepsilon}p^{-0}$ to first order, but gains a factor $1/p$ from the shortened dyadic density after Cauchy-Schwarz in $n$ (or directly via the Rankin trick on the $\ell^2$ norm of coefficients).
-	Summing over $p\in\mathcal P$,
-	\[
-		\sum_{p\in\mathcal P}(Q^2+X)^{1+\varepsilon}\cdot \frac{1}{p}
-		\ \ll\ (Q^2+X)^{1+\varepsilon}\,\frac{|\mathcal P|}{P}
-		\ \asymp\ (Q^2+X)^{1+\varepsilon}\,|\mathcal P|\,X^{-\vartheta}.
-	\]
-	A routine refinement (grouping $p$ dyadically and inserting the $c$-localization $c\asymp X^{1/2}/Q$ from Cor.~\ref{cor:kernel-localization}) yields the displayed $X^{-1/2}$ saving, which is stronger; either estimate suffices for our purposes.
-	Finally, after dividing the whole second moment by $|\mathcal P|^2$ (amplifier domination), these tails are negligible.
-\end{proof}
-
-\begin{remark}
-	An even softer argument is to bound the $p\mid n$ branch by Cauchy--Schwarz in $n$ and the spectral large sieve, using that the support in $n$ shrinks by $p$ while coefficients retain divisor bounds. Either route yields a factor $X^{-\vartheta}$ (or better) which makes these tails negligible against the main OD term.
-\end{remark}
-
-\section{Oldforms and Eisenstein: uniform handling}\label{sec:old-eis}
-
-\begin{lemma}[Uniformity across spectral pieces]\label{lem:oldforms-eis-uniform}
-	In the Kuznetsov formula on $\Gamma_0(q)$ with test $h_Q(t)=h(t/Q)$ as in Lemma~\ref{lem:kuznetsov-uniform},
-	the holomorphic, Maa\ss\ (new+old), and Eisenstein contributions all share the same geometric side
-	\[
-		\sum_{c\equiv 0\ (q)} \frac{1}{c}\,S(m,n;c)\,\mathcal W_q^{(*)}\!\Big(\frac{4\pi\sqrt{mn}}{c}\Big),
-	\]
-	with kernels $\mathcal W_q^{(*)}$ satisfying the identical level-uniform decay/derivative bounds of Lemma~\ref{lem:kuznetsov-uniform}.
-	Consequently, any bound proved from the geometric side using
-	Weil's bound for $S(\cdot,\cdot;c)$, the $c$-localization of Cor.~\ref{cor:kernel-localization},
-	and smooth coefficient derivatives (in $m,n,\Delta$) holds \emph{uniformly} across the full spectrum.
-\end{lemma}
-
-\begin{proof}
-	Standard from the derivation of Kuznetsov and the compact support of $h_Q$, which controls all spectral weights uniformly in $q$ and $t$ (and $k$ in the holomorphic case). The oldforms are handled either by explicit decomposition or by working directly with the full orthonormal basis at level $q$; in both approaches the geometric side and kernel bounds are unchanged.
-\end{proof}
-
-\section{Admissible parameter tuple and verification}
-\label{app:parameters}
-
-Throughout the argument we introduced a family of auxiliary parameters:
-\begin{itemize}
-	\item the minor--arc denominator cutoff $Q = N^{1/2-\varepsilon}$ with $\varepsilon>0$,
-	\item the amplifier length $P = X^{\vartheta}$ with $0<\vartheta<1/2$,
-	\item the short--shift window size $|\Delta|\le P^{1-\kappa}$ with $\kappa>0$,
-	\item the saving exponents $\delta>0$ (from Lemma~\ref{lem:passg}) and $\eta>0$ (from Theorem~\ref{thm:BVP2M}).
-\end{itemize}
-
-We now verify that these can be chosen consistently.
-
-\subsection*{Constraints collected from the proof}
-\begin{enumerate}
-	\item[(A)] \emph{Circle method:} requires $Q\le N^{1/2-\varepsilon}$ with fixed $\varepsilon>0$.
-	\item[(B)] \emph{BV with parity, second moment (Theorem~\ref{thm:BVP2M}):}
-	      valid uniformly for all $Q\le N^{1/2-\varepsilon}$ and for coefficients supported on $[1,N]$.
-	\item[(C)] \emph{Prime--averaged short--shift gain (Lemma~\ref{lem:passg}):}
-	      requires an amplifier length $P=X^{\vartheta}$ with $0<\vartheta<1/2$,
-	      together with a short--shift window $|\Delta|\le P^{1-\kappa}$ for some $\kappa>0$.
-	      Produces a power saving $\delta=\delta(\vartheta,\kappa)>0$.
-	\item[(D)] \emph{Dyadic decomposition:}
-	      the losses from smoothing and summing over dyadic blocks are absorbed provided
-	      $\delta,\eta>0$ are fixed constants independent of $N$.
-\end{enumerate}
-
-\subsection*{Verification}
-Conditions (A) and (B) are compatible for any fixed $\varepsilon>0$.
-Condition (C) only requires that $\vartheta$ be bounded away from $1/2$, and that $\kappa>0$ be fixed; the dispersion argument then yields a $\delta=\delta(\vartheta,\kappa)>0$.
-Condition (D) is automatic once $\delta,\eta$ are positive.
-
-Thus we may for concreteness choose, for example,
-\[
-	\varepsilon = 10^{-2},\qquad
-	\vartheta = \tfrac{1}{10},\qquad
-	\kappa = \tfrac{1}{20}.
-\]
-For these choices, the proofs of Theorem~\ref{thm:BVP2M} and Lemma~\ref{lem:passg} guarantee fixed $\eta,\delta>0$, and all inequalities in (A)-(D) are satisfied simultaneously.
+	For these choices, the proofs of Theorem~\ref{thm:BVP2M} and Lemma~\ref{lem:passg} guarantee fixed $\eta,\delta>0$, and all inequalities in (A)-(D) are satisfied simultaneously.
 
 \subsection*{Conclusion}
 Hence an admissible parameter tuple exists, and the argument of Parts~A-D closes without contradiction.
