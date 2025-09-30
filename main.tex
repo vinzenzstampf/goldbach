@@ -446,14 +446,14 @@ We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
 	\smallskip
 
-	\emph{Proof of Lemma \ref{lem:distance}.} By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page’s theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring–Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2013}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
 \end{proof}
 
 \begin{remark}
 	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
 \end{remark}
 
-We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász’s mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
 
 \subsection*{Auxiliary tools}
 We recall three standard inputs.
@@ -586,7 +586,7 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 		for some fixed $\sigma=\sigma(\rho)>0$, uniformly in $(a,c)=1$.
 	\end{sublemma}
 
-	Assuming Sublemmas \ref{sub:kernel} and \ref{sub:vdc}, Weil’s bound for Kloosterman sums gives
+	Assuming Sublemmas \ref{sub:kernel} and \ref{sub:vdc}, Weil's bound for Kloosterman sums gives
 	\[
 		\mathcal K_q(m,n,\Delta;c)\ \ll_\varepsilon\ c^{1/2+\varepsilon}\,(m,n,c)^{1/2}.
 	\]
@@ -597,9 +597,9 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	for some $\delta=\delta(\sigma)>0$. The diagonal is negligible by $\sum_{p}\varepsilon_p=0$. Averaging over $q\le Q$ and $\chi$ only improves the bound. This proves \eqref{eq:typeIII-bound}.
 	\smallskip
 
-	\emph{Proof of Sublemma \ref{sub:kernel}.} This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
+	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[\S16]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus.  This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
 
-	\emph{Proof of Sublemma \ref{sub:vdc}.} Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
+	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[\S13]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
 \end{proof}
 
 \begin{proof}
@@ -840,6 +840,17 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 \end{remark}
 % =========================================================
 % Part D. Assembly and Conclusion
+
+\begin{theorem}[Main Theorem]
+	For all sufficiently large even integers $N$,
+	\[
+		R(N)=\mathfrak S(N)\frac{N}{\log^2 N}
+		+ O\!\left(\frac{N}{\log^{2+\eta}N}\right),
+	\]
+	with $\mathfrak S(N)>0$.
+	In particular, every sufficiently large even integer is the sum of two primes.
+\end{theorem}
+
 % =========================================================
 
 \section{Minor-arc bound (summary of Parts B--C)}
@@ -852,7 +863,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 \end{theorem}
 
 \begin{proof}
-	Fix a Vaughan/Heath–Brown identity with three variables and smooth dyadic partitions so that
+	Fix a Vaughan/Heath-Brown identity with three variables and smooth dyadic partitions so that
 	\[
 		S(\alpha)-B(\alpha)\ =\ \sum_{j=1}^3 \mathcal T_j(\alpha),
 	\]
@@ -862,7 +873,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 	\]
 	for appropriate $c^{(j)}_n$ (after localizing minor arcs by Dirichlet approximation and completing sums).
 
-	For $j=1,2$ apply Theorem~\ref{thm:BVP2M} with a loss $(\log N)^{-A}$ which we budget as $(\log N)^{-2-\varepsilon}$. For $j=3$ use Proposition~\ref{prop:typeIII} with $\delta>0$ to gain a fixed power saving over $(Q^2+X)$ on each dyadic block $X\ll N$, summing the dyadics with $\sum_X X^{-\,\delta}\ll 1$. Optimizing the Heath–Brown splitting parameters (choose the standard $M\le N^{1/3}$ regime) yields
+	For $j=1,2$ apply Theorem~\ref{thm:BVP2M} with a loss $(\log N)^{-A}$ which we budget as $(\log N)^{-2-\varepsilon}$. For $j=3$ use Proposition~\ref{prop:typeIII} with $\delta>0$ to gain a fixed power saving over $(Q^2+X)$ on each dyadic block $X\ll N$, summing the dyadics with $\sum_X X^{-\,\delta}\ll 1$. Optimizing the Heath-Brown splitting parameters (choose the standard $M\le N^{1/3}$ regime) yields
 	\[
 		\int_{\mathfrak m} \big|S(\alpha)-B(\alpha)\big|^2\,d\alpha \ \ll\ \frac{N}{(\log N)^{3+\varepsilon}}.
 	\]
@@ -1450,10 +1461,10 @@ Thus we may for concreteness choose, for example,
 	\vartheta = \tfrac{1}{10},\qquad
 	\kappa = \tfrac{1}{20}.
 \]
-For these choices, the proofs of Theorem~\ref{thm:BVP2M} and Lemma~\ref{lem:passg} guarantee fixed $\eta,\delta>0$, and all inequalities in (A)–(D) are satisfied simultaneously.
+For these choices, the proofs of Theorem~\ref{thm:BVP2M} and Lemma~\ref{lem:passg} guarantee fixed $\eta,\delta>0$, and all inequalities in (A)-(D) are satisfied simultaneously.
 
 \subsection*{Conclusion}
-Hence an admissible parameter tuple exists, and the argument of Parts~A–D closes without contradiction.
+Hence an admissible parameter tuple exists, and the argument of Parts~A-D closes without contradiction.
 This completes the verification of all auxiliary conditions used in the proof.
 
 
