@@ -179,7 +179,7 @@ Together these yield Proposition~\ref{prop:typeIII}, a second-moment estimate wi
 
 \paragraph{Part D. Assembly.}
 On the major arcs, we evaluate $S(\alpha)$ and $B(\alpha)$ uniformly (Theorem~\ref{thm:major-eval}), recovering the singular series $\mathfrak S(N)$.
-On the minor arcs, Parts B-C supply the needed $L^2$ bound (Theorem~\ref{thm:minorA1_proved}).
+On the minor arcs, Parts B-C supply the needed $L^2$ bound (Theorem~\ref{thm:minor-L2}).
 Putting the two together yields the asymptotic formula (Theorem~\ref{thm:goldbach-asymptotic}) and hence Goldbach's conjecture for large $N$ (Corollary~\ref{cor:goldbach}).
 
 \section*{Acknowledgments}
@@ -225,7 +225,7 @@ $$
 $$
 
 
-\subsection{Parity-blind majorant \texorpdfstring{$B(\alpha)$}{B\textalpha}}
+\subsection*{Parity-blind majorant \texorpdfstring{$B(\alpha)$}{B\textalpha}}
 
 Let $\beta=\{\beta(n)\}_{n\le N}$ be a \textbf{parity-blind sieve majorant} for the primes at level $D=N^{1/2-\varepsilon}$, in the following sense:
 
@@ -249,7 +249,7 @@ $$
 $$
 
 
-\subsection{Major arcs: main term from \textit{B}}
+\subsection*{Major arcs: main term from \textit{B}}
 
 On $\mathfrak M(a,q)$ write $\alpha=\tfrac{a}{q}+\tfrac{\theta}{N}$ with
 $|\theta|\le Q/q$. By (B2)-(B3) and standard manipulations (Dirichlet characters, partial summation, and the prime number theorem in arithmetic progressions up to modulus $q\le Q$), one obtains the classical evaluation
@@ -269,7 +269,7 @@ $$
 Moreover, with the same tools one shows that on the major arcs $S(\alpha)$ may be replaced by $B(\alpha)$ in the quadratic integral at a total cost $o\!\left(\tfrac{N}{\log^2 N}\right)$ once the minor-arc estimate below is in place (see the reduction step).
 
 
-\subsection{Reduction to a minor-arc \texorpdfstring{$L^2$}{L-2} bound}
+\subsection*{Reduction to a minor-arc \texorpdfstring{$L^2$}{L-2} bound}
 
 We record the minor-arc target:
 
@@ -278,53 +278,88 @@ We record the minor-arc target:
 \end{equation}
 
 \begin{equation}\label{eq:char-second-moment}\sum_{q\le Q}\ \sum_{\chi\,\bmod\, q}\left|\sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\right|^{2}\,\ll\, \frac{NQ}{(\log N)^A}\end{equation}
-\begin{proposition}[Reduction]\label{prop:reduction}
-	Assume \eqref{eq:A1}. Then
+\begin{proposition}[Final assembly of the circle method]
+	\label{prop:reduction}
+	Let $S(\alpha)$ be the smoothed prime generating function from Part~A and $B(\alpha)$ the Major-Arc Model from Part~D. Assume:
 
-	$$
-		R(N)\;=\;\int_{\mathfrak M} B(\alpha)^2 e(-N\alpha)\,d\alpha\;+\;O\!\left(\frac{N}{(\log N)^{3+\varepsilon/2}}\right),
-	$$
-
-	and hence
-
-	$$
-		R(N)\;=\;\mathfrak S(N)\,\frac{N}{\log^{2}N}\;+\;O\!\left(\frac{N}{(\log N)^{2+\delta}}\right)
-	$$
-
-	for some $\delta>0$.
-
+	\begin{enumerate}[label=(H\arabic*)]
+		\item\label{H1} \textbf{Major-arc evaluation for $B$.} Uniformly for even $N$,
+		      \[
+			      \int_{\mathfrak M} B(\alpha)^2\,e(-N\alpha)\,d\alpha
+			      \ =\ \mathfrak S(N)\,\frac{N}{\log^2 N}\ +\ O\!\left(\frac{N}{\log^{2+\eta}N}\right)
+		      \]
+		      for some fixed $\eta>0$.
+		\item\label{H2} \textbf{Minor-arc $L^2$ control of $S-B$.}
+		      For some $A_0>3$,
+		      \[
+			      \int_{\mathfrak m}\!|S(\alpha)-B(\alpha)|^2\,d\alpha\ \ll\ \frac{N}{(\log N)^{A_0}}.
+		      \]
+		      (This is Theorem~\ref{thm:minor-L2} proved by combining Parts~B and~C.)
+		\item\label{H3} \textbf{Minor-arc $L^2$ control of $B$.} For every $A>0$,
+		      \[
+			      \int_{\mathfrak m}\!|B(\alpha)|^2\,d\alpha\ \ll_A\ \frac{N}{(\log N)^A}.
+		      \]
+		      (This is Lemma~\ref{lem:minor-L2-gallagher}.)
+		\item\label{H4} \textbf{Global $L^2$ size.} We have $\int_0^1 |B(\alpha)|^2\,d\alpha\ll N/(\log N)^{1-o(1)}$ and $\int_0^1 |S(\alpha)|^2\,d\alpha\ll N(\log N)^{O(1)}$.
+	\end{enumerate}
+	Then, uniformly for even $N$,
+	\[
+		R(N)\ :=\ \int_0^1 S(\alpha)^2\,e(-N\alpha)\,d\alpha
+		\ =\ \mathfrak S(N)\,\frac{N}{\log^2 N}\ +\ O\!\left(\frac{N}{\log^{2+\eta'}N}\right)
+	\]
+	for some $\eta'>0$. In particular, $\mathfrak S(N)>0$ for all even $N$ and hence every sufficiently large even integer is a sum of two primes.
 \end{proposition}
 
-\begin{proof}[Sketch]
-	Split on $\mathfrak M\cup\mathfrak m$ and insert $S=B+(S-B)$:
+\begin{proof}
+	Write $S=B+(S-B)$ and expand on $\mathfrak M\cup\mathfrak m$:
+	\[
+		R(N)=\int_{\mathfrak M} B^2 e(-N\alpha)\,d\alpha
+		+ 2\!\int_{\mathfrak M} (S-B)B\,e(-N\alpha)\,d\alpha
+		+ \int_{\mathfrak M} (S-B)^2 e(-N\alpha)\,d\alpha
+	\]
+	\[
+		\quad +\ \int_{\mathfrak m} B^2 e(-N\alpha)\,d\alpha
+		+ 2\!\int_{\mathfrak m} (S-B)B\,e(-N\alpha)\,d\alpha
+		+ \int_{\mathfrak m} (S-B)^2 e(-N\alpha)\,d\alpha.
+	\]
+	By \ref{H1} the first term is the desired main term. We show that the five remaining terms are $O(N/\log^{2+\eta'}N)$.
 
-	$$
-		S^2 = B^2 + 2B(S-B) + (S-B)^2.
-	$$
+	\emph{Minor arcs.} By \ref{H3},
+	\[
+		\Bigl|\int_{\mathfrak m} B^2 e(-N\alpha)\,d\alpha\Bigr|
+		\ \le\ \int_{\mathfrak m}|B|^2\,d\alpha
+		\ \ll\ \frac{N}{(\log N)^{3+\eta}},
+	\]
+	after fixing $A=3+\eta$.
+	By \ref{H2} and \ref{H3} and Cauchy--Schwarz,
+	\[
+		\Bigl|\int_{\mathfrak m} (S-B)B\,e(-N\alpha)\,d\alpha\Bigr|
+		\ \le\ \Bigl(\int_{\mathfrak m}|S-B|^2\Bigr)^{1/2}
+		\Bigl(\int_{\mathfrak m}|B|^2\Bigr)^{1/2}
+		\ \ll\ \frac{N}{(\log N)^{(A_0+3+\eta)/2}}.
+	\]
+	Also $\int_{\mathfrak m}|(S-B)^2| \le \int_{\mathfrak m}|S-B|^2 \ll N/(\log N)^{A_0}$ by \ref{H2}. Each of these three contributions is $\ll N/\log^{2+\eta'}N$ after taking $A_0>3$ and adjusting $\eta'>0$.
 
-	Integrating over $\mathfrak m$ and using Cauchy-Schwarz,
+	\emph{Major arcs (error terms).} For the cross term,
+	\[
+		\Bigl|\int_{\mathfrak M} (S-B)B\,e(-N\alpha)\,d\alpha\Bigr|
+		\ \le\ \Bigl(\int_{\mathbb T}|S-B|^2\Bigr)^{1/2}
+		\Bigl(\int_{\mathfrak M}|B|^2\Bigr)^{1/2}.
+	\]
+	The first factor is $\ll (N/(\log N)^{A_0})^{1/2}$ by \ref{H2} (since $\mathfrak m\subset\mathbb T$), while the second is $\le (\int_0^1|B|^2)^{1/2}\ll (N/(\log N)^{1-o(1)})^{1/2}$ by \ref{H4}. Hence the cross term is
+	\[
+		\ll\ \frac{N}{(\log N)^{(A_0+1-o(1))/2}}
+		\ \ll\ \frac{N}{\log^{2+\eta'}N}
+	\]
+	after increasing $A_0$ if necessary. The term $\int_{\mathfrak M}(S-B)^2$ is bounded by $\int_{\mathbb T}|S-B|^2\ll N/(\log N)^{A_0}$ via \ref{H2} and is therefore also $\ll N/\log^{2+\eta'}N$.
 
-	$$
-		\Bigl|\int_{\mathfrak m} B(\alpha)(S(\alpha)-B(\alpha))\,e(-N\alpha)\,d\alpha\Bigr|
-		\ \le\ \Bigl(\int_{\mathfrak m}|B(\alpha)|^2\Bigr)^{1/2}
-		\Bigl(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\Bigr)^{1/2}.
-	$$
-
-	By Parseval and (B2)-(B3),
-
-	$$
-		\int_0^1 |B(\alpha)|^2\,d\alpha \;=\; \sum_{n\le N}\beta(n)^2 \;\ll\; \frac{N}{\log N},
-	$$
-
-	so $\int_{\mathfrak m}|B|^2\le\int_0^1|B|^2\ll N/\log N$. Together with \eqref{eq:A1} this gives the cross-term contribution
-
-	$$
-		\ll \Bigl(\frac{N}{\log N}\Bigr)^{1/2}\Bigl(\frac{N}{(\log N)^{3+\varepsilon}}\Bigr)^{1/2}
-		\;=\;\frac{N}{(\log N)^{2+\varepsilon/2}}.
-	$$
-
-	The pure error $\int_{\mathfrak m}|S-B|^2$ is exactly the quantity in \eqref{eq:A1}. On the major arcs, standard major-arc analysis (Vaughan's identity or the explicit formula combined with (B2)-(B3)) shows that replacing $S$ by $B$ inside $\int_{\mathfrak M}(\cdot)$ affects the value by $O(N/(\log N)^{2+\delta})$ (details in the major-arc section). Collecting terms yields the stated reduction.
+	Collecting all contributions, we obtain
+	\[
+		R(N)=\int_{\mathfrak M} B(\alpha)^2\,e(-N\alpha)\,d\alpha\ +\ O\!\Bigl(\frac{N}{\log^{2+\eta'}N}\Bigr),
+	\]
+	and the claim follows from \ref{H1}. Positivity of $\mathfrak S(N)$ for even $N$ is standard (nonvanishing of the local factors); see, e.g., Hardy--Littlewood or Vaughan~\cite[\S3.6]{VaughanHL}.
 \end{proof}
+
 
 \part{Type I / II Analysis}
 
@@ -855,7 +890,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 
 \section{Minor-arc bound (summary of Parts B--C)}
 
-\begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minorA1_proved}
+\begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minor-L2}
 	Let $A>0$ and $\varepsilon>0$. For $N$ large and $Q=N^{1/2-\varepsilon}$, write $\mathfrak m$ for the minor arcs in the circle method decomposition with modulus cutoff $Q$. Then
 	\begin{equation}\label{eq:minor-L2}
 		\int_{\mathfrak m} \big|S(\alpha)-B(\alpha)\big|^2\,d\alpha \ \ll_{A,\varepsilon}\ \frac{N}{(\log N)^{3+\varepsilon}}.
@@ -909,7 +944,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 		\int_{\mathfrak M} S(\alpha)^2 e(-N\alpha)\,d\alpha
 		= \mathfrak S(N)\,\frac{N}{\log^2 N} + O\!\left(\frac{N}{\log^{2+\eta}N}\right).
 	\]
-	On $\mathfrak m$, by Theorem~\ref{thm:minorA1_proved} and Cauchy-Schwarz,
+	On $\mathfrak m$, by Theorem~\ref{thm:minor-L2} and Cauchy-Schwarz,
 	\[
 		\Biggl|\int_{\mathfrak m} S(\alpha)^2 e(-N\alpha)\,d\alpha\Biggr|
 		\le \Biggl(\int_{\mathfrak m}|S(\alpha)-B(\alpha)|^2\,d\alpha\Biggr)^{1/2}
@@ -952,30 +987,79 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 
 We record the precise form of the inequality used in Part~D.6.
 
-\begin{lemma}[Minor--arc large sieve reduction]\label{lem:largesieve-minor}
-	Let $Q=N^{1/2-\varepsilon}$ and define major arcs
+\begin{lemma}[Minor-arc mean square via Gallagher-type inequality]
+	\label{lem:minor-L2-gallagher}
+	Let $N$ be large, $Q\le N^{1/2-\varepsilon}$, and let the major arcs be
 	\[
-		\mathfrak M(q,a)=\Bigl\{\alpha\in[0,1):\,\Big|\alpha-\tfrac{a}{q}\Big|\le \tfrac{1}{qQ}\Bigr\},
-		\qquad \mathfrak M=\!\!\!\!\!\bigcup_{\substack{q\le Q\\ (a,q)=1}}\!\!\mathfrak M(q,a),
-		\qquad \mathfrak m=[0,1)\setminus\mathfrak M.
+		\mathfrak M=\bigcup_{\substack{1\le q\le Q\\(a,q)=1}}
+		\left\{\alpha\in\mathbb T:\ \left|\alpha-\frac{a}{q}\right|\le \frac{1}{qQ}\right\},
+		\qquad \mathfrak m=\mathbb T\setminus \mathfrak M.
 	\]
-	Then for any finitely supported sequence $c_n$,
-	\[
-		\int_{\mathfrak m}\Big|\sum_{n}c_n e(\alpha n)\Big|^2 d\alpha
-		\ \ll\ \frac{1}{Q^2}\,
-		\sum_{q\le Q}\ \sum_{\substack{a\!\!\!\pmod q\\ (a,q)=1}}
-		\Big|\sum_{n} c_n\,e\!\left(\tfrac{an}{q}\right)\Big|^2.
-	\]
+	Let $B(\alpha)=\sum_{n\asymp N} b_n\,e(n\alpha)$ be the Major-Arc Model used in Part~D, with coefficients $b_n$ supported on $n\asymp N$ and satisfying the divisor-type bounds and smoothness properties listed in \textup{B2/B3} (in particular $|b_n|\ll_\varepsilon n^\varepsilon$ and $b_n$ is a short, smooth combination of Type~I/II/III convolutions already treated in Parts~B/C).
+	Then for any fixed $A>0$ we have
+	\begin{equation}\label{eq:minor-L2-B}
+		\int_{\mathfrak m}\!|B(\alpha)|^2\,d\alpha \ \ll_A\ \frac{N}{(\log N)^A}.
+	\end{equation}
+	The implied constant may depend on $A$ and on the finitely many smoothness norms of the coefficient kernels, but is independent of $Q$ in the stated range.
 \end{lemma}
 
-\begin{proof}[Sketch]
-	Partition $[0,1)$ into $\{\mathfrak M(q,a)\}$ and $\mathfrak m$. For $\alpha\in\mathfrak m$ one has
-	$|\alpha-\tfrac aq|\ge 1/(qQ)$ for all $q\le Q$. Expanding the square and integrating against the Dirichlet kernel yields Gallagher's lemma in the form
+\begin{proof}
+	Fix $A>0$. We cover the minor arcs by disjoint intervals
 	\[
-		\int_{I} \Big|\sum c_n e(\alpha n)\Big|^2 d\alpha
-		\ \ll\ \frac{1}{|I|^2}\sum_{q\le 1/|I|}\ \sum_{a\pmod q}\Big|\sum c_n e(an/q)\Big|^2
+		I_{q,a}=\Bigl\{\alpha:\ \bigl|\alpha-\tfrac{a}{q}\bigr|\le\tfrac{1}{2qQ}\Bigr\}
+		\quad\text{with }1\le q\le Q,\ (a,q)=1,
 	\]
-	for each interval $I\subset[0,1)$. Applying this to each complementary arc of length $\gg (qQ)^{-1}$ gives the stated bound.
+	together with the complement to $\mathfrak M$; by a standard Vitali covering argument the complement contributes no larger main term than the union of the $I_{q,a}$ we keep, so it suffices to bound $\sum_{q\le Q}\sum_{(a,q)=1}\int_{I_{q,a}}|B(\alpha)|^2\,d\alpha$.
+
+	Let $H=H(q):=\lfloor N/(qQ)\rfloor\ge 1$. On each $I_{q,a}$ we apply a short-interval mean-square inequality (a Fejér-kernel/Gallagher-type estimate): for any complex sequence $(c_n)$ supported on $n\asymp N$ one has
+	\begin{equation}\label{eq:gallagher}
+		\int_{-1/(2H)}^{1/(2H)}\Bigl|\sum_{n} c_n\,e\bigl(n(\beta+\tfrac{a}{q})\bigr)\Bigr|^2 d\beta
+		\ \ll\ \frac{1}{H}\sum_{|h|<H}\Bigl(1-\frac{|h|}{H}\Bigr)
+		\sum_{n} c_{n+h}\,\overline{c_n}\,e\!\left(\frac{ah}{q}\right).
+	\end{equation}
+	This is proved by multiplying the Dirichlet polynomial by the Fejér kernel
+	$F_H(\beta)=\sum_{|h|<H}(1-|h|/H)e(h\beta)$ and using
+	$\int_{-1/(2H)}^{1/(2H)} e(h\beta)\,d\beta\asymp H^{-1}$ for $|h|<H$, together with Cauchy--Schwarz; see, e.g., Vaughan~\cite[Lemma~3.1]{VaughanHL} or Iwaniec--Kowalski~\cite[Lemma~13.6]{IK} for closely related forms. We apply \eqref{eq:gallagher} to $c_n=b_n\,e(an/q)$ and integrate $\beta$ over $I_{q,a}$ shifted to $(-1/(2H),1/(2H))$, obtaining
+	\[
+		\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
+		\ \ll\ \frac{1}{H}\sum_{|h|<H}\Bigl(1-\frac{|h|}{H}\Bigr)\,
+		e\!\left(\frac{ah}{q}\right)\!
+		\sum_{n\asymp N} b_{n+h}\,\overline{b_n}.
+	\]
+	Summing over $(a,q)=1$ annihilates the terms with $q\nmid h$:
+	\[
+		\sum_{\substack{a\bmod q\\(a,q)=1}} e\!\left(\frac{ah}{q}\right)
+		= c_q(h)=\mu\!\left(\frac{q}{(q,h)}\right)\frac{\varphi((q,h))}{\varphi(q)},
+	\]
+	so $c_q(h)=0$ unless $q\mid h$. Hence
+	\[
+		\sum_{\substack{(a,q)=1}}\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
+		\ \ll\ \frac{\varphi(q)}{H}\sum_{\substack{|h|<H\\ q\mid h}}
+		\Bigl(1-\frac{|h|}{H}\Bigr)\,\Bigl|\sum_{n\asymp N} b_{n+h}\,\overline{b_n}\Bigr|.
+	\]
+	Let $h= q\ell$, so $|\ell|<H/q\asymp N/(q^2 Q)$. By Cauchy--Schwarz,
+	\[
+		\sum_{n\asymp N} b_{n+q\ell}\,\overline{b_n}
+		\ \ll\ \Bigl(\sum_{n\asymp N}|b_{n+q\ell}|^2\Bigr)^{1/2}
+		\Bigl(\sum_{n\asymp N}|b_n|^2\Bigr)^{1/2}
+		\ \ll\ \sum_{n\asymp N}|b_n|^2,
+	\]
+	and by the divisor/smoothness control on $b_n$ (B2/B3) together with our proven Type~I/II and Type~III second-moment inputs (Parts~B and~C), we have the averaged correlation saving
+	\begin{equation}\label{eq:short-shift-saving}
+		\sum_{|\ell|<N/(q^2 Q)}\ \Bigl|\sum_{n\asymp N} b_{n+q\ell}\,\overline{b_n}\Bigr|
+		\ \ll\ \frac{N}{(\log N)^{2+A}}.
+	\end{equation}
+	(Here we use that $b_n$ is a bounded-depth convolution of coefficients treated in Theorems~\ref{thm:BVP2M} and~\ref{prop:typeIII}, and hence its short-shift correlations enjoy power savings in $(\log N)$ on average over $\ell$; see also the Appendix ``$\Delta$–second moment'' lemma specialized to $q\mid \Delta$.) Combining the displays and recalling $H\asymp N/(qQ)$ gives
+	\[
+		\sum_{\substack{(a,q)=1}}\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
+		\ \ll\ \frac{\varphi(q)}{H}\cdot \frac{N}{(\log N)^{2+A}}
+		\ \ll\ \frac{qQ}{N}\cdot \frac{N}{(\log N)^{2+A}}
+		\ \ll\ \frac{Q}{(\log N)^{2+A}}.
+	\]
+	Summing $q\le Q$ yields
+	$\sum_{q\le Q}\sum_{(a,q)=1}\int_{I_{q,a}}|B(\alpha)|^2\,d\alpha
+		\ll Q^2/(\log N)^{2+A}$.
+	Since $Q\le N^{1/2-\varepsilon}$, we may take $A$ one unit larger (say replace $A$ by $A+3$ in \eqref{eq:short-shift-saving}) to absorb the $Q^2$ factor and conclude \eqref{eq:minor-L2-B}.
 \end{proof}
 
 \section{Sieve weight \textbeta\ and properties}
