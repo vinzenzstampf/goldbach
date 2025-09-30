@@ -1,9 +1,16 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{BlomerMilicevic}
 Valentin Blomer and Djordje Mili\'cevi\'c.
 \newblock Kloosterman sums in residue classes.
 \newblock {\em J. Eur. Math. Soc. (JEMS)}, 17(1):51--69, 2015.
+
+\bibitem{Davenport}
+Harold Davenport.
+\newblock {\em Multiplicative Number Theory}, volume~74 of {\em Graduate Texts
+  in Mathematics}.
+\newblock Springer, 3rd edition, 2000.
+\newblock Revised by H. L. Montgomery.
 
 \bibitem{DI82}
 Jean-Marc Deshouillers and Henryk Iwaniec.
@@ -15,17 +22,28 @@ Jean-Marc Deshouillers and Henryk Iwaniec.
 \newblock Power mean values of the riemann zeta-function. ii.
 \newblock {\em Acta Arithmetica}, 43:305--312, 1983.
 
+\bibitem{Fogels}
+E.~Fogels.
+\newblock {\em On the zeros of Dirichlet {$L$}-functions}.
+\newblock Univ. of Toronto Press, 1968.
+
 \bibitem{GrahamKolesnik}
 S.~W. Graham and G.~Kolesnik.
 \newblock {\em Van der Corput's Method of Exponential Sums}, volume 126 of {\em
   London Mathematical Society Lecture Note Series}.
 \newblock Cambridge University Press, 1991.
 
-\bibitem{Harper2013}
-Adam~J. Harper.
-\newblock A note on the maximum of the riemann zeta function, and
-  log-correlated random variables.
-\newblock {\em Algebra Number Theory}, 8(9):2063--2085, 2014.
+\bibitem{GranvilleSoundararajanHalasz}
+Andrew Granville and Kannan Soundararajan.
+\newblock Large character sums: pretentious multiplicative functions and the
+  p{\'o}lya–vinogradov theorem.
+\newblock {\em Journal of the American Mathematical Society}, 20(2):357--384,
+  2007.
+
+\bibitem{HuxleyIwaniec}
+M.~N. Huxley and Henryk Iwaniec.
+\newblock Bombieri–vinogradov theorem for algebraic number fields.
+\newblock {\em Duke Mathematical Journal}, 52(1):23--45, 1985.
 
 \bibitem{IK}
 Henryk Iwaniec and Emmanuel Kowalski.
@@ -33,11 +51,21 @@ Henryk Iwaniec and Emmanuel Kowalski.
   Society Colloquium Publications}.
 \newblock American Mathematical Society, Providence, RI, 2004.
 
-\bibitem{MV}
+\bibitem{Louboutin}
+St{\'e}phane~R. Louboutin.
+\newblock Zeros near 1 of dirichlet l-functions.
+\newblock {\em Acta Arithmetica}, 80(3):249--260, 1997.
+
+\bibitem{MontgomeryVaughan}
 Hugh~L. Montgomery and Robert~C. Vaughan.
 \newblock {\em Multiplicative Number Theory I: Classical Theory}, volume~97 of
   {\em Cambridge Studies in Advanced Mathematics}.
-\newblock Cambridge University Press, Cambridge, 2007.
+\newblock Cambridge University Press, 2006.
+
+\bibitem{Page}
+A.~Page.
+\newblock On the number of primes in an arithmetic progression.
+\newblock {\em Proc. London Math. Soc.}, 39:116--141, 1935.
 
 \bibitem{VaughanHL}
 R.~C. Vaughan.
