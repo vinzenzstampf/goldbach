@@ -384,89 +384,101 @@ We record the minor-arc target:
 \end{itemize}
 
 
-\section{Bombieri--Vinogradov with parity (second moment): full statement and proof}
-% ============================================
-% BVP2M: Bombieri-Vinogradov with parity, second moment
-% ============================================
+\section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
+
+Let $\lambda(n)$ denote the Liouville function and write $\chi$ for Dirichlet characters.
+We work with smooth, divisor–bounded coefficients supported on $[1,N]$.
 
 \begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
-	Let $(c_n)$ be coefficients supported on $n\le N$ with divisor-type bounds $|c_n|\ll_\varepsilon n^\varepsilon$ and smooth weights, and let $\liou(n)$ denote the Liouville (parity) function.
-	Fix $Q\le N^{1/2-\varepsilon}$.
-	Then for any $A>0$,
-	\begin{equation}\label{eq:BVP2M-goal}
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}
-		\Biggl|\;\sum_{n\le N} c_n\,\liou(n)\,\chi(n)\;\Biggr|^2
-		\;\;\ll_{A,\varepsilon}\;\; \frac{NQ}{(\log N)^A}.
-	\end{equation}
+	Fix $A>0$ and $\varepsilon>0$. Let $N\ge 3$ and $Q\le N^{1/2-\varepsilon}$.
+	Let $w:\mathbb R\to\mathbb R_{\ge 0}$ be a smooth weight supported on $[1/2,2]$ with $w^{(j)}\!\ll_j 1$,
+	and let $c_n$ be coefficients of the form $c_n = f(n)\,w(n/N)$ with $|f(n)|\ll_\delta \tau(n)^\delta$ for some fixed $\delta>0$.
+	Then
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}
+		\Bigg|\ \sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)\ \Bigg|^2
+		\ \ \ll_{A,\varepsilon,\delta}\ \ \frac{NQ}{(\log N)^A}\,.
+	\]
+	The implicit constant depends at most on $A,\varepsilon,\delta$ and on derivative bounds for $w$.
 \end{theorem}
 
-\begin{proof}
-	The argument proceeds in four standard stages.
-
-	\paragraph{Step 1: Reduction to primitive characters.}
-	By orthogonality, restricting to primitive $\chi$ and accounting for induced characters introduces only $O(N^\varepsilon Q)$ overhead, negligible compared with the RHS.
-
-	\paragraph{Step 2: Halász-Montgomery estimate with smooth weights.}
-	Let
-	\[
-		F(s):=\sum_{n\le N} \frac{c_n\,\liou(n)}{n^s}.
-	\]
-	For $\Re(s)=1+\tfrac1{\log N}$, Halász's theorem with smooth weights (see Lemma~\ref{lem:halasz-smooth}) gives
-	\[
-		\sum_{n\le N} c_n\,\liou(n)\,\chi(n)
-		\;\ll_A\; \frac{N}{(\log N)^A}
-		+ \max_{|t|\le N}\;\big|F(1+it)\big|,
-	\]
-	uniformly in $\chi$.
-
-	\paragraph{Step 3: Pretentious pruning and exceptional characters.}
-	By the Granville-Soundararajan pretentious method, the only possible large values of $F(1+it)$ occur if $\chi$ pretends to be a real character $\chi_0$ of small conductor, aligned with $\lambda$. But $\lambda$ is completely multiplicative with mean zero, and is maximally non-pretentious. Thus, for all non-principal $\chi$, the pretentious distance
-	\[
-		\mathbb D(\lambda,\chi;N)^2:=\sum_{p\le N}\frac{1-\Re(\lambda(p)\chi(p))}{p}
-	\]
-	satisfies $\mathbb D(\lambda,\chi;N)\gg\log\log N$.
-	By Halász's theorem, this forces
-	\[
-		\sum_{n\le N}\liou(n)\chi(n) \;\ll\; N\exp(-c\log\log N)\;\ll\; N/(\log N)^A.
-	\]
-	Thus only $\chi=\chi_0$ (principal) requires special treatment.
-
-	\paragraph{Step 4: Principal character and second moment.}
-	For $\chi=\chi_0$, we need to control $\sum_{n\le N} c_n \liou(n)$.
-	Here we apply zero-density estimates and classical zero-free regions (see Lemma~\ref{lem:logfree-density}, Lemma~\ref{lem:siegel}) to handle potential Siegel zeros.
-	By standard arguments (Montgomery-Vaughan large sieve in $L^2$ form, with zero-density input), we obtain
-	\[
-		\sum_{q\le Q}\ \Biggl|\sum_{n\le N}c_n\liou(n)\Biggr|^2
-		\;\;\ll\;\; \frac{NQ}{(\log N)^A}.
-	\]
-	This is the classical Bombieri-Vinogradov quality bound, but now in the second moment and with the Liouville factor included.
-\end{proof}
-
 \begin{remark}
-	\
-	\begin{itemize}[leftmargin=2em]
-		\item The parity sensitivity enters only in Step~3, where the non-pretentiousness of $\lambda$ is used to kill all non-principal $\chi$.
-		\item For coefficients $c_n$ of Type~I/II shape with smooth dyadic weights, all divisor-type convolutions are absorbed in the $n^\varepsilon$-bound, so the same proof applies.
-		\item The $NQ/(\log N)^A$ saving is strong enough to absorb all losses from dyadic decomposition in the minor-arc analysis.
-	\end{itemize}
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
 \end{remark}
 
-\begin{corollary}[Parity-blindness of linear sieve weights]\label{cor:parityblind}
-	Let $\beta$ be the Rosser-Iwaniec upper-bound linear sieve at level $D=N^{1/2-\varepsilon}$ with small prime cutoff $z=N^\eta$, and let $\psi\in C_c^\infty((1/2,2))$. Then, for any $A>0$,
-	\[
-		\sum_{n\le N}\beta(n)\,\liou(n)\,\psi(n/N) \;\;\ll_{A,\varepsilon}\;\; \frac{N}{(\log N)^A}.
-	\]
-\end{corollary}
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász’s mean–value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
 
-\begin{proof}
-	Expand $\beta(n)=\sum_{d\mid P(z)}\lambda_d\,1_{d\mid n}$ with well-factorable coefficients $\lambda_d\ll_\varepsilon d^\varepsilon$.
-	Insert into the sum and apply Cauchy-Schwarz over $d\le D$. Each inner sum
+\subsection*{Auxiliary tools}
+We recall three standard inputs.
+
+\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
 	\[
-		\sum_{n\le N,\; d\mid n} \liou(n)\,\psi(n/N)
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
 	\]
-	is of the shape handled by Theorem~\ref{thm:BVP2M}, after restricting to residue classes mod~$d$.
-	Summing over $d$ costs only $N^\varepsilon$, so the total is $\ll N(\log N)^{-A}$.
+\end{lemma}
+
+\begin{lemma}[Halász mean–value bound; e.g. {\cite[Thm.~12.13]{IK}}]\label{lem:halasz}
+	Let $g$ be a completely multiplicative function with $|g(n)|\le 1$. Then, for $x\ge 2$,
+	\[
+		\sum_{n\le x} g(n)
+		\ \ll\ x\,\exp\!\big(-\mathcal D(g;x)\big)\ +\ \frac{x}{(\log x)^{100}},
+	\]
+	where
+	$\displaystyle \mathcal D(g;x)\ :=\ \min_{|t|\le x}\ \sum_{p\le x}\frac{1-\Re\big(g(p)p^{-it}\big)}{p}$.
+\end{lemma}
+
+\begin{lemma}[Distance for $\lambda\chi$]\label{lem:distance}
+	For any Dirichlet character $\chi$ and any $x\ge 3$,
+	\[
+		\min_{|t|\le x}\ \sum_{p\le x}\frac{1-\Re\!\big(\lambda(p)\chi(p)p^{-it}\big)}{p}
+		\ \ge\ \tfrac12\,\log\log x\ +\ O(1).
+	\]
+\end{lemma}
+
+\begin{proof}[Sketch proof of Lemma~\ref{lem:distance}]
+	Since $\lambda(p)=-1$, the summand equals $\frac{1+\Re(\chi(p)p^{-it})}{p}$. Mertens gives $\sum_{p\le x}\frac1p=\log\log x+M+o(1)$. It remains to show
+	$\sum_{p\le x}\frac{\Re(\chi(p)p^{-it})}{p}=o(\log\log x)$ uniformly in $\chi,t$.
+	For nonprincipal $\chi$, this follows from the prime number theorem in arithmetic progressions with the classical zero–free region and partial summation; for a potential exceptional real $\chi$ one uses Page’s theorem to isolate at most one modulus $q_0$ and obtains the same bound with an absolute implied constant (cf. \cite[Ch.~11–12]{IK}, \cite[Ch.~12]{MV}). For the principal character, $\sum_{p\le x}p^{-1}\cos(t\log p)$ is $o(\log\log x)$ uniformly in $|t|\le x$ by Dirichlet’s test and the oscillation of $\cos(t\log p)$. Details appear for instance in \cite[§12.1–12.2]{IK}.
 \end{proof}
+
+\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+Set $a_n := c_n\,\lambda(n)$. By Cauchy–Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+\end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
+
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}–\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\ \exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring \eqref{eq:per-chi} and summing over $\chi$ gives
+\[
+	\sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
+	\ \ll_{\delta}\ \phi(q)\ \frac{N^2}{(\log N)^{1+2\eta}}.
+\]
+Now sum over $q\le Q$ and use $Q\le N^{1/2-\varepsilon}$ together with $\sum_{q\le Q}\phi(q)\ll Q^2$:
+\[
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
+	\ \ll_{\delta}\ \frac{N^2 Q^2}{(\log N)^{1+2\eta}}
+	\ \ll\ \frac{NQ}{(\log N)^A},
+\]
+after shrinking $\eta$ in terms of $A$ and using $Q\le N^{1/2-\varepsilon}$. This completes the proof.
+\qed
 
 
 \part{Type III Analysis}

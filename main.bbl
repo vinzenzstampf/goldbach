@@ -1,3 +1,15 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{1}
+
+\bibitem{IK}
+Henryk Iwaniec and Emmanuel Kowalski.
+\newblock {\em Analytic Number Theory}, volume~53 of {\em American Mathematical
+  Society Colloquium Publications}.
+\newblock American Mathematical Society, Providence, RI, 2004.
+
+\bibitem{MV}
+Hugh~L. Montgomery and Robert~C. Vaughan.
+\newblock {\em Multiplicative Number Theory I: Classical Theory}, volume~97 of
+  {\em Cambridge Studies in Advanced Mathematics}.
+\newblock Cambridge University Press, Cambridge, 2007.
 
 \end{thebibliography}
