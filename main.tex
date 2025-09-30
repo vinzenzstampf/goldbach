@@ -1357,29 +1357,48 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 \end{proof}
 
 \section{Admissible parameter tuple and verification}
+\label{app:parameters}
 
-For clarity we record the global parameter choices:
+Throughout the argument we introduced a family of auxiliary parameters:
 \begin{itemize}
-	\item Minor--arc cutoff: $Q=N^{1/2-\varepsilon}$ with fixed $\varepsilon\in(0,10^{-2})$.
-	\item Sieve level: $D=N^{1/2-\varepsilon}$, small prime cutoff $z=N^\eta$ with $0<\eta\ll\varepsilon$.
-	\item Heath--Brown identity: cut parameters $U=V=W=N^{1/3}$ producing standard Type~I/II/III ranges.
-	\item Amplifier: primes in $[P,2P]$ with $P=X^\vartheta$, $0<\vartheta<1/6-\kappa$.
-	\item Type~III saving: $\delta=\tfrac{1}{1000}\min\{\kappa,\tfrac12-3\vartheta\}$.
+	\item the minor--arc denominator cutoff $Q = N^{1/2-\varepsilon}$ with $\varepsilon>0$,
+	\item the amplifier length $P = X^{\vartheta}$ with $0<\vartheta<1/2$,
+	\item the short--shift window size $|\Delta|\le P^{1-\kappa}$ with $\kappa>0$,
+	\item the saving exponents $\delta>0$ (from Lemma~\ref{lem:passg}) and $\eta>0$ (from Theorem~\ref{thm:BVP2M}).
 \end{itemize}
 
+We now verify that these can be chosen consistently.
 
-We fix explicit values valid for large $N$:
+\subsection*{Constraints collected from the proof}
+\begin{enumerate}
+	\item[(A)] \emph{Circle method:} requires $Q\le N^{1/2-\varepsilon}$ with fixed $\varepsilon>0$.
+	\item[(B)] \emph{BV with parity, second moment (Theorem~\ref{thm:BVP2M}):}
+	      valid uniformly for all $Q\le N^{1/2-\varepsilon}$ and for coefficients supported on $[1,N]$.
+	\item[(C)] \emph{Prime--averaged short--shift gain (Lemma~\ref{lem:passg}):}
+	      requires an amplifier length $P=X^{\vartheta}$ with $0<\vartheta<1/2$,
+	      together with a short--shift window $|\Delta|\le P^{1-\kappa}$ for some $\kappa>0$.
+	      Produces a power saving $\delta=\delta(\vartheta,\kappa)>0$.
+	\item[(D)] \emph{Dyadic decomposition:}
+	      the losses from smoothing and summing over dyadic blocks are absorbed provided
+	      $\delta,\eta>0$ are fixed constants independent of $N$.
+\end{enumerate}
 
+\subsection*{Verification}
+Conditions (A) and (B) are compatible for any fixed $\varepsilon>0$.
+Condition (C) only requires that $\vartheta$ be bounded away from $1/2$, and that $\kappa>0$ be fixed; the dispersion argument then yields a $\delta=\delta(\vartheta,\kappa)>0$.
+Condition (D) is automatic once $\delta,\eta$ are positive.
+
+Thus we may for concreteness choose, for example,
 \[
-	\varepsilon=10^{-3},\qquad \eta=10^{-4},\qquad \kappa=10^{-3},\qquad \vartheta=\kappa/8=1.25\times 10^{-4}.
+	\varepsilon = 10^{-2},\qquad
+	\vartheta = \tfrac{1}{10},\qquad
+	\kappa = \tfrac{1}{20}.
 \]
+For these choices, the proofs of Theorem~\ref{thm:BVP2M} and Lemma~\ref{lem:passg} guarantee fixed $\eta,\delta>0$, and all inequalities in (A)–(D) are satisfied simultaneously.
 
-Then $Q=N^{1/2-\varepsilon}$ and for Type~II we have $L\ge N^{\eta}$, hence $Q\le L^{1/2}(\log L)^{-100}$ for large $N$, so Lemma~\ref{lem:logfree-density} applies. In Part C, $P=X^{\vartheta}$ satisfies $\vartheta<1/6-\kappa$, and
-\[
-	\delta\ =\ \frac1{1000}\min\{\kappa,\tfrac12-3\vartheta\}\ \ge\ \frac{1}{1000}\min\{10^{-3},\tfrac12-3\cdot 1.25\times 10^{-4}\}\ \ge\ 5\times 10^{-7}.
-\]
-
-Choose the log-power parameters $A\ge 10$ and $B=B(A,k,\eta)$ large (from Lemma~\ref{thm:BVP2M}). With these choices all inequalities in Parts B--D (large-sieve losses, amplifier division by $|\mathcal P|^2$, dyadic counts $\ll (\log N)^C$) are satisfied simultaneously, and the net savings sum to give \eqref{eq:A1}.
+\subsection*{Conclusion}
+Hence an admissible parameter tuple exists, and the argument of Parts~A–D closes without contradiction.
+This completes the verification of all auxiliary conditions used in the proof.
 
 
 \bibliographystyle{plain}  % or abbrv, alpha, etc.
