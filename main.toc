@@ -9,7 +9,7 @@
 \contentsline {paragraph}{Consequences for the minor-arc $L^2$.}{9}{section*.13}%
 \contentsline {part}{C\hspace {1em}Type III Analysis}{9}{part.3}%
 \contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{9}{section.3.1}%
-\contentsline {paragraph}{Step 1: Cauchy--Schwarz and expansion.}{9}{section*.14}%
+\contentsline {paragraph}{Step 1: Cauchy--Schwarz and expansion.}{10}{section*.14}%
 \contentsline {paragraph}{Step 2: Poisson in $\Delta $.}{10}{section*.15}%
 \contentsline {paragraph}{Step 3: Weil on complete sums and $m$-averaging.}{10}{section*.16}%
 \contentsline {paragraph}{Step 4: Amplifier decorrelation.}{11}{section*.17}%

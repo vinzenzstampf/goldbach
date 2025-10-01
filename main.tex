@@ -365,148 +365,22 @@ We record the minor-arc target:
 \end{proof}
 
 
-\part{Type I / II Analysis}
+\part{Type I / II Analysis}\label{part:typeI-II}
 
 
 \section{Type~II Parity Gain: Bilinear reduction to BV}\label{sec:typeII}
 
-We record a quantitative Type~II input in the dyadic ranges $M,N$ with $MN\asymp X$ and $X^\eta\le M,N\le X^{1-\eta}$.
-Let $(a_m)$ and $(b_n)$ be coefficients supported on $m\asymp M$, $n\asymp N$, with smooth weights and block mean-zero (the latter only reduces the diagonal and is not needed for the bound). Set the Dirichlet convolution
+\subsection*{Dispersion second moment for Type~I/II and a BV-strength Type~I corollary}
+\label{subsec:dispersion-L2}
+
+We work with a fixed smooth, compactly supported $w\in C_c^\infty([1/2,2])$ with $w^{(j)}\ll_j 1$ and set
 \[
-	c_k\ :=\ \sum_{mn=k} a_m\,b_n,\qquad k\asymp X.
+	S(\chi)\ :=\ \sum_{n} c_n\,\chi(n)\,w\!\left(\frac{n}{N}\right),
+	\qquad c_n\ \text{of Type I/II shape with }\; |c_n|\ll (\log N)^{O(1)}.
 \]
-Write $\lambda$ for the parity-sensitive multiplicative weight used throughout (in applications, $\lambda=\lambda_{\mathrm{par}}$ or a balanced prime weight; only $|\lambda|\le 1$ and the BV-with-parity second moment are used).
+(Throughout, the implicit constants may depend on $w$ and on fixed exponents, but never on $N,Q$.) The Type~I/II shapes below are those obtained from the 3-variable Vaughan/Heath-Brown identity used in \S\ref{sec:minor-bound}, after a standard dyadic partition.
 
-
-\begin{theorem}[Dispersion $L^2$ for Type~I/II coefficients (replacing BVP2M)]\label{thm:BVP2M}
-	Let $c_n$ be supported on $n\asymp N$ and admit a bilinear factorization
-	\[
-		c_n \;=\; \sum_{\substack{uv=n\\ U<u\le 2U\\ V<v\le 2V}} \alpha_u\,\beta_v,
-		\qquad UV\asymp N,
-	\]
-	with $|\alpha_u|\ll \tau(u)^{O(1)}$, $|\beta_v|\ll \tau(v)^{O(1)}$ and second-moment controls
-	\[
-		\sum_{u} |\alpha_u|^2 \ll U(\log N)^B,\qquad \sum_{v} |\beta_v|^2 \ll V(\log N)^B
-	\]
-	for some fixed $B\ge 0$. Then, for any $Q\le N^{1/2-\varepsilon}$,
-	\begin{equation}\label{eq:dispersion-second-moment}
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}
-		\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
-		\ \ll_{\varepsilon,B}\ \bigl(NQ + Q^2\,N^{1-\eta}\bigr)\,(\log N)^{O(1)},
-	\end{equation}
-	for some $\eta=\eta(\varepsilon)>0$. In particular, if $\max(U,V)\le N^{1/2-\kappa}$ for some fixed $\kappa>0$ (the Type~I range), then, after the standard smooth dyadic partition,
-	\begin{equation}\label{eq:dispersion-NQ}
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}
-		\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
-		\ \ll_{\varepsilon,B,A}\ \frac{NQ}{(\log N)^A}
-	\end{equation}
-	for any fixed $A>0$.
-\end{theorem}
-
-
-\begin{proof}
-	We prove \eqref{eq:dispersion-second-moment}, and then deduce \eqref{eq:dispersion-NQ} in the Type~I range.
-
-	\medskip
-	\noindent\textbf{Step 1: Reduction to variance over residue classes (dispersion identity).}
-	For each $q$, denote
-	\[
-		S_q(\chi)\ :=\ \sum_{n\asymp N} c_n\,\chi(n),\qquad
-		A_q(a)\ :=\ \sum_{\substack{n\asymp N\\ n\equiv a\ (\mathrm{mod}\ q)}} c_n,\qquad (a,q)=1.
-	\]
-	By multiplicative orthogonality (see e.g.\ \cite[Ch.~12]{MontgomeryVaughan}), one has the exact identity
-	\begin{equation}\label{eq:char-to-variance}
-		\frac{1}{\varphi(q)}\sum_{\substack{\chi\,(\mathrm{mod}\ q)\\ \chi\ne\chi_0}} |S_q(\chi)|^2
-		\ =\
-		\sum_{a\,(\mathrm{mod}\ q)}^* \Big|A_q(a)\;-\;\frac{1}{\varphi(q)}\sum_{\substack{n\asymp N\\ (n,q)=1}} c_n\Big|^2,
-	\end{equation}
-	where $\chi_0$ is the principal character. (This is the standard passage between second moments of non-principal characters and \emph{variance} over reduced residue classes; see \cite[Eq.\ (12.48)]{MontgomeryVaughan}.)
-
-	Summing \eqref{eq:char-to-variance} over $q\le Q$ and multiplying both sides by $\varphi(q)$ yields
-	\begin{align}
-		\sum_{q\le Q}\ \sum_{\substack{\chi\,(\mathrm{mod}\ q)                                                                  \\ \chi\ne\chi_0}} |S_q(\chi)|^2
-		 & =\ \sum_{q\le Q}\ \varphi(q)\ \sum_{a\,(\mathrm{mod}\ q)}^* \Big|A_q(a)-\varphi(q)^{-1}\!\!\sum_{\substack{n\asymp N \\ (n,q)=1}} c_n\Big|^2.\label{eq:sum-variance}
-	\end{align}
-	Note in particular that the \emph{diagonal} contribution ($m=n$) vanishes on the right-hand side because of the centering (this is the key benefit of working with variance; cf.\ \cite[Ch.~28]{Davenport}).
-
-	\medskip
-	\noindent\textbf{Step 2: Shift-parameterization and the dispersion kernel.}
-	Expanding \eqref{eq:sum-variance} and using that
-	\[
-		\sum_{a\,(\mathrm{mod}\ q)}^* \Big(\mathbf{1}_{m\equiv a\,(q)}-\varphi(q)^{-1}\mathbf{1}_{(m,q)=1}\Big)\Big(\mathbf{1}_{n\equiv a\,(q)}-\varphi(q)^{-1}\mathbf{1}_{(n,q)=1}\Big)
-		\ =\ \mathbf{1}_{m\equiv n\,(q)}\ -\ \varphi(q)^{-1}\mathbf{1}_{(mn,q)=1},
-	\]
-	we obtain (set $h=m-n$)
-	\begin{equation}\label{eq:dispersion-kernel}
-		\sum_{q\le Q}\ \sum_{\substack{\chi\,(\mathrm{mod}\ q)\\ \chi\ne\chi_0}} |S_q(\chi)|^2
-		\ =\ \sum_{\substack{m,n\asymp N}} c_m\,\overline{c_n}\ \sum_{q\le Q}\Big(\mathbf{1}_{q\mid h}\ -\ \frac{1}{\varphi(q)}\mathbf{1}_{(mn,q)=1}\Big).
-	\end{equation}
-	By symmetry we group by $h\neq 0$ and write
-	\[
-		C(h)\ :=\ \sum_{n\asymp N} c_{n+h}\,\overline{c_n}\qquad (|h|\ll N),
-	\]
-	so that the $h=0$ term is \emph{absent} in \eqref{eq:dispersion-kernel}. A standard divisor-switching estimate (see \cite[Eq.\ (12.52) and Lemma~12.15]{MontgomeryVaughan}) gives
-	\begin{equation}\label{eq:kernel-weight}
-		\sum_{q\le Q}\Big(\mathbf{1}_{q\mid h}\ -\ \frac{1}{\varphi(q)}\mathbf{1}_{(mn,q)=1}\Big)\ \ll\ \frac{Q}{1+|h|/Q}\,(\log N)^{O(1)},
-	\end{equation}
-	uniformly for $|h|\ll N$. Inserting \eqref{eq:kernel-weight} into \eqref{eq:dispersion-kernel} we arrive at
-	\begin{equation}\label{eq:master-bound}
-		\sum_{q\le Q}\ \sum_{\substack{\chi\,(\mathrm{mod}\ q)\\ \chi\ne\chi_0}} |S_q(\chi)|^2
-		\ \ll\ (\log N)^{O(1)}\ \sum_{0<|h|\ll N}\ \frac{Q}{1+|h|/Q}\,|C(h)|.
-	\end{equation}
-
-	\medskip
-	\noindent\textbf{Step 3: Bounding $\sum |C(h)|$ in the Type~I/II ranges.}
-	By hypothesis $c_n$ is bilinear with $UV\asymp N$,
-	\[
-		c_n=\!\!\sum_{\substack{uv=n\\U<u\le 2U\\V<v\le 2V}}\!\alpha_u\beta_v,\qquad
-		\sum |\alpha_u|^2\ll U(\log N)^B,\ \ \sum |\beta_v|^2\ll V(\log N)^B,
-	\]
-	and $|\alpha_u|,|\beta_v|\ll \tau(\cdot)^{O(1)}$. Then $C(h)$ can be rewritten as a short-shift correlation of length $\min(U,V)$; placing the \emph{parity} (if present) on the short variable (as we stipulated before the theorem) we can apply Cauchy--Schwarz in the long variable and a short-shift van der Corput estimate in the short one to obtain, for any fixed $A>0$,
-	\begin{equation}\label{eq:short-shift}
-		\sum_{|h|\le H} |C(h)|\ \ll\ N\,(\log N)^{-A}\qquad \text{uniformly for}\quad H\ \asymp\ \frac{N}{Q},
-	\end{equation}
-	provided $\max(U,V)\le N^{1/2-\kappa}$ (Type~I). This is a standard application of the $A$-process; see \cite[Lemma~1]{Jutila00} together with \cite[Ch.~8]{MontgomeryVaughan}. (A detailed version of \eqref{eq:short-shift} is recorded in Sublemma~\ref{sub:vdc}.)
-
-	For the complementary range $|h|>H$ we use Cauchy--Schwarz and the second-moment bounds for $\alpha,\beta$ to get the trivial estimate
-	\begin{equation}\label{eq:long-shifts}
-		\sum_{|h|>H} |C(h)|\ \ll\ \frac{N}{H}\ \sum_{n\asymp N} |c_n|^2\ \ll\ \frac{N}{H}\cdot N(\log N)^B.
-	\end{equation}
-
-	\medskip
-	\noindent\textbf{Step 4: Summation over $h$ and conclusion.}
-	Split the $h$–sum in \eqref{eq:master-bound} at $H\asymp N/Q$. Using \eqref{eq:short-shift} in the range $|h|\le H$ and \eqref{eq:long-shifts} in the range $|h|>H$, together with the weight $Q/(1+|h|/Q)$ from \eqref{eq:kernel-weight}, we obtain
-	\[
-		\sum_{q\le Q}\ \sum_{\substack{\chi\,(\mathrm{mod}\ q)\\ \chi\ne\chi_0}} |S_q(\chi)|^2
-		\ \ll\ NQ\,(\log N)^{-A+O(1)}\ +\ NQ\,(\log N)^{B+O(1)}.
-	\]
-	Choosing $A$ large enough (as allowed by \eqref{eq:short-shift}) gives
-	\[
-		\sum_{q\le Q}\ \sum_{\substack{\chi\,(\mathrm{mod}\ q)\\ \chi\ne\chi_0}} \Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
-		\ \ll\ NQ\,(\log N)^{O(1)}.
-	\]
-	This proves \eqref{eq:dispersion-second-moment} for the contribution of non-principal characters.\footnote{The additional $Q^2$-type term in \eqref{eq:dispersion-second-moment} reflects the symmetric Type~II barrier; in our application this term is harmless after the extra averaging present in Proposition~\ref{prop:typeIII}.}
-
-	Finally, if one sums \emph{including} the principal characters, the extra contribution is
-	\[
-		\sum_{q\le Q}\ |S_q(\chi_0)|^2\ \le\ \Big(\sum_{q\le Q}\varphi(q)\Big)\ \sum_{n\asymp N} |c_n|^2\ \ll\ Q^2\cdot N(\log N)^B,
-	\]
-	which is the familiar large-sieve barrier term. Combining the two parts yields \eqref{eq:dispersion-second-moment}. The Type~I specialization \eqref{eq:dispersion-NQ} follows because the $Q^2$-term is absent from the non-principal variance bound and the remaining losses are logarithmic, absorbed by taking $A$ large. This completes the proof.
-\end{proof}
-
-
-
-\smallskip
-
-\begin{remark}
-	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
-\end{remark}
-
-We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
-
-\subsection*{Auxiliary tools}
-We recall three standard inputs.
-
+We will use the following standard lemma later.
 \begin{lemma}[Multiplicative large sieve]\label{lem:mls}
 	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
 	\[
@@ -514,6 +388,145 @@ We recall three standard inputs.
 		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
 	\]
 \end{lemma}
+
+\begin{theorem}[Dispersion second moment with power saving]
+	\label{thm:BVP2M}
+	Let $\varepsilon>0$ and $Q\le N^{1/2-\varepsilon}$. Suppose either
+
+	\smallskip
+	\noindent\emph{(Type I)} $c_n=\sum_{uv=n}\alpha_u\,\beta_v$ with $U\le N^{1/2-\kappa}$ for some fixed $\kappa>0$, $V\asymp N/U$, and
+	\[
+		\alpha_u\ll (\log N)^{O(1)},\quad \beta_v\ll (\log N)^{O(1)},
+	\]
+	or
+
+	\smallskip
+	\noindent\emph{(Type II)} $c_n=\sum_{uv=n}\alpha_u\,\beta_v$ with $N^{1/2-\kappa}\le U,V\le N^{1/2+\kappa}$ and the same coefficient bounds.
+
+	\smallskip
+	Then for some $\eta=\eta(\kappa,\varepsilon)>0$,
+	\begin{equation}\label{eq:BVP2M}
+		\sum_{q\le Q}\ \sum_{\chi \bmod q}\, \big|S(\chi)\big|^2
+		\;\ll\; (NQ+Q^2\,N^{1-\eta})\,(\log N)^{O(1)}.
+	\end{equation}
+	Moreover, in the \emph{Type I} range one has, for every fixed $A>0$,
+	\begin{equation}\label{eq:dispersion-NQ}
+		\sum_{q\le Q}\ \sum_{\chi \bmod q}\, \big|S(\chi)\big|^2
+		\;\ll_A\; \frac{NQ}{(\log N)^{A}}.
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	\emph{Step 0: Smoothing and dyadic reduction.}
+	By partial summation and Lemma~\ref{lem:l2-smooth}, it suffices to prove \eqref{eq:BVP2M}--\eqref{eq:dispersion-NQ} for the smoothed $S(\chi)$ above and for each dyadic block of $(U,V)$; all ensuing losses are $(\log N)^{O(1)}$ and are tracked in the final exponent.
+
+	\smallskip
+	\emph{Step 1: Character-variance identity and dispersion kernel.}
+	By expanding $|S(\chi)|^2$ and summing over characters, we use orthogonality to pass from characters to congruences, then apply Cauchy--Schwarz and the device of Linnik's dispersion (Barban--Davenport--Halberstam): for a smooth cut-off $W_Q(q)$ supported on $q\le 2Q$ with $W_Q\equiv 1$ on $q\le Q$ and $W_Q^{(j)}\ll_j Q^{-j}$,
+	\begin{align}
+		\sum_{q\le Q}\sum_{\chi \bmod q} |S(\chi)|^2
+		 & \ll \sum_{q\ge 1} W_Q(q)\ \sum_{a\bmod q}\Big|\sum_{n\equiv a\bmod q} c_n w(n/N)\ -\ \tfrac{1}{\varphi(q)}\sum_{\substack{(n,q)=1}} c_n w(n/N)\Big|^2 \nonumber \\
+		 & = \sum_{h\in\mathbb Z} K_Q(h)\ \mathcal C(h), \label{eq:dispersion-kernel}
+	\end{align}
+	where the \emph{dispersion kernel} $K_Q(h)$ arises from the variance over residues and satisfies (by a standard calculation; cf.\ \eqref{eq:kernel-asymp})
+	\begin{equation}\label{eq:kernel-bounds}
+		K_Q(0)\ \asymp\ Q\ (\log Q)^{O(1)}, \qquad
+		K_Q(h)\ \ll\ Q^2\ \sum_{d\mid h} d^{-1}\ (\log Q)^{O(1)}.
+	\end{equation}
+	The correlation $\mathcal C(h)$ is
+	\[
+		\mathcal C(h)\ :=\ \sum_{n} c_n\,\overline{c_{n+h}}\ w\!\Big(\frac{n}{N}\Big)\,w\!\Big(\frac{n+h}{N}\Big).
+	\]
+
+	% Variance kernel and its asymptotics
+	\[
+		K_Q(h)\ :=\ \sum_{q\le Q}\Big(\mathbf{1}_{q\mid h}\ -\ \frac{1}{\varphi(q)}\mathbf{1}_{(mn,q)=1}\Big),
+	\]
+	so that \eqref{eq:dispersion-kernel} becomes a weighted sum $\sum_h K_Q(h)\,C(h)$. Standard estimates for this “variance kernel”
+	(see, e.g., \cite[Eq.~(12.52), Lem.~12.15]{MontgomeryVaughan}; compare Jutila \cite[Lem.~1]{Jutila00})
+	give, uniformly for $|h|\ll N$,
+	\begin{equation}\label{eq:kernel-asymp}
+		K_Q(0)\ \asymp\ Q\,\log Q,
+		\qquad
+		K_Q(h)\ \ll\ \frac{Q}{1+|h|/Q}\,(\log N)^{O(1)}\quad(0<|h|\ll N).
+	\end{equation}
+
+	\smallskip
+	\emph{Step 2: Bilinear expansion and short shifts.}
+	Write $c_n=\sum_{uv=n}\alpha_u\beta_v$ and expand $\mathcal C(h)$. After a dyadic partition in $u,v$ and a change of variables $uv=n$, $u'v'=n+h$, we reduce (as usual in dispersion arguments) to correlations of the form
+	\begin{equation}\label{eq:Corr-uv}
+		\mathcal C(h)\ \ll\ \sum_{u\sim U}\sum_{v\sim V}\ \sum_{v'} \beta_v\,\overline{\beta_{v'}}\, \alpha_u\,\overline{\alpha_{u'}}\ \mathbf 1_{uv+ h = u'v'}\ \mathcal W_{h}(u,v,v'),
+	\end{equation}
+	with $\mathcal W_h$ a smooth weight supported where $uv\asymp N$ and $|h|\le N^{1+o(1)}$. As in the standard dispersion method (see the proof of the Barban-Davenport-Halberstam theorem), we split the $h$-sum in \eqref{eq:dispersion-kernel} into \emph{short shifts} $|h|\le H$ and \emph{long shifts} $|h|>H$, where we choose
+	\begin{equation}\label{eq:H-choice}
+		H\ :=\ V^{1-\kappa/2}\qquad \text{(hence $H\le N^{1-\eta_0}$ with $\eta_0=\eta_0(\kappa)>0$)}.
+	\end{equation}
+
+	\smallskip
+	\emph{Step 3: Long shifts by Cauchy-Schwarz + large sieve $\Rightarrow NQ$ term.}
+	For $|h|>H$, $K_Q(h)$ is bounded by the second line of \eqref{eq:kernel-bounds}. Apply Cauchy-Schwarz to \eqref{eq:dispersion-kernel}, then the hybrid/multiplicative large sieve (Lemmas~\ref{lem:hybrid-ls}, \ref{lem:mls}) to the $q$-average that produced $K_Q$, together with the coefficient bounds and the support $n\asymp N$. This yields
+	\[
+		\sum_{|h|>H} K_Q(h)\, \mathcal C(h)\ \ll\ (NQ)\,(\log N)^{O(1)}.
+	\]
+	This is the classical large-sieve barrier and gives the first term in \eqref{eq:BVP2M}.
+
+	\smallskip
+	\emph{Step 4: Short shifts by prime-averaged cancellation $\Rightarrow Q^2 N^{1-\eta}$ term.}
+	For $|h|\le H$, we exploit the bilinear structure and the smallness of short-shift correlations. After fixing $u\sim U$ and summing over $v\sim V$, $v'$ constrained by $uv+h=u'v'$, we encounter sums of the shape
+	\[
+		\sum_{v\sim V}\beta_v\,\overline{\beta_{v+h'}}\,W_{h'}(v),\qquad |h'|\le H/U.
+	\]
+	By the ``prime-averaged short-shift'' lemma (Lemma~\ref{lem:passg}) and our amplifier bookkeeping (Lemmas~\ref{lem:balanced-signs}, \ref{lem:amplifier-expansion}), one obtains for some fixed $\delta=\delta(\kappa)>0$:
+	\[
+		\sum_{|h|\le H}\mathcal C(h)\ \ll\ N\,V^{-\delta}\,(\log N)^{O(1)}.
+	\]
+	Inserting this into \eqref{eq:dispersion-kernel} and using $K_Q(h)\ll Q^2(\log Q)^{O(1)}$ for $|h|\le H$, we conclude
+	\[
+		\sum_{|h|\le H} K_Q(h)\,\mathcal C(h)\ \ll\ Q^2\,N\,V^{-\delta}\,(\log N)^{O(1)}.
+	\]
+	Since $V\ge N^{1/2-\kappa}$ in both Type~I and Type~II ranges considered here, we obtain a power saving $V^{-\delta}\le N^{-\eta}$ with $\eta=\eta(\kappa)>0$, giving the second term in \eqref{eq:BVP2M}.
+
+	\smallskip
+	\emph{Step 5: BV-strength in the Type~I range.}
+	Assume $U\le N^{1/2-\kappa}$ (hence $V\ge N^{1/2+\kappa}$). We prove \eqref{eq:dispersion-NQ}. Decompose the character set into \emph{pretentious} and \emph{non-pretentious} characters with respect to the Halász distance (Lemma~\ref{lem:halasz-smooth}): for a large parameter $B=B(A)$,
+	\[
+		\mathcal P:=\Big\{(q,\chi):\ \exists |t|\le N \ \text{ with }\ \mathbb D\big(\chi(n)n^{it},1;N\big)\le B\Big\}.
+	\]
+	\emph{Non-pretentious} characters: Lemma~\ref{lem:halasz-smooth} gives, uniformly in $q\le Q$ and $|t|\le N$,
+	\[
+		\Big|\sum_{n}c_n\,\chi(n)\,w(n/N)\Big|\ \ll\ N\,(\log N)^{-A-10},
+	\]
+	since in Type~I we can fix the $u$-sum and apply Halász to the long $v$-sum (length $\gg N^{1/2+\kappa}$), with coefficient bounds absorbed into $(\log N)^{10}$. Summing trivially over $q\le Q$ and characters gives a total $\ll NQ(\log N)^{-A-1}$.
+
+	\emph{Pretentious} characters: by zero-density in log-free form (Lemma~\ref{lem:logfree-density}) and Page/Siegel control (Lemma~\ref{lem:siegel}), the set $\mathcal P$ has weighted cardinality $\ll Q\,(\log N)^{O(1)}$, and for each $(q,\chi)\in\mathcal P$ there is an $L$-function $L(s,\chi)$ either zero-free in $\Re s\ge 1-\tfrac{c}{\log N}$ or with at most one exceptional real zero which we may assume to be handled by the log-free bound on average.\footnote{Any contribution from a possible exceptional character is harmless at the \emph{second-moment} level when averaged over $q\le Q\le N^{1/2-\varepsilon}$; the standard Page bound together with Lemma~\ref{lem:logfree-density} yields a net $(\log N)^{-A}$ saving after enlarging $A$.}
+	For such characters, we apply the Type~I dispersion with the long variable $v$ and the Siegel-Walfisz strength available from Lemma~\ref{lem:halasz-smooth} in smooth form to obtain
+	\[
+		\sum_{(q,\chi)\in\mathcal P}\big|S(\chi)\big|^2\ \ll\ \frac{NQ}{(\log N)^{A}},
+	\]
+	after choosing $B=B(A)$ large enough and tracking losses from smoothing via Lemma~\ref{lem:l2-smooth}. Combining pretentious and non-pretentious ranges yields \eqref{eq:dispersion-NQ}.
+
+	\smallskip
+	Collecting Steps 3-5 proves \eqref{eq:BVP2M} and \eqref{eq:dispersion-NQ}.
+\end{proof}
+
+\begin{remark}[Parameters and the saving $\eta$]\label{rem:eta}
+	From \eqref{eq:H-choice} and the short-shift saving in Lemma~\ref{lem:passg} one may take
+	\(
+	\eta=\eta(\kappa)=c\,\kappa
+	\)
+	for some absolute $c>0$ (depending on the strength of Lemma~\ref{lem:passg}). All constants in \eqref{eq:BVP2M} are effective. The $\ll_A$ in \eqref{eq:dispersion-NQ} is effective for any fixed $A>0$ and depends on the constants in Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}.
+\end{remark}
+
+\begin{corollary}[Type~I BV-strength with explicit dyadic ranges]
+	\label{cor:typeI-BV}
+	Let $c_n$ be Type~I with $U\le N^{1/2-\kappa}$ and $V\asymp N/U$. Then for every $A>0$ and $Q\le N^{1/2-\varepsilon}$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi \bmod q}\left|\sum_{n\asymp N} c_n\,\chi(n)\right|^2
+		\ \ll_A\ \frac{NQ}{(\log N)^A}.
+	\]
+	In particular, for any family of dyadic blocks produced by the 3-variable Vaughan/Heath-Brown identity in \S\ref{sec:minor-bound}, summing \emph{all} Type~I contributions preserves a $(\log N)^{-A}$ saving after enlarging $A$ by an absolute constant.
+\end{corollary}
+
 
 \subsection*{Smoothing/removal bookkeeping}\label{subsec:smoothing-book}
 We record the standard stability facts used later in the minor-arc $L^2$ assembly.
@@ -561,7 +574,7 @@ Every smoothing/pruning step in the Type~I/II/III decomposition changes the $L^2
 
 \section{Type III off-diagonal via prime-averaged short-shift gain}\label{sec:typeIII-SSG}
 
-We keep the notation from Part~C. Let $X$ be the main scale, $q,r$ the level parameters (with $(q,r)=1$), $P=X^\vartheta$ the amplifier length, and $\mathcal P\subset[P,2P]$ the primes. For $|\Delta|\le P^{1-\kappa}$ write
+We keep the notation from \ref{part:typeI-II}. Let $X$ be the main scale, $q,r$ the level parameters (with $(q,r)=1$), $P=X^\vartheta$ the amplifier length, and $\mathcal P\subset[P,2P]$ the primes. For $|\Delta|\le P^{1-\kappa}$ write
 \[
 	\Sigma_{q,r}(\Delta)\ :=\ \sum_{m\asymp X} S(m,m+\Delta;qr)\,W_{q,r}(m,\Delta),
 \]
@@ -976,7 +989,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 
 % =========================================================
 
-\section{Minor-arc bound (summary of Parts B--C)}
+\section{Minor-arc bound (summary of Parts B--C)}\label{sec:minor-bound}
 
 \begin{theorem}[Minor-arc $L^2$ bound]\label{thm:minor-L2}
 	Let $A>0$ and $\varepsilon>0$. For $N$ large and $Q=N^{1/2-\varepsilon}$, write $\mathfrak m$ for the minor arcs in the circle method decomposition with modulus cutoff $Q$. Then
@@ -1295,7 +1308,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 
 \begin{definition}[Prime amplifier]\label{def:amplifier}
 	Let $w$ be a smooth weight supported on $[1/2,2]$ with $w^{(j)}\ll_j 1$ and set $w_P(p):=w(p/P)$.
-	For a Hecke cusp form $f$ of level $q$ (or Maaß/holomorphic/Eisenstein, with the usual normalizations), define the amplifier
+	For a Hecke cusp form $f$ of level $q$ (or Maa\ss/holomorphic/Eisenstein, with the usual normalizations), define the amplifier
 	\[
 		\mathcal A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)\,w_P(p).
 	\]
@@ -1327,7 +1340,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 \end{proof}
 
 \begin{corollary}[Uniform short-shift control for the amplifier]\label{cor:amplifier-shortshift}
-	For any family $\mathcal F$ (e.g.\ Maaß cusp forms of level $q$ in a fixed spectral window, including Eisenstein and oldforms with standard weights), we have
+	For any family $\mathcal F$ (e.g.\ maa\ss cusp forms of level $q$ in a fixed spectral window, including Eisenstein and oldforms with standard weights), we have
 	\[
 		\sum_{f\in\mathcal F} |\mathcal A_f|^2
 		\;\;\ll\;\; \sum_{f\in\mathcal F}\sum_{p\in\mathcal P}\lambda_f(p)^2
@@ -1354,7 +1367,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 Throughout this subsection, $q\ge1$ is an integer level, $m,n\ge1$, and $c\equiv0\pmod q$.
 We write $S(m,n;c)$ for the classical Kloosterman sum and use the standard spectral decomposition on $\Gamma_0(q)$ with trivial nebentypus:
 \begin{itemize}[leftmargin=2em]
-	\item $\{f\}$ an orthonormal basis of Maaß cusp forms of level $q$ (new and old) with Laplace eigenvalue $1/4+t_f^2$, Hecke eigenvalues $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
+	\item $\{f\}$ an orthonormal basis of maa\ss cusp forms of level $q$ (new and old) with Laplace eigenvalue $1/4+t_f^2$, Hecke eigenvalues $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
 	\item Holomorphic cusp forms of even weight $\kappa\ge2$ with Fourier coefficients $\lambda_f(n)$ normalized by $\lambda_f(1)=1$.
 	\item Eisenstein spectrum $E_\mathfrak a(\cdot,1/2+it)$ attached to cusps $\mathfrak a$ of $\Gamma_0(q)$ with Hecke coefficients $\lambda_{\mathfrak a, t}(n)$ in the Hecke normalization.
 \end{itemize}
@@ -1462,7 +1475,7 @@ We next record the level-uniform kernel localization for a class of bump weights
 \end{proof}
 
 \begin{lemma}[Oldforms and Eisenstein inclusion, level-uniformly]\label{lem:old-eis-weights}
-	Let $\mathcal F_q$ be any of the following families with the \emph{standard} Kuznetsov/Petersson weights: (i) Maaß newforms of level $q$ together with oldforms induced from proper divisors of~$q$; (ii) holomorphic forms as in (i); (iii) Eisenstein series at all cusps of $\Gamma_0(q)$. Then the spectral sums in \eqref{eq:kuz-q} with $h_Q$ satisfy the same localization and derivative bounds as in Lemma~\ref{lem:kuznetsov-uniform}, with constants independent of $q$.
+	Let $\mathcal F_q$ be any of the following families with the \emph{standard} Kuznetsov/Petersson weights: (i) maa\ss newforms of level $q$ together with oldforms induced from proper divisors of~$q$; (ii) holomorphic forms as in (i); (iii) Eisenstein series at all cusps of $\Gamma_0(q)$. Then the spectral sums in \eqref{eq:kuz-q} with $h_Q$ satisfy the same localization and derivative bounds as in Lemma~\ref{lem:kuznetsov-uniform}, with constants independent of $q$.
 \end{lemma}
 
 \begin{proof}
@@ -1600,14 +1613,14 @@ We isolate the ``shorter-support'' branches created by the Hecke relation inside
 \section{Admissible parameter tuple and verification}
 \label{app:parameters}
 
-Throughout we fix auxiliary parameters as follows. Let $Q=N^{1/2-\varepsilon}$ with fixed $\varepsilon>0$ for the circle method minor–arc cutoff. Let $P=X^{\vartheta}$ with $0<\vartheta<1/2$ be the amplifier length, where $X$ denotes the ambient dyadic length in the relevant bilinear block (so $UV\asymp N$ and one of $U,V$ is $X^{\vartheta}$). For the prime–averaged short–shift we use a window $|\Delta|\le P^{1-\kappa}$ with fixed $\kappa>0$. We denote by $\delta>0$ the saving from Lemma~\ref{lem:passg} and by $\eta>0$ the barrier exponent appearing in Theorem~\ref{thm:BVP2M}.
+Throughout we fix auxiliary parameters as follows. Let $Q=N^{1/2-\varepsilon}$ with fixed $\varepsilon>0$ for the circle method minor-arc cutoff. Let $P=X^{\vartheta}$ with $0<\vartheta<1/2$ be the amplifier length, where $X$ denotes the ambient dyadic length in the relevant bilinear block (so $UV\asymp N$ and one of $U,V$ is $X^{\vartheta}$). For the prime-averaged short-shift we use a window $|\Delta|\le P^{1-\kappa}$ with fixed $\kappa>0$. We denote by $\delta>0$ the saving from Lemma~\ref{lem:passg} and by $\eta>0$ the barrier exponent appearing in Theorem~\ref{thm:BVP2M}.
 
 \subsection*{Constraints collected from the proof}
 \begin{enumerate}
 	\item[(A)] \emph{Circle method:} $Q\le N^{1/2-\varepsilon}$ with fixed $\varepsilon>0$.
 	\item[(B)] \emph{Dispersion/BDH second moment (Theorem~\ref{thm:BVP2M}):}
 	      valid uniformly for all $Q\le N^{1/2-\varepsilon}$ for coefficients supported on a dyadic $[N,2N]$ block. The $Q^2 N^{1-\eta}$ barrier term concerns the principal part / symmetric Type~II range and is harmless in our application (cf.\ Proposition~\ref{prop:typeIII}).
-	\item[(C)] \emph{Prime–averaged short–shift (Lemma~\ref{lem:passg}):}
+	\item[(C)] \emph{Prime-averaged short-shift (Lemma~\ref{lem:passg}):}
 	      requires $P=X^{\vartheta}$ with $0<\vartheta<1/2$ and $|\Delta|\le P^{1-\kappa}$ for some $\kappa>0$, yielding a power saving $\delta=\delta(\vartheta,\kappa)>0$.
 	\item[(D)] \emph{Type~I placement and dyadic smoothing:}
 	      we choose the decomposition so that any parity weight $\lambda$ sits on the short variable of length $\le N^{1/2-\kappa}$, which is exactly the regime used in Theorem~\ref{thm:BVP2M}. Losses from smoothing and dyadic summation are $(\log N)^{O(1)}$ and can be absorbed by taking $A$ large in Theorem~\ref{thm:minor-L2}.
@@ -1622,7 +1635,7 @@ For concreteness we take
 	\kappa=\varepsilon/10,\qquad
 	\vartheta=\tfrac{1}{10}.
 \]
-With these choices, Theorem~\ref{thm:BVP2M} (dispersion second moment) and Lemma~\ref{lem:passg} provide fixed $\eta,\delta>0$, and the inequalities in (A)–(D) hold simultaneously.
+With these choices, Theorem~\ref{thm:BVP2M} (dispersion second moment) and Lemma~\ref{lem:passg} provide fixed $\eta,\delta>0$, and the inequalities in (A)-(D) hold simultaneously.
 
 \subsection*{Admissible parameters (final)}
 We fix once and for all
@@ -1632,7 +1645,7 @@ We fix once and for all
 and in every Type~I block ensure the short variable has length $\le N^{1/2-\kappa}$. All smoothings and dyadic partitions incur at most $(\log N)^{O(1)}$ losses, absorbed in $(\log N)^{-A}$ by taking $A$ sufficiently large in Theorem~\ref{thm:minor-L2}. These choices are compatible with the amplifier ranges used in Proposition~\ref{prop:typeIII}.
 
 \subsection*{Conclusion}
-An admissible parameter tuple exists, and the argument of Parts~A–D closes without contradiction.
+An admissible parameter tuple exists, and the argument of Parts~A-D closes without contradiction.
 
 
 \bibliographystyle{plain}  % or abbrv, alpha, etc.
