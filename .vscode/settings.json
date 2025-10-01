@@ -11,6 +11,7 @@
             ]
         }
     ],
+    "editor.wordWrap": true,
     "latex-workshop.latex.rootFile.useSubFile": true,
     "[latex]": {
         "editor.defaultFormatter": "James-Yu.latex-workshop",

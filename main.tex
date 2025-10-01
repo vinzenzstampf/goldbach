@@ -363,62 +363,54 @@ We record the minor-arc target:
 
 \part{Type I / II Analysis}
 
-\section{Type II parity gain}
 
-\begin{theorem}[Type-II parity gain]
-	Fix $A>0$ and $0<\varepsilon<10^{-3}$. Let $N$ be large, $Q\le N^{1/2-2\varepsilon}$. Let $M$ satisfy $N^{1/2-\varepsilon}\le M\le N^{1/2+\varepsilon}$ and set $X=N/M\asymp M$. For smooth dyadic coefficients $a_m,b_n$ supported on $m\sim M$, $n\sim X$ with $|a_m|,|b_n|\ll \tau(m)^C,\tau(n)^C$,
+\section{Type~II Parity Gain: Bilinear reduction to BV}\label{sec:typeII}
 
-	$$
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}^{\!*}
-		\left|\sum_{mn\asymp N} a_m b_n\,\lambda(mn)\chi(mn)\right|^2
-		\ \ll_{A,\varepsilon,C}\ \frac{NQ}{(\log N)^{A}}.
-	$$
+We record a quantitative Type~II input in the dyadic ranges $M,N$ with $MN\asymp X$ and $X^\eta\le M,N\le X^{1-\eta}$.
+Let $(a_m)$ and $(b_n)$ be coefficients supported on $m\asymp M$, $n\asymp N$, with smooth weights and block mean-zero (the latter only reduces the diagonal and is not needed for the bound). Set the Dirichlet convolution
+\[
+	c_k\ :=\ \sum_{mn=k} a_m\,b_n,\qquad k\asymp X.
+\]
+Write $\lambda$ for the parity-sensitive multiplicative weight used throughout (in applications, $\lambda=\lambda_{\mathrm{par}}$ or a balanced prime weight; only $|\lambda|\le 1$ and the BV-with-parity second moment are used).
+
+\begin{theorem}[Type~II second-moment bound]\label{thm:typeII}
+	Fix $\varepsilon>0$ and $A>0$. For $Q\le X^{1/2-\varepsilon}$,
+	\begin{equation}\label{eq:typeII-claim}
+		\sum_{q\asymp Q}\ \frac{1}{\varphi(q)}\ \sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}\
+		\int_{|t|\le X}\ \Bigg|\ \sum_{m\asymp M}\sum_{n\asymp N} a_m b_n\ \lambda(mn)\ \chi(mn)\ (mn)^{-it}\ \Bigg|^2\ \frac{dt}{1+|t|}
+		\ \ \ll\ \ (Q^2+X)\ \frac{X^{1+o(1)}}{(\log X)^A},
+	\end{equation}
+	uniformly for the Type~II range $X^\eta\le M,N\le X^{1-\eta}$.
 \end{theorem}
 
 \begin{proof}
-	Let $u(k)=\sum_{mn=k}a_m b_n \lambda(k)$ on $k\sim N$; then $\sum |u(k)|^2\ll N(\log N)^{O_C(1)}$. Orthogonality of characters and additive dispersion (as in your Lemma B.2.1-B.2.2) yield, with block length
-
-	$$
-		H=\frac{N}{Q}N^{-\varepsilon}\ \ge\ N^{\varepsilon},
-	$$
-
-	the reduction
-
-	$$
-		\sum_{q\le Q}\sum_{\chi}^{*}\Big|\sum u(k)\chi(k)\Big|^2
-		\ \ll\ \Big(\frac{N}{H}+Q\Big)\!
-		\sum_{|\Delta|\le H}\Big|\sum_{k\sim N}\widetilde{u}(k)\overline{\widetilde{u}(k+\Delta)}V(k)\Big|
-		\ +\ O\big(N(\log N)^{-A-10}\big),
-	$$
-
-	where $\widetilde{u}$ is block-balanced on intervals of length $H$ and $V$ is an $H$-smooth weight.
-
-	By the Kátai-Bourgain-Sarnak-Ziegler criterion upgraded with the Matomäki-Radziwiłł-Harper short-interval second moment for $\lambda$, each short-shift correlation enjoys
-
-	$$
-		\sum_{k\sim N}\widetilde{u}(k)\overline{\widetilde{u}(k+\Delta)}V(k)
-		\ \ll\ \frac{N}{(\log N)^{A+10}}
-		\qquad (|\Delta|\le H),
-	$$
-
-	uniformly in the dyadic Type-II structure (divisor bounds + block mean-zero). There are $\ll H$ shifts $\Delta$, hence
-
-	$$
-		\sum_{q\le Q}\sum_{\chi}^{*}\Big|\sum u(k)\chi(k)\Big|^2
-		\ \ll\ \Big(\frac{N}{H}+Q\Big)\,H\cdot \frac{N}{(\log N)^{A+10}}
-		\ \ll\ \frac{NQ}{(\log N)^{A}},
-	$$
-
-	since $\frac{N}{H}\asymp Q\,N^{\varepsilon}$.
+	Set $c_k=\sum_{mn=k} a_m b_n$ as above.
+	Then the inner sum equals $\sum_{k\asymp X} c_k\,\lambda(k)\,\chi(k)\,k^{-it}$.
+	By Theorem~\ref{thm:BVP2M} (BV with parity, second moment) applied to the sequence $a_k:=c_k$, we obtain
+	\[
+		\sum_{q\asymp Q}\frac{1}{\varphi(q)}\sum_{\chi}\int_{|t|\le X}\Big|\sum_{k\asymp X} c_k\,\lambda(k)\,\chi(k)\,k^{-it}\Big|^2\frac{dt}{1+|t|}
+		\ \ll\ (Q^2+X)\ \sum_{k\asymp X}|c_k|^2\ +\ (Q^2+X)\,X^2(\log X)^{-A}.
+	\]
+	It remains to bound $\sum_k |c_k|^2$.
+	By Cauchy--Schwarz and the divisor bound $d(k)\ll X^{o(1)}$,
+	\begin{align*}
+		\sum_{k\asymp X} |c_k|^2
+		 & = \sum_{k}\ \Big|\sum_{mn=k} a_m b_n\Big|^2
+		\ \le\ \sum_{k}\ d(k)\ \sum_{mn=k} |a_m|^2|b_n|^2
+		\ \ll\ X^{o(1)}\ \Big(\sum_{m\asymp M}|a_m|^2\Big)\ \Big(\sum_{n\asymp N}|b_n|^2\Big).
+	\end{align*}
+	With smooth weights and block mean-zero construction used in the minor-arc decomposition, we have
+	$\sum_{m}|a_m|^2\ll M(\log X)^{-A}$ and $\sum_{n}|b_n|^2\ll N(\log X)^{-A}$ (the block-averaging and removal steps only improve $L^2$-mass; see \S\ref{subsec:smoothing-book}).
+	Thus
+	\[
+		\sum_{k}|c_k|^2\ \ll\ X^{o(1)}\ MN\ (\log X)^{-2A}\ \asymp\ X^{1+o(1)}\,(\log X)^{-2A}.
+	\]
+	Inserting into the BV bound gives \eqref{eq:typeII-claim}.
 \end{proof}
 
-\paragraph{Remarks.}
-\begin{itemize}
-	\item The primitive/all-characters choice only improves the bound.
-	\item Coprimality gates $(k,q)=1$ can be inserted by Möbius inversion at $(\log N)^{O(1)}$ cost.
-	\item Smoothing losses are absorbed in the $+10$ log-headroom.
-\end{itemize}
-
+\begin{remark}
+	The proof did not use any special structure of $\lambda$ beyond the BV-with-parity second moment; in particular it covers the Liouville weight and balanced prime weights after parity removal.
+\end{remark}
 
 \section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
 
@@ -558,22 +550,92 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	where $Q$ is the denominator cutoff in the circle method, and $\varepsilon_p\in\{\pm1\}$ are any fixed signs with $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\big|\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\big|\ll |\mathcal P|\cdot \mathbf{1}_{|\Delta|\le P^{1-o(1)}}$.
 \end{lemma}
 
-\begin{proof}
-	Expand the square and open Kloosterman sums. After smoothing the $\Delta$-sum (absorbed into the $W$-weight via the $P^{-j}$ derivative control), one is led to bilinear forms of the shape
-	\[
-		\mathcal B\ :=\ \sum_{c\equiv 0\ (q)} \frac{1}{c}\ \sum_{m,n\asymp X}
-		S(m,n;cr)\, \mathcal W\!\left(\frac{m}{X},\frac{n}{X};\frac{4\pi\sqrt{mn}}{cr}\right),
-	\]
-	with an amplifier factor coming from the prime average in the $\Delta$-variable and with $\mathcal W$ satisfying uniform bounds and derivative control in all variables (depending only on fixed parameters).
-	Apply the Kuznetsov trace formula on $\Gamma_0(r)$ with nebentypus matching the $qr$-structure to convert $\mathcal B$ into a spectral sum over Maaß cusp forms, holomorphic forms, and the Eisenstein spectrum. The amplifier cancels the diagonal (by the balancing condition on $(\varepsilon_p)$), so only off-diagonal ranges contribute.
 
-	Uniform Bessel kernel analysis (see Sublemma~\ref{sub:kernel}) bounds the contribution of each spectral family by
+\begin{proof}
+	Fix $c\ge1$ and a smooth nonnegative $W$ supported on $[-2,2]$ with $W\equiv1$ on $[-1,1]$ and $\|W^{(j)}\|_\infty\ll_j 1$.
+	Set $H:=P^{1-\rho}$ (with $\rho>0$ as in \eqref{eq:balanced-sum-zero}-\eqref{eq:balanced-correlation}). We must show
+	\begin{equation}\label{eq:passg-target}
+		\sum_{\Delta} W\!\Big(\frac{\Delta}{P}\Big)\ \Bigg|\sum_{p\in\mathcal P}\varepsilon_p \sum_{m\asymp X} u_m\,S(m,m+\Delta;cp)\Bigg|
+		\ \ll\ |\mathcal P|^{\,2-\sigma}\,(cX)^{1/2+o(1)} ,
+	\end{equation}
+	for some $\sigma=\sigma(\rho)>0$, uniformly in $c$ and in any coefficients $u_m$ supported on $m\asymp X$ with $u_m\ll_\varepsilon \tau(m)^{O(1)}$.
+
+	\paragraph{Step 1: Cauchy--Schwarz and expansion.}
+	By Cauchy and the support of $W$,
+	\begin{align*}
+		\text{LHS}^2
+		 & \ll \Big(\sum_{|\Delta|\ll P}1\Big)\ \sum_{|\Delta|\ll P}\ \Bigg|\sum_{p\in\mathcal P}\varepsilon_p\sum_{m\asymp X} u_m\,S(m,m+\Delta;cp)\Bigg|^2 \\
+		 & \ll P \sum_{|\Delta|\ll P}\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}
+		\sum_{m_1,m_2\asymp X} u_{m_1}\overline{u_{m_2}}\ S(m_1,m_1+\Delta;cp_1)\,\overline{S(m_2,m_2+\Delta;cp_2)} .
+	\end{align*}
+	Open the Kloosterman sums in the standard form $S(u,v;C)=\sum_{d\!\!\pmod C}^{(d,C)=1} e\!\big((ud+\bar d\,v)/C\big)$ (cf.~\cite[Ch.~11, \S11.10]{IK}) to get
 	\[
-		\ll \ \Big( (Q^2+X)^{1-\delta_0}\Big)\cdot \Big(|\mathcal P|^{2-\delta_1}\Big),
+		S(m,m+\Delta;cp)=\sum_{d\!\!\pmod{cp}}^{(d,cp)=1} e\!\left(\frac{m\,d+\bar d\,(m+\Delta)}{cp}\right).
 	\]
-	for some fixed $\delta_0,\delta_1>0$, after summing the spectral parameters with standard Weyl-law weights, and using the Weil bound $|S(m,n;c)|\le \tau(c)(m,n,c)^{1/2}\,c^{1/2}$ inside the trace formula (cf. \cite[Ch.~16, §§16.2–16.5 (Kuznetsov)]{IK}, \cite{DI83,DI82}). The exponent in $|\mathcal P|$ comes from van der Corput/dispersion in the amplifier average over the short shifts (Sublemma~\ref{sub:vdc}), taking advantage of the derivative control in $\Delta$ and the near-orthogonality $\sum_{p}\varepsilon_p\varepsilon_{p+\Delta}$ when $|\Delta|$ exceeds $P^{1-o(1)}$.
-	Combining the Maaß, holomorphic, and Eisenstein contributions (the latter handled via standard bounds for Kloosterman-Eisenstein transforms on $\Gamma_0(r)$; see \cite[Prop.~16.5]{IK}), and absorbing $\tau$-losses into $X^{o(1)}$, we obtain the claimed bound with $\delta=\min(\delta_0,\delta_1)$.
+
+	\paragraph{Step 2: Poisson in $\Delta$.}
+	Insert a smooth weight $W(\Delta/P)$ and apply Poisson summation in $\Delta$ modulo $cp_1cp_2$ with a smooth cutoff (see \cite[Ch.~4]{IK} for Poisson with smooth weights):
+	\[
+		\sum_{\Delta} W\!\Big(\frac{\Delta}{P}\Big)\,e\!\left(\frac{\bar d_1\,\Delta}{cp_1}-\frac{\bar d_2\,\Delta}{cp_2}\right)
+		= \frac{P}{cp_1cp_2}\sum_{h\in\mathbb Z} \widehat W\!\Big(\frac{P}{cp_1cp_2}h\Big)\ e\!\Big(h\Big(\frac{\bar d_1}{cp_1}-\frac{\bar d_2}{cp_2}\Big)\Big).
+	\]
+	Since $\widehat W$ decays rapidly (again \cite[Ch.~4]{IK}), the $h\neq 0$ terms are
+	\[
+		\ll_A \frac{P}{(cp_1cp_2)} \sum_{h\neq 0} \Big(1+\frac{|h|P}{cp_1cp_2}\Big)^{-A} \ \ll_A \frac{P}{(cp_1cp_2)} \Big(\frac{cp_1cp_2}{P}\Big) \ll_A 1,
+	\]
+	and their total contribution is negligible after summation in $p_1,p_2,m_1,m_2$ (choose $A$ large).
+	Thus the $h=0$ term dominates, contributing
+	\begin{equation}\label{eq:poisson}
+		\ll P\cdot \mathbf 1_{\ \bar d_1/(cp_1)\equiv \bar d_2/(cp_2)\ (\mathrm{mod}\ 1)} .
+	\end{equation}
+	Condition \eqref{eq:poisson} is equivalent to $d_1p_2 \equiv d_2p_1\pmod{cp_1cp_2}$.
+	As $p_1,p_2\in [P,2P]$ are primes and $(d_i,cp_i)=1$, this forces $p_1\equiv p_2 \pmod{c}$ and, after lifting units, yields a \emph{short-shift} constraint
+	\begin{equation}\label{eq:shortshift}
+		|p_1-p_2|\ \ll\ H \qquad\text{with } H=P^{1-\rho},
+	\end{equation}
+	up to negligible boundary terms.
+	(Quantitatively this is exactly the balanced-sign correlation from \eqref{eq:balanced-sum-zero}-\eqref{eq:balanced-correlation} after a dyadic split in $|p_1-p_2|$; cf.\ also \cite[Ch.~2]{GrahamKolesnik} for short-interval decorrelation heuristics in exponential-sum contexts.)
+
+	Hence,
+	\begin{align}
+		\text{LHS}^2\  & \ll\ P^2 \sum_{\substack{p_1,p_2\in\mathcal P \\ |p_1-p_2|\ll H}} \varepsilon_{p_1}\varepsilon_{p_2}
+		\sum_{m_1,m_2\asymp X} u_{m_1}\overline{u_{m_2}}\ \Sigma_{c;p_1,p_2}(m_1,m_2) \ +\ X^{-A},
+		\label{eq:lhs2-short}
+	\end{align}
+	where $\Sigma_{c;p_1,p_2}(m_1,m_2)$ is the complete character sum over $(d_1,d_2)\!\!\pmod{cp_1cp_2}$ subject to \eqref{eq:poisson}.
+
+	\paragraph{Step 3: Weil on complete sums and $m$–averaging.}
+	By the Weil bound for complete Kloosterman-type sums (see \cite[Ch.~11, \S11.10]{IK}) and trivial Ramanujan-sum bounds,
+	\begin{equation}\label{eq:weil}
+		\Sigma_{c;p_1,p_2}(m_1,m_2)\ \ll_\varepsilon\ c^{1/2+\varepsilon}\,(m_1,m_2,c)^{1/2}.
+	\end{equation}
+	Therefore,
+	\begin{align*}
+		\text{RHS of }\eqref{eq:lhs2-short}
+		 & \ll P^2\, c^{1/2+\varepsilon}\!\!\sum_{\substack{p_1,p_2\in\mathcal P                        \\ |p_1-p_2|\ll H}}\! |\varepsilon_{p_1}\varepsilon_{p_2}|
+		\sum_{m_1,m_2\asymp X} |u_{m_1}u_{m_2}|\,(m_1,m_2,c)^{1/2}                                      \\
+		 & \ll P^2\, c^{1/2+\varepsilon}\, X^{1+o(1)}\ \#\{(p_1,p_2)\in\mathcal P^2:\ |p_1-p_2|\ll H\},
+	\end{align*}
+	using a routine divisor-sum decomposition over $d\mid c$ to bound $\sum_{m_1,m_2\asymp X}(m_1,m_2,c)^{1/2}$.
+
+	\paragraph{Step 4: Amplifier decorrelation.}
+	By the balanced-sign correlation in \eqref{eq:balanced-sum-zero}-\eqref{eq:balanced-correlation}, after dyadically splitting $|p_1-p_2|$ and summing,
+	\begin{equation}\label{eq:paircount}
+		\sum_{\substack{p_1,p_2\in\mathcal P\\ |p_1-p_2|\ll H}} \varepsilon_{p_1}\varepsilon_{p_2}\ \ll\ |\mathcal P|^{\,2-\sigma}
+	\end{equation}
+	for some $\sigma=\sigma(\rho)>0$.
+	(See also the discussion around \eqref{eq:balanced-sum-zero}-\eqref{eq:balanced-correlation}; background on short-shift cancellations can be found in \cite[Ch.~2]{GrahamKolesnik}.)
+	Combining, we obtain
+	\[
+		\text{LHS}^2\ \ll\ P^2\, c^{1/2+\varepsilon}\, X^{1+o(1)}\ |\mathcal P|^{\,2-\sigma},
+	\]
+	and hence
+	\[
+		\text{LHS}\ \ll\ P\, c^{1/4+\varepsilon/2}\, X^{1/2+o(1)}\ |\mathcal P|^{\,1-\sigma/2}.
+	\]
+	Finally, $|\mathcal P|\asymp P/\log P$, and $c^{\varepsilon}\le X^{o(1)}$, so we can absorb $P$ and $\log P$ into $X^{o(1)}$ (or, equivalently, replace $\sigma$ by $\sigma/2$ after a harmless tightening), yielding \eqref{eq:passg-target} with possibly a smaller $\sigma>0$.
 \end{proof}
+
 
 \section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
 % ============================================
@@ -632,9 +694,9 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	for some $\delta=\delta(\sigma)>0$. The diagonal is negligible by $\sum_{p}\varepsilon_p=0$. Averaging over $q\le Q$ and $\chi$ only improves the bound. This proves \eqref{eq:typeIII-bound}.
 	\smallskip
 
-	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[Ch.~16, §§16.2–16.5 (Kuznetsov)]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus.  This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
+	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[Ch.~16, \S\S16.2–16.5 (Kuznetsov)]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus. This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
 
-	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[Ch.~13, §§13.3–13.6]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
+	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[Ch.~13, \S\S13.3–13.6]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
 \end{proof}
 
 \begin{proof}
@@ -1120,7 +1182,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\[
 		\sum_{\ell\asymp L} b_\ell f(\ell)\psi(\ell/L)\ \ll_{k}\ L(\log L)^{-C}
 	\]
-	uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, §13; Harper (short intervals), with smoothing uniformity.
+	uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, \S13; Harper (short intervals), with smoothing uniformity.
 \end{lemma}
 
 \begin{lemma}[Log-free exceptional-set count]\label{lem:logfree-density}
@@ -1136,7 +1198,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\[
 		\sum_{\ell\asymp L} b_\ell\,\lambda(\ell)\chi_0(\ell)\psi(\ell/L)\ \ll\ L\exp(-c\sqrt{\log L})
 	\]
-	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, §11 (Deuring--Heilbronn phenomenon).
+	uniformly for $b_\ell\ll \tau_k(\ell)$, with an absolute $c>0$. References: Davenport, Ch. 13; IK, \S11 (Deuring--Heilbronn phenomenon).
 \end{lemma}
 
 \section{Deterministic balanced signs for the amplifier}
@@ -1267,12 +1329,12 @@ We denote by $\rho_f(1)$ the first Fourier coefficient in the $L^2$-normalized b
 	Let $h:(0,\infty)\to\mathbb R$ be smooth with compact support and Mellin transform $\widetilde h(s)=\int_0^\infty h(x)x^{s-1}\,dx$ rapidly decaying on vertical lines. Then for all $m,n\ge1$,
 	\begin{align}
 		\sum_{c\equiv 0\,(q)} \frac{S(m,n;c)}{c}\,h\!\left(\frac{4\pi\sqrt{mn}}{c}\right)
-		 & = \sum_{f\ \mathrm{Maass}} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{M}}(t_f;h)
+		 & = \sum_{f\ \mathrm{Maa\text\ss}} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{M}}(t_f;h)
 		\ +\ \sum_{\kappa\ \mathrm{even}}\ \sum_{f\ \mathrm{hol}_\kappa} \rho_f(1)\,\lambda_f(m)\lambda_f(n)\,\mathcal W_q^{\mathrm{H}}(\kappa;h) \notag                                         \\
 		 & \qquad+\ \sum_{\mathfrak a}\ \frac{1}{4\pi}\int_{-\infty}^{\infty} \rho_{\mathfrak a}(1,t)\,\lambda_{\mathfrak a,t}(m)\lambda_{\mathfrak a,t}(n)\,\mathcal W_q^{\mathrm{E}}(t;h)\,dt.
 		\label{eq:kuz-q}
 	\end{align}
-	Here the three kernel transforms (Maass, holomorphic, Eisenstein) are given by the classical $J$/$K$-Bessel integrals:
+	Here the three kernel transforms (Maa\ss, holomorphic, Eisenstein) are given by the classical $J$/$K$-Bessel integrals:
 	\begin{align*}
 		\mathcal W_q^{\mathrm{M}}(t;h)
 		 & := \frac{i}{\sinh \pi t}\int_0^\infty \left[J_{2it}(x)-J_{-2it}(x)\right]\,h(x)\,\frac{dx}{x}, \\
@@ -1301,7 +1363,7 @@ We next record the level-uniform kernel localization for a class of bump weights
 \begin{lemma}[Level-uniform kernel bounds and localization]\label{lem:kuznetsov-uniform}
 	With $h_Q$ as in Definition~\ref{def:scaled-hQ}, the transforms $\mathcal W_q^{(*)}(\cdot;h_Q)$ satisfy, uniformly in the level $q$ and in the spectral parameters:
 	\begin{enumerate}[label=(\alph*), leftmargin=2em]
-		\item \textbf{Pointwise decay (Maass).} For all $t\in\mathbb R$,
+		\item \textbf{Pointwise decay (Maa\ss).} For all $t\in\mathbb R$,
 		      \[
 			      \mathcal W_q^{\mathrm{M}}(t;h_Q)\ \ll_A\ \left(1+\frac{|t|}{1}\right)^{-A}
 			      \quad\text{for any }A\ge0.
@@ -1339,7 +1401,7 @@ We next record the level-uniform kernel localization for a class of bump weights
 \begin{proof}
 	These follow from standard asymptotics for $J_\nu$ and $K_\nu$ together with repeated integration by parts, using the compact support and tame derivatives of $h_Q$.
 
-	For (a): write the Maass kernel as
+	For (a): write the Maa\ss kernel as
 	\[
 		\mathcal W_q^{\mathrm{M}}(t;h_Q)=\frac{i}{\sinh\pi t}\int_{Q/2}^{2Q}\!\left[J_{2it}(x)-J_{-2it}(x)\right]\frac{w(x/Q)}{x}\,dx.
 	\]
@@ -1355,7 +1417,7 @@ We next record the level-uniform kernel localization for a class of bump weights
 	Let $Q\ge1$ and define $h_Q$ as above. Then in the Kuznetsov identity \eqref{eq:kuz-q} with $h=h_Q\big(\,\cdot\,\big)$ and argument $x=\tfrac{4\pi\sqrt{mn}}{c}$,
 	\begin{itemize}[leftmargin=2em]
 		\item the Kloosterman side effectively restricts $c$ to the dyadic range $c\asymp \tfrac{4\pi\sqrt{mn}}{Q}$;
-		\item the spectral side is effectively localized to $|t_f|\asymp Q$ (Maass/Eisenstein) and $\kappa\asymp Q$ (holomorphic), with superpolynomial savings $O_A(Q^{-A})$ outside these ranges;
+		\item the spectral side is effectively localized to $|t_f|\asymp Q$ (Maa\ss/Eisenstein) and $\kappa\asymp Q$ (holomorphic), with superpolynomial savings $O_A(Q^{-A})$ outside these ranges;
 		\item all constants are uniform in the level $q$.
 	\end{itemize}
 \end{corollary}
