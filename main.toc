@@ -6,35 +6,35 @@
 \contentsline {section}{\numberline {1}Circle-Method Decomposition}{3}{section.1.1}%
 \contentsline {part}{B\hspace {1em}Type I / II Analysis}{6}{part.2}%
 \contentsline {section}{\numberline {1}Type\nobreakspace {}II Parity Gain: Bilinear reduction to BV}{6}{section.2.1}%
-\contentsline {paragraph}{Consequences for the minor-arc $L^2$.}{11}{section*.14}%
-\contentsline {part}{C\hspace {1em}Type III Analysis}{11}{part.3}%
-\contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{11}{section.3.1}%
-\contentsline {paragraph}{Step 1: Cauchy--Schwarz and expansion.}{11}{section*.15}%
-\contentsline {paragraph}{Step 2: Poisson in $\Delta $.}{12}{section*.16}%
-\contentsline {paragraph}{Step 3: Weil on complete sums and $m$-averaging.}{12}{section*.17}%
-\contentsline {paragraph}{Step 4: Amplifier decorrelation.}{12}{section*.18}%
-\contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{13}{section.3.2}%
-\contentsline {paragraph}{Step 1: Apply the amplifier.}{14}{section*.19}%
-\contentsline {paragraph}{Step 2: Expand and apply Kuznetsov.}{14}{section*.20}%
-\contentsline {paragraph}{Step 3: Second-moment in $\Delta $.}{14}{section*.21}%
-\contentsline {paragraph}{Step 4: Summation over $q,r$.}{14}{section*.22}%
-\contentsline {paragraph}{Step 5: Parameter choice and gain.}{14}{section*.23}%
-\contentsline {part}{D\hspace {1em}Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit {N}}{15}{part.4}%
-\contentsline {section}{\numberline {1}Major arcs, main terms, and comparison}{15}{section.4.1}%
-\contentsline {section}{\numberline {2}Minor-arc bound (summary of Parts B--C)}{17}{section.4.2}%
-\contentsline {section}{\numberline {3}Final assembly: evaluation of \textit {R(N)}}{18}{section.4.3}%
-\contentsline {section}{\numberline {4}Corollary: Goldbach for large \textit {N}}{18}{section.4.4}%
-\contentsline {part}{E\hspace {1em}Appendix -- Technical Lemmas and Parameters}{18}{part.5}%
-\contentsline {section}{\numberline {1}Minor--arc large sieve reduction}{18}{section.5.1}%
-\contentsline {section}{\numberline {2}Sieve weight \textbeta \ and properties}{20}{section.5.2}%
-\contentsline {section}{\numberline {3}Major--arc uniform error}{21}{section.5.3}%
-\contentsline {section}{\numberline {4}Auxiliary analytic inputs used in Part B}{21}{section.5.4}%
-\contentsline {section}{\numberline {5}Deterministic balanced signs for the amplifier}{21}{section.5.5}%
-\contentsline {section}{\numberline {6}Kuznetsov formula and level-uniform kernel bounds}{23}{section.5.6}%
-\contentsline {section}{\numberline {7}\textbf \textDelta --second moment, level--uniform}{25}{section.5.7}%
-\contentsline {paragraph}{Step 1: Poisson summation in $\Delta $.}{26}{section*.24}%
-\contentsline {paragraph}{Step 2: Completion in $m,n$.}{26}{section*.25}%
-\contentsline {paragraph}{Step 3: Assemble contributions.}{26}{section*.26}%
-\contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{26}{section.5.8}%
-\contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{27}{section.5.9}%
-\contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{27}{section.5.10}%
+\contentsline {paragraph}{Consequences for the minor-arc $L^2$.}{9}{section*.13}%
+\contentsline {part}{C\hspace {1em}Type III Analysis}{9}{part.3}%
+\contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{9}{section.3.1}%
+\contentsline {paragraph}{Step 1: Cauchy--Schwarz and expansion.}{9}{section*.14}%
+\contentsline {paragraph}{Step 2: Poisson in $\Delta $.}{10}{section*.15}%
+\contentsline {paragraph}{Step 3: Weil on complete sums and $m$-averaging.}{10}{section*.16}%
+\contentsline {paragraph}{Step 4: Amplifier decorrelation.}{11}{section*.17}%
+\contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{11}{section.3.2}%
+\contentsline {paragraph}{Step 1: Apply the amplifier.}{12}{section*.18}%
+\contentsline {paragraph}{Step 2: Expand and apply Kuznetsov.}{12}{section*.19}%
+\contentsline {paragraph}{Step 3: Second-moment in $\Delta $.}{12}{section*.20}%
+\contentsline {paragraph}{Step 4: Summation over $q,r$.}{13}{section*.21}%
+\contentsline {paragraph}{Step 5: Parameter choice and gain.}{13}{section*.22}%
+\contentsline {part}{D\hspace {1em}Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit {N}}{13}{part.4}%
+\contentsline {section}{\numberline {1}Major arcs, main terms, and comparison}{13}{section.4.1}%
+\contentsline {section}{\numberline {2}Minor-arc bound (summary of Parts B--C)}{15}{section.4.2}%
+\contentsline {section}{\numberline {3}Final assembly: evaluation of \textit {R(N)}}{16}{section.4.3}%
+\contentsline {section}{\numberline {4}Corollary: Goldbach for large \textit {N}}{17}{section.4.4}%
+\contentsline {part}{E\hspace {1em}Appendix -- Technical Lemmas and Parameters}{17}{part.5}%
+\contentsline {section}{\numberline {1}Minor--arc large sieve reduction}{17}{section.5.1}%
+\contentsline {section}{\numberline {2}Sieve weight \textbeta \ and properties}{18}{section.5.2}%
+\contentsline {section}{\numberline {3}Major--arc uniform error}{19}{section.5.3}%
+\contentsline {section}{\numberline {4}Auxiliary analytic inputs used in Part B}{20}{section.5.4}%
+\contentsline {section}{\numberline {5}Deterministic balanced signs for the amplifier}{20}{section.5.5}%
+\contentsline {section}{\numberline {6}Kuznetsov formula and level-uniform kernel bounds}{22}{section.5.6}%
+\contentsline {section}{\numberline {7}\textbf \textDelta --second moment, level--uniform}{24}{section.5.7}%
+\contentsline {paragraph}{Step 1: Poisson summation in $\Delta $.}{24}{section*.23}%
+\contentsline {paragraph}{Step 2: Completion in $m,n$.}{25}{section*.24}%
+\contentsline {paragraph}{Step 3: Assemble contributions.}{25}{section*.25}%
+\contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{25}{section.5.8}%
+\contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{26}{section.5.9}%
+\contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{26}{section.5.10}%

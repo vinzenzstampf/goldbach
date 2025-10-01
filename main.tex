@@ -496,54 +496,7 @@ Write $\lambda$ for the parity-sensitive multiplicative weight used throughout (
 
 
 
-\begin{proof}
-	By Cauchy and the (hybrid) large sieve (the $t=0$ specialization of Lemma~\ref{lem:hybrid-ls}),
-	\begin{equation}\label{eq:largesieve}
-		\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{n\le N}a_n\,\chi(n)\Big|^2 \ \ll\ (N+Q^2)\sum_{n\le N}|a_n|^2.
-	\end{equation}
-	We will apply \eqref{eq:largesieve} with
-	\(
-	a_n := c_n\,\lambda(n)\,1_{(n,W)=1}
-	\)
-	after pruning to $(n,W)=1$ with $W=\prod_{p\le W_0}p$ for a slowly growing $W_0=(\log N)^B$ (to be fixed). Since $c_n$ is supported in a dyadic interval with smooth $w$, standard inclusion--exclusion with $W$ and summation by parts loses only $(\log N)^{O(1)}$; this is absorbed into the right-hand side of \eqref{eq:dispersion-NQ}.
-
-	To surpass the trivial $(N+Q^2)\sum|a_n|^2$ barrier we use a \emph{pretentious pruning} against potential characters for which $\lambda(n)\chi(n)$ pretends to $n^{it}\xi(n)$ with $\xi$ a real character of small conductor. Quantitatively, let
-	\begin{equation}\label{eq:distance-def}
-		\mathbb D\big(\lambda\chi, n^{it}\xi; N\big)^2\ :=\ \sum_{p\le N}\frac{1-\Re\big(\lambda(p)\chi(p)\overline{\xi(p)}p^{-it}\big)}{p}.
-	\end{equation}
-	We require the following uniform distance lower bound.
-	\begin{lemma}[Uniform distance for $\lambda\chi$]\label{lem:distance}
-		For any $\varepsilon>0$ there exists $\delta=\delta(\varepsilon)>0$ such that uniformly for $Q\le N^{1/2-\varepsilon}$, all Dirichlet characters $\chi\bmod q$ with $q\le Q$, all $|t|\le N$, and all primitive real characters $\xi$ of conductor $\le Q$, one has
-		\(
-		\mathbb D\!\left(\lambda\chi, n^{it}\xi;\,N\right)^2 \ \ge\ \delta\log\log N,
-		\)
-		except possibly when $\xi$ is the exceptional character of a real quadratic field with a Siegel zero $\beta$, in which case the same bound holds provided $N^{-\kappa}\le 1-\beta$ for some fixed $\kappa>0$. Moreover, the set of moduli $q\le Q$ for which such an exceptional $\xi$ exists has cardinality $\ll Q/(\log N)^A$.
-	\end{lemma}
-
-	Assuming Lemma~\ref{lem:distance} for the moment, we invoke the smooth Halász--Montgomery lemma with weights.
-	\begin{lemma}[Weighted Halász mean value]\label{lem:halasz}
-		Let $f$ be a completely multiplicative function with $|f(n)|\le 1$, and let $w\in C_c^\infty([1/2,2])$. For $N\ge2$, uniformly in $|t|\le N$ and primitive characters $\xi$ of conductor $\le Q$, we have
-		\[
-			\left|\sum_{n\le N} w(n/N)\,f(n)\right| \ \ll\ N\,\exp\!\big(-\mathbb D(f,n^{it}\xi;N)^2\big)\ +\ \frac{N}{(\log N)^{A+10}},
-		\]
-		where the implicit constant depends on $A$ and finitely many $\|w^{(j)}\|_\infty$.
-	\end{lemma}
-
-	Apply Lemma~\ref{lem:halasz} to $f(n)=\lambda(n)\chi(n)1_{(n,W)=1}$ after writing $f=g*h$ with $g$ supported on $p\le W_0$ and $h$ on $p>W_0$ to absorb the coprimality gate; the $g$-contribution is harmless by smooth partial summation. Then Lemma~\ref{lem:distance} yields for each $(q,\chi)$
-	\begin{equation}\label{eq:pointwise-hal}
-		\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|\ \ll\ N\,(\log N)^{-A-9}.
-	\end{equation}
-	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
-	\(
-	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
-	\)
-	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:dispersion-NQ}.
-
-	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
-	\smallskip
-
-	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2014}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
-\end{proof}
+\smallskip
 
 \begin{remark}
 	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
@@ -562,43 +515,6 @@ We recall three standard inputs.
 	\]
 \end{lemma}
 
-\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
-Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
-\[
-	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
-\]
-Apply Lemma~\ref{lem:mls} with $a_n$ to get
-\begin{equation}\label{eq:LS-upper}
-	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
-	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
-\end{equation}
-This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
-
-Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
-\[
-	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
-	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
-	\ \ll_{B,\delta}\ N\ \exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
-	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
-\]
-Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
-\begin{equation}\label{eq:per-chi}
-	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
-\end{equation}
-Squaring \eqref{eq:per-chi} and summing over $\chi$ gives
-\[
-	\sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-	\ \ll_{\delta}\ \phi(q)\ \frac{N^2}{(\log N)^{1+2\eta}}.
-\]
-Now sum over $q\le Q$ and use $Q\le N^{1/2-\varepsilon}$ together with $\sum_{q\le Q}\phi(q)\ll Q^2$:
-\[
-	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
-	\ \ll_{\delta}\ \frac{N^2 Q^2}{(\log N)^{1+2\eta}}
-	\ \ll\ \frac{NQ}{(\log N)^A},
-\]
-after shrinking $\eta$ in terms of $A$ and using $Q\le N^{1/2-\varepsilon}$. This completes the proof.
-\qed
-
 \subsection*{Smoothing/removal bookkeeping}\label{subsec:smoothing-book}
 We record the standard stability facts used later in the minor-arc $L^2$ assembly.
 
@@ -614,8 +530,7 @@ We record the standard stability facts used later in the minor-arc $L^2$ assembl
 \end{lemma}
 
 \begin{proof}
-	This is the multiplicative large sieve (e.g. \cite[Ch.~7]{MV}, \cite[Thm.~3.13]{IK}) combined with Gallagher's hybrid \(t\)-average;
-	setting \(t=0\) recovers \eqref{eq:largesieve}. The weight \((1+|t|)^{-1}\) allows a bounded partition of the \(t\)-range.
+	This is the multiplicative large sieve (e.g. \cite[Ch.~7]{MV}, \cite[Thm.~3.13]{IK}) combined with Gallagher's hybrid \(t\)-average. The weight \((1+|t|)^{-1}\) allows a bounded partition of the \(t\)-range.
 \end{proof}
 
 
@@ -1300,6 +1215,10 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\]
 	uniformly for all $f$ with pretentious distance $\mathbb D(f,1;L)\ge C'\sqrt{\log\log L}$, where $C'$ depends on $C,k$. In particular the bound holds for $f(n)=\lambda(n)\chi(n)$ when $\chi$ is non-pretentious. References: Granville--Soundararajan (Pretentious multiplicative functions) and IK, \S13; Harper (short intervals), with smoothing uniformity.
 \end{lemma}
+
+\begin{proof}
+	This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+\end{proof}
 
 \begin{lemma}[Log-free exceptional-set count]\label{lem:logfree-density}
 	Fix $C_1\ge 1$. For $Q\le L^{1/2}(\log L)^{-100}$, the set
