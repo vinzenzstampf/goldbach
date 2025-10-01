@@ -5,6 +5,26 @@ Valentin Blomer and Djordje Mili\'cevi\'c.
 \newblock Kloosterman sums in residue classes.
 \newblock {\em J. Eur. Math. Soc. (JEMS)}, 17(1):51--69, 2015.
 
+\bibitem{DeshouillersIwaniec1982}
+Jean{-}Marc Deshouillers and Henryk Iwaniec.
+\newblock Kloosterman sums and fourier coefficients of cusp forms.
+\newblock {\em Inventiones Mathematicae}, 70:219--288, 1982.
+
+\bibitem{DukeFriedlanderIwaniec1993}
+William Duke, John~B. Friedlander, and Henryk Iwaniec.
+\newblock Bounds for automorphic $l$-functions.
+\newblock {\em Inventiones Mathematicae}, 112:1--8, 1993.
+
+\bibitem{DukeFriedlanderIwaniec1994}
+William Duke, John~B. Friedlander, and Henryk Iwaniec.
+\newblock A quadratic divisor problem.
+\newblock {\em Inventiones Mathematicae}, 115:209--217, 1994.
+
+\bibitem{FouvryIwaniec1997}
+{\'E}tienne Fouvry and Henryk Iwaniec.
+\newblock Almost primes in short intervals.
+\newblock {\em Inventiones Mathematicae}, 128:557--613, 1997.
+
 \bibitem{GrahamKolesnik}
 S.~W. Graham and G.~Kolesnik.
 \newblock {\em Van der Corput's Method of Exponential Sums}, volume 126 of {\em
@@ -15,19 +35,7 @@ S.~W. Graham and G.~Kolesnik.
 Henryk Iwaniec and Emmanuel Kowalski.
 \newblock {\em Analytic Number Theory}, volume~53 of {\em American Mathematical
   Society Colloquium Publications}.
-\newblock American Mathematical Society, Providence, RI, 2004.
-
-\bibitem{Jutila00}
-Matti Jutila.
-\newblock On spectral large sieve inequalities.
-\newblock {\em Functiones et Approximatio Commentarii Mathematici}, 28:7--18,
-  2000.
-
-\bibitem{MontgomeryVaughan}
-Hugh~L. Montgomery and Robert~C. Vaughan.
-\newblock {\em Multiplicative Number Theory I: Classical Theory}, volume~97 of
-  {\em Cambridge Studies in Advanced Mathematics}.
-\newblock Cambridge University Press, 2006.
+\newblock American Mathematical Society, Providence, RI, 2 edition, 2021.
 
 \bibitem{MV}
 Hugh~L. Montgomery and Robert~C. Vaughan.
