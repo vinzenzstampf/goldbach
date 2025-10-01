@@ -29,12 +29,12 @@
 \contentsline {section}{\numberline {2}Sieve weight \textbeta \ and properties}{17}{section.5.2}%
 \contentsline {section}{\numberline {3}Major--arc uniform error}{18}{section.5.3}%
 \contentsline {section}{\numberline {4}Auxiliary analytic inputs used in Part \ref {part:typeI-II}}{18}{section.5.4}%
-\contentsline {section}{\numberline {5}Deterministic balanced signs for the amplifier}{20}{section.5.5}%
-\contentsline {section}{\numberline {6}Kuznetsov formula and level-uniform kernel bounds}{22}{section.5.6}%
-\contentsline {section}{\numberline {7}\textbf \textDelta --second moment, level--uniform}{24}{section.5.7}%
-\contentsline {paragraph}{Step 1: Poisson summation in $\Delta $.}{24}{section*.23}%
-\contentsline {paragraph}{Step 2: Completion in $m,n$.}{25}{section*.24}%
-\contentsline {paragraph}{Step 3: Assemble contributions.}{25}{section*.25}%
-\contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{25}{section.5.8}%
-\contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{26}{section.5.9}%
-\contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{26}{section.5.10}%
+\contentsline {section}{\numberline {5}Deterministic balanced signs for the amplifier}{21}{section.5.5}%
+\contentsline {section}{\numberline {6}Kuznetsov formula and level-uniform kernel bounds}{23}{section.5.6}%
+\contentsline {section}{\numberline {7}\textbf \textDelta --second moment, level--uniform}{25}{section.5.7}%
+\contentsline {paragraph}{Step 1: Poisson summation in $\Delta $.}{25}{section*.23}%
+\contentsline {paragraph}{Step 2: Completion in $m,n$.}{26}{section*.24}%
+\contentsline {paragraph}{Step 3: Assemble contributions.}{26}{section*.25}%
+\contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{26}{section.5.8}%
+\contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{27}{section.5.9}%
+\contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{27}{section.5.10}%

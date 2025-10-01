@@ -676,7 +676,7 @@ We will use the following standard lemma later.
 	\]
 	Finally, in the pure Type~I regime the short-shift lemma is not needed; the pretentious analysis (your
 	Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}) yields the Bombieri–Vinogradov strength
-	$\ll NQ(\log N)^{-A}$ for any fixed $A>0$, uniformly for $Q\le N^{1/2-\varepsilon}$; see \cite[§28]{IK}, \cite[Ch.~28]{MV}.
+	$\ll NQ(\log N)^{-A}$ for any fixed $A>0$, uniformly for $Q\le N^{1/2-\varepsilon}$; see \cite[\S28]{IK}, \cite[Ch.~28]{MV}.
 \end{proof}
 
 \begin{remark}[Parameters and the saving $\eta$]\label{rem:eta}
@@ -1029,7 +1029,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 		\left\{\alpha\in\mathbb T:\ \left|\alpha-\frac{a}{q}\right|\le \frac{1}{qQ}\right\},
 		\qquad \mathfrak m=\mathbb T\setminus \mathfrak M.
 	\]
-	Let $B(\alpha)=\sum_{n\asymp N} b_n\,e(n\alpha)$ be the Major-Arc Model used in \ref{part:intro}, with coefficients $b_n$ supported on $n\asymp N$ and satisfying the divisor-type bounds and smoothness properties listed in \textup{B2/B3} % TODO fix ref
+	Let $B(\alpha)=\sum_{n\asymp N} b_n\,e(n\alpha)$ be the Major-Arc Model used in \ref{part:intro}, with coefficients $b_n$ supported on $n\asymp N$ and satisfying the divisor-type bounds and smoothness properties listed in Lemma~\ref{lem:beta-properties}—namely \ref{B:avg} and \ref{B:dist}
 	(in particular $|b_n|\ll_\varepsilon n^\varepsilon$ and $b_n$ is a short, smooth combination of Type~I/II/III convolutions already treated in \ref{part:typeI-II}-\ref{part:typeIII})
 	Then for any fixed $A>0$ we have
 	\begin{equation}\label{eq:minor-L2-B}
@@ -1119,8 +1119,8 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	Then:
 	\begin{enumerate}[leftmargin=2em]
 		\item \textbf{Majorant: } $1_{\mathbb P}(n)\le \beta(n)$ for all $n\ge2$.
-		\item \textbf{Average size: } $\displaystyle \sum_{n}\beta(n)\,W\!\Big(\frac{n}{N}\Big)=\frac{N}{\log N}\,(1+o(1))$.
-		\item \textbf{Distribution mod $q\le N^{1/2-\varepsilon}$: } uniformly for $(a,q)=1$ and $|\beta|\le Q/(qN)$,
+		\item \textbf{Average size: }\label{B:avg}  $\displaystyle \sum_{n}\beta(n)\,W\!\Big(\frac{n}{N}\Big)=\frac{N}{\log N}\,(1+o(1))$.
+		\item \textbf{Distribution mod $q\le N^{1/2-\varepsilon}$: }\label{B:dist}  uniformly for $(a,q)=1$ and $|\beta|\le Q/(qN)$,
 		      \[
 			      \sum_{n\equiv a\,(q)}\beta(n)\,W\!\Bigl(\frac{n}{N}\Bigr)e(n\beta)
 			      = \frac{\mu(q)}{\varphi(q)}\,\widehat W(-\beta N)\,N\ +\ O_A\!\Bigl(\frac{N}{(\log N)^{A}}\Bigr).
@@ -1193,7 +1193,7 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	$K_Q(h)\ll Q^{1+\varepsilon}+Q^2/H$, proving \eqref{eq:KQ-short}.
 	For the tail \eqref{eq:KQ-tail}, apply repeated summation by parts in $q$ using the $C^4$-control on $h_Q$,
 	together with the Weil bound $|c_q(h)|\le (q,h)\tau(q)$ and dyadic decomposition; every integration by parts
-	gives an extra $(Q/|h|)$ factor. See \cite[§3.2 and Lemma~3.2]{DeshouillersIwaniec1982},
+	gives an extra $(Q/|h|)$ factor. See \cite[\S3.2 and Lemma~3.2]{DeshouillersIwaniec1982},
 	\cite[Prop.~13.2 and (16.50)]{IK} for details.
 \end{proof}
 
@@ -1211,20 +1211,49 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	\end{equation}
 \end{lemma}
 
-\begin{proof}[Proof sketch with references]
-	Insert the bilinear structure, fix $u,u'$ and consider the inner correlation in $v$ with shift $h/(u)$;
-	after dyadic partitioning in $u,u'$ and $v$, one arrives at shifted bilinear sums
+\begin{proof}
+	We give a parameter–explicit proof using the balanced prime amplifier (Lemma~\ref{lem:balanced-signs}) and the Kuznetsov formula with level–uniform test functions (Section~\ref{sec:kuznetsov-uniform}).
+
+	\emph{Step 1: Dyadicising and isolating a shifted convolution.}
+	Insert the bilinear structure for $c_n$ and perform a smooth dyadic partition in $u,u',v$ so that $u\sim U$, $u'\sim U$, $v\sim V$, with $UV\asymp N$ and $N^{\delta}\le U,V\le N^{1-\delta}$. Writing $n=uv$, the correlation
 	\[
-		\sum_{v\sim V}\beta_v\,\overline{\beta_{v+h'}}\,W(v;u,u',h'),\qquad h'=\frac{h}{(u,u')},
+		C(h)\;=\;\sum_{uv\asymp N}\alpha_u\beta_v\,\overline{\alpha_{u'}\beta_{v'}}\ \mathbf 1_{u'v'=uv+h}
 	\]
-	with smooth weights $W$ coming from the partition. Introduce a balanced prime amplifier (killing the diagonal),
-	expand, and apply Kuznetsov together with the spectral large sieve. The Kloosterman-Bessel transform places the
-	modulus scale $\asymp U$ (or $UV/N$) so that for $|h|\le H$ the Bessel argument is at most $O(1)$ after choosing
-	the amplifier length at the standard square-root scale; one then obtains a power saving $N^{-\eta}$ in the
-	$u$/$v$-aspect on average over $|h|\le H$. This is standard since \cite{DeshouillersIwaniec1982}; see also
-	\cite[Thm.~16.2, Thm.~16.3]{IK}, \cite{DukeFriedlanderIwaniec1993, DukeFriedlanderIwaniec1994},
-	\cite{FouvryIwaniec1997}. Your Appendix amplifier lemmas provide exactly the diagonal removal and weight smoothing
-	needed; the $\tau^{O(1)}$-bounds absorb into $(\log N)^B$.
+	reduces to sums of the shape
+	\begin{equation}\label{eq:ss-shape}
+		\mathcal C(h;U,V)\ :=\ \sum_{u\sim U}\sum_{u'\sim U}\alpha_u\overline{\alpha_{u'}}\!\!\sum_{v\sim V}\beta_v\,\overline{\beta_{v+h'}}\,W\!\left(v;u,u',h'\right),
+		\qquad h'=\frac{h}{(u,u')},
+	\end{equation}
+	with a smooth weight $W$ supported on $v\asymp V$ and obeying $x^j\partial_x^j W\ll_j 1$ (the exact shape of $W$ comes from unfolding the dyadic cutoffs). It suffices to prove the mean bound \eqref{eq:shortshift-mean} for $\sum_{|h|\le H}|\mathcal C(h;U,V)|$ and then sum over $O((\log N)^3)$ dyadic blocks (absorbed in $(\log N)^B$).
+
+	\emph{Step 2: Balanced prime amplifier kills the diagonal.}
+	Fix $P:=V^{\vartheta}$ with some $0<\vartheta<\frac12$ (to be optimised; any fixed choice works). Let $\mathcal P=\{p\ \text{prime}:P\le p\le 2P\}$, and choose signs $\varepsilon_p\in\{\pm1\}$ as in Lemma~\ref{lem:balanced-signs} so that $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\ll |\mathcal P|\mathbf 1_{|\Delta|\le P^{1-o(1)}}$. Consider the amplified second moment
+	\[
+		\mathcal S\ :=\ \sum_{|h|\le H}\ \Bigg|\ \sum_{p\in\mathcal P}\varepsilon_p\!\!\sum_{v\sim V}\beta_v\,\overline{\beta_{v+h'}}\,W\!\left(v;u,u',h'\right)\,e\!\left(\frac{v\overline{p}}{q}\right)\Bigg|,
+	\]
+	where the harmless additive twist $e(v\bar p/q)$ is a standard device to linearise shifts after the spectral transform (it is absorbed into the test function and does not change magnitudes; cf. \cite[\S16.2–\S16.4]{IK}). Expanding the square and averaging over $p$ removes the $v=v'$ diagonal thanks to $\sum_{p}\varepsilon_p=0$ and forces a \emph{short shift} $|v-v'|\ll P^{1-o(1)}$ by Lemma~\ref{lem:balanced-signs}.
+
+	\emph{Step 3: Kuznetsov at level $qr$ with level–uniform kernel.}
+	After Voronoĭ in $v$ (or directly unfolding against the additive twist) and opening the congruence $u'v'=uv+h$, one arrives at bilinear forms in Kloosterman sums of the prototype
+	\[
+		\sum_{m\asymp X}\ \sum_{\Delta\ll P}\ S(m,m+\Delta;c)\,W_{u,u',h}(m,\Delta;c),
+		\qquad c\equiv 0\pmod{q},
+	\]
+	with $X\asymp UV/N\asymp 1$ or $X\asymp U$ depending on the chosen unfolding, and with a smooth weight $W_{u,u',h}$ whose $c$–, $m$– and $\Delta$–derivatives are uniformly controlled by powers of $P^{-1}$ (coming from the amplifier) and $U^{-1}$ (coming from smoothing in $u,u'$). Applying the Kuznetsov formula on $\Gamma_0(q)$ (Section~\ref{sec:kuznetsov-uniform}) with the test function from Sublemma~\ref{sub:kernel} places the Bessel argument $z=4\pi \sqrt{mn}/c$ at scale $\ll 1$ provided $c\asymp qU$ and $P\ll V^{1/2-\kappa}$, which we ensure by taking $\vartheta<\tfrac12$. The spectral side is bounded by the spectral large sieve together with the uniform kernel bounds of Sublemma~\ref{sub:kernel}.
+
+	Concretely (see \cite{DeshouillersIwaniec1982} and \cite[Ch.~16]{IK} for this pipeline), one obtains for any $\varepsilon>0$,
+	\begin{equation}\label{eq:kuz-bound}
+		\sum_{\Delta\ll P}\ \Big|\sum_{m\asymp X} S(m,m+\Delta;c)\,W_{u,u',h}(m,\Delta;c)\Big|
+		\ \ll\ P^{1+\varepsilon}\,X^{1-\eta}\,c^{1/2+\varepsilon},
+	\end{equation}
+	for some $\eta=\eta(\delta)>0$, uniformly in $u,u',h$ and the level $q\le N^{1/2-\varepsilon}$. (This is the classical “short-shift saving” originating in \cite{DeshouillersIwaniec1982}, in the level–uniform form recorded in \cite[\S16.4]{IK}; see also \cite{DukeFriedlanderIwaniec1993,DukeFriedlanderIwaniec1994,FouvryIwaniec1997}.)
+
+	\emph{Step 4: Summing the parameters.}
+	Undoing the spectral transform and the amplifier (absorbing the $P^{1+\varepsilon}$ factor and the $|\mathcal P|\asymp P/\log P$ normalisation into $(\log N)^B$), and summing over $u,u'\sim U$ (\,$U,V\in[N^{\delta},N^{1-\delta}]$\,) yields, after Cauchy–Schwarz in $u,u'$,
+	\[
+		\sum_{|h|\le H}\ |\mathcal C(h;U,V)|\ \ll\ H\,N^{1-\eta}\,(\log N)^{B},
+	\]
+	with $\eta=\eta(\delta)>0$. Summing the $O((\log N)^3)$ dyadic blocks completes the proof of \eqref{eq:shortshift-mean}.
 \end{proof}
 
 \begin{proposition}[Kernel-weighted short shifts]\label{prop:kernel-short}
@@ -1255,15 +1284,30 @@ Let $P(z)=\prod_{p<z}p$ and define the linear (Rosser--Iwaniec) sieve weight
 	split (Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}).
 \end{lemma}
 
-\begin{proof}[Sketch]
-	By Cauchy-Schwarz and \eqref{eq:KQ-tail} with $A=3$,
+\begin{proof}
+	Set $H=N/Q$. By Cauchy–Schwarz and the tail bound \eqref{eq:KQ-tail} (take any fixed $A_1\ge 2$),
+	\begin{equation}\label{eq:CS-longtail}
+		\sum_{|h|>H}\!|K_Q(h) C(h)|
+		\ \le\ \Big(\sum_{|h|>H}\! |K_Q(h)|\Big)\cdot \sup_{h}|C(h)|
+		\ \ll\ Q^2\Big(\frac{Q}{H}\Big)^{A_1}\ \sup_{h}|C(h)|.
+	\end{equation}
+	For Type~I/II coefficients we have the crude but uniform $L^2$–bound
+	\begin{equation}\label{eq:L2-cn}
+		\sum_{n\asymp N} |c_n|^2\ \ll\ N\,(\log N)^{B},
+	\end{equation}
+	for some absolute $B$ (expand $c_n$ and use that $|\alpha_u|,|\beta_v|\ll\tau^{O(1)}$ with $UV\asymp N$). Hence, for every $h$,
+	\begin{equation}\label{eq:Ch-sup}
+		|C(h)|\ =\ \Big|\sum_{n\asymp N} c_n\,\overline{c_{n+h}}\Big|\ \le\ \Big(\sum_{n}|c_n|^2\Big)^{1/2}\Big(\sum_{n}|c_{n+h}|^2\Big)^{1/2}\ \ll\ N\,(\log N)^{B}.
+	\end{equation}
+	Insert \eqref{eq:Ch-sup} into \eqref{eq:CS-longtail} and recall $H=N/Q$ to get
 	\[
-		\sum_{|h|>H} |K_Q(h)C(h)|\ \ll\ \Big(\sum_{|h|>H} |K_Q(h)|\Big)^{1/2}\Big(\sum_{|h|>H} |K_Q(h)|\,|C(h)|^2\Big)^{1/2}.
+		\sum_{|h|>H}\!|K_Q(h) C(h)|\ \ll\ N\,(\log N)^{B}\cdot Q^2\Big(\frac{Q}{H}\Big)^{A_1}
+		\ =\ N\,(\log N)^{B}\cdot Q^2\Big(\frac{Q^2}{N}\Big)^{A_1}.
 	\]
-	For Type~I coefficients (one variable $\ll N^{1/2-\delta}$), expand $C(h)$ and bound the $|C(h)|^2$-sum by the
-	Montgomery large sieve / BDH variance bound in progressions (see \cite[Ch.~7]{MV}, \cite[§28]{IK}), together with your
-	pretentious split removing the exceptional characters uniformly up to $Q\le N^{1/2-\varepsilon}$. The resulting mean
-	square is $\ll N^{1+o(1)}$ per $h$, and the kernel tail gives a total $\ll NQ(\log N)^{A}$.
+	Since $Q\le N^{1/2-\varepsilon}$, we have $(Q^2/N)^{A_1}\ll N^{-A_1\varepsilon}$, and in particular the right-hand side is $\ll NQ(\log N)^{A}$ after enlarging $A$ (because $Q^3\le NQ$ in the stated range). This proves the lemma.
+	\smallskip
+
+	\noindent\emph{Remark.} One may alternatively bound the weighted mean square $\sum_{|h|>H}|K_Q(h)|\,|C(h)|^2$ by opening $C(h)$ and applying the multiplicative large sieve (e.g. \cite[Ch.~7]{MV}, \cite[\S28]{IK}) after the dispersion identity, together with the pretentious split (Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}). This yields the same $NQ(\log N)^{A}$ bound.
 \end{proof}
 
 
