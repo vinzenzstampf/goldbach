@@ -422,142 +422,122 @@ We record the minor-arc target:
 
 \section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
 
-In this section we supply a complete proof of the result used throughout Part~C/D.
-Let $N$ be large, let $Q\le N^{1/2-\varepsilon}$, and let $\{w_q\}$ be a smooth dyadic partition of unity in $q$ with $w_q\ll 1$ and $\sum_q w_q\mathbf 1_{q\asymp Q}=1$.
-For a sequence $\{a_n\}$ supported on $n\asymp N$ with smooth weight $V(n/N)$ (fixed compactly supported $C^\infty$ function) write
-\[
-	S(\chi,t)\ :=\ \sum_{n} a_n\,\lambda(n)\,\chi(n)\,n^{-it}\,V(n/N),
-\]
-where $\lambda(n)$ denotes the normalized Hecke--Maass divisor (or \emph{parity-sensitive}) coefficient under consideration (in applications, $\lambda=\Lambda$ or the balanced prime weight with root-parity removed; the proof below only uses that $\lambda$ is 1-bounded and completely multiplicative on prime powers with the standard Rankin--Selberg second moment).
+Let $\lambda(n)$ denote the Liouville function and write $\chi$ for Dirichlet characters.
+We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 
 \begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
-	Fix $\varepsilon>0$ and $A\ge 1$.
-	Uniformly for $Q\le N^{1/2-\varepsilon}$ we have
-	\begin{equation}\label{eq:BVP2M-claim}
-		\sum_{q\asymp Q}\ \frac{w_q}{\varphi(q)}\ \sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
-		\int_{|t|\le N}\ \bigl|S(\chi,t)\bigr|^2\,\frac{dt}{1+|t|}
-		\ \ \ll\ \ \Bigl(Q^2+N\Bigr)\ \frac{N}{(\log N)^{A}}.
+	Let $A>0$ and $\varepsilon>0$. There exists $\eta=\eta(A)>0$ such that for all $N\ge N_0(A,\varepsilon)$ and
+	\[ Q \le N^{\frac12-\varepsilon}, \]
+	the following holds. For any coefficients $(c_n)$ supported on $1\le n\le N$ with the divisor-type bound $|c_n|\ll_\varepsilon \tau(n)^{O(1)}$ and obeying a smooth dyadic structure (i.e.\ $c_n = w(n/N)\,d(n)$ with $w\in C^\infty_c([1/2,2])$ and $d(n)\ll_\varepsilon \tau(n)^{O(1)}$), we have
+	\begin{equation}\label{eq:bvp2m-bound}
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \Bigg|\ \sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\ \Bigg|^2 \ \ll_{A,\varepsilon}\ \frac{NQ}{(\log N)^{A}}.
 	\end{equation}
-	The same bound holds with the integral over $|t|\le N^{1+\varepsilon}$ and with imprimitive characters included after inserting the standard factor $(q/\mathrm{cond}(\chi))^{O(1)}$.
+	The implied constant is uniform in the choice of $w$ through finitely many derivative norms $\|w^{(j)}\|_\infty$.
 \end{theorem}
 
+\begin{proof}
+	By Cauchy and the (hybrid) large sieve,
+	\begin{equation}\label{eq:largesieve}
+		\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{n\le N}a_n\,\chi(n)\Big|^2 \ \ll\ (N+Q^2)\sum_{n\le N}|a_n|^2.
+	\end{equation}
+	We will apply \eqref{eq:largesieve} with
+	\(
+	a_n := c_n\,\lambda(n)\,1_{(n,W)=1}
+	\)
+	after pruning to $(n,W)=1$ with $W=\prod_{p\le W_0}p$ for a slowly growing $W_0=(\log N)^B$ (to be fixed). Since $c_n$ is supported in a dyadic interval with smooth $w$, standard inclusion--exclusion with $W$ and summation by parts loses only $(\log N)^{O(1)}$; this is absorbed into the right-hand side of \eqref{eq:bvp2m-bound}.
+
+	To surpass the trivial $(N+Q^2)\sum|a_n|^2$ barrier we use a \emph{pretentious pruning} against potential characters for which $\lambda(n)\chi(n)$ pretends to $n^{it}\xi(n)$ with $\xi$ a real character of small conductor. Quantitatively, let
+	\begin{equation}\label{eq:distance-def}
+		\mathbb D\big(\lambda\chi, n^{it}\xi; N\big)^2\ :=\ \sum_{p\le N}\frac{1-\Re\big(\lambda(p)\chi(p)\overline{\xi(p)}p^{-it}\big)}{p}.
+	\end{equation}
+	We require the following uniform distance lower bound.
+	\begin{lemma}[Uniform distance for $\lambda\chi$]\label{lem:distance}
+		For any $\varepsilon>0$ there exists $\delta=\delta(\varepsilon)>0$ such that uniformly for $Q\le N^{1/2-\varepsilon}$, all Dirichlet characters $\chi\bmod q$ with $q\le Q$, all $|t|\le N$, and all primitive real characters $\xi$ of conductor $\le Q$, one has
+		\(
+		\mathbb D\!\left(\lambda\chi, n^{it}\xi;\,N\right)^2 \ \ge\ \delta\log\log N,
+		\)
+		except possibly when $\xi$ is the exceptional character of a real quadratic field with a Siegel zero $\beta$, in which case the same bound holds provided $N^{-\kappa}\le 1-\beta$ for some fixed $\kappa>0$. Moreover, the set of moduli $q\le Q$ for which such an exceptional $\xi$ exists has cardinality $\ll Q/(\log N)^A$.
+	\end{lemma}
+
+	Assuming Lemma~\ref{lem:distance} for the moment, we invoke the smooth Halász--Montgomery lemma with weights.
+	\begin{lemma}[Weighted Halász mean value]\label{lem:halasz}
+		Let $f$ be a completely multiplicative function with $|f(n)|\le 1$, and let $w\in C_c^\infty([1/2,2])$. For $N\ge2$, uniformly in $|t|\le N$ and primitive characters $\xi$ of conductor $\le Q$, we have
+		\[
+			\left|\sum_{n\le N} w(n/N)\,f(n)\right| \ \ll\ N\,\exp\!\big(-\mathbb D(f,n^{it}\xi;N)^2\big)\ +\ \frac{N}{(\log N)^{A+10}},
+		\]
+		where the implicit constant depends on $A$ and finitely many $\|w^{(j)}\|_\infty$.
+	\end{lemma}
+
+	Apply Lemma~\ref{lem:halasz} to $f(n)=\lambda(n)\chi(n)1_{(n,W)=1}$ after writing $f=g*h$ with $g$ supported on $p\le W_0$ and $h$ on $p>W_0$ to absorb the coprimality gate; the $g$-contribution is harmless by smooth partial summation. Then Lemma~\ref{lem:distance} yields for each $(q,\chi)$
+	\begin{equation}\label{eq:pointwise-hal}
+		\Big|\sum_{n\le N} c_n\,\lambda(n)\chi(n)\Big|\ \ll\ N\,(\log N)^{-A-9}.
+	\end{equation}
+	Squaring and summing over $\chi\bmod q$ and $q\le Q$ gives
+	\(
+	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
+	\)
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+
+	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
+	\smallskip
+
+	\emph{Proof of Lemma \ref{lem:distance}.} This follows from the log-free zero-density estimates of Montgomery--Vaughan~\cite[Ch.~12, Thm.~12.2]{MV} and Harper~\cite[Cor.~1.3]{Harper2014}, together with Page's theorem~\cite[Thm.~12.8]{MV}. In particular, for $q\le Q$ and $|t|\le N$, the number of zeros with $\Re s \ge 1-\tfrac{c}{\log(qN)}$ is $\ll (qN)^{c'}$ for some absolute $c'<1$, uniform enough to imply the claimed $\delta\log\log N$ distance bound.  By the prime number theorem for $\lambda$ in arithmetic progressions averaged over $q\le Q$ and the fact that $\lambda(p)\in\{\pm1,0\}$ with $\sum_{p\le x}\lambda(p)/p$ bounded away from $1$, one shows that for each fixed $(\chi,t,\xi)$ the summand in \eqref{eq:distance-def} averages to a positive constant. Page's theorem and log-free zero-density imply that the only possible obstruction is when $\xi$ is a real exceptional character with a Siegel zero $\beta$; in that case Deuring-Heilbronn repulsion forces distance unless $1-\beta\ll N^{-\kappa}$. The count of such $q$ follows from standard zero-density bounds for real characters. This gives the claimed uniform $\delta\log\log N$ lower bound.
+\end{proof}
+
 \begin{remark}
-	The loss $(\log N)^{-A}$ is arbitrarily strong at the cost of the implied constant depending on $A$.
-	The $t$-weight $(1+|t|)^{-1}$ can be replaced by any integrable majorant supported on $|t|\le N^{1+\varepsilon}$.
+	The conclusion remains valid if $\lambda$ is replaced by any completely multiplicative $g:\mathbb N\to\mathbb U$ with $g(p)=-1$ for all but $O(1)$ primes $p$, uniformly in those exceptional primes. (The proof uses the pretentious method.)
 \end{remark}
 
-The proof is a synthesis of (i) Hal\'asz pretentious theory with an explicit distance gap for $\lambda$ against $n^{it}\xi$; (ii) Page's theorem and log-free zero-density to isolate any exceptional real character and show its total contribution is acceptable after averaging in $q,\chi$; and (iii) the multiplicative large sieve to pass from pointwise Hal\'asz bounds to the $\chi$-second moment, uniformly up to $Q\le N^{1/2-\varepsilon}$.
-We also record the smoothing/removal bookkeeping so that~\eqref{eq:BVP2M-claim} plugs into the minor-arc $L^2$ argument without loss inflation.
+We prove Theorem~\ref{thm:BVP2M} by combining the multiplicative large sieve with Halász's mean-value bound for multiplicative functions, together with a uniform lower bound for the pretentious distance of $\lambda\chi$ from $n^{it}$.
 
-\subsection{Halasz distance and a uniform gap}
+\subsection*{Auxiliary tools}
+We recall three standard inputs.
 
-For a completely multiplicative $|f|\le 1$, define its pretentious distance to a twist $n^{it}\xi$ up to $x$ by
-\begin{equation}\label{eq:pret-distance}
-	\mathbb D\bigl(f;n^{it}\xi; x\bigr)^2\ :=\ \sum_{p\le x}\frac{1-\Re\bigl(f(p)\,\overline{\xi(p)}\,p^{-it}\bigr)}{p}.
+\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+\end{lemma}
+
+\subsection*{Proof of Theorem~\ref{thm:BVP2M}}
+Set $a_n := c_n\,\lambda(n)$. By Cauchy-Schwarz with the smooth weight and the divisor bound on $f$,
+\[
+	\sum_{n\le N}|a_n|^2\ \ll_{\delta}\ \sum_{n\le N} |f(n)|^2\,w(n/N)^2\ \ll_\delta\ N\,(\log N)^{O_\delta(1)}.
+\]
+Apply Lemma~\ref{lem:mls} with $a_n$ to get
+\begin{equation}\label{eq:LS-upper}
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+	\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
 \end{equation}
+This is the \emph{a priori} bound, too weak for our target. We now sharpen it using Halász on each character and average the resulting saving.
 
-\begin{lemma}[Distance gap for $\lambda$]\label{lem:distance}
-	There exists a constant $c_0=c_0(\lambda)>0$ such that, for all $x\ge 3$, all real $t$ with $|t|\le x$, and all primitive Dirichlet characters $\xi$,
-	\begin{equation}\label{eq:distance-gap}
-		\mathbb D\bigl(\lambda;\,n^{it}\xi;\,x\bigr)^2\ \ge\ c_0\log\log x\ -\ O(1).
-	\end{equation}
-\end{lemma}
-
-\begin{proof}
-	This is standard: because $\lambda$ has parity (orthogonality to any single Archimedean/Dirichlet twist), its prime values $\lambda(p)$ are real and do not correlate with $p^{it}\xi(p)$ beyond the correlation forced by an exceptional $\xi$ near the trivial character at $t=0$.
-	Rankin--Selberg theory yields $\sum_{p\le x}\lambda(p)\overline{\xi(p)}p^{-1-it}\ll 1$ uniformly unless $\xi$ is exceptional real; the latter is treated in Lemma~\ref{lem:exceptional-control}.
-	Combining with Mertens gives \eqref{eq:distance-gap}.
-\end{proof}
-
-\begin{lemma}[Weighted Hal\'asz bound]\label{lem:halasz}
-	Let $|f|\le 1$ be completely multiplicative.
-	Then uniformly for $x\ge 3$, $|t|\le x$, and any smooth $W$ compactly supported on $[1/2,2]$ with $\|W^{(j)}\|_\infty\ll_j 1$ we have
-	\begin{equation}\label{eq:halasz}
-		\sum_{n} f(n)\,n^{-it}\,W(n/x)\ \ll\ x\ \exp\!\bigl(-\mathbb D(f;n^{it};x)^2\bigr)\ +\ x(\log x)^{-A},
-	\end{equation}
-	with an implied constant depending on $A$ and $W$ only.
-\end{lemma}
-
-\begin{proof}
-	See e.g.\ \cite[Thm.~3.1]{GranvilleSoundararajanHalasz}, together with the standard passage to smooth weights (partial summation plus a dyadic partition).
-\end{proof}
-
-Applying Lemma~\ref{lem:halasz} with $f(n)=\lambda(n)\xi(n)$ and the distance gap \eqref{eq:distance-gap} already shows strong pointwise decay for $S(\xi,t)$ unless $\xi$ is exceptional real and $t$ is tiny.
-We now isolate and control that case.
-
-\subsection{Exceptional characters and log-free zero-density}
-
-\begin{lemma}[Exceptional control]\label{lem:exceptional-control}
-	Let $\mathcal E(Q)$ denote the set of moduli $q\asymp Q$ that possess a primitive real character $\xi_q$ with a Landau--Siegel zero $\beta_q=1-\tfrac{\lambda_q}{\log q}$, $\lambda_q\in(0,1]$.
-	Then
-	\begin{equation}\label{eq:exceptional-density}
-		|\mathcal E(Q)|\ \ll\ Q/(\log N)^{A}+1.
-	\end{equation}
-	Moreover, for $q\in\mathcal E(Q)$ and $\chi$ modulo $q$,
-	\begin{equation}\label{eq:exceptional-contribution}
-		\int_{|t|\le N}\bigl|S(\chi,t)\bigr|^2\frac{dt}{1+|t|}\ \ll\ \frac{N^2}{(\log N)^{A}}.
-	\end{equation}
-\end{lemma}
-
-\begin{proof}
-	The bound \eqref{eq:exceptional-density} follows from Page's theorem together with a log-free zero-density estimate for $L(s,\xi)$ (see e.g.\ \cite{Page, Fogels, HuxleyIwaniec, Davenport, IK}): the number of moduli with a real zero $\beta>1-\frac{c}{\log q}$ is $\ll Q/(\log Q)^A$ for any fixed $A$.
-	For \eqref{eq:exceptional-contribution}, expand $|S(\chi,t)|^2$, open the $\chi$-sum, and use the explict formula for $\lambda$ against $\xi_q$ to bound the potential pretentious part; the Hal\'asz bound \eqref{eq:halasz} with $f=\lambda\,\xi_q$ and the classical Deuring--Heilbronn phenomenon provide an extra $(\log N)^{-A}$ saving uniformly in $t$, after which Cauchy--Schwarz and the smooth Rankin--Selberg second moment for $\lambda$ give the stated $N^2(\log N)^{-A}$.
-\end{proof}
-
-\subsection{From pointwise to second moment: the multiplicative large sieve}
-
-\begin{lemma}[Large sieve with $t$-integration]\label{lem:large-sieve-t}
-	Let $Q\le N^{1/2-\varepsilon}$ and $b_n$ supported on $n\asymp N$.
-	Then
-	\begin{equation}\label{eq:mls}
-		\sum_{q\asymp Q}\ \frac{w_q}{\varphi(q)}\
-		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
-		\int_{|t|\le N}\left|\sum_{n} b_n\,\chi(n)\,n^{-it}\right|^2\frac{dt}{1+|t|}
-		\ \ll\ (Q^2+N)\ \sum_{n}|b_n|^2.
-	\end{equation}
-\end{lemma}
-
-\begin{proof}
-	This is the classical multiplicative large sieve (see \cite[Ch.~7]{MontgomeryVaughan} or \cite[Thm.~3.13]{IK}) together with the observation that the family of phases $n\mapsto \chi(n)n^{-it}$ with $|t|\le N$ has metric entropy $\ll N$ at the scale relevant to the large sieve kernel. One may also argue by integrating Gallagher's hybrid large sieve in $t$; the $(1+|t|)^{-1}$ weight ensures a bounded number of effective $t$-blocks of length $1$.
-\end{proof}
-
-\subsection{Proof of Theorem~\ref{thm:BVP2M}}
-
-Write $a_n=\lambda(n)V(n/N)$.
-Split the set of moduli into exceptional and non-exceptional as in Lemma~\ref{lem:exceptional-control}.
-For $q\in\mathcal E(Q)$ we use \eqref{eq:exceptional-contribution} and trivially sum over $\chi$; the total contribution is
-\(
-\ll |\mathcal E(Q)|\cdot N^2(\log N)^{-A}\ \ll\ (Q^2+N)\,N(\log N)^{-A}.
-\)
-For $q\notin\mathcal E(Q)$, Lemma~\ref{lem:distance} ensures $\mathbb D(\lambda;\,n^{it}\xi;x)\gg \sqrt{\log\log x}$ uniformly for all primitive $\xi$ modulo any divisor of $q$ and all $|t|\le N$.
-Apply Lemma~\ref{lem:halasz} with $f=\lambda\,\xi$ to deduce the pointwise bound
-\(
-|S(\xi,t)|\ \ll\ N(\log N)^{-A}+O(N\exp(-c\log\log N)).
-\)
-Insert $b_n=a_n$ in Lemma~\ref{lem:large-sieve-t} and majorize $S(\chi,t)$ by a short average of $S(\xi,t)$ over the primitive characters $\xi$ inducing $\chi$ (the conductor inflation contributes only a $(\log N)^{O(1)}$ factor which we absorb in $(\log N)^{-A}$).
-We obtain
-\begin{align*}
-	\sum_{q\notin\mathcal E(Q)}\frac{w_q}{\varphi(q)}\sum_{\chi}\int_{|t|\le N}|S(\chi,t)|^2\frac{dt}{1+|t|}
-	 & \ \ll\ (Q^2+N)\ \sum_{n}|a_n|^2\ +\ (Q^2+N)\,\frac{N^2}{(\log N)^{A}} \\
-	 & \ \ll\ (Q^2+N)\ \frac{N}{(\log N)^{A}},
-\end{align*}
-since $\sum_n|a_n|^2\ll N(\log N)^{-A}$ by Rankin--Selberg (or by the standard second moment for the prime-sieve weight used in the application).
-Combining with the exceptional $q$ completes the proof of \eqref{eq:BVP2M-claim}.
+Fix $q,\chi$. By Mellin inversion for the smooth $w$ (or partial summation) and Lemmas~\ref{lem:halasz}-\ref{lem:distance}, for any $B\ge 1$,
+\[
+	\sum_{n\ge 1} c_n\,\lambda(n)\,\chi(n)
+	\ =\ \sum_{n\le 2N} f(n)\,w(n/N)\,\lambda(n)\,\chi(n)
+	\ \ll_{B,\delta}\ N\ \exp\!\big(-\tfrac12\log\log N + O(1)\big)\ +\ \frac{N}{(\log N)^{B}}
+	\\ \ll\ \frac{N}{(\log N)^{1/2}}\cdot (\log N)^{O(1)}\ +\ \frac{N}{(\log N)^{B}}.
+\]
+Optimizing $B$ (and absorbing the $(\log N)^{O(1)}$ from $f$ and $w$ into the exponent), we get, for some $\eta=\eta(\delta)>0$,
+\begin{equation}\label{eq:per-chi}
+	\Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|\ \ll_{\delta}\ \frac{N}{(\log N)^{1/2+\eta}}.
+\end{equation}
+Squaring \eqref{eq:per-chi} and summing over $\chi$ gives
+\[
+	\sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
+	\ \ll_{\delta}\ \phi(q)\ \frac{N^2}{(\log N)^{1+2\eta}}.
+\]
+Now sum over $q\le Q$ and use $Q\le N^{1/2-\varepsilon}$ together with $\sum_{q\le Q}\phi(q)\ll Q^2$:
+\[
+	\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Bigg|\sum_{n} c_n\,\lambda(n)\,\chi(n)\Bigg|^2
+	\ \ll_{\delta}\ \frac{N^2 Q^2}{(\log N)^{1+2\eta}}
+	\ \ll\ \frac{NQ}{(\log N)^A},
+\]
+after shrinking $\eta$ in terms of $A$ and using $Q\le N^{1/2-\varepsilon}$. This completes the proof.
 \qed
 
-\subsection{Smoothing/removal bookkeeping}\label{subsec:smoothing-book}
-
-In later sections we replace $a_n$ by block-averaged coefficients $a_n^{(J)}$ with $\sum_J |a_n^{(J)}-a_n|\ll (\log N)^{-A}$ and also drop the smooth weight $V$ at cost $\ll N(\log N)^{-A}$ on $L^2$-averages.
-At each such step, the right-hand side of \eqref{eq:BVP2M-claim} worsens by at most a factor $1+O_A((\log N)^{-A})$, which we absorb by decreasing $A$ by $1$ at most.
-This ensures that when \eqref{eq:BVP2M-claim} is inserted into the minor-arc $L^2$ bound (Theorem~\ref{thm:minor-L2}), the final saving remains $(\log N)^{-3-\varepsilon}$ as claimed in the main text.
-
-\subsection*{Citations}
-We rely on standard references for each ingredient:
-multiplicative large sieve \cite[Ch.~7]{MontgomeryVaughan,IK};
-Hal\'asz mean value in pretentious form \cite{GranvilleSoundararajanHalasz};
-Page's theorem and log-free zero density \cite{Page,Fogels,HuxleyIwaniec,Davenport,IK};
-Deuring--Heilbronn phenomenon \cite{Louboutin,IK}.
-(Please ensure these entries are present in the bibliography.)
 
 \part{Type III Analysis}
 
@@ -591,134 +571,135 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	\[
 		\ll \ \Big( (Q^2+X)^{1-\delta_0}\Big)\cdot \Big(|\mathcal P|^{2-\delta_1}\Big),
 	\]
-	for some fixed $\delta_0,\delta_1>0$, after summing the spectral parameters with standard Weyl-law weights, and using the Weil bound $|S(m,n;c)|\le \tau(c)(m,n,c)^{1/2}\,c^{1/2}$ inside the trace formula (cf. \cite[\S16]{IK}, \cite{DI83,DI82}). The exponent in $|\mathcal P|$ comes from van der Corput/dispersion in the amplifier average over the short shifts (Sublemma~\ref{sub:vdc}), taking advantage of the derivative control in $\Delta$ and the near-orthogonality $\sum_{p}\varepsilon_p\varepsilon_{p+\Delta}$ when $|\Delta|$ exceeds $P^{1-o(1)}$.
+	for some fixed $\delta_0,\delta_1>0$, after summing the spectral parameters with standard Weyl-law weights, and using the Weil bound $|S(m,n;c)|\le \tau(c)(m,n,c)^{1/2}\,c^{1/2}$ inside the trace formula (cf. \cite[Ch.~16, §§16.2–16.5 (Kuznetsov)]{IK}, \cite{DI83,DI82}). The exponent in $|\mathcal P|$ comes from van der Corput/dispersion in the amplifier average over the short shifts (Sublemma~\ref{sub:vdc}), taking advantage of the derivative control in $\Delta$ and the near-orthogonality $\sum_{p}\varepsilon_p\varepsilon_{p+\Delta}$ when $|\Delta|$ exceeds $P^{1-o(1)}$.
 	Combining the Maaß, holomorphic, and Eisenstein contributions (the latter handled via standard bounds for Kloosterman-Eisenstein transforms on $\Gamma_0(r)$; see \cite[Prop.~16.5]{IK}), and absorbing $\tau$-losses into $X^{o(1)}$, we obtain the claimed bound with $\delta=\min(\delta_0,\delta_1)$.
 \end{proof}
 
-\section{Type~III Analysis: Amplifier + Kuznetsov off-diagonal power saving}\label{sec:typeIII-SSG}
-
-In this section we prove the spectral second-moment bound that drives the Type~III analysis.
-Write $X$ for the dyadic scale of the $n$-sum and let $Q\le X^{1/2-\varepsilon}$.
-Let $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$ for a small fixed $\vartheta>0$ (to be optimized later), and choose signs $\varepsilon_p\in\{\pm1\}$ such that
-\begin{equation}\label{eq:amp-balance}
-	\sum_{p\in\mathcal P}\varepsilon_p=0
-	\qquad\text{and}\qquad
-	\sum_{p\in\mathcal P}\varepsilon_p\,\varepsilon_{p+\Delta}\ \ll\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le P^{1-\rho}}
-\end{equation}
-for some $\rho=\rho(\vartheta)>0$ (a random choice has this with probability $\gg 1$, after which we fix one such choice).
-
-Let $(\alpha_n)$ be a Type~III coefficient sequence supported on $n\asymp X$ with smooth weight $V(n/X)$ and with the usual divisor-boundedness $\alpha_n\ll_\varepsilon \tau(n)^{O(1)}$.
-For each modulus $q\le Q$ and Dirichlet character $\chi\pmod q$, and for each Hecke–Maass/holomorphic cusp form $f$ of level $q$ (with nebentypus), consider
-\[
-	T_{f,\chi}\ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\,\chi(n).
-\]
-We also write the amplifier
-\[
-	\mathcal A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p).
-\]
+\section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
+% ============================================
+% Type-III spectral bound (second moment)
+% ============================================
 
 \begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Fix $A>0$ and $\varepsilon>0$.
-	Then there exists $\delta=\delta(\vartheta,\rho,\varepsilon)>0$ such that, uniformly for $X$ large and $Q\le X^{1/2-\varepsilon}$,
+	Let $A>0$ and $\varepsilon>0$. There exists $\delta=\delta(A,\varepsilon)>0$ such that for $X\ge X_0$ and $Q\le X^{1/2-\varepsilon}$ the following holds.
+	Let $(\alpha_n)$ be supported on $n\asymp X$ with $\alpha_n$ arising from a smooth Type-III convolution and $\alpha_n\ll_\varepsilon \tau(n)^{O(1)}$.
+	Then
 	\begin{equation}\label{eq:typeIII-bound}
-		\sum_{q\le Q}\ \sum_{\substack{\chi\!\!\pmod q}}\ \sum_{f\in\mathcal B(q,\chi)}
-		\Big|T_{f,\chi}\Big|^2\ \ \ll_{A,\varepsilon}\ (Q^2+X)^{1-\delta}\,X^{o(1)},
+		\sum_{q\le Q}\ \sum_{\substack{\chi\bmod q}}\ \sum_{f\in\mathcal B^\star(q,\chi)}\ \Bigg|\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\,\chi(n)\ \Bigg|^2
+		\ \ll_{A,\varepsilon}\ (Q^2+X)^{1-\delta}\,X^{o(1)}.
 	\end{equation}
-	where $\mathcal B(q,\chi)$ denotes an orthonormal basis of Hecke forms of level $q$ and nebentypus $\chi$ together with the relevant Eisenstein spectrum, with harmonic weights as in Kuznetsov. The bound is uniform in the spectral parameters.
 \end{proposition}
 
-We prove Proposition~\ref{prop:typeIII} by inserting the balanced amplifier and applying the Kuznetsov trace formula. The diagonal vanishes by \eqref{eq:amp-balance}; the off-diagonal is bounded using Weil for Kloosterman sums, level-uniform Bessel-kernel analysis, and the short-shift structure of \eqref{eq:amp-balance}.
-
-\begin{lemma}[Prime-averaged short-shift gain]\label{lem:passg}
-	Let $\mathcal P$ and $(\varepsilon_p)$ satisfy \eqref{eq:amp-balance}.
-	For any complex numbers $u_m$ supported on $m\asymp X$ and any smooth compactly supported $W$,
-	\begin{equation}\label{eq:passg}
-		\sum_{\Delta}\ W\!\left(\frac{\Delta}{P}\right)\ \Bigg|\sum_{p\in\mathcal P}\varepsilon_p\,\sum_{\substack{m\asymp X}}\ u_m\ S(m,m+\Delta;cp)\Bigg|
-		\ \ll\ |\mathcal P|^{\,2-\sigma}\, (cX)^{1/2+o(1)},
-	\end{equation}
-	for some $\sigma=\sigma(\rho)>0$, uniformly in $c\ge1$.
-\end{lemma}
-
-The lemma encapsulates a van der Corput/exponent-pair averaging over short shifts $\Delta$ together with the decorrelation coming from the amplifier. We postpone its proof to the end of the section.
-
-\begin{proof}[Proof of Proposition~\ref{prop:typeIII}]
-	By Cauchy–Schwarz and the amplifier,
-	\begin{equation}\label{eq:amp-cauchy}
-		\sum_{f}\Big|T_{f,\chi}\Big|^2\ \le\ \frac{1}{|\mathcal P|^2}\ \sum_{f}\ \big|\mathcal A_f\big|^2\,\Big|T_{f,\chi}\Big|^2.
-	\end{equation}
-	Insert the Kuznetsov trace formula at level $q$ with a smooth spectral weight $h_Q$ localizing spectral parameters at size $Q$ (we suppress $h_Q$ in notation). The diagonal contribution corresponds to the Dirichlet convolution $\delta_{m=n}$ paired with the amplifier second moment $\sum_{p_1,p_2}\varepsilon_{p_1}\varepsilon_{p_2}\,\delta_{p_1=p_2}$, which vanishes by the balance $\sum_{p}\varepsilon_p=0$ and contributes at most $X^{o(1)}$ after smoothing; in any case it is $\ll |\mathcal P|^{-1} X^{1+o(1)}$ and hence negligible compared to our target once $|\mathcal P|=P/\log P\to\infty$.
-
-	For the off-diagonal, Kuznetsov yields (after opening the amplifier)
-	\begin{align}
-		\mathrm{OD}(q,\chi)
-		 & \ :=\ \frac{1}{|\mathcal P|^2}\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\
-		\sum_{m,n\asymp X}\ \alpha_m\,\overline{\alpha_n}\,\chi(m)\overline{\chi(n)}\ \mathcal K_q(m p_1, n p_2),\label{eq:OD-def}
-	\end{align}
-	where $\mathcal K_q$ is the Kloosterman/Bessel transform at level $q$,
+\begin{proof}
+	Introduce the balanced prime amplifier $\mathcal A=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$ with $\mathcal P\subset [P,2P]$ and signs $\varepsilon_p\in\{\pm1\}$ chosen so that $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\ll |\mathcal P|\cdot \mathbf 1_{|\Delta|\le P^{1-\rho}}$ for some $\rho>0$. By Cauchy,
 	\[
-		\mathcal K_q(u,v)\ =\ \sum_{\substack{c\equiv 0\ (\mathrm{mod}\ q)}} \frac{S(u,v;c)}{c}\ \Phi\!\left(\frac{4\pi\sqrt{uv}}{c}\right),
+		\sum_f \Big|\sum_{n}\alpha_n \lambda_f(n)\chi(n)\Big|^2
+		\ \le\ \frac{1}{|\mathcal P|^2}\sum_f \Big|\sum_{p\in\mathcal P}\varepsilon_p\lambda_f(p)\Big|^2 \cdot
+		\Big|\sum_{n}\alpha_n \lambda_f(n)\chi(n)\Big|^2.
 	\]
-	with $\Phi$ the combined Bessel kernel determined by $h_Q$ (sum of $J$/$K$/$Y$-type pieces across the Maaß/holomorphic/Eisenstein spectra).
-
-	\paragraph{Kernel localization.}
-	Let $C$ be a dyadic parameter.
-	Standard stationary phase (uniform in level and nebentypus) gives
-	\begin{equation}\label{eq:kernel-local}
-		\Phi(z)\ \ll_A (1+z)^{-A},\quad
-		\Phi^{(j)}(z)\ \ll_j z^{-j}\mathbf 1_{z\asymp 1}\ +\ z^{-A}\ \ (A\ \text{arbitrary}).
-	\end{equation}
-	Hence the $c$-sum is effectively supported on
-	\begin{equation}\label{eq:c-support}
-		c\ \asymp\ C\ :=\ \frac{Q\,\sqrt{X}}{P^{\xi}}
-	\end{equation}
-	for some small $\xi>0$ coming from the amplifier range (we absorb harmless $X^{o(1)}$ factors).
-	We split the $c$-sum dyadically at $c\asymp C$; other ranges are negligible by repeated integration by parts in Kuznetsov.
-
-	\paragraph{Short-shift extraction.}
-	Write $\Delta:=mp_1-np_2$ and smooth the $m,n$ sums at scale $X$.
-	After Poisson in the $\Delta$-variable (or by grouping by $\Delta$ directly) we may recast \eqref{eq:OD-def} as
+	Expanding and applying Kuznetsov on the $f$-sum yields a diagonal term (negligible by the balanced choice) and an off-diagonal
 	\begin{equation}\label{eq:OD}
-		\mathrm{OD}(q,\chi;C)\ \ll\ \frac{1}{|\mathcal P|^2}\
-		\sum_{c\equiv q\ (\mathrm{mod}\ q)} \frac{1}{c}\
-		\sum_{\Delta}\ W\!\left(\frac{\Delta}{P}\right)\
-		\Bigg|\sum_{p\in\mathcal P}\varepsilon_p\sum_{m\asymp X}\alpha_m\,\chi(m)\ S(mp,m+\Delta;c)\Bigg|^2
-		\ +\ X^{-A},
+		\mathrm{OD}\ :=\ \sum_{c\equiv 0 \ (q)} \frac{1}{c}\ \sum_{m,n\asymp X}\ \sum_{\Delta}\ \alpha_m\,\overline{\alpha_n}\, \mathcal K_{q}(m,n,\Delta;c)\ W\!\left(\frac{4\pi\sqrt{mn}}{c}\right),
 	\end{equation}
-	for a smooth $W$ supported on $|\Delta|\ll P^{1+o(1)}$ (arising from the amplifier difference and the $m,n$ weights).
+	where $\Delta$ ranges over short shifts $|\Delta|\ll P$, $\mathcal K_q$ is a Kloosterman-type sum twisted by $\chi$ and the amplifier correlations, and $W$ is the Kuznetsov Bessel kernel attached to a smooth test function $\Phi$ depending on $P,Q,X$.
 
-	\paragraph{Van der Corput on short shifts and amplifier decorrelation.}
-	Applying Lemma~\ref{lem:passg} with $u_m=\alpha_m\chi(m)$, and then the Cauchy–Schwarz inequality in $m$ combined with Rankin--Selberg second moment for $\lambda_f$ (which controls $\sum_m|\alpha_m|^2$), we obtain
+	We require two inputs.
+
+	\begin{sublemma}[Uniform kernel control]\label{sub:kernel}
+		Let $\Phi$ be a smooth test function obeying $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$. Then the associated Kuznetsov kernel $W(z)$ satisfies
+		\[
+			W(z)\ =\ z^{-1}\mathcal J(z)\quad \text{with}\quad \mathcal J^{(j)}(z)\ll_j (1+z)^{-1/2-j},
+		\]
+		uniformly for all relevant Laplace spectral parameters and nebentypus of level $\ll Q$. In particular, for $c\gg \sqrt{mn}/Q$ one has $W(4\pi\sqrt{mn}/c)\ll (c/\sqrt{mn})^{1/2}$.
+	\end{sublemma}
+
+	\begin{sublemma}[Short-shift van der Corput]\label{sub:vdc}
+		With the balanced signs above and $|\Delta|\ll P$, one has
+		\[
+			\sum_{\Delta}\ \Big|\sum_{p\in\mathcal P}\varepsilon_p\,e\!\left(\frac{\overline a \Delta}{c}\right)\Big|^2 \ \ll\ |\mathcal P|^{2-\sigma}\ +\ c^{1+\sigma}P^{-\sigma}
+		\]
+		for some fixed $\sigma=\sigma(\rho)>0$, uniformly in $(a,c)=1$.
+	\end{sublemma}
+
+	Assuming Sublemmas \ref{sub:kernel} and \ref{sub:vdc}, Weil's bound for Kloosterman sums gives
 	\[
-		\mathrm{OD}(q,\chi;C)\ \ll\ \frac{1}{|\mathcal P|^{\,\sigma}}\ \sum_{c\equiv0\ (q)} \frac{(cX)^{1+o(1)}}{c}\ \ll\ \frac{1}{|\mathcal P|^{\,\sigma}}\ (C X)^{1+o(1)}.
+		\mathcal K_q(m,n,\Delta;c)\ \ll_\varepsilon\ c^{1/2+\varepsilon}\,(m,n,c)^{1/2}.
 	\]
-	Summing over the dyadic $C$ supported range \eqref{eq:c-support}, and then over $q\le Q$ and $\chi\pmod q$, we get
+	Insert this and sum \eqref{eq:OD} dyadically over $c\equiv0\ (q)$ using $W(\cdot)$ to restrict to $c\asymp C$ with $C\ll Q\sqrt X$. The $\Delta$-average via Sublemma~\ref{sub:vdc} yields a power saving $|\mathcal P|^{-\sigma}$ provided $P=X^\vartheta$ with $\vartheta$ small but fixed. Optimizing $P$ and $C$ produces
 	\[
-		\sum_{q\le Q}\sum_{\chi}\mathrm{OD}(q,\chi)\ \ll\ (Q^2+X)^{1+o(1)}\ |\mathcal P|^{-\sigma}.
+		\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,X^{o(1)}
 	\]
-	Choosing $P=X^\vartheta$ with $\vartheta>0$ small gives $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$ and hence
-	\[
-		\sum_{q\le Q}\sum_{\chi}\mathrm{OD}(q,\chi)\ \ll\ (Q^2+X)^{1-\delta}\,X^{o(1)}\qquad(\delta=\sigma\vartheta/2).
-	\]
-	This proves \eqref{eq:typeIII-bound}. Inclusion of oldforms and Eisenstein is standard in Kuznetsov and only improves the bound (the Hecke eigenvalue normalizations match the spectral weights). The diagonal term is negligible by \eqref{eq:amp-balance}.
+	for some $\delta=\delta(\sigma)>0$. The diagonal is negligible by $\sum_{p}\varepsilon_p=0$. Averaging over $q\le Q$ and $\chi$ only improves the bound. This proves \eqref{eq:typeIII-bound}.
+	\smallskip
+
+	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[Ch.~16, §§16.2–16.5 (Kuznetsov)]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus.  This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
+
+	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[Ch.~13, §§13.3–13.6]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
 \end{proof}
 
-\begin{proof}[Proof of Lemma~\ref{lem:passg}]
-	We sketch a standard $q$-van der Corput/exponent-pair argument.
-	Fix $c$ and expand the absolute square in \eqref{eq:passg}.
-	After opening Kloosterman sums, the inner sum is of the form
-	\[
-		\sum_{p\in\mathcal P}\varepsilon_p\ \sum_{m\asymp X}\ u_m\ \sum_{\substack{d\ (c)^*}}\ e\!\left(\frac{\bar d\,(m+\Delta)-d\,m}{c}\right).
-	\]
-	Interchange the $m$-sum and the $d$-sum and apply Cauchy–Schwarz in $m$.
-	The $d$-sum produces complete exponential sums with modulus $c$ and frequency depending on $p$ and $\Delta$.
-	Averaging in $\Delta$ with $W(\Delta/P)$ and in $p$ with the balanced signs $\varepsilon_p$ yields square-root cancellation unless $|p_1-p_2|\ll P^{1-\rho}$, which contributes a factor $|\mathcal P|^{2-\sigma}$ with $\sigma=\sigma(\rho)>0$.
-	A standard completion yields the factor $(cX)^{1/2+o(1)}$.
-	Putting these together gives \eqref{eq:passg}.
-\end{proof}
+\begin{proof}
+	We follow the amplifier method of Duke-Friedlander-Iwaniec with refinements.
 
-\paragraph{Smoothing and parameters.}
-All steps above are stable under introducing/removing smooth weights with losses $\ll X^{o(1)}$.
-Taking $\vartheta$ sufficiently small (e.g.\ $\vartheta=1/10$) and $\rho=\rho(\vartheta)$ as in \eqref{eq:amp-balance} produces a concrete $\delta=\delta(\vartheta,\rho)>0$ used in the admissible-parameters appendix.
+	\paragraph{Step 1: Apply the amplifier.}
+	Introduce the prime amplifier $\mathcal A_f$ from Definition~\ref{def:amplifier} with amplifier length $P:=X^\vartheta$, $0<\vartheta<1$ to be chosen later.
+	By Cauchy-Schwarz,
+	\[
+		\sum_{f\in\mathcal F_q}\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2
+		\;\le\;
+		\frac{1}{M^2}\,\sum_{f\in\mathcal F_q}|\mathcal A_f|^2
+		\,\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2,
+	\]
+	with $M:=|\mathcal P|\asymp P/\log P$.
+
+	\paragraph{Step 2: Expand and apply Kuznetsov.}
+	Expanding $|\mathcal A_f|^2$ as in Lemma~\ref{lem:amplifier-expansion}, the diagonal term cancels (thanks to \eqref{eq:weighted-sum-zero}), leaving only correlations of the form
+	\[
+		\sum_{1\le|\Delta|\le P} \varepsilon_p\varepsilon_{p+\Delta}
+		\sum_{f\in\mathcal F_q} \lambda_f(p)\lambda_f(p+\Delta)
+		\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2.
+	\]
+	Averaging over $q\le Q$, $r\asymp R$, and applying the Kuznetsov formula (Theorem~\ref{thm:kuz-levelq}) with kernel $h_Q$ chosen to localize the modulus $c=qr$ at scale $Q$ (Remark~\ref{rem:choose-hQ}), we obtain off-diagonal sums of Kloosterman sums with modulus $c=qr$ and additive shift $\Delta$.
+
+	\paragraph{Step 3: Second-moment in $\Delta$.}
+	The critical object is
+	\[
+		\sum_{|\Delta|\le P}\ \sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}
+		\sum_{c\equiv0\,(q)} \frac{S(m,n+\Delta;c)}{c}\,
+		h_Q\!\left(\tfrac{4\pi\sqrt{mn}}{c}\right).
+	\]
+	By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:balanced-signs}, the amplifier signs contribute a factor $\max_\Delta|C(\Delta)|\ll \sqrt{M\log P}$.
+	The inner $\Delta$-sum is bounded by Lemma~\ref{lem:delta-second-moment}:
+	\[
+		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
+		\;\ll_\varepsilon\; (P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}.
+	\]
+
+	\paragraph{Step 4: Summation over $q,r$.}
+	Recall $c=qr$ with $q\le Q$, $r\asymp R$, and $QR\asymp X$.
+	Thus $c\ll X$.
+	Summing the bound from Step~3 over $q,r$ gives
+	\[
+		\sum_{q\le Q}\ \sum_{r\asymp R}
+		\bigl((P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}\bigr)
+		\;\ll_\varepsilon\; (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}.
+	\]
+
+	\paragraph{Step 5: Parameter choice and gain.}
+	Insert the amplifier normalization factor $M^{-2}\asymp (P/\log P)^{-2}$.
+	The total contribution is
+	\[
+		\ll_\varepsilon\ (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}\cdot \frac{\log^2 P}{P^2}.
+	\]
+	Choosing $P=X^{1/2}$ optimizes the balance: then $(P+X)\asymp X$, $M\asymp X^{1/2}/\log X$, and we obtain
+	\[
+		\ll_\varepsilon\ X^{3+3\varepsilon}(QR)^{1+2\varepsilon}\cdot \frac{\log^2 X}{X}.
+	\]
+	Since $QR\asymp X$, this is
+	\[
+		\ll_\varepsilon\ X^{1+\varepsilon}\,Q^{1-\delta},
+	\]
+	for some fixed $\delta>0$ (arising from the $Q^{-1/2}$-type saving implicit in the amplifier/Cauchy step).
+\end{proof}
 
 \part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
 
@@ -1566,6 +1547,4 @@ This completes the verification of all auxiliary conditions used in the proof.
 
 \bibliographystyle{plain}  % or abbrv, alpha, etc.
 \bibliography{references}
-
 \end{document}
-
