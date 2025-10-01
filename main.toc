@@ -4,21 +4,21 @@
 \contentsline {paragraph}{Part C. Type\nobreakspace {}III analysis.}{3}{section*.5}%
 \contentsline {paragraph}{Part D. Assembly.}{3}{section*.6}%
 \contentsline {section}{\numberline {1}Circle-Method Decomposition}{3}{section.1.1}%
-\contentsline {part}{B\hspace {1em}Type I / II Analysis}{6}{part.2}%
-\contentsline {section}{\numberline {1}Type\nobreakspace {}II Parity Gain: Bilinear reduction to BV}{6}{section.2.1}%
-\contentsline {paragraph}{Consequences for the minor-arc $L^2$.}{8}{section*.13}%
-\contentsline {part}{C\hspace {1em}Type III Analysis}{8}{part.3}%
-\contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{8}{section.3.1}%
-\contentsline {paragraph}{Step 1: Cauchy--Schwarz and expansion.}{8}{section*.14}%
-\contentsline {paragraph}{Step 2: Poisson in $\Delta $.}{9}{section*.15}%
-\contentsline {paragraph}{Step 3: Weil on complete sums and $m$-averaging.}{9}{section*.16}%
-\contentsline {paragraph}{Step 4: Amplifier decorrelation.}{9}{section*.17}%
-\contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{10}{section.3.2}%
-\contentsline {paragraph}{Step 1: Apply the amplifier.}{11}{section*.18}%
-\contentsline {paragraph}{Step 2: Expand and apply Kuznetsov.}{11}{section*.19}%
-\contentsline {paragraph}{Step 3: Second-moment in $\Delta $.}{11}{section*.20}%
-\contentsline {paragraph}{Step 4: Summation over $q,r$.}{11}{section*.21}%
-\contentsline {paragraph}{Step 5: Parameter choice and gain.}{11}{section*.22}%
+\contentsline {part}{B\hspace {1em}Type III Analysis}{6}{part.2}%
+\contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{6}{section.2.1}%
+\contentsline {paragraph}{Step 1: Cauchy--Schwarz and expansion.}{6}{section*.11}%
+\contentsline {paragraph}{Step 2: Poisson in $\Delta $.}{6}{section*.12}%
+\contentsline {paragraph}{Step 3: Weil on complete sums and $m$-averaging.}{7}{section*.13}%
+\contentsline {paragraph}{Step 4: Amplifier decorrelation.}{7}{section*.14}%
+\contentsline {section}{\numberline {2}Type\nobreakspace {}III Analysis: Prime-Averaged Short-Shift Gain}{8}{section.2.2}%
+\contentsline {paragraph}{Step 1: Apply the amplifier.}{9}{section*.15}%
+\contentsline {paragraph}{Step 2: Expand and apply Kuznetsov.}{9}{section*.16}%
+\contentsline {paragraph}{Step 3: Second-moment in $\Delta $.}{9}{section*.17}%
+\contentsline {paragraph}{Step 4: Summation over $q,r$.}{9}{section*.18}%
+\contentsline {paragraph}{Step 5: Parameter choice and gain.}{9}{section*.19}%
+\contentsline {part}{C\hspace {1em}Type I / II Analysis}{10}{part.3}%
+\contentsline {section}{\numberline {1}Type\nobreakspace {}II Parity Gain: Bilinear reduction to BV}{10}{section.3.1}%
+\contentsline {paragraph}{Consequences for the minor-arc $L^2$.}{12}{section*.22}%
 \contentsline {part}{D\hspace {1em}Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit {N}}{12}{part.4}%
 \contentsline {section}{\numberline {1}Major arcs, main terms, and comparison}{12}{section.4.1}%
 \contentsline {section}{\numberline {2}Minor-arc bound (summary of Parts B--C)}{14}{section.4.2}%

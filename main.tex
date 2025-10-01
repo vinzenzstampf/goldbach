@@ -365,149 +365,6 @@ We record the minor-arc target:
 \end{proof}
 
 
-\part{Type I / II Analysis}\label{part:typeI-II}
-
-
-\section{Type~II Parity Gain: Bilinear reduction to BV}\label{sec:typeII}
-
-\subsection*{Dispersion second moment for Type~I/II and a BV-strength Type~I corollary}
-\label{subsec:dispersion-L2}
-
-We work with a fixed smooth, compactly supported $w\in C_c^\infty([1/2,2])$ with $w^{(j)}\ll_j 1$ and set
-\[
-	S(\chi)\ :=\ \sum_{n} c_n\,\chi(n)\,w\!\left(\frac{n}{N}\right),
-	\qquad c_n\ \text{of Type I/II shape with }\; |c_n|\ll (\log N)^{O(1)}.
-\]
-(Throughout, the implicit constants may depend on $w$ and on fixed exponents, but never on $N,Q$.) The Type~I/II shapes below are those obtained from the 3-variable Vaughan/Heath-Brown identity used in \S\ref{sec:minor-bound}, after a standard dyadic partition. \\
-
-We will use the following standard lemma later.
-\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
-	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
-		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
-	\]
-\end{lemma}
-
-\begin{theorem}[Dispersion second moment with power saving]
-	\label{thm:BVP2M}
-	Let $\varepsilon>0$ and $Q\le N^{1/2-\varepsilon}$. Suppose either
-
-	\smallskip
-	\noindent\emph{(Type I)} $c_n=\sum_{uv=n}\alpha_u\,\beta_v$ with $U\le N^{1/2-\kappa}$ for some fixed $\kappa>0$, $V\asymp N/U$, and
-	\[
-		\alpha_u\ll (\log N)^{O(1)},\quad \beta_v\ll (\log N)^{O(1)},
-	\]
-	or
-
-	\smallskip
-	\noindent\emph{(Type II)} $c_n=\sum_{uv=n}\alpha_u\,\beta_v$ with $N^{1/2-\kappa}\le U,V\le N^{1/2+\kappa}$ and the same coefficient bounds.
-
-	\smallskip
-	Then for some $\eta=\eta(\kappa,\varepsilon)>0$,
-	\begin{equation}\label{eq:BVP2M}
-		\sum_{q\le Q}\ \sum_{\chi \bmod q}\, \big|S(\chi)\big|^2
-		\;\ll\; (NQ+Q^2\,N^{1-\eta})\,(\log N)^{O(1)}.
-	\end{equation}
-	Moreover, in the \emph{Type I} range one has, for every fixed $A>0$,
-	\begin{equation}\label{eq:dispersion-NQ}
-		\sum_{q\le Q}\ \sum_{\chi \bmod q}\, \big|S(\chi)\big|^2
-		\;\ll_A\; \frac{NQ}{(\log N)^{A}}.
-	\end{equation}
-\end{theorem}
-
-
-
-\begin{proof}[Proof of Theorem~\ref{thm:BVP2M}]
-	Start from the character–variance/dispersion identity:
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
-		\ =\ \sum_{h\in\mathbb Z} K_Q(h)\,C(h),
-	\]
-	with $K_Q$ defined using a smooth $h_Q$ supported on $[Q/2,2Q]$ (absorbing the smoothing loss into $(\log N)^{O(1)}$).
-	Split at $H=N/Q$:
-	\begin{equation}\label{eq:H-choice}
-		\sum_{h} K_Q(h)\,C(h)\ =\ \sum_{|h|\le H} K_Q(h)\,C(h)\ +\ \sum_{|h|>H} K_Q(h)\,C(h).
-	\end{equation}
-	For the short-shift range, apply Proposition~\ref{prop:kernel-short} (which uses
-	Lemmas~\ref{lem:kernel-smooth} and \ref{lem:shortshift-TypeII}) to get
-	\[
-		\sum_{|h|\le H} K_Q(h)\,C(h)\ \ll\ Q^2\,N^{1-\eta}\,(\log N)^{B}.
-	\]
-	For the long-shift range, apply Lemma~\ref{lem:long-tail} (Type~I/II plus pretentious split) to obtain
-	\[
-		\sum_{|h|>H} K_Q(h)\,C(h)\ \ll\ NQ\,(\log N)^{A}.
-	\]
-	Combining the two ranges proves the claimed bound
-	\[
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
-		\ \ll\ (NQ\;+\;Q^2 N^{1-\eta})\,(\log N)^{O(1)}.
-	\]
-	Finally, in the pure Type~I regime the short-shift lemma is not needed; the pretentious analysis (your
-	Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}) yields the Bombieri–Vinogradov strength
-	$\ll NQ(\log N)^{-A}$ for any fixed $A>0$, uniformly for $Q\le N^{1/2-\varepsilon}$; see \cite[§28]{IK}, \cite[Ch.~28]{MV}.
-\end{proof}
-
-\begin{remark}[Parameters and the saving $\eta$]\label{rem:eta}
-	From \eqref{eq:H-choice} and the short-shift saving in Lemma~\ref{lem:passg} one may take
-	\(
-	\eta=\eta(\kappa)=c\,\kappa
-	\)
-	for some absolute $c>0$ (depending on the strength of Lemma~\ref{lem:passg}). All constants in \eqref{eq:BVP2M} are effective. The $\ll_A$ in \eqref{eq:dispersion-NQ} is effective for any fixed $A>0$ and depends on the constants in Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}.
-\end{remark}
-
-\begin{corollary}[Type~I BV-strength with explicit dyadic ranges]
-	\label{cor:typeI-BV}
-	Let $c_n$ be Type~I with $U\le N^{1/2-\kappa}$ and $V\asymp N/U$. Then for every $A>0$ and $Q\le N^{1/2-\varepsilon}$,
-	\[
-		\sum_{q\le Q}\ \sum_{\chi \bmod q}\left|\sum_{n\asymp N} c_n\,\chi(n)\right|^2
-		\ \ll_A\ \frac{NQ}{(\log N)^A}.
-	\]
-	In particular, for any family of dyadic blocks produced by the 3-variable Vaughan/Heath-Brown identity in \S\ref{sec:minor-bound}, summing \emph{all} Type~I contributions preserves a $(\log N)^{-A}$ saving after enlarging $A$ by an absolute constant.
-\end{corollary}
-
-\subsection*{Smoothing/removal bookkeeping}\label{subsec:smoothing-book}
-We record the standard stability facts used later in the minor-arc $L^2$ assembly.
-
-\begin{lemma}[Hybrid large sieve $+$ $t$-integration]\label{lem:hybrid-ls}
-	Let $(b_n)$ be supported on $n\asymp N$. For $Q\le N$,
-	\[
-		\sum_{q\le Q} \frac{1}{\varphi(q)}
-		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
-		\int_{|t|\le N}
-		\Big|\sum_{n} b_n\,\chi(n)\,n^{-it}\Big|^2\,\frac{dt}{1+|t|}
-		\ \ \ll\ (Q^2+N)\ \sum_{n}|b_n|^2.
-	\]
-\end{lemma}
-
-\begin{proof}
-	This is the multiplicative large sieve (e.g. \cite[Ch.~7]{MV}, \cite[Thm.~3.13]{IK}) combined with Gallagher's hybrid \(t\)-average. The weight \((1+|t|)^{-1}\) allows a bounded partition of the \(t\)-range.
-\end{proof}
-
-
-\begin{lemma}[L$^2$-stability under smoothing/pruning]\label{lem:l2-smooth}
-	Let $(c_n)$ be your working coefficients (smooth dyadic weight on $[N,2N]$), and let $(c'_n)$ be obtained from $(c_n)$ by any combination of:
-	(i) replacing $w(n/N)$ by a piecewise-smooth dyadic partition of unity,
-	(ii) pruning to $(n,W)=1$ with $W=\prod_{p\le (\log N)^B}p$ or reinserting those primes,
-	(iii) block-averaging on intervals of length $N/(\log N)^B$ (“block mean-zero”).
-	If $\sum_n |c_n-c'_n|^2 \ll N(\log N)^{-A}$ (true for each operation with $B=B(A)$), then
-	\[
-		\sum_{q\le Q} \frac{1}{\varphi(q)}\!\!
-		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
-		\!\int_{|t|\le N}\!
-		\Big|\sum_{n} (c_n-c'_n)\,\lambda(n)\,\chi(n)\,n^{-it}\Big|^2\frac{dt}{1+|t|}
-		\ \ \ll\ (Q^2+N)\,N\,(\log N)^{-A}.
-	\]
-\end{lemma}
-
-\begin{proof}
-	Apply Lemma~\ref{lem:hybrid-ls} with $b_n=(c_n-c'_n)\lambda(n)$ and use $|\lambda(n)|\le1$.
-\end{proof}
-
-\paragraph{Consequences for the minor-arc $L^2$.}
-Every smoothing/pruning step in the Type~I/II/III decomposition changes the $L^2$-mass by at most $(Q^2+N)N(\log N)^{-A}$. Choosing $A$ large (and summing over $O(\log N)$ dyadic blocks) shows the cumulative loss is $\ll N(\log N)^{-3-\varepsilon}$ in Theorem~\ref{thm:minor-L2}.
-
-
 \part{Type III Analysis}\label{part:typeIII}
 
 \section{Type III off-diagonal via prime-averaged short-shift gain}\label{sec:typeIII-SSG}
@@ -739,6 +596,148 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	\]
 	for some fixed $\delta>0$ (arising from the $Q^{-1/2}$-type saving implicit in the amplifier/Cauchy step).
 \end{proof}
+
+\part{Type I / II Analysis}\label{part:typeI-II}
+
+\section{Type~II Parity Gain: Bilinear reduction to BV}\label{sec:typeII}
+
+\subsection*{Dispersion second moment for Type~I/II and a BV-strength Type~I corollary}
+\label{subsec:dispersion-L2}
+
+We work with a fixed smooth, compactly supported $w\in C_c^\infty([1/2,2])$ with $w^{(j)}\ll_j 1$ and set
+\[
+	S(\chi)\ :=\ \sum_{n} c_n\,\chi(n)\,w\!\left(\frac{n}{N}\right),
+	\qquad c_n\ \text{of Type I/II shape with }\; |c_n|\ll (\log N)^{O(1)}.
+\]
+(Throughout, the implicit constants may depend on $w$ and on fixed exponents, but never on $N,Q$.) The Type~I/II shapes below are those obtained from the 3-variable Vaughan/Heath-Brown identity used in \S\ref{sec:minor-bound}, after a standard dyadic partition. \\
+
+We will use the following standard lemma later.
+\begin{lemma}[Multiplicative large sieve]\label{lem:mls}
+	For any complex sequence $(a_n)$ supported on $1\le n\le N$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\!\!\!\pmod q}\ \Big|\sum_{n\le N} a_n\,\chi(n)\Big|^2
+		\ \ \le\ \ (N+Q^2)\ \sum_{n\le N} |a_n|^2.
+	\]
+\end{lemma}
+
+\begin{theorem}[Dispersion second moment with power saving]
+	\label{thm:BVP2M}
+	Let $\varepsilon>0$ and $Q\le N^{1/2-\varepsilon}$. Suppose either
+
+	\smallskip
+	\noindent\emph{(Type I)} $c_n=\sum_{uv=n}\alpha_u\,\beta_v$ with $U\le N^{1/2-\kappa}$ for some fixed $\kappa>0$, $V\asymp N/U$, and
+	\[
+		\alpha_u\ll (\log N)^{O(1)},\quad \beta_v\ll (\log N)^{O(1)},
+	\]
+	or
+
+	\smallskip
+	\noindent\emph{(Type II)} $c_n=\sum_{uv=n}\alpha_u\,\beta_v$ with $N^{1/2-\kappa}\le U,V\le N^{1/2+\kappa}$ and the same coefficient bounds.
+
+	\smallskip
+	Then for some $\eta=\eta(\kappa,\varepsilon)>0$,
+	\begin{equation}\label{eq:BVP2M}
+		\sum_{q\le Q}\ \sum_{\chi \bmod q}\, \big|S(\chi)\big|^2
+		\;\ll\; (NQ+Q^2\,N^{1-\eta})\,(\log N)^{O(1)}.
+	\end{equation}
+	Moreover, in the \emph{Type I} range one has, for every fixed $A>0$,
+	\begin{equation}\label{eq:dispersion-NQ}
+		\sum_{q\le Q}\ \sum_{\chi \bmod q}\, \big|S(\chi)\big|^2
+		\;\ll_A\; \frac{NQ}{(\log N)^{A}}.
+	\end{equation}
+\end{theorem}
+
+
+
+\begin{proof}[Proof of Theorem~\ref{thm:BVP2M}]
+	Start from the character–variance/dispersion identity:
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
+		\ =\ \sum_{h\in\mathbb Z} K_Q(h)\,C(h),
+	\]
+	with $K_Q$ defined using a smooth $h_Q$ supported on $[Q/2,2Q]$ (absorbing the smoothing loss into $(\log N)^{O(1)}$).
+	Split at $H=N/Q$:
+	\begin{equation}\label{eq:H-choice}
+		\sum_{h} K_Q(h)\,C(h)\ =\ \sum_{|h|\le H} K_Q(h)\,C(h)\ +\ \sum_{|h|>H} K_Q(h)\,C(h).
+	\end{equation}
+	For the short-shift range, apply Proposition~\ref{prop:kernel-short} (which uses
+	Lemmas~\ref{lem:kernel-smooth} and \ref{lem:shortshift-TypeII}) to get
+	\[
+		\sum_{|h|\le H} K_Q(h)\,C(h)\ \ll\ Q^2\,N^{1-\eta}\,(\log N)^{B}.
+	\]
+	For the long-shift range, apply Lemma~\ref{lem:long-tail} (Type~I/II plus pretentious split) to obtain
+	\[
+		\sum_{|h|>H} K_Q(h)\,C(h)\ \ll\ NQ\,(\log N)^{A}.
+	\]
+	Combining the two ranges proves the claimed bound
+	\[
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
+		\ \ll\ (NQ\;+\;Q^2 N^{1-\eta})\,(\log N)^{O(1)}.
+	\]
+	Finally, in the pure Type~I regime the short-shift lemma is not needed; the pretentious analysis (your
+	Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}) yields the Bombieri–Vinogradov strength
+	$\ll NQ(\log N)^{-A}$ for any fixed $A>0$, uniformly for $Q\le N^{1/2-\varepsilon}$; see \cite[§28]{IK}, \cite[Ch.~28]{MV}.
+\end{proof}
+
+\begin{remark}[Parameters and the saving $\eta$]\label{rem:eta}
+	From \eqref{eq:H-choice} and the short-shift saving in Lemma~\ref{lem:passg} one may take
+	\(
+	\eta=\eta(\kappa)=c\,\kappa
+	\)
+	for some absolute $c>0$ (depending on the strength of Lemma~\ref{lem:passg}). All constants in \eqref{eq:BVP2M} are effective. The $\ll_A$ in \eqref{eq:dispersion-NQ} is effective for any fixed $A>0$ and depends on the constants in Lemmas~\ref{lem:halasz-smooth}, \ref{lem:logfree-density}, \ref{lem:siegel}.
+\end{remark}
+
+\begin{corollary}[Type~I BV-strength with explicit dyadic ranges]
+	\label{cor:typeI-BV}
+	Let $c_n$ be Type~I with $U\le N^{1/2-\kappa}$ and $V\asymp N/U$. Then for every $A>0$ and $Q\le N^{1/2-\varepsilon}$,
+	\[
+		\sum_{q\le Q}\ \sum_{\chi \bmod q}\left|\sum_{n\asymp N} c_n\,\chi(n)\right|^2
+		\ \ll_A\ \frac{NQ}{(\log N)^A}.
+	\]
+	In particular, for any family of dyadic blocks produced by the 3-variable Vaughan/Heath-Brown identity in \S\ref{sec:minor-bound}, summing \emph{all} Type~I contributions preserves a $(\log N)^{-A}$ saving after enlarging $A$ by an absolute constant.
+\end{corollary}
+
+\subsection*{Smoothing/removal bookkeeping}\label{subsec:smoothing-book}
+We record the standard stability facts used later in the minor-arc $L^2$ assembly.
+
+\begin{lemma}[Hybrid large sieve $+$ $t$-integration]\label{lem:hybrid-ls}
+	Let $(b_n)$ be supported on $n\asymp N$. For $Q\le N$,
+	\[
+		\sum_{q\le Q} \frac{1}{\varphi(q)}
+		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
+		\int_{|t|\le N}
+		\Big|\sum_{n} b_n\,\chi(n)\,n^{-it}\Big|^2\,\frac{dt}{1+|t|}
+		\ \ \ll\ (Q^2+N)\ \sum_{n}|b_n|^2.
+	\]
+\end{lemma}
+
+\begin{proof}
+	This is the multiplicative large sieve (e.g. \cite[Ch.~7]{MV}, \cite[Thm.~3.13]{IK}) combined with Gallagher's hybrid \(t\)-average. The weight \((1+|t|)^{-1}\) allows a bounded partition of the \(t\)-range.
+\end{proof}
+
+
+\begin{lemma}[L$^2$-stability under smoothing/pruning]\label{lem:l2-smooth}
+	Let $(c_n)$ be your working coefficients (smooth dyadic weight on $[N,2N]$), and let $(c'_n)$ be obtained from $(c_n)$ by any combination of:
+	(i) replacing $w(n/N)$ by a piecewise-smooth dyadic partition of unity,
+	(ii) pruning to $(n,W)=1$ with $W=\prod_{p\le (\log N)^B}p$ or reinserting those primes,
+	(iii) block-averaging on intervals of length $N/(\log N)^B$ (“block mean-zero”).
+	If $\sum_n |c_n-c'_n|^2 \ll N(\log N)^{-A}$ (true for each operation with $B=B(A)$), then
+	\[
+		\sum_{q\le Q} \frac{1}{\varphi(q)}\!\!
+		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
+		\!\int_{|t|\le N}\!
+		\Big|\sum_{n} (c_n-c'_n)\,\lambda(n)\,\chi(n)\,n^{-it}\Big|^2\frac{dt}{1+|t|}
+		\ \ \ll\ (Q^2+N)\,N\,(\log N)^{-A}.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Apply Lemma~\ref{lem:hybrid-ls} with $b_n=(c_n-c'_n)\lambda(n)$ and use $|\lambda(n)|\le1$.
+\end{proof}
+
+\paragraph{Consequences for the minor-arc $L^2$.}
+Every smoothing/pruning step in the Type~I/II/III decomposition changes the $L^2$-mass by at most $(Q^2+N)N(\log N)^{-A}$. Choosing $A$ large (and summing over $O(\log N)$ dyadic blocks) shows the cumulative loss is $\ll N(\log N)^{-3-\varepsilon}$ in Theorem~\ref{thm:minor-L2}.
+
 
 \part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
 
