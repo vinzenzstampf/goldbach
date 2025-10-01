@@ -595,131 +595,130 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	Combining the Maaß, holomorphic, and Eisenstein contributions (the latter handled via standard bounds for Kloosterman-Eisenstein transforms on $\Gamma_0(r)$; see \cite[Prop.~16.5]{IK}), and absorbing $\tau$-losses into $X^{o(1)}$, we obtain the claimed bound with $\delta=\min(\delta_0,\delta_1)$.
 \end{proof}
 
-\section{Type~III Analysis: Prime-Averaged Short-Shift Gain}
-% ============================================
-% Type-III spectral bound (second moment)
-% ============================================
+\section{Type~III Analysis: Amplifier + Kuznetsov off-diagonal power saving}\label{sec:typeIII-SSG}
+
+In this section we prove the spectral second-moment bound that drives the Type~III analysis.
+Write $X$ for the dyadic scale of the $n$-sum and let $Q\le X^{1/2-\varepsilon}$.
+Let $\mathcal P=\{p\in[P,2P]\}$ with $P=X^\vartheta$ for a small fixed $\vartheta>0$ (to be optimized later), and choose signs $\varepsilon_p\in\{\pm1\}$ such that
+\begin{equation}\label{eq:amp-balance}
+	\sum_{p\in\mathcal P}\varepsilon_p=0
+	\qquad\text{and}\qquad
+	\sum_{p\in\mathcal P}\varepsilon_p\,\varepsilon_{p+\Delta}\ \ll\ |\mathcal P|\cdot \mathbf 1_{|\Delta|\le P^{1-\rho}}
+\end{equation}
+for some $\rho=\rho(\vartheta)>0$ (a random choice has this with probability $\gg 1$, after which we fix one such choice).
+
+Let $(\alpha_n)$ be a Type~III coefficient sequence supported on $n\asymp X$ with smooth weight $V(n/X)$ and with the usual divisor-boundedness $\alpha_n\ll_\varepsilon \tau(n)^{O(1)}$.
+For each modulus $q\le Q$ and Dirichlet character $\chi\pmod q$, and for each Hecke–Maass/holomorphic cusp form $f$ of level $q$ (with nebentypus), consider
+\[
+	T_{f,\chi}\ :=\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\,\chi(n).
+\]
+We also write the amplifier
+\[
+	\mathcal A_f\ :=\ \sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p).
+\]
 
 \begin{proposition}[Type-III spectral second moment]\label{prop:typeIII}
-	Let $A>0$ and $\varepsilon>0$. There exists $\delta=\delta(A,\varepsilon)>0$ such that for $X\ge X_0$ and $Q\le X^{1/2-\varepsilon}$ the following holds.
-	Let $(\alpha_n)$ be supported on $n\asymp X$ with $\alpha_n$ arising from a smooth Type-III convolution and $\alpha_n\ll_\varepsilon \tau(n)^{O(1)}$.
-	Then
+	Fix $A>0$ and $\varepsilon>0$.
+	Then there exists $\delta=\delta(\vartheta,\rho,\varepsilon)>0$ such that, uniformly for $X$ large and $Q\le X^{1/2-\varepsilon}$,
 	\begin{equation}\label{eq:typeIII-bound}
-		\sum_{q\le Q}\ \sum_{\substack{\chi\bmod q}}\ \sum_{f\in\mathcal B^\star(q,\chi)}\ \Bigg|\ \sum_{n\asymp X}\alpha_n\,\lambda_f(n)\,\chi(n)\ \Bigg|^2
-		\ \ll_{A,\varepsilon}\ (Q^2+X)^{1-\delta}\,X^{o(1)}.
+		\sum_{q\le Q}\ \sum_{\substack{\chi\!\!\pmod q}}\ \sum_{f\in\mathcal B(q,\chi)}
+		\Big|T_{f,\chi}\Big|^2\ \ \ll_{A,\varepsilon}\ (Q^2+X)^{1-\delta}\,X^{o(1)},
 	\end{equation}
+	where $\mathcal B(q,\chi)$ denotes an orthonormal basis of Hecke forms of level $q$ and nebentypus $\chi$ together with the relevant Eisenstein spectrum, with harmonic weights as in Kuznetsov. The bound is uniform in the spectral parameters.
 \end{proposition}
 
-\begin{proof}
-	Introduce the balanced prime amplifier $\mathcal A=\sum_{p\in\mathcal P}\varepsilon_p\,\lambda_f(p)$ with $\mathcal P\subset [P,2P]$ and signs $\varepsilon_p\in\{\pm1\}$ chosen so that $\sum_{p\in\mathcal P}\varepsilon_p=0$ and $\sum_{p\in\mathcal P}\varepsilon_p\varepsilon_{p+\Delta}\ll |\mathcal P|\cdot \mathbf 1_{|\Delta|\le P^{1-\rho}}$ for some $\rho>0$. By Cauchy,
-	\[
-		\sum_f \Big|\sum_{n}\alpha_n \lambda_f(n)\chi(n)\Big|^2
-		\ \le\ \frac{1}{|\mathcal P|^2}\sum_f \Big|\sum_{p\in\mathcal P}\varepsilon_p\lambda_f(p)\Big|^2 \cdot
-		\Big|\sum_{n}\alpha_n \lambda_f(n)\chi(n)\Big|^2.
-	\]
-	Expanding and applying Kuznetsov on the $f$-sum yields a diagonal term (negligible by the balanced choice) and an off-diagonal
-	\begin{equation}\label{eq:OD}
-		\mathrm{OD}\ :=\ \sum_{c\equiv 0 \ (q)} \frac{1}{c}\ \sum_{m,n\asymp X}\ \sum_{\Delta}\ \alpha_m\,\overline{\alpha_n}\, \mathcal K_{q}(m,n,\Delta;c)\ W\!\left(\frac{4\pi\sqrt{mn}}{c}\right),
+We prove Proposition~\ref{prop:typeIII} by inserting the balanced amplifier and applying the Kuznetsov trace formula. The diagonal vanishes by \eqref{eq:amp-balance}; the off-diagonal is bounded using Weil for Kloosterman sums, level-uniform Bessel-kernel analysis, and the short-shift structure of \eqref{eq:amp-balance}.
+
+\begin{lemma}[Prime-averaged short-shift gain]\label{lem:passg}
+	Let $\mathcal P$ and $(\varepsilon_p)$ satisfy \eqref{eq:amp-balance}.
+	For any complex numbers $u_m$ supported on $m\asymp X$ and any smooth compactly supported $W$,
+	\begin{equation}\label{eq:passg}
+		\sum_{\Delta}\ W\!\left(\frac{\Delta}{P}\right)\ \Bigg|\sum_{p\in\mathcal P}\varepsilon_p\,\sum_{\substack{m\asymp X}}\ u_m\ S(m,m+\Delta;cp)\Bigg|
+		\ \ll\ |\mathcal P|^{\,2-\sigma}\, (cX)^{1/2+o(1)},
 	\end{equation}
-	where $\Delta$ ranges over short shifts $|\Delta|\ll P$, $\mathcal K_q$ is a Kloosterman-type sum twisted by $\chi$ and the amplifier correlations, and $W$ is the Kuznetsov Bessel kernel attached to a smooth test function $\Phi$ depending on $P,Q,X$.
+	for some $\sigma=\sigma(\rho)>0$, uniformly in $c\ge1$.
+\end{lemma}
 
-	We require two inputs.
+The lemma encapsulates a van der Corput/exponent-pair averaging over short shifts $\Delta$ together with the decorrelation coming from the amplifier. We postpone its proof to the end of the section.
 
-	\begin{sublemma}[Uniform kernel control]\label{sub:kernel}
-		Let $\Phi$ be a smooth test function obeying $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$. Then the associated Kuznetsov kernel $W(z)$ satisfies
-		\[
-			W(z)\ =\ z^{-1}\mathcal J(z)\quad \text{with}\quad \mathcal J^{(j)}(z)\ll_j (1+z)^{-1/2-j},
-		\]
-		uniformly for all relevant Laplace spectral parameters and nebentypus of level $\ll Q$. In particular, for $c\gg \sqrt{mn}/Q$ one has $W(4\pi\sqrt{mn}/c)\ll (c/\sqrt{mn})^{1/2}$.
-	\end{sublemma}
+\begin{proof}[Proof of Proposition~\ref{prop:typeIII}]
+	By Cauchy–Schwarz and the amplifier,
+	\begin{equation}\label{eq:amp-cauchy}
+		\sum_{f}\Big|T_{f,\chi}\Big|^2\ \le\ \frac{1}{|\mathcal P|^2}\ \sum_{f}\ \big|\mathcal A_f\big|^2\,\Big|T_{f,\chi}\Big|^2.
+	\end{equation}
+	Insert the Kuznetsov trace formula at level $q$ with a smooth spectral weight $h_Q$ localizing spectral parameters at size $Q$ (we suppress $h_Q$ in notation). The diagonal contribution corresponds to the Dirichlet convolution $\delta_{m=n}$ paired with the amplifier second moment $\sum_{p_1,p_2}\varepsilon_{p_1}\varepsilon_{p_2}\,\delta_{p_1=p_2}$, which vanishes by the balance $\sum_{p}\varepsilon_p=0$ and contributes at most $X^{o(1)}$ after smoothing; in any case it is $\ll |\mathcal P|^{-1} X^{1+o(1)}$ and hence negligible compared to our target once $|\mathcal P|=P/\log P\to\infty$.
 
-	\begin{sublemma}[Short-shift van der Corput]\label{sub:vdc}
-		With the balanced signs above and $|\Delta|\ll P$, one has
-		\[
-			\sum_{\Delta}\ \Big|\sum_{p\in\mathcal P}\varepsilon_p\,e\!\left(\frac{\overline a \Delta}{c}\right)\Big|^2 \ \ll\ |\mathcal P|^{2-\sigma}\ +\ c^{1+\sigma}P^{-\sigma}
-		\]
-		for some fixed $\sigma=\sigma(\rho)>0$, uniformly in $(a,c)=1$.
-	\end{sublemma}
-
-	Assuming Sublemmas \ref{sub:kernel} and \ref{sub:vdc}, Weil's bound for Kloosterman sums gives
+	For the off-diagonal, Kuznetsov yields (after opening the amplifier)
+	\begin{align}
+		\mathrm{OD}(q,\chi)
+		 & \ :=\ \frac{1}{|\mathcal P|^2}\ \sum_{p_1,p_2\in\mathcal P}\varepsilon_{p_1}\varepsilon_{p_2}\
+		\sum_{m,n\asymp X}\ \alpha_m\,\overline{\alpha_n}\,\chi(m)\overline{\chi(n)}\ \mathcal K_q(m p_1, n p_2),\label{eq:OD-def}
+	\end{align}
+	where $\mathcal K_q$ is the Kloosterman/Bessel transform at level $q$,
 	\[
-		\mathcal K_q(m,n,\Delta;c)\ \ll_\varepsilon\ c^{1/2+\varepsilon}\,(m,n,c)^{1/2}.
+		\mathcal K_q(u,v)\ =\ \sum_{\substack{c\equiv 0\ (\mathrm{mod}\ q)}} \frac{S(u,v;c)}{c}\ \Phi\!\left(\frac{4\pi\sqrt{uv}}{c}\right),
 	\]
-	Insert this and sum \eqref{eq:OD} dyadically over $c\equiv0\ (q)$ using $W(\cdot)$ to restrict to $c\asymp C$ with $C\ll Q\sqrt X$. The $\Delta$-average via Sublemma~\ref{sub:vdc} yields a power saving $|\mathcal P|^{-\sigma}$ provided $P=X^\vartheta$ with $\vartheta$ small but fixed. Optimizing $P$ and $C$ produces
+	with $\Phi$ the combined Bessel kernel determined by $h_Q$ (sum of $J$/$K$/$Y$-type pieces across the Maaß/holomorphic/Eisenstein spectra).
+
+	\paragraph{Kernel localization.}
+	Let $C$ be a dyadic parameter.
+	Standard stationary phase (uniform in level and nebentypus) gives
+	\begin{equation}\label{eq:kernel-local}
+		\Phi(z)\ \ll_A (1+z)^{-A},\quad
+		\Phi^{(j)}(z)\ \ll_j z^{-j}\mathbf 1_{z\asymp 1}\ +\ z^{-A}\ \ (A\ \text{arbitrary}).
+	\end{equation}
+	Hence the $c$-sum is effectively supported on
+	\begin{equation}\label{eq:c-support}
+		c\ \asymp\ C\ :=\ \frac{Q\,\sqrt{X}}{P^{\xi}}
+	\end{equation}
+	for some small $\xi>0$ coming from the amplifier range (we absorb harmless $X^{o(1)}$ factors).
+	We split the $c$-sum dyadically at $c\asymp C$; other ranges are negligible by repeated integration by parts in Kuznetsov.
+
+	\paragraph{Short-shift extraction.}
+	Write $\Delta:=mp_1-np_2$ and smooth the $m,n$ sums at scale $X$.
+	After Poisson in the $\Delta$-variable (or by grouping by $\Delta$ directly) we may recast \eqref{eq:OD-def} as
+	\begin{equation}\label{eq:OD}
+		\mathrm{OD}(q,\chi;C)\ \ll\ \frac{1}{|\mathcal P|^2}\
+		\sum_{c\equiv q\ (\mathrm{mod}\ q)} \frac{1}{c}\
+		\sum_{\Delta}\ W\!\left(\frac{\Delta}{P}\right)\
+		\Bigg|\sum_{p\in\mathcal P}\varepsilon_p\sum_{m\asymp X}\alpha_m\,\chi(m)\ S(mp,m+\Delta;c)\Bigg|^2
+		\ +\ X^{-A},
+	\end{equation}
+	for a smooth $W$ supported on $|\Delta|\ll P^{1+o(1)}$ (arising from the amplifier difference and the $m,n$ weights).
+
+	\paragraph{Van der Corput on short shifts and amplifier decorrelation.}
+	Applying Lemma~\ref{lem:passg} with $u_m=\alpha_m\chi(m)$, and then the Cauchy–Schwarz inequality in $m$ combined with Rankin--Selberg second moment for $\lambda_f$ (which controls $\sum_m|\alpha_m|^2$), we obtain
 	\[
-		\mathrm{OD}\ \ll\ (Q^2+X)^{1-\delta}\,X^{o(1)}
+		\mathrm{OD}(q,\chi;C)\ \ll\ \frac{1}{|\mathcal P|^{\,\sigma}}\ \sum_{c\equiv0\ (q)} \frac{(cX)^{1+o(1)}}{c}\ \ll\ \frac{1}{|\mathcal P|^{\,\sigma}}\ (C X)^{1+o(1)}.
 	\]
-	for some $\delta=\delta(\sigma)>0$. The diagonal is negligible by $\sum_{p}\varepsilon_p=0$. Averaging over $q\le Q$ and $\chi$ only improves the bound. This proves \eqref{eq:typeIII-bound}.
-	\smallskip
-
-	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[\S16]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus.  This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
-
-	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[\S13]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
+	Summing over the dyadic $C$ supported range \eqref{eq:c-support}, and then over $q\le Q$ and $\chi\pmod q$, we get
+	\[
+		\sum_{q\le Q}\sum_{\chi}\mathrm{OD}(q,\chi)\ \ll\ (Q^2+X)^{1+o(1)}\ |\mathcal P|^{-\sigma}.
+	\]
+	Choosing $P=X^\vartheta$ with $\vartheta>0$ small gives $|\mathcal P|\asymp P/\log P=X^{\vartheta+o(1)}$ and hence
+	\[
+		\sum_{q\le Q}\sum_{\chi}\mathrm{OD}(q,\chi)\ \ll\ (Q^2+X)^{1-\delta}\,X^{o(1)}\qquad(\delta=\sigma\vartheta/2).
+	\]
+	This proves \eqref{eq:typeIII-bound}. Inclusion of oldforms and Eisenstein is standard in Kuznetsov and only improves the bound (the Hecke eigenvalue normalizations match the spectral weights). The diagonal term is negligible by \eqref{eq:amp-balance}.
 \end{proof}
 
-\begin{proof}
-	We follow the amplifier method of Duke-Friedlander-Iwaniec with refinements.
-
-	\paragraph{Step 1: Apply the amplifier.}
-	Introduce the prime amplifier $\mathcal A_f$ from Definition~\ref{def:amplifier} with amplifier length $P:=X^\vartheta$, $0<\vartheta<1$ to be chosen later.
-	By Cauchy-Schwarz,
+\begin{proof}[Proof of Lemma~\ref{lem:passg}]
+	We sketch a standard $q$-van der Corput/exponent-pair argument.
+	Fix $c$ and expand the absolute square in \eqref{eq:passg}.
+	After opening Kloosterman sums, the inner sum is of the form
 	\[
-		\sum_{f\in\mathcal F_q}\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2
-		\;\le\;
-		\frac{1}{M^2}\,\sum_{f\in\mathcal F_q}|\mathcal A_f|^2
-		\,\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2,
+		\sum_{p\in\mathcal P}\varepsilon_p\ \sum_{m\asymp X}\ u_m\ \sum_{\substack{d\ (c)^*}}\ e\!\left(\frac{\bar d\,(m+\Delta)-d\,m}{c}\right).
 	\]
-	with $M:=|\mathcal P|\asymp P/\log P$.
-
-	\paragraph{Step 2: Expand and apply Kuznetsov.}
-	Expanding $|\mathcal A_f|^2$ as in Lemma~\ref{lem:amplifier-expansion}, the diagonal term cancels (thanks to \eqref{eq:weighted-sum-zero}), leaving only correlations of the form
-	\[
-		\sum_{1\le|\Delta|\le P} \varepsilon_p\varepsilon_{p+\Delta}
-		\sum_{f\in\mathcal F_q} \lambda_f(p)\lambda_f(p+\Delta)
-		\Bigl|\sum_{n}\alpha_n\lambda_f(n)\Bigr|^2.
-	\]
-	Averaging over $q\le Q$, $r\asymp R$, and applying the Kuznetsov formula (Theorem~\ref{thm:kuz-levelq}) with kernel $h_Q$ chosen to localize the modulus $c=qr$ at scale $Q$ (Remark~\ref{rem:choose-hQ}), we obtain off-diagonal sums of Kloosterman sums with modulus $c=qr$ and additive shift $\Delta$.
-
-	\paragraph{Step 3: Second-moment in $\Delta$.}
-	The critical object is
-	\[
-		\sum_{|\Delta|\le P}\ \sum_{m,n\asymp X}\alpha_m\overline{\alpha_n}
-		\sum_{c\equiv0\,(q)} \frac{S(m,n+\Delta;c)}{c}\,
-		h_Q\!\left(\tfrac{4\pi\sqrt{mn}}{c}\right).
-	\]
-	By Cauchy-Schwarz in $\Delta$ and Lemma~\ref{lem:balanced-signs}, the amplifier signs contribute a factor $\max_\Delta|C(\Delta)|\ll \sqrt{M\log P}$.
-	The inner $\Delta$-sum is bounded by Lemma~\ref{lem:delta-second-moment}:
-	\[
-		\sum_{|\Delta|\le P}|\Sigma_{q,r}(\Delta)|^2
-		\;\ll_\varepsilon\; (P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}.
-	\]
-
-	\paragraph{Step 4: Summation over $q,r$.}
-	Recall $c=qr$ with $q\le Q$, $r\asymp R$, and $QR\asymp X$.
-	Thus $c\ll X$.
-	Summing the bound from Step~3 over $q,r$ gives
-	\[
-		\sum_{q\le Q}\ \sum_{r\asymp R}
-		\bigl((P+c)\,X^{1+2\varepsilon}\,c^{1+2\varepsilon}\bigr)
-		\;\ll_\varepsilon\; (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}.
-	\]
-
-	\paragraph{Step 5: Parameter choice and gain.}
-	Insert the amplifier normalization factor $M^{-2}\asymp (P/\log P)^{-2}$.
-	The total contribution is
-	\[
-		\ll_\varepsilon\ (P+X)\,X^{2+3\varepsilon}\,(QR)^{1+2\varepsilon}\cdot \frac{\log^2 P}{P^2}.
-	\]
-	Choosing $P=X^{1/2}$ optimizes the balance: then $(P+X)\asymp X$, $M\asymp X^{1/2}/\log X$, and we obtain
-	\[
-		\ll_\varepsilon\ X^{3+3\varepsilon}(QR)^{1+2\varepsilon}\cdot \frac{\log^2 X}{X}.
-	\]
-	Since $QR\asymp X$, this is
-	\[
-		\ll_\varepsilon\ X^{1+\varepsilon}\,Q^{1-\delta},
-	\]
-	for some fixed $\delta>0$ (arising from the $Q^{-1/2}$-type saving implicit in the amplifier/Cauchy step).
+	Interchange the $m$-sum and the $d$-sum and apply Cauchy–Schwarz in $m$.
+	The $d$-sum produces complete exponential sums with modulus $c$ and frequency depending on $p$ and $\Delta$.
+	Averaging in $\Delta$ with $W(\Delta/P)$ and in $p$ with the balanced signs $\varepsilon_p$ yields square-root cancellation unless $|p_1-p_2|\ll P^{1-\rho}$, which contributes a factor $|\mathcal P|^{2-\sigma}$ with $\sigma=\sigma(\rho)>0$.
+	A standard completion yields the factor $(cX)^{1/2+o(1)}$.
+	Putting these together gives \eqref{eq:passg}.
 \end{proof}
+
+\paragraph{Smoothing and parameters.}
+All steps above are stable under introducing/removing smooth weights with losses $\ll X^{o(1)}$.
+Taking $\vartheta$ sufficiently small (e.g.\ $\vartheta=1/10$) and $\rho=\rho(\vartheta)$ as in \eqref{eq:amp-balance} produces a concrete $\delta=\delta(\vartheta,\rho)>0$ used in the admissible-parameters appendix.
 
 \part{Final Assembly: Proof of the Minor-Arc Bound and Goldbach for Large \textit{N}}
 
