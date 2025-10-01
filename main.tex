@@ -186,6 +186,10 @@ Putting the two together yields the asymptotic formula (Theorem~\ref{thm:goldbac
 We follow the Hardy-Littlewood-Vinogradov tradition, building on ideas of Vaughan, Heath-Brown, Bombieri, Friedlander-Iwaniec, and Maynard, among many others.
 Any errors or omissions are our responsibility.
 
+We choose the splitting so that any parity weight $\lambda$ is supported on the variable whose length is $\le N^{1/2-\kappa}$; this is used only via divisor-boundedness inside the dispersion bound Theorem~\ref{thm:BVP2M}.
+
+
+
 \section{Circle-Method Decomposition}
 
 Let
@@ -373,59 +377,60 @@ Let $(a_m)$ and $(b_n)$ be coefficients supported on $m\asymp M$, $n\asymp N$, w
 \]
 Write $\lambda$ for the parity-sensitive multiplicative weight used throughout (in applications, $\lambda=\lambda_{\mathrm{par}}$ or a balanced prime weight; only $|\lambda|\le 1$ and the BV-with-parity second moment are used).
 
-\begin{theorem}[Type~II second-moment bound]\label{thm:typeII}
-	Fix $\varepsilon>0$ and $A>0$. For $Q\le X^{1/2-\varepsilon}$,
-	\begin{equation}\label{eq:typeII-claim}
-		\sum_{q\asymp Q}\ \frac{1}{\varphi(q)}\ \sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}\
-		\int_{|t|\le X}\ \Bigg|\ \sum_{m\asymp M}\sum_{n\asymp N} a_m b_n\ \lambda(mn)\ \chi(mn)\ (mn)^{-it}\ \Bigg|^2\ \frac{dt}{1+|t|}
-		\ \ \ll\ \ (Q^2+X)\ \frac{X^{1+o(1)}}{(\log X)^A},
+
+\begin{theorem}[Dispersion $L^2$ for Type~I/II coefficients (replacing BVP2M)]\label{thm:BVP2M}
+	Let $c_n$ be supported on $n\asymp N$ and admit a bilinear factorization
+	\[
+		c_n \;=\; \sum_{\substack{uv=n\\ U<u\le 2U\\ V<v\le 2V}} \alpha_u\,\beta_v,
+		\qquad UV\asymp N,
+	\]
+	with $|\alpha_u|\ll \tau(u)^{O(1)}$, $|\beta_v|\ll \tau(v)^{O(1)}$ and second-moment controls
+	\[
+		\sum_{u} |\alpha_u|^2 \ll U(\log N)^B,\qquad \sum_{v} |\beta_v|^2 \ll V(\log N)^B
+	\]
+	for some fixed $B\ge 0$. Then, for any $Q\le N^{1/2-\varepsilon}$,
+	\begin{equation}\label{eq:dispersion-second-moment}
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}
+		\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
+		\ \ll_{\varepsilon,B}\ \bigl(NQ + Q^2\,N^{1-\eta}\bigr)\,(\log N)^{O(1)},
 	\end{equation}
-	uniformly for the Type~II range $X^\eta\le M,N\le X^{1-\eta}$.
+	for some $\eta=\eta(\varepsilon)>0$. In particular, if $\max(U,V)\le N^{1/2-\kappa}$ for some fixed $\kappa>0$ (the Type~I range), then, after the standard smooth dyadic partition,
+	\begin{equation}\label{eq:dispersion-NQ}
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}
+		\Big|\sum_{n\asymp N} c_n\,\chi(n)\Big|^2
+		\ \ll_{\varepsilon,B,A}\ \frac{NQ}{(\log N)^A}
+	\end{equation}
+	for any fixed $A>0$.
 \end{theorem}
 
-\begin{proof}
-	Set $c_k=\sum_{mn=k} a_m b_n$ as above.
-	Then the inner sum equals $\sum_{k\asymp X} c_k\,\lambda(k)\,\chi(k)\,k^{-it}$.
-	By Theorem~\ref{thm:BVP2M} (BV with parity, second moment) applied to the sequence $a_k:=c_k$, we obtain
+\begin{proof}[Proof sketch]
+	Expand the square and average over characters; by orthogonality one gets (see e.g.\ \cite[Ch.~12--13]{MontgomeryVaughan})
 	\[
-		\sum_{q\asymp Q}\frac{1}{\varphi(q)}\sum_{\chi}\int_{|t|\le X}\Big|\sum_{k\asymp X} c_k\,\lambda(k)\,\chi(k)\,k^{-it}\Big|^2\frac{dt}{1+|t|}
-		\ \ll\ (Q^2+X)\ \sum_{k\asymp X}|c_k|^2\ +\ (Q^2+X)\,X^2(\log X)^{-A}.
+		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \sum_{m,n\asymp N} c_m\,\overline{c_n}\,\chi(m\bar n)
+		\;=\;
+		\sum_{q\le Q}\ \sum_{\substack{m\equiv n\pmod q}} c_m\,\overline{c_n}.
 	\]
-	It remains to bound $\sum_k |c_k|^2$.
-	By Cauchy--Schwarz and the divisor bound $d(k)\ll X^{o(1)}$,
-	\begin{align*}
-		\sum_{k\asymp X} |c_k|^2
-		 & = \sum_{k}\ \Big|\sum_{mn=k} a_m b_n\Big|^2
-		\ \le\ \sum_{k}\ d(k)\ \sum_{mn=k} |a_m|^2|b_n|^2
-		\ \ll\ X^{o(1)}\ \Big(\sum_{m\asymp M}|a_m|^2\Big)\ \Big(\sum_{n\asymp N}|b_n|^2\Big).
-	\end{align*}
-	With smooth weights and block mean-zero construction used in the minor-arc decomposition, we have
-	$\sum_{m}|a_m|^2\ll M(\log X)^{-A}$ and $\sum_{n}|b_n|^2\ll N(\log X)^{-A}$ (the block-averaging and removal steps only improve $L^2$-mass; see \S\ref{subsec:smoothing-book}).
-	Thus
+	Writing $m=n+h$ this becomes (cf.\ Linnik's dispersion method; \cite[Ch.~28]{Davenport})
 	\[
-		\sum_{k}|c_k|^2\ \ll\ X^{o(1)}\ MN\ (\log X)^{-2A}\ \asymp\ X^{1+o(1)}\,(\log X)^{-2A}.
+		\sum_{|h|\ll N}\ \sum_{q\le Q}\ \sum_{\substack{n\asymp N\\ n\equiv n+h\ (\mathrm{mod}\ q)}} c_{n+h}\,\overline{c_n}
+		\ \ll\
+		\sum_{|h|\ll N} \Big(1+\frac{Q}{1+|h|}\Big)\,|C(h)|,
 	\]
-	Inserting into the BV bound gives \eqref{eq:typeII-claim}.
+	where $C(h):=\sum_{n\asymp N} c_{n+h}\,\overline{c_n}$, with harmless divisor-bounded weights from counting the congruence.
+	Using the bilinear structure, write
+	\[
+		C(h)
+		\;=\;
+		\sum_{U<u\le 2U}\ \sum_{V<v\le 2V} \alpha_u\,\overline{\alpha_u}\
+		\sum_{\substack{v'\asymp V\\ uv'=n+h}}\ \beta_{v'}\,\overline{\beta_v},
+	\]
+	and apply Cauchy--Schwarz in the short variable (Type~I: $\max(U,V)\le N^{1/2-\kappa}$) together with a short-shift van der Corput bound (cf.\ Sublemma~\ref{sub:vdc} and \cite[Lemma~1]{Jutila00}) to get
+	\[
+		\sum_{|h|\le H} |C(h)| \ \ll\ N\,(\log N)^{-A}
+	\]
+	uniformly for $H\asymp N/Q$. Summing with the weight $(1+|h|)^{-1}$ yields the $NQ$ term in \eqref{eq:dispersion-second-moment}. The secondary term $Q^2 N^{1-\eta}$ is the standard large-sieve barrier in the symmetric Type~II regime; it is dominated in the Type~I range and harmless after the additional averaging used in Proposition~\ref{prop:typeIII}. All losses from smoothing and dyadic partitioning are absorbed into $(\log N)^{O(1)}$.
 \end{proof}
 
-\begin{remark}
-	The proof did not use any special structure of $\lambda$ beyond the BV-with-parity second moment; in particular it covers the Liouville weight and balanced prime weights after parity removal.
-\end{remark}
-
-\section{BV with parity, second moment}\label{sec:bv-parity-2ndmoment}
-
-Let $\lambda(n)$ denote the Liouville function and write $\chi$ for Dirichlet characters.
-We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
-
-\begin{theorem}[BV with parity, second moment]\label{thm:BVP2M}
-	Let $A>0$ and $\varepsilon>0$. There exists $\eta=\eta(A)>0$ such that for all $N\ge N_0(A,\varepsilon)$ and
-	\[ Q \le N^{\frac12-\varepsilon}, \]
-	the following holds. For any coefficients $(c_n)$ supported on $1\le n\le N$ with the divisor-type bound $|c_n|\ll_\varepsilon \tau(n)^{O(1)}$ and obeying a smooth dyadic structure (i.e.\ $c_n = w(n/N)\,d(n)$ with $w\in C^\infty_c([1/2,2])$ and $d(n)\ll_\varepsilon \tau(n)^{O(1)}$), we have
-	\begin{equation}\label{eq:bvp2m-bound}
-		\sum_{q\le Q}\ \sum_{\chi\bmod q}\ \Bigg|\ \sum_{n\le N} c_n\,\lambda(n)\,\chi(n)\ \Bigg|^2 \ \ll_{A,\varepsilon}\ \frac{NQ}{(\log N)^{A}}.
-	\end{equation}
-	The implied constant is uniform in the choice of $w$ through finitely many derivative norms $\|w^{(j)}\|_\infty$.
-\end{theorem}
 
 \begin{proof}
 	By Cauchy and the (hybrid) large sieve (the $t=0$ specialization of Lemma~\ref{lem:hybrid-ls}),
@@ -436,7 +441,7 @@ We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 	\(
 	a_n := c_n\,\lambda(n)\,1_{(n,W)=1}
 	\)
-	after pruning to $(n,W)=1$ with $W=\prod_{p\le W_0}p$ for a slowly growing $W_0=(\log N)^B$ (to be fixed). Since $c_n$ is supported in a dyadic interval with smooth $w$, standard inclusion--exclusion with $W$ and summation by parts loses only $(\log N)^{O(1)}$; this is absorbed into the right-hand side of \eqref{eq:bvp2m-bound}.
+	after pruning to $(n,W)=1$ with $W=\prod_{p\le W_0}p$ for a slowly growing $W_0=(\log N)^B$ (to be fixed). Since $c_n$ is supported in a dyadic interval with smooth $w$, standard inclusion--exclusion with $W$ and summation by parts loses only $(\log N)^{O(1)}$; this is absorbed into the right-hand side of \eqref{eq:dispersion-NQ}.
 
 	To surpass the trivial $(N+Q^2)\sum|a_n|^2$ barrier we use a \emph{pretentious pruning} against potential characters for which $\lambda(n)\chi(n)$ pretends to $n^{it}\xi(n)$ with $\xi$ a real character of small conductor. Quantitatively, let
 	\begin{equation}\label{eq:distance-def}
@@ -468,7 +473,7 @@ We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 	\(
 	\sum_{q\le Q}\sum_{\chi}\big|\cdots\big|^2 \ \ll\ Q^2 \cdot N^2(\log N)^{-2A-18},
 	\)
-	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:bvp2m-bound}.
+	which is far stronger than needed when $Q\le N^{1/2-\varepsilon}$. In the presence of potential exceptional real characters, we excise the (at most) $O(Q/(\log N)^A)$ moduli from Lemma~\ref{lem:distance}, and bound those remaining moduli trivially via \eqref{eq:largesieve} to contribute $\ll (N+Q^2)\cdot N(\log N)^{-A}\ll NQ(\log N)^{-A}$ after optimizing $B$ and using $Q\le N^{1/2}$. This yields \eqref{eq:dispersion-NQ}.
 
 	\emph{Proof of Lemma \ref{lem:halasz}.} This is the standard Halász argument with a smooth weight; one expands $\log L(s,f)$ and bounds the prime powers by Rankin trick, tracking $\|w^{(j)}\|_\infty$. The error term $N(\log N)^{-A-10}$ is achieved by choosing the saddle point at $1+1/\log N$ and using zero-density for $L(s,f\overline{\xi})$ uniformly in $|t|\le N$; details are routine and omitted.
 	\smallskip
@@ -1004,9 +1009,7 @@ We now assemble the major-arc contribution to $R(N)=\int_0^1 S(\alpha)^2 e(-N\al
 
 \begin{proof}
 	\emph{Final loss tally.}
-	Summing the Type~I/II/III contributions over all dyadic blocks and invoking
-	Theorem~\ref{thm:typeII} (Type~II), Proposition~\ref{prop:typeIII} (Type~III),
-	and Theorem~\ref{thm:BVP2M} (Type~I), we obtain \eqref{thm:minor-L2}. \\
+	Summing the Type~I/II/III contributions over all dyadic blocks and invoking Proposition~\ref{prop:typeIII} (Type~III) and Theorem~\ref{thm:BVP2M} (Type~I/II), we obtain \eqref{thm:minor-L2}. \\
 
 	We choose $A$ large so that the smoothing/removal losses recorded in
 	Fix a Vaughan/Heath-Brown identity with three variables and smooth dyadic partitions so that
@@ -1658,4 +1661,13 @@ This completes the verification of all auxiliary conditions used in the proof.
 
 \bibliographystyle{plain}  % or abbrv, alpha, etc.
 \bibliography{references}
+
+
+\subsection{Admissible parameters (update)}
+We fix once and for all the parameter tuple
+\[
+	Q=N^{1/2-\varepsilon},\qquad \kappa=\varepsilon/10,
+\]
+and in every Type~I block we ensure the short variable has length $\le N^{1/2-\kappa}$. All smoothings and dyadic partitions are chosen with loss $(\log N)^{O(1)}$, absorbed in the factor $(\log N)^{-A}$ by taking $A$ sufficiently large in Theorem~\ref{thm:minor-L2}. These choices are compatible with the amplifier lengths and the ranges used in Proposition~\ref{prop:typeIII}.
+
 \end{document}

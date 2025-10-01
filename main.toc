@@ -6,7 +6,6 @@
 \contentsline {section}{\numberline {1}Circle-Method Decomposition}{3}{section.1.1}%
 \contentsline {part}{B\hspace {1em}Type I / II Analysis}{6}{part.2}%
 \contentsline {section}{\numberline {1}Type\nobreakspace {}II Parity Gain: Bilinear reduction to BV}{6}{section.2.1}%
-\contentsline {section}{\numberline {2}BV with parity, second moment}{6}{section.2.2}%
 \contentsline {paragraph}{Consequences for the minor-arc $L^2$.}{9}{section*.14}%
 \contentsline {part}{C\hspace {1em}Type III Analysis}{9}{part.3}%
 \contentsline {section}{\numberline {1}Type III off-diagonal via prime-averaged short-shift gain}{9}{section.3.1}%
@@ -39,3 +38,4 @@
 \contentsline {section}{\numberline {8}Hecke \textit p \textbar \textit n tails are negligible}{25}{section.5.8}%
 \contentsline {section}{\numberline {9}Oldforms and Eisenstein: uniform handling}{26}{section.5.9}%
 \contentsline {section}{\numberline {10}Admissible parameter tuple and verification}{26}{section.5.10}%
+\contentsline {subsection}{\numberline {10.1}Admissible parameters (update)}{27}{subsection.5.10.1}%
