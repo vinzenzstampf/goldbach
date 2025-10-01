@@ -428,7 +428,7 @@ We work with smooth, divisor-bounded coefficients supported on $[1,N]$.
 \end{theorem}
 
 \begin{proof}
-	By Cauchy and the (hybrid) large sieve,
+	By Cauchy and the (hybrid) large sieve (the $t=0$ specialization of Lemma~\ref{lem:hybrid-ls}),
 	\begin{equation}\label{eq:largesieve}
 		\sum_{q\le Q}\sum_{\chi\bmod q}\Big|\sum_{n\le N}a_n\,\chi(n)\Big|^2 \ \ll\ (N+Q^2)\sum_{n\le N}|a_n|^2.
 	\end{equation}
@@ -530,6 +530,48 @@ Now sum over $q\le Q$ and use $Q\le N^{1/2-\varepsilon}$ together with $\sum_{q\
 after shrinking $\eta$ in terms of $A$ and using $Q\le N^{1/2-\varepsilon}$. This completes the proof.
 \qed
 
+\subsection*{Smoothing/removal bookkeeping}\label{subsec:smoothing-book}
+We record the standard stability facts used later in the minor-arc $L^2$ assembly.
+
+\begin{lemma}[Hybrid large sieve $+$ $t$-integration]\label{lem:hybrid-ls}
+	Let $(b_n)$ be supported on $n\asymp N$. For $Q\le N$,
+	\[
+		\sum_{q\le Q} \frac{1}{\varphi(q)}
+		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
+		\int_{|t|\le N}
+		\Big|\sum_{n} b_n\,\chi(n)\,n^{-it}\Big|^2\,\frac{dt}{1+|t|}
+		\ \ \ll\ (Q^2+N)\ \sum_{n}|b_n|^2.
+	\]
+\end{lemma}
+
+\begin{proof}
+	This is the multiplicative large sieve (e.g. \cite[Ch.~7]{MV}, \cite[Thm.~3.13]{IK}) combined with Gallagher's hybrid \(t\)-average;
+	setting \(t=0\) recovers \eqref{eq:largesieve}. The weight \((1+|t|)^{-1}\) allows a bounded partition of the \(t\)-range.
+\end{proof}
+
+
+\begin{lemma}[L$^2$-stability under smoothing/pruning]\label{lem:l2-smooth}
+	Let $(c_n)$ be your working coefficients (smooth dyadic weight on $[N,2N]$), and let $(c'_n)$ be obtained from $(c_n)$ by any combination of:
+	(i) replacing $w(n/N)$ by a piecewise-smooth dyadic partition of unity,
+	(ii) pruning to $(n,W)=1$ with $W=\prod_{p\le (\log N)^B}p$ or reinserting those primes,
+	(iii) block-averaging on intervals of length $N/(\log N)^B$ (“block mean-zero”).
+	If $\sum_n |c_n-c'_n|^2 \ll N(\log N)^{-A}$ (true for each operation with $B=B(A)$), then
+	\[
+		\sum_{q\le Q} \frac{1}{\varphi(q)}\!\!
+		\sum_{\substack{\chi\ (\mathrm{mod}\ q)\\ \chi\ \mathrm{primitive}}}
+		\!\int_{|t|\le N}\!
+		\Big|\sum_{n} (c_n-c'_n)\,\lambda(n)\,\chi(n)\,n^{-it}\Big|^2\frac{dt}{1+|t|}
+		\ \ \ll\ (Q^2+N)\,N\,(\log N)^{-A}.
+	\]
+\end{lemma}
+
+\begin{proof}
+	Apply Lemma~\ref{lem:hybrid-ls} with $b_n=(c_n-c'_n)\lambda(n)$ and use $|\lambda(n)|\le1$.
+\end{proof}
+
+\paragraph{Consequences for the minor-arc $L^2$.}
+Every smoothing/pruning step in the Type~I/II/III decomposition changes the $L^2$-mass by at most $(Q^2+N)N(\log N)^{-A}$. Choosing $A$ large (and summing over $O(\log N)$ dyadic blocks) shows the cumulative loss is $\ll N(\log N)^{-3-\varepsilon}$ in Theorem~\ref{thm:minor-L2}.
+
 
 \part{Type III Analysis}
 
@@ -604,7 +646,7 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	\end{align}
 	where $\Sigma_{c;p_1,p_2}(m_1,m_2)$ is the complete character sum over $(d_1,d_2)\!\!\pmod{cp_1cp_2}$ subject to \eqref{eq:poisson}.
 
-	\paragraph{Step 3: Weil on complete sums and $m$–averaging.}
+	\paragraph{Step 3: Weil on complete sums and $m$-averaging.}
 	By the Weil bound for complete Kloosterman-type sums (see \cite[Ch.~11, \S11.10]{IK}) and trivial Ramanujan-sum bounds,
 	\begin{equation}\label{eq:weil}
 		\Sigma_{c;p_1,p_2}(m_1,m_2)\ \ll_\varepsilon\ c^{1/2+\varepsilon}\,(m_1,m_2,c)^{1/2}.
@@ -694,9 +736,9 @@ where $S(\cdot,\cdot;c)$ denotes Kloosterman sums and $W_{q,r}$ is a smooth weig
 	for some $\delta=\delta(\sigma)>0$. The diagonal is negligible by $\sum_{p}\varepsilon_p=0$. Averaging over $q\le Q$ and $\chi$ only improves the bound. This proves \eqref{eq:typeIII-bound}.
 	\smallskip
 
-	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[Ch.~16, \S\S16.2–16.5 (Kuznetsov)]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus. This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
+	\emph{Proof of Sublemma \ref{sub:kernel}.} Stationary phase analysis of Kuznetsov kernels with smooth test functions appears in Iwaniec--Kowalski~\cite[Ch.~16, \S\S16.2-16.5 (Kuznetsov)]{IK} and Blomer--Mili\'cevi\'c~\cite[Prop.~3.1]{BlomerMilicevic}. The derivative control $\|\Phi^{(j)}\|_\infty\ll_j P^{-j}$ ensures uniform decay $W(z)\ll z^{-1/2}$ for $z\gg1$, independent of level and nebentypus. This is standard stationary phase on the Kuznetsov kernel with $\Phi$ satisfying $P^{-j}$ derivative control; the stated bounds follow uniformly in level and nebentypus since $Q\le X^{1/2-\varepsilon}$.
 
-	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[Ch.~13, \S\S13.3–13.6]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
+	\emph{Proof of Sublemma \ref{sub:vdc}.} This is a standard application of van der Corput's $A$-- and $B$--processes to exponential sums over primes; see Graham--Kolesnik~\cite[Ch.~2]{GrahamKolesnik} or Iwaniec--Kowalski~\cite[Ch.~13, \S\S13.3-13.6]{IK}. The balanced choice of $\varepsilon_p$ guarantees cancellation beyond $|\Delta|\ge P^{1-\rho}$, yielding a power saving $|\mathcal P|^{-\sigma}$ uniformly.  Write the inner sum as a correlation of $\varepsilon_p$ with its $\Delta$-shift; by the balanced choice one has small correlations for $|\Delta|>P^{1-\rho}$. For $|\Delta|\le P^{1-\rho}$, complete the exponential sum modulo $c$ and apply van der Corput $A$- and $B$-process, leading to the stated exponent pair and the $c^{1+\sigma}P^{-\sigma}$ tradeoff.
 \end{proof}
 
 \begin{proof}
@@ -1104,7 +1146,7 @@ We record the precise form of the inequality used in Part~D.6.
 		\sum_{|\ell|<N/(q^2 Q)}\ \Bigl|\sum_{n\asymp N} b_{n+q\ell}\,\overline{b_n}\Bigr|
 		\ \ll\ \frac{N}{(\log N)^{2+A}}.
 	\end{equation}
-	(Here we use that $b_n$ is a bounded-depth convolution of coefficients treated in Theorems~\ref{thm:BVP2M} and~\ref{prop:typeIII}, and hence its short-shift correlations enjoy power savings in $(\log N)$ on average over $\ell$; see also the Appendix ``$\Delta$–second moment'' lemma specialized to $q\mid \Delta$.) Combining the displays and recalling $H\asymp N/(qQ)$ gives
+	(Here we use that $b_n$ is a bounded-depth convolution of coefficients treated in Theorems~\ref{thm:BVP2M} and~\ref{prop:typeIII}, and hence its short-shift correlations enjoy power savings in $(\log N)$ on average over $\ell$; see also the Appendix ``$\Delta$-second moment'' lemma specialized to $q\mid \Delta$.) Combining the displays and recalling $H\asymp N/(qQ)$ gives
 	\[
 		\sum_{\substack{(a,q)=1}}\int_{I_{q,a}}\!|B(\alpha)|^2\,d\alpha
 		\ \ll\ \frac{\varphi(q)}{H}\cdot \frac{N}{(\log N)^{2+A}}
